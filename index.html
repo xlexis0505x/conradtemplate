@@ -3094,21 +3094,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 
-<style id="conrad-engineering-theme">
+
+<style id="conrad-editorial-p5r-theme">
   :root {
     --bg-canvas: #F2F3F0;
     --card-surface: #FFFFFF;
-    --ink-primary: #111317;
-    --ink-muted: #52565E;
-    --border-hairline: rgba(17, 19, 23, 0.15);
-    --border-strong: #111317;
-    --accent-vermilion: #FF4800;
+    --ink-primary: #14181E;
+    --ink-muted: #565C66;
+    --border-hairline: rgba(20, 24, 30, 0.18);
+    --border-card: rgba(20, 24, 30, 0.22);
+    --border-strong: rgba(20, 24, 30, 0.8);
+    --accent-terracotta: #C85A32;
     --color-gray: #F2F3F0 !important;
     --color-white: #FFFFFF !important;
-    --color-black: #111317 !important;
-    --color-red: #FF4800 !important;
-    --font-sans: 'Space Grotesk', 'Helvetica Neue', Inter, -apple-system, sans-serif;
-    --font-mono: 'Space Mono', 'JetBrains Mono', 'SF Mono', monospace;
+    --color-black: #14181E !important;
+    --color-red: #C85A32 !important;
+    
+    /* Coalowl Original Typography */
+    --font-human: "Helvetica neue", YakuHanJP, "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Space Mono', 'SF Mono', monospace;
   }
 
   /* Universal Geometric Rules: ZERO ROUNDED CORNERS */
@@ -3117,16 +3121,16 @@
     box-sizing: border-box;
   }
 
-  /* Base Canvas & Typography */
+  /* Base Canvas */
   html, body {
     background-color: var(--bg-canvas) !important;
     color: var(--ink-primary) !important;
-    font-family: var(--font-sans) !important;
+    font-family: var(--font-human) !important;
     -webkit-font-smoothing: antialiased;
-    letter-spacing: -0.01em;
+    letter-spacing: normal;
   }
 
-  /* Hairlines and Architectural Grid Lines */
+  /* Hairlines and Architectural Boundaries (Refined Dark Slate) */
   .header, .footer, .social {
     border-color: var(--border-hairline) !important;
   }
@@ -3137,8 +3141,8 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 24px;
-    background: #E6E7E3;
+    height: 26px;
+    background: #E8EAE5;
     border-bottom: 1px solid var(--border-hairline);
     z-index: 100;
     display: flex;
@@ -3149,10 +3153,9 @@
     font-size: 9px;
     letter-spacing: 0.08em;
     color: var(--ink-muted);
-    text-transform: uppercase;
   }
   .tech-meta-strip span.active-tag {
-    color: var(--accent-vermilion);
+    color: var(--accent-terracotta);
     font-weight: 700;
     display: inline-flex;
     align-items: center;
@@ -3163,18 +3166,18 @@
     display: inline-block;
     width: 6px;
     height: 6px;
-    background: var(--accent-vermilion);
-    animation: blink 2s infinite ease-in-out;
+    background: var(--accent-terracotta);
+    animation: pulseDot 2s infinite ease-in-out;
   }
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(0.85); }
   }
 
-  /* Header Overrides */
+  /* Header */
   .header {
-    top: 24px !important;
-    height: 70px !important;
+    top: 26px !important;
+    height: 68px !important;
     background: var(--bg-canvas) !important;
     border-bottom: 1px solid var(--border-hairline);
     padding: 0 40px !important;
@@ -3183,127 +3186,132 @@
     justify-content: space-between;
   }
   .header__logo__image {
-    height: 38px !important;
+    height: 36px !important;
     width: auto !important;
   }
   .header__list__item__link {
-    font-family: var(--font-mono) !important;
-    font-size: 11px !important;
-    letter-spacing: 0.08em !important;
-    font-weight: 700 !important;
+    font-family: var(--font-human) !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.02em !important;
     color: var(--ink-primary) !important;
-    text-transform: uppercase;
-    transition: color 0.08s ease, background 0.08s ease;
+    text-transform: none !important;
+    transition: color 0.08s ease;
     padding: 6px 12px;
-    border: 1px solid transparent;
   }
   .header__list__item__link:hover {
-    background: #111317;
-    color: #F2F3F0 !important;
-    border-color: #111317;
+    color: var(--accent-terracotta) !important;
   }
 
-  /* Tactile Button Physics (Teenage Engineering Hardware Feel) */
+  /* Tactile Trigger Buttons */
   .btn-tactile {
     font-family: var(--font-mono);
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.08em;
-    padding: 8px 16px;
+    padding: 7px 14px;
     background: var(--card-surface);
     color: var(--ink-primary);
-    border: 1.5px solid var(--border-strong);
-    box-shadow: 2px 2px 0px var(--border-strong) !important;
+    border: 1.5px solid var(--border-card);
+    box-shadow: 2px 2px 0px rgba(20, 24, 30, 0.6) !important;
     cursor: pointer;
     text-transform: uppercase;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
     transition: transform 0.06s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.06s ease, background 0.06s ease, color 0.06s ease;
   }
   .btn-tactile:hover {
     background: var(--ink-primary);
     color: var(--bg-canvas);
-    box-shadow: 2px 2px 0px var(--accent-vermilion) !important;
+    box-shadow: 2px 2px 0px var(--accent-terracotta) !important;
   }
   .btn-tactile:active {
     transform: translate(1.5px, 1.5px) !important;
-    box-shadow: 0.5px 0.5px 0px var(--border-strong) !important;
+    box-shadow: 0.5px 0.5px 0px rgba(20, 24, 30, 0.6) !important;
   }
 
-  .btn-vermilion {
-    background: var(--accent-vermilion) !important;
+  .btn-terracotta {
+    background: var(--accent-terracotta) !important;
     color: #FFFFFF !important;
-    border-color: var(--border-strong) !important;
+    border-color: rgba(20, 24, 30, 0.3) !important;
   }
-  .btn-vermilion:hover {
-    background: #E03E00 !important;
+  .btn-terracotta:hover {
+    background: #B33927 !important;
     color: #FFFFFF !important;
   }
 
-  /* 45-Degree Chamfered Specimen Cards */
+  /* 45-Degree Chamfered Specimen Card */
   .thumbnail__float, .thumbnail__back, .thumbnail__buffer-float, .thumbnail__buffer-back {
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%) !important;
-    border: 1.5px solid var(--border-strong) !important;
-    box-shadow: 3px 3px 0px var(--border-strong) !important;
+    border: 1.5px solid var(--border-card) !important;
+    box-shadow: 3px 3px 0px rgba(20, 24, 30, 0.7) !important;
     background: #FFFFFF !important;
   }
-
-  /* Hard Shadow on Hover / Drag */
   .thumbnail__float:hover {
-    box-shadow: 4px 4px 0px var(--accent-vermilion) !important;
+    box-shadow: 4px 4px 0px var(--accent-terracotta) !important;
   }
 
-  /* Marquee Telemetry Text: Swiss Typography */
+  /* Restored Human-Scale Heading & Reading Typography */
+  .infomation__title__text {
+    font-family: var(--font-human) !important;
+    font-size: 32px !important;
+    font-weight: 500 !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.02em !important;
+    text-transform: none !important;
+    color: var(--ink-primary) !important;
+  }
+  @media (max-width: 1024px) {
+    .infomation__title__text {
+      font-size: 24px !important;
+    }
+  }
+
   .marquee__text {
-    font-family: var(--font-sans) !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.04em !important;
-    text-transform: uppercase !important;
-    color: rgba(17, 19, 23, 0.06) !important;
+    font-family: var(--font-human) !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.03em !important;
+    text-transform: none !important;
+    color: rgba(20, 24, 30, 0.05) !important;
   }
 
-  /* Data Readouts & Monospace Micro-Tags */
+  /* Monospace Strictly for Numbers, Micro-labels & Action CTA */
   .infomation__num__text {
     font-family: var(--font-mono) !important;
     font-weight: 700 !important;
     font-size: 13px !important;
     letter-spacing: 0.08em !important;
   }
-  .infomation__title__text {
-    font-family: var(--font-sans) !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.02em !important;
-    color: var(--ink-primary) !important;
-  }
   .infomation__link a {
     font-family: var(--font-mono) !important;
-    font-size: 11px !important;
+    font-size: 10px !important;
     font-weight: 700 !important;
     letter-spacing: 0.08em !important;
-    color: var(--accent-vermilion) !important;
+    color: var(--accent-terracotta) !important;
     text-transform: uppercase;
     display: inline-flex;
     align-items: center;
     gap: 6px;
     padding: 6px 14px;
-    border: 1px solid var(--border-strong);
+    border: 1px solid var(--border-card);
     background: #FFFFFF;
-    box-shadow: 2px 2px 0px var(--border-strong);
+    box-shadow: 2px 2px 0px rgba(20, 24, 30, 0.6);
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
-    transition: transform 0.06s ease, background 0.06s ease;
+    transition: transform 0.06s ease, background 0.06s ease, color 0.06s ease;
   }
   .infomation__link a:hover {
     background: var(--ink-primary);
     color: #FFFFFF !important;
+    border-color: var(--ink-primary);
   }
   .infomation__link a:active {
     transform: translate(1.5px, 1.5px);
-    box-shadow: 0.5px 0.5px 0px var(--border-strong);
+    box-shadow: 0.5px 0.5px 0px rgba(20, 24, 30, 0.6);
   }
 
-  /* Footer Styling */
+  /* Footer */
   .footer {
     border-top: 1px solid var(--border-hairline) !important;
     background: var(--bg-canvas) !important;
@@ -3318,191 +3326,180 @@
     text-transform: uppercase;
   }
   .footer__scroll-text__circle {
-    background: var(--accent-vermilion) !important;
+    background: var(--accent-terracotta) !important;
   }
 
-  /* Persona 5 Mechanical Kinetic Dossier Drawer */
-  .dossier-drawer-backdrop {
+  /* ======================================================== */
+  /* P5R-INSPIRED ASYMMETRIC ANGLED SLICE & FANNED CARD DECK */
+  /* ======================================================== */
+  .p5r-backdrop {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(17, 19, 23, 0.4);
+    background: rgba(20, 24, 30, 0.45);
+    backdrop-filter: blur(2px);
     z-index: 2999;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.15s ease;
+    transition: opacity 0.16s ease;
   }
-  .dossier-drawer-backdrop.is-active {
+  .p5r-backdrop.is-active {
     opacity: 1;
     pointer-events: auto;
   }
 
-  .dossier-drawer {
+  /* Asymmetric Angled Background Slice from Top-Right */
+  .p5r-slice {
     position: fixed;
     top: 0;
     right: 0;
-    width: 620px;
-    max-width: 92vw;
+    width: 660px;
+    max-width: 95vw;
     height: 100vh;
-    background: var(--bg-canvas);
-    border-left: 2px solid var(--border-strong);
-    box-shadow: -10px 0px 0px rgba(17, 19, 23, 0.15) !important;
+    background: #14181E;
+    box-shadow: -10px 0px 0px var(--accent-terracotta) !important;
     z-index: 3000;
-    transform: translateX(105%);
-    transition: transform 0.14s cubic-bezier(0.16, 1, 0.3, 1);
-    clip-path: polygon(32px 0, 100% 0, 100% 100%, 0 100%);
-    padding: 36px 36px 60px 48px;
+    transform: translateX(110%);
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+    padding: 36px 36px 40px 105px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
   }
-  .dossier-drawer.is-active {
+  .p5r-slice.is-active {
     transform: translateX(0%);
   }
 
-  /* Dossier Content Styling */
-  .dossier-header {
-    border-bottom: 2px solid var(--border-strong);
-    padding-bottom: 16px;
+  .p5r-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    border-bottom: 1.5px solid rgba(242, 243, 240, 0.15);
+    padding-bottom: 14px;
   }
-  .dossier-title {
-    font-family: var(--font-sans);
-    font-size: 24px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    color: var(--ink-primary);
-    margin: 0 0 6px 0;
-  }
-  .dossier-ref {
+  .p5r-tag {
     font-family: var(--font-mono);
     font-size: 10px;
     font-weight: 700;
-    color: var(--accent-vermilion);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
+    color: var(--accent-terracotta);
+    text-transform: uppercase;
+    margin-bottom: 4px;
   }
-  .dossier-close {
-    background: none;
-    border: 1.5px solid var(--border-strong);
-    padding: 6px 12px;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 2px 2px 0px var(--border-strong);
-    transition: all 0.06s ease;
-  }
-  .dossier-close:hover {
-    background: var(--ink-primary);
-    color: var(--bg-canvas);
-  }
-  .dossier-close:active {
-    transform: translate(1px, 1px);
-    box-shadow: 0.5px 0.5px 0px var(--border-strong);
-  }
-
-  .dossier-section-title {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: var(--ink-primary);
-    border-bottom: 1px solid var(--border-hairline);
-    padding-bottom: 6px;
-    margin: 0 0 12px 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .dossier-section-title::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    background: var(--accent-vermilion);
-  }
-
-  .dossier-text {
-    font-size: 13px;
-    line-height: 1.65;
-    color: var(--ink-muted);
+  .p5r-title {
+    font-family: var(--font-human);
+    font-size: 26px;
+    font-weight: 500;
+    color: #F2F3F0;
+    letter-spacing: -0.02em;
     margin: 0;
+    text-transform: none;
   }
-
-  /* Structured Engineering & Economics Tables */
-  .dossier-table {
-    width: 100%;
-    border-collapse: collapse;
+  .p5r-close {
+    background: transparent;
+    border: 1.5px solid rgba(242, 243, 240, 0.3);
+    color: #F2F3F0;
     font-family: var(--font-mono);
-    font-size: 11px;
-    margin: 12px 0;
-    border: 1px solid var(--border-hairline);
-  }
-  .dossier-table th {
-    background: #E6E7E3;
-    color: var(--ink-primary);
-    padding: 8px 10px;
-    text-align: left;
-    border-bottom: 1.5px solid var(--border-strong);
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    padding: 6px 12px;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px var(--accent-terracotta);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+    transition: all 0.08s ease;
   }
-  .dossier-table td {
-    padding: 8px 10px;
-    border-bottom: 1px solid var(--border-hairline);
-    color: var(--ink-primary);
-  }
-  .dossier-table tr:last-child td {
-    border-bottom: none;
-  }
-  .dossier-table td.highlight {
-    color: var(--accent-vermilion);
-    font-weight: 700;
+  .p5r-close:hover {
+    background: var(--accent-terracotta);
+    color: #FFFFFF;
+    border-color: var(--accent-terracotta);
   }
 
-  /* Metric Highlight Callout Boxes */
-  .metric-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin: 12px 0;
+  /* Fanned Deck of Staggered Pitch Cards */
+  .p5r-deck {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 8px;
+    perspective: 800px;
   }
-  .metric-box {
-    background: #FFFFFF;
-    border: 1.5px solid var(--border-strong);
-    padding: 12px;
-    box-shadow: 2px 2px 0px var(--border-strong);
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+
+  .p5r-card {
+    background: #F2F3F0;
+    color: var(--ink-primary);
+    border: 1.5px solid rgba(20, 24, 30, 0.3);
+    box-shadow: 3px 3px 0px rgba(200, 90, 50, 0.7);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+    padding: 16px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.12s ease, border-color 0.12s ease, background 0.12s ease;
   }
-  .metric-box-label {
+
+  /* Staggered Deck Offsets (Fanned Persona Feel) */
+  .p5r-card:nth-child(1) { margin-left: 10px; transform: rotate(-0.5deg); }
+  .p5r-card:nth-child(2) { margin-left: 22px; transform: rotate(0.2deg); }
+  .p5r-card:nth-child(3) { margin-left: 34px; transform: rotate(-0.3deg); }
+  .p5r-card:nth-child(4) { margin-left: 46px; transform: rotate(0.4deg); }
+  .p5r-card:nth-child(5) { margin-left: 58px; transform: rotate(-0.2deg); }
+
+  /* Snappy Hover Physics: Card slides forward out of stack */
+  .p5r-card:hover {
+    transform: translate(-18px, -4px) rotate(-1deg) scale(1.02) !important;
+    box-shadow: 6px 6px 0px var(--accent-terracotta) !important;
+    border-color: var(--accent-terracotta) !important;
+    background: #FFFFFF !important;
+    z-index: 10;
+  }
+  .p5r-card:active {
+    transform: translate(-14px, -1px) scale(1.01) !important;
+    box-shadow: 2px 2px 0px var(--accent-terracotta) !important;
+  }
+
+  .p5r-card-badge {
     font-family: var(--font-mono);
     font-size: 9px;
-    letter-spacing: 0.08em;
-    color: var(--ink-muted);
-    text-transform: uppercase;
-  }
-  .metric-box-val {
-    font-family: var(--font-mono);
-    font-size: 18px;
     font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent-terracotta);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .p5r-card-heading {
+    font-family: var(--font-human);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     color: var(--ink-primary);
-    margin-top: 4px;
+    margin: 0 0 6px 0;
+    text-transform: none;
+  }
+  .p5r-card-desc {
+    font-family: var(--font-human);
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--ink-muted);
+    margin: 0;
+    text-transform: none;
   }
 
-  /* Loading Screen Transformation */
+  /* Loading Screen */
   .loading {
     background: var(--bg-canvas) !important;
   }
   .loading__num {
     font-family: var(--font-mono) !important;
     font-weight: 700 !important;
-    color: var(--accent-vermilion) !important;
+    color: var(--accent-terracotta) !important;
   }
 </style>
+
 </head>
 
 <body>
@@ -3519,7 +3516,7 @@
                 class="header__bar"></span></li>
             <li class="header__list__item"><a href="mailto:owlcoal@gmail.com" target="_blank"
                 class="header__list__item__link"><span>#</span>CONTACT</a><span class="header__bar"></span></li>
-          <li class="header__list__item"><button onclick="window.toggleDossierDrawer()" class="btn-tactile btn-vermilion" style="padding: 5px 12px; font-size: 9px; margin-left: 8px;">INSPECT DOSSIER</button></li></ul>
+          <li class="header__list__item"><button onclick="window.toggleP5RDeck()" class="btn-tactile btn-terracotta" style="padding: 5px 12px; font-size: 9px; margin-left: 8px;">PITCH DECK</button></li></ul>
         </div>
         <div class="social">
           <ul class="social__list">
@@ -3578,51 +3575,51 @@
           <div class="container__wrap" data-v-684698a2>
             <div class="thumbnail" data-v-684698a2>
               <div class="thumbnail__buffer-float" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--vertical" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--vertical" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2></div><a
                 href="/works/20240918F7" class="thumbnail__float" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__float__image thumbnail--vertical" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__float__image thumbnail--vertical" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="/schematics/sys-01.svg"
+                  src="/schematics/story-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2></a>
               <div class="thumbnail__back" data-v-684698a2></div>
               <div class="thumbnail__buffer-back" data-v-684698a2></div>
               <div class="thumbnail__title" data-v-684698a2>
-                <h2 class="thumbnail__title__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</h2>
+                <h2 class="thumbnail__title__text move-text" data-v-684698a2>The solid-state propulsion cell</h2>
               </div>
             </div>
             <div class="infomation" data-v-684698a2>
@@ -3632,19 +3629,19 @@
                 <p class="infomation__num__text" data-v-684698a2>10</p>
               </div>
               <div class="infomation__title" data-v-684698a2>
-                <h2 class="infomation__title__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</h2>
+                <h2 class="infomation__title__text move-text" data-v-684698a2>The solid-state propulsion cell</h2>
               </div>
               <div class="infomation__link" data-v-684698a2><a href="/works/102" class="move-text" data-v-684698a2>View
                   Detail</a></div>
             </div>
             <div class="marquee" data-v-684698a2>
               <div class="marquee__list marquee__animation" data-v-684698a2>
-                <div class="marquee__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</div>
-                <div class="marquee__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</div>
-                <div class="marquee__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</div>
-                <div class="marquee__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</div>
-                <div class="marquee__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</div>
-                <div class="marquee__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</div>
+                <div class="marquee__text move-text" data-v-684698a2>The solid-state propulsion cell</div>
+                <div class="marquee__text move-text" data-v-684698a2>The solid-state propulsion cell</div>
+                <div class="marquee__text move-text" data-v-684698a2>The solid-state propulsion cell</div>
+                <div class="marquee__text move-text" data-v-684698a2>The solid-state propulsion cell</div>
+                <div class="marquee__text move-text" data-v-684698a2>The solid-state propulsion cell</div>
+                <div class="marquee__text move-text" data-v-684698a2>The solid-state propulsion cell</div>
               </div>
             </div>
           </div>
@@ -3659,179 +3656,117 @@
   <script src="/_nuxt/6344783.js" defer></script>
   <script src="/_nuxt/1d95d89.js" defer></script>
 
+  
+
   <!-- Top Technical Annotation Strip -->
   <div class="tech-meta-strip">
-    <div>[CONRAD_CHALLENGE // 2026 INNOVATION SUMMIT] &bull; ARCHIVE REF: LOREM-4029-A</div>
+    <div>[CONRAD_CHALLENGE // 2026 SUMMIT] &bull; INNOVATION PITCH ARCHIVE</div>
     <div style="display:flex; align-items: center; gap: 16px;">
       <span>COORD: 42.1&deg;N 71.0&deg;W</span>
-      <span class="active-tag">TRL-4 BENCH-VALIDATED</span>
-      <button onclick="window.toggleDossierDrawer()" class="btn-tactile btn-vermilion" style="padding: 3px 10px; font-size: 8px; margin: 0;">DOSSIER</button>
+      <span class="active-tag">TRL-4 VALIDATED</span>
+      <button onclick="window.toggleP5RDeck()" class="btn-tactile btn-terracotta" style="padding: 3px 10px; font-size: 8px; margin: 0;">PITCH DECK</button>
     </div>
   </div>
 
-  <!-- Persona 5 Mechanical Kinetic Drawer Backdrop & Panel -->
-  <div id="dossier-backdrop" class="dossier-drawer-backdrop" onclick="window.toggleDossierDrawer()"></div>
-  <aside id="dossier-drawer" class="dossier-drawer" aria-label="Technical Dossier">
-    <div class="dossier-header">
+  <!-- P5R Asymmetric Angled Card Menu -->
+  <div id="p5r-backdrop" class="p5r-backdrop" onclick="window.toggleP5RDeck()"></div>
+  <aside id="p5r-slice" class="p5r-slice" aria-label="Conrad Pitch Deck">
+    <div class="p5r-header">
       <div>
-        <div class="dossier-ref">[CONFIDENTIAL // CONRAD FOUNDATION 2026]</div>
-        <h2 class="dossier-title">TECHNICAL DOSSIER &amp; PATENT FILING</h2>
+        <div class="p5r-tag">[CONRAD 2026 &bull; INNOVATION DOSSIER]</div>
+        <h2 class="p5r-title">Unified Pitch Deck</h2>
       </div>
-      <button class="dossier-close" onclick="window.toggleDossierDrawer()">[ESC // CLOSE]</button>
+      <button class="p5r-close" onclick="window.toggleP5RDeck()">[ESC // CLOSE]</button>
     </div>
 
-    <div>
-      <h3 class="dossier-section-title">EXECUTIVE ABSTRACT // PROBLEM HOOK</h3>
-      <p class="dossier-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      </p>
-    </div>
-
-    <!-- Core Breakthrough Validation Metrics -->
-    <div>
-      <h3 class="dossier-section-title">EXPERIMENTAL BENCHMARK VALIDATION</h3>
-      <div class="metric-grid">
-        <div class="metric-box">
-          <div class="metric-box-label">THRUST-TO-POWER RATIO</div>
-          <div class="metric-box-val" style="color: #FF4800;">+427%</div>
-          <div style="font-size: 8px; font-family: monospace; color: #52565E; margin-top:2px;">18.4 N/kW vs legacy 3.5 N/kW</div>
+    <!-- Fanned Deck of 5 Staggered Pitch Cards -->
+    <div class="p5r-deck">
+      <!-- Card 1: Abstract & Problem -->
+      <div class="p5r-card" onclick="window.showSectionModal('abstract')">
+        <div class="p5r-card-badge">
+          <span>01 &bull; PROBLEM &amp; THESIS</span>
+          <span>[STAGE 4]</span>
         </div>
-        <div class="metric-box">
-          <div class="metric-box-label">ACOUSTIC PROFILE</div>
-          <div class="metric-box-val">&lt; 12 dB</div>
-          <div style="font-size: 8px; font-family: monospace; color: #52565E; margin-top:2px;">Near-silent solid-state operation</div>
-        </div>
-        <div class="metric-box">
-          <div class="metric-box-label">MOVING PARTS COUNT</div>
-          <div class="metric-box-val">0 UNITS</div>
-          <div style="font-size: 8px; font-family: monospace; color: #52565E; margin-top:2px;">Solid-state monolithic grid</div>
-        </div>
-        <div class="metric-box">
-          <div class="metric-box-label">TRL MATURITY LEVEL</div>
-          <div class="metric-box-val" style="color: #FF4800;">STAGE 4</div>
-          <div style="font-size: 8px; font-family: monospace; color: #52565E; margin-top:2px;">Benchtop chamber verified</div>
-        </div>
+        <h3 class="p5r-card-heading">Executive Abstract &amp; Problem</h3>
+        <p class="p5r-card-desc">
+          Wildfire detection and high-altitude climate observation suffer from short drone endurance and noisy, carbon-emitting mechanical turbines.
+        </p>
       </div>
-    </div>
 
-    <!-- Structured Technical Table: Business Pitch & Unit Economics -->
-    <div>
-      <h3 class="dossier-section-title">BUSINESS FEASIBILITY &amp; UNIT ECONOMICS</h3>
-      <table class="dossier-table">
-        <thead>
-          <tr>
-            <th>SUBSYSTEM / COMPONENT</th>
-            <th>LEGACY STANDARD</th>
-            <th>PROJECT LOREM</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Unit Production BOM</td>
-            <td>,000 / unit</td>
-            <td class="highlight"> / unit</td>
-          </tr>
-          <tr>
-            <td>Mean Time Between Failures</td>
-            <td>450 operating hours</td>
-            <td class="highlight">&gt; 12,000 hours</td>
-          </tr>
-          <tr>
-            <td>Energy Density Required</td>
-            <td>1,200 W/kg</td>
-            <td class="highlight">240 W/kg</td>
-          </tr>
-          <tr>
-            <td>Atmospheric Carbon Output</td>
-            <td>184.2 g CO2/km</td>
-            <td class="highlight">0.00 g (Zero-Emission)</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <!-- Card 2: Core Science -->
+      <div class="p5r-card" onclick="window.showSectionModal('science')">
+        <div class="p5r-card-badge">
+          <span>02 &bull; CORE SCIENCE</span>
+          <span>[+427% RATIO]</span>
+        </div>
+        <h3 class="p5r-card-heading">Core Science &amp; Architecture</h3>
+        <p class="p5r-card-desc">
+          Solid-state electro-hydrodynamic ionization accelerates ambient air ions directly, yielding 18.4 N/kW with zero mechanical wear.
+        </p>
+      </div>
 
-    <!-- Market Sizing -->
-    <div>
-      <h3 class="dossier-section-title">MARKET OPPORTUNITY (TAM / SAM / SOM)</h3>
-      <table class="dossier-table">
-        <thead>
-          <tr>
-            <th>MARKET SEGMENT</th>
-            <th>SCOPE</th>
-            <th>VALUATION</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>TAM (Total Addressable)</td>
-            <td>Atmospheric Earth Observation</td>
-            <td class="highlight">.8 Billion</td>
-          </tr>
-          <tr>
-            <td>SAM (Serviceable Addressable)</td>
-            <td>Wildfire Early Detection &amp; Sensing</td>
-            <td class="highlight">.2 Billion</td>
-          </tr>
-          <tr>
-            <td>SOM (Serviceable Obtainable)</td>
-            <td>Year 3 Target Commercial Rollout</td>
-            <td class="highlight"> Million</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <!-- Card 3: Business & Feasibility -->
+      <div class="p5r-card" onclick="window.showSectionModal('business')">
+        <div class="p5r-card-badge">
+          <span>03 &bull; BUSINESS MODEL</span>
+          <span>[ BOM]</span>
+        </div>
+        <h3 class="p5r-card-heading">Business &amp; Unit Feasibility</h3>
+        <p class="p5r-card-desc">
+          Unit manufacturing BOM of  vs ,000 for legacy turbines. Target addressable market of .8B across atmospheric sensing and wildfire defense.
+        </p>
+      </div>
 
-    <!-- Team & Patent Dossier -->
-    <div>
-      <h3 class="dossier-section-title">TEAM &amp; PATENT FILING DOSSIER</h3>
-      <table class="dossier-table">
-        <tbody>
-          <tr>
-            <td>PATENT APPLICATION</td>
-            <td class="highlight">US-2026-LATIN-01 [PROVISIONAL]</td>
-          </tr>
-          <tr>
-            <td>TITLE OF INVENTION</td>
-            <td>Method &amp; Solid-State Apparatus for Fluidic Acceleration</td>
-          </tr>
-          <tr>
-            <td>PRINCIPAL INVESTIGATOR</td>
-            <td>William Yang [Lead Hardware Architect]</td>
-          </tr>
-          <tr>
-            <td>VERIFICATION FACILITY</td>
-            <td>High-Voltage Calibration Benchmark Laboratory</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <!-- Card 4: 3-Min Pitch Video -->
+      <div class="p5r-card" onclick="window.showSectionModal('video')">
+        <div class="p5r-card-badge">
+          <span>04 &bull; MULTIMEDIA</span>
+          <span>[3:00 MIN]</span>
+        </div>
+        <h3 class="p5r-card-heading">3-Minute Pitch Video</h3>
+        <p class="p5r-card-desc">
+          Watch the founders explain the working bench prototype, high-voltage chamber test footage, and market deployment strategy.
+        </p>
+      </div>
 
-    <!-- Action Trigger CTA -->
-    <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
-      <button class="btn-tactile btn-vermilion" style="justify-content: center; padding: 12px 20px; font-size: 11px;">
-        INSPECT FULL TECHNICAL DOSSIER (.PDF)
-      </button>
-      <div style="font-family: monospace; font-size: 9px; color: #52565E; text-align: center;">
-        SHA-256 CHECKSUM: 9f8e4a7b2c01d93e8842af5e710b37...
+      <!-- Card 5: Download Brief PDF -->
+      <div class="p5r-card" onclick="window.showSectionModal('download')">
+        <div class="p5r-card-badge">
+          <span>05 &bull; PATENT &amp; BRIEF</span>
+          <span>[PDF 4.2 MB]</span>
+        </div>
+        <h3 class="p5r-card-heading">Download Executive Brief (PDF)</h3>
+        <p class="p5r-card-desc">
+          Complete technical dossier including patent provisional claims (US-2026-LATIN-01) and raw laboratory chamber sensor logs.
+        </p>
       </div>
     </div>
   </aside>
 
   <script>
-    window.toggleDossierDrawer = function() {
-      const drawer = document.getElementById('dossier-drawer');
-      const backdrop = document.getElementById('dossier-backdrop');
-      if (drawer && backdrop) {
-        drawer.classList.toggle('is-active');
+    window.toggleP5RDeck = function() {
+      const slice = document.getElementById('p5r-slice');
+      const backdrop = document.getElementById('p5r-backdrop');
+      if (slice && backdrop) {
+        slice.classList.toggle('is-active');
         backdrop.classList.toggle('is-active');
+      }
+    };
+    window.showSectionModal = function(type) {
+      if (type === 'download') {
+        alert('Downloading Executive Pitch Brief & Patent Claims (PDF)...\\nSHA-256: 9f8e4a7b2c01d93e8842af5e710b37');
+      } else if (type === 'video') {
+        alert('3-Minute Pitch Video player initialized: [Playing Conrad Challenge 2026 Summit Pitch...]');
+      } else {
+        alert('Navigating to ' + type + ' detail section.');
       }
     };
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        const drawer = document.getElementById('dossier-drawer');
-        const backdrop = document.getElementById('dossier-backdrop');
-        if (drawer && drawer.classList.contains('is-active')) {
-          drawer.classList.remove('is-active');
+        const slice = document.getElementById('p5r-slice');
+        const backdrop = document.getElementById('p5r-backdrop');
+        if (slice && slice.classList.contains('is-active')) {
+          slice.classList.remove('is-active');
           backdrop.classList.remove('is-active');
         }
       }

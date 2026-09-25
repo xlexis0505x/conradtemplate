@@ -1,13 +1,13 @@
 {
   "contents": [
     {
-      "id": "sys-01",
-      "title": "SYS-01 // LOREM IPSUM",
+      "id": "story-01",
+      "title": "The solid-state propulsion cell",
       "created_day": "2026-09-25T00:00:00.000Z",
-      "client": "CONRAD CHALLENGE // INNOVATION SUMMIT",
-      "url": "/schematics/sys-01.svg",
+      "client": "CONRAD CHALLENGE &bull; CHAPTER 01",
+      "url": "/schematics/story-01.svg",
       "url_site": "https://conradchallenge.org",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "description": "Our primary breakthrough consolidates atmospheric ionization and momentum transfer into a single monolithic solid-state cell, eliminating turbines and mechanical friction entirely.",
       "status": [
         "TRL: 4",
         "PATENT PENDING"
@@ -18,7 +18,7 @@
       "works": [
         {
           "picture": {
-            "url": "/schematics/sys-01.svg",
+            "url": "/schematics/story-01.svg",
             "width": 600,
             "height": 600
           }
@@ -26,13 +26,13 @@
       ]
     },
     {
-      "id": "sys-02",
-      "title": "SYS-02 // DOLOR SIT AMET",
+      "id": "story-02",
+      "title": "Asymmetric dielectric ionization",
       "created_day": "2026-09-25T00:00:00.000Z",
-      "client": "CONRAD CHALLENGE // INNOVATION SUMMIT",
-      "url": "/schematics/sys-02.svg",
+      "client": "CONRAD CHALLENGE &bull; CHAPTER 02",
+      "url": "/schematics/story-02.svg",
       "url_site": "https://conradchallenge.org",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "description": "By shaping micro-scale electrode geometry, the emitter generates a localized corona discharge that accelerates surrounding atmospheric ions at near-zero thermal loss.",
       "status": [
         "TRL: 4",
         "PATENT PENDING"
@@ -43,7 +43,7 @@
       "works": [
         {
           "picture": {
-            "url": "/schematics/sys-02.svg",
+            "url": "/schematics/story-02.svg",
             "width": 600,
             "height": 600
           }
@@ -51,13 +51,13 @@
       ]
     },
     {
-      "id": "sys-03",
-      "title": "SYS-03 // CONSECTETUR ADIP",
+      "id": "story-03",
+      "title": "Empirical chamber verification",
       "created_day": "2026-09-25T00:00:00.000Z",
-      "client": "CONRAD CHALLENGE // INNOVATION SUMMIT",
-      "url": "/schematics/sys-03.svg",
+      "client": "CONRAD CHALLENGE &bull; CHAPTER 03",
+      "url": "/schematics/story-03.svg",
       "url_site": "https://conradchallenge.org",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "description": "Rigorous benchtop vacuum and pressure chamber testing demonstrates continuous acoustic emissions below 12 dB with sub-micron drift stability across 480 continuous operational hours.",
       "status": [
         "TRL: 4",
         "PATENT PENDING"
@@ -68,7 +68,7 @@
       "works": [
         {
           "picture": {
-            "url": "/schematics/sys-03.svg",
+            "url": "/schematics/story-03.svg",
             "width": 600,
             "height": 600
           }
@@ -76,13 +76,13 @@
       ]
     },
     {
-      "id": "sys-04",
-      "title": "SYS-04 // SED DO EIUSMOD",
+      "id": "story-04",
+      "title": "Stratospheric surveillance envelope",
       "created_day": "2026-09-25T00:00:00.000Z",
-      "client": "CONRAD CHALLENGE // INNOVATION SUMMIT",
-      "url": "/schematics/sys-04.svg",
+      "client": "CONRAD CHALLENGE &bull; CHAPTER 04",
+      "url": "/schematics/story-04.svg",
       "url_site": "https://conradchallenge.org",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "description": "Designed for autonomous stratospheric lingering, the cell enables silent long-duration wildfire surveillance and atmospheric climate sensing with zero fossil fuel burn.",
       "status": [
         "TRL: 4",
         "PATENT PENDING"
@@ -93,7 +93,7 @@
       "works": [
         {
           "picture": {
-            "url": "/schematics/sys-04.svg",
+            "url": "/schematics/story-04.svg",
             "width": 600,
             "height": 600
           }
@@ -101,13 +101,13 @@
       ]
     },
     {
-      "id": "sys-05",
-      "title": "SYS-05 // TEMPOR INCIDIDUNT",
+      "id": "story-05",
+      "title": "Monolithic scalable production",
       "created_day": "2026-09-25T00:00:00.000Z",
-      "client": "CONRAD CHALLENGE // INNOVATION SUMMIT",
-      "url": "/schematics/sys-05.svg",
+      "client": "CONRAD CHALLENGE &bull; CHAPTER 05",
+      "url": "/schematics/story-05.svg",
       "url_site": "https://conradchallenge.org",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "description": "Standard PCB lithography and additive carbon-composite layups bring the bill of materials down to  per unit compared to ,000 for legacy mechanical small-scale turbo-fan drones.",
       "status": [
         "TRL: 4",
         "PATENT PENDING"
@@ -118,132 +118,7 @@
       "works": [
         {
           "picture": {
-            "url": "/schematics/sys-05.svg",
-            "width": 600,
-            "height": 600
-          }
-        }
-      ]
-    },
-    {
-      "id": "sys-06",
-      "title": "SYS-06 // LABORE ET DOLORE",
-      "created_day": "2026-09-25T00:00:00.000Z",
-      "client": "CONRAD CHALLENGE // INNOVATION SUMMIT",
-      "url": "/schematics/sys-06.svg",
-      "url_site": "https://conradchallenge.org",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "status": [
-        "TRL: 4",
-        "PATENT PENDING"
-      ],
-      "color": [
-        "レッド"
-      ],
-      "works": [
-        {
-          "picture": {
-            "url": "/schematics/sys-06.svg",
-            "width": 600,
-            "height": 600
-          }
-        }
-      ]
-    },
-    {
-      "id": "sys-07",
-      "title": "SYS-07 // MAGNA ALIQUA",
-      "created_day": "2026-09-25T00:00:00.000Z",
-      "client": "CONRAD CHALLENGE // INNOVATION SUMMIT",
-      "url": "/schematics/sys-07.svg",
-      "url_site": "https://conradchallenge.org",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "status": [
-        "TRL: 4",
-        "PATENT PENDING"
-      ],
-      "color": [
-        "レッド"
-      ],
-      "works": [
-        {
-          "picture": {
-            "url": "/schematics/sys-07.svg",
-            "width": 600,
-            "height": 600
-          }
-        }
-      ]
-    },
-    {
-      "id": "sys-08",
-      "title": "SYS-08 // ENIM AD MINIM",
-      "created_day": "2026-09-25T00:00:00.000Z",
-      "client": "CONRAD CHALLENGE // INNOVATION SUMMIT",
-      "url": "/schematics/sys-08.svg",
-      "url_site": "https://conradchallenge.org",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "status": [
-        "TRL: 4",
-        "PATENT PENDING"
-      ],
-      "color": [
-        "レッド"
-      ],
-      "works": [
-        {
-          "picture": {
-            "url": "/schematics/sys-08.svg",
-            "width": 600,
-            "height": 600
-          }
-        }
-      ]
-    },
-    {
-      "id": "sys-09",
-      "title": "SYS-09 // QUIS NOSTRUD",
-      "created_day": "2026-09-25T00:00:00.000Z",
-      "client": "CONRAD CHALLENGE // INNOVATION SUMMIT",
-      "url": "/schematics/sys-09.svg",
-      "url_site": "https://conradchallenge.org",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "status": [
-        "TRL: 4",
-        "PATENT PENDING"
-      ],
-      "color": [
-        "レッド"
-      ],
-      "works": [
-        {
-          "picture": {
-            "url": "/schematics/sys-09.svg",
-            "width": 600,
-            "height": 600
-          }
-        }
-      ]
-    },
-    {
-      "id": "sys-10",
-      "title": "SYS-10 // EXERCITATION ULLAMCO",
-      "created_day": "2026-09-25T00:00:00.000Z",
-      "client": "CONRAD CHALLENGE // INNOVATION SUMMIT",
-      "url": "/schematics/sys-10.svg",
-      "url_site": "https://conradchallenge.org",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "status": [
-        "TRL: 4",
-        "PATENT PENDING"
-      ],
-      "color": [
-        "レッド"
-      ],
-      "works": [
-        {
-          "picture": {
-            "url": "/schematics/sys-10.svg",
+            "url": "/schematics/story-05.svg",
             "width": 600,
             "height": 600
           }
@@ -251,7 +126,7 @@
       ]
     }
   ],
-  "totalCount": 10,
+  "totalCount": 5,
   "offset": 0,
-  "limit": 10
+  "limit": 5
 }
