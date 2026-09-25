@@ -3329,52 +3329,13 @@
     background: var(--accent-terracotta) !important;
   }
 
-
   /* ============================================================ */
-  /* UNCOUPLED 2-COLUMN MAIN LAYOUT                               */
+  /* ORIGINAL COALOWL LAYOUT — PRESERVED                         */
+  /* Thumbnail and infomation use their original fixed positions. */
+  /* Only typography/color overrides applied below.              */
   /* ============================================================ */
 
-  /* 
-   * The original Nuxt code uses `position: fixed` for both .thumbnail
-   * and .infomation. We override both and introduce a grid wrapper.
-   */
-
-  /* Suppress the old .infomation fixed panel - we replace it with our own left column */
-  .infomation[data-v-684698a2] {
-    display: none !important;
-  }
-
-  /* Subdue the marquee to a barely-visible watermark - never competes with foreground */
-  .marquee[data-v-684698a2] {
-    opacity: 0.035 !important;
-    pointer-events: none !important;
-    z-index: 1 !important;
-  }
-
-  /* Re-anchor thumbnail to the right 40% of the viewport */
-  .thumbnail[data-v-684698a2] {
-    position: fixed !important;
-    top: 50% !important;
-    left: auto !important;
-    right: 7vw !important;
-    bottom: auto !important;
-    transform: translateY(-50%) !important;
-    margin: 0 !important;
-    height: 46vh !important;
-    width: 46vh !important;
-    z-index: 8 !important;
-  }
-  @media (max-width: 1024px) {
-    .thumbnail[data-v-684698a2] {
-      right: 50% !important;
-      transform: translate(50%, -50%) !important;
-      height: 60vw !important;
-      width: 60vw !important;
-      top: 40% !important;
-    }
-  }
-
-  /* Preserved specimen card styling */
+  /* Specimen card chamfer + terracotta hover */
   .thumbnail__float[data-v-684698a2],
   .thumbnail__back[data-v-684698a2],
   .thumbnail__buffer-float[data-v-684698a2],
@@ -3388,119 +3349,7 @@
     box-shadow: 4px 4px 0px var(--accent-terracotta) !important;
   }
 
-  /* LEFT EDITORIAL PANEL - positioned in the left half of the viewport */
-  #conrad-spec-panel {
-    position: fixed;
-    top: 50%;
-    left: 7vw;
-    transform: translateY(-50%);
-    width: 38vw;
-    max-width: 480px;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    pointer-events: auto;
-  }
-  @media (max-width: 1024px) {
-    #conrad-spec-panel {
-      left: 5vw;
-      right: 5vw;
-      width: auto;
-      max-width: none;
-      top: auto;
-      bottom: 100px;
-      transform: none;
-    }
-  }
-
-  .csp-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    color: var(--accent-terracotta);
-    text-transform: uppercase;
-    margin: 0;
-  }
-
-  .csp-heading {
-    font-family: var(--font-human);
-    font-size: clamp(26px, 2.8vw, 40px);
-    font-weight: 500;
-    line-height: 1.18;
-    letter-spacing: -0.03em;
-    text-transform: none;
-    color: var(--ink-primary);
-    margin: 0;
-  }
-
-  .csp-divider {
-    width: 48px;
-    height: 1.5px;
-    background: var(--accent-terracotta);
-    margin: 0;
-  }
-
-  .csp-description {
-    font-family: var(--font-human);
-    font-size: 13px;
-    line-height: 1.65;
-    color: var(--ink-muted);
-    margin: 0;
-    text-transform: none;
-    max-width: 380px;
-  }
-
-  .csp-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .csp-badge {
-    font-family: var(--font-mono);
-    font-size: 8.5px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--ink-primary);
-    border: 1px solid var(--border-card);
-    padding: 4px 9px;
-    text-transform: uppercase;
-    background: transparent;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%);
-  }
-
-  .csp-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--accent-terracotta);
-    text-transform: uppercase;
-    background: #FFFFFF;
-    border: 1.5px solid var(--border-card);
-    box-shadow: 2.5px 2.5px 0px rgba(20,24,30,0.65);
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
-    padding: 7px 16px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.06s, color 0.06s, transform 0.06s;
-    align-self: flex-start;
-  }
-  .csp-cta:hover {
-    background: var(--ink-primary);
-    color: #FFFFFF;
-    border-color: var(--ink-primary);
-  }
-  .csp-cta:active {
-    transform: translate(1.5px, 1.5px);
-    box-shadow: 0.5px 0.5px 0px rgba(20,24,30,0.5);
-  }
-
-  /* Restored heading typography */
+  /* Restored Coalowl human-scale title typography */
   .infomation__title__text {
     font-family: var(--font-human) !important;
     font-size: 32px !important;
@@ -3510,24 +3359,52 @@
     text-transform: none !important;
     color: var(--ink-primary) !important;
   }
+  @media (max-width: 1024px) {
+    .infomation__title__text {
+      font-size: 24px !important;
+    }
+  }
 
+  /* Subdued marquee watermark — doesn't compete with reading text */
   .marquee__text {
     font-family: var(--font-human) !important;
     font-weight: 500 !important;
     letter-spacing: -0.03em !important;
     text-transform: none !important;
+    color: rgba(20, 24, 30, 0.05) !important;
   }
 
+  /* Monospace strictly for counter numbers */
   .infomation__num__text {
     font-family: var(--font-mono) !important;
     font-weight: 700 !important;
     font-size: 13px !important;
     letter-spacing: 0.08em !important;
   }
+  .infomation__link a {
+    font-family: var(--font-mono) !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    color: var(--accent-terracotta) !important;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: 1px solid var(--border-card);
+    background: #FFFFFF;
+    box-shadow: 2px 2px 0px rgba(20, 24, 30, 0.6);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+    transition: transform 0.06s ease, background 0.06s ease, color 0.06s ease;
+  }
+  .infomation__link a:hover {
+    background: var(--ink-primary);
+    color: #FFFFFF !important;
+    border-color: var(--ink-primary);
+  }
 
-  /* ============================================================ */
-  /* FOOTER                                                       */
-  /* ============================================================ */
+  /* Footer */
   .footer {
     border-top: 1px solid var(--border-hairline) !important;
     background: var(--bg-canvas) !important;
@@ -3546,7 +3423,8 @@
   }
 
   /* ============================================================ */
-  /* PERSONA 5 ROYAL — AUTHENTIC ANGLED CORNER SLAB DECK         */
+  /* PERSONA 5 ROYAL — BOLD ANGLED CORNER SLAB DECK              */
+  /* Bigger. Bolder. Selected card blows up.                     */
   /* ============================================================ */
 
   /* Scrim */
@@ -3556,7 +3434,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(10, 12, 16, 0.6);
+    background: rgba(10, 12, 16, 0.65);
     z-index: 2999;
     opacity: 0;
     pointer-events: none;
@@ -3567,51 +3445,50 @@
     pointer-events: auto;
   }
 
-  /* Top-right corner wedge container */
+  /* Top-right corner wedge — now taller, wider, more imposing */
   .p5r-corner {
     position: fixed;
     top: 0;
     right: 0;
-    width: 620px;
-    max-width: 96vw;
-    height: 520px;
+    width: 700px;
+    max-width: 98vw;
+    height: 640px;
     z-index: 3000;
     pointer-events: none;
-    /* Angled dark wedge from top-right sliding down */
-    transform: translate(105%, -105%);
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translate(110%, -110%);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .p5r-corner.is-active {
     transform: translate(0, 0);
     pointer-events: auto;
   }
 
-  /* The dark polygon wedge background */
+  /* Dark polygon wedge background */
   .p5r-wedge-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #14181E;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 14% 100%);
-    /* Terracotta trim on left diagonal edge — via gradient */
-    border-right: 3px solid #BA4A28;
+    background: #0E1116;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%);
+    /* Bold vermilion right border */
+    border-right: 4px solid #BA4A28;
   }
 
-  /* Close button anchored inside wedge top-right */
+  /* Close button */
   .p5r-corner-close {
     position: absolute;
-    top: 18px;
-    right: 22px;
+    top: 20px;
+    right: 24px;
     background: transparent;
-    border: 1.5px solid rgba(242, 243, 240, 0.35);
+    border: 1.5px solid rgba(242, 243, 240, 0.3);
     color: #F2F3F0;
     font-family: var(--font-mono);
     font-size: 9px;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 5px 10px;
+    letter-spacing: 0.12em;
+    padding: 6px 12px;
     cursor: pointer;
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%);
     z-index: 10;
@@ -3623,159 +3500,169 @@
     color: #FFFFFF;
   }
 
-  /* Staggered slab deck — cascades down from the wedge */
+  /* Slab deck — starts higher, more room */
   .p5r-slab-deck {
     position: absolute;
-    top: 52px;
+    top: 62px;
     right: 0;
-    left: 15%;  /* aligns slabs to start after the diagonal cut */
+    left: 13%;
     display: flex;
     flex-direction: column;
-    padding-right: 22px;
-    /* Slabs cascade downward with negative margins creating overlap */
+    padding-right: 0;
   }
 
-  /* Each slab = a tilted horizontal bar like a P5R save slot */
+  /* Core slab — taller, meatier */
   .p5r-slab {
     position: relative;
     display: flex;
     align-items: center;
     width: 100%;
-    height: 72px;
-    margin-top: -12px;     /* overlap slabs to create deck cascade */
-    padding: 0 20px 0 14px;
+    height: 90px;
+    margin-top: -16px;       /* more overlap = tighter cascade */
+    padding: 0 28px 0 18px;
     cursor: pointer;
     text-decoration: none;
 
-    /* Angled slab — tilted like P5R save slots */
+    /* Angled at -12deg, P5R save slot */
     transform: rotate(-12deg);
     transform-origin: right center;
 
-    /* Base: paper-white with crisp graphite border */
-    background: #F8F7F5;
-    border-top: 2px solid #14181E;
-    border-bottom: 2px solid #14181E;
+    background: #F4F3F0;
+    border-top: 3px solid #14181E;
+    border-bottom: 3px solid #14181E;
     border-left: none;
     border-right: none;
 
-    /* Depth shadow */
-    box-shadow: 4px 4px 0px #14181E;
+    box-shadow: 5px 5px 0px #14181E;
 
-    /* Mechanical instant snap transition */
+    /* Instant mechanical snap */
     transition:
-      transform 0.08s cubic-bezier(0.16, 1, 0.3, 1),
-      background 0.08s cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 0.08s cubic-bezier(0.16, 1, 0.3, 1),
-      color 0.08s cubic-bezier(0.16, 1, 0.3, 1);
+      transform     0.08s cubic-bezier(0.16, 1, 0.3, 1),
+      height        0.08s cubic-bezier(0.16, 1, 0.3, 1),
+      background    0.08s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow    0.08s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color  0.08s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Z-layering: first slab is on top of the stack */
+  /* Z layering */
   .p5r-slab:nth-child(1) { z-index: 50; margin-top: 0; }
   .p5r-slab:nth-child(2) { z-index: 40; }
   .p5r-slab:nth-child(3) { z-index: 30; }
   .p5r-slab:nth-child(4) { z-index: 20; }
   .p5r-slab:nth-child(5) { z-index: 10; }
 
-  /* LEFT INDEX NOTCH — punched-out monospace number */
+  /* INDEX NOTCH — bold punched number */
   .p5r-slab-no {
     font-family: var(--font-mono);
-    font-size: 22px;
     font-weight: 900;
-    letter-spacing: -0.05em;
     color: #14181E;
-    min-width: 52px;
-    line-height: 1;
-    /* The "No." prefix is tiny */
+    min-width: 68px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0;
     flex-shrink: 0;
-    border-right: 2px solid rgba(20, 24, 30, 0.2);
-    padding-right: 12px;
-    margin-right: 16px;
+    border-right: 2.5px solid rgba(20, 24, 30, 0.18);
+    padding-right: 16px;
+    margin-right: 20px;
+    line-height: 1;
   }
   .p5r-slab-no-label {
-    font-size: 7px;
+    font-size: 7.5px;
     font-weight: 700;
-    letter-spacing: 0.06em;
-    color: rgba(20, 24, 30, 0.45);
+    letter-spacing: 0.08em;
+    color: rgba(20, 24, 30, 0.38);
     text-transform: uppercase;
-    line-height: 1;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   }
   .p5r-slab-no-num {
-    font-size: 28px;
+    font-size: 36px;
     font-weight: 900;
+    line-height: 0.88;
     color: inherit;
-    line-height: 0.9;
+    letter-spacing: -0.04em;
   }
 
-  /* SLAB BODY — title and meta */
+  /* Slab body */
   .p5r-slab-body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
     overflow: hidden;
   }
   .p5r-slab-title {
     font-family: var(--font-human);
-    font-size: 14px;
+    font-size: 17px;
     font-weight: 600;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
     color: #14181E;
     text-transform: none;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.2;
+    line-height: 1.15;
   }
   .p5r-slab-meta {
     font-family: var(--font-mono);
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: rgba(20, 24, 30, 0.45);
-    text-transform: uppercase;
-    line-height: 1;
-  }
-
-  /* RIGHT TAG — flush to the right edge */
-  .p5r-slab-tag {
-    font-family: var(--font-mono);
     font-size: 9px;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    color: rgba(20, 24, 30, 0.5);
+    letter-spacing: 0.14em;
+    color: rgba(20, 24, 30, 0.4);
     text-transform: uppercase;
-    flex-shrink: 0;
-    margin-left: 8px;
   }
 
-  /* HOVER / ACTIVE STATE — P5R slot selection snap forward */
+  /* Right tag */
+  .p5r-slab-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: rgba(20, 24, 30, 0.45);
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+
+  /* ——————————————————————————————————————
+   * HOVER/SELECTED STATE
+   * Card snaps forward, grows taller, turns full vermilion,
+   * number blows up to massive scale.
+   * —————————————————————————————————————— */
   .p5r-slab:hover {
-    transform: rotate(-12deg) translate(-14px, -4px) !important;
+    transform: rotate(-12deg) translate(-22px, -6px) scaleY(1.18) !important;
     background: #BA4A28 !important;
-    box-shadow: 6px 6px 0px #14181E !important;
+    box-shadow: 8px 8px 0px #14181E !important;
     border-color: #BA4A28 !important;
-    z-index: 100 !important;
+    border-width: 4px !important;
+    z-index: 200 !important;
   }
   .p5r-slab:hover .p5r-slab-no {
     color: #FFFFFF;
-    border-right-color: rgba(255, 255, 255, 0.3);
+    border-right-color: rgba(255, 255, 255, 0.25);
   }
-  .p5r-slab:hover .p5r-slab-no-label,
-  .p5r-slab:hover .p5r-slab-meta,
-  .p5r-slab:hover .p5r-slab-tag {
-    color: rgba(255, 255, 255, 0.65) !important;
+  .p5r-slab:hover .p5r-slab-no-num {
+    font-size: 48px !important;
+    letter-spacing: -0.06em;
+  }
+  .p5r-slab:hover .p5r-slab-no-label {
+    color: rgba(255, 255, 255, 0.55) !important;
   }
   .p5r-slab:hover .p5r-slab-title {
     color: #FFFFFF !important;
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em !important;
+  }
+  .p5r-slab:hover .p5r-slab-meta {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+  .p5r-slab:hover .p5r-slab-tag {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-size: 11px !important;
   }
   .p5r-slab:active {
-    transform: rotate(-12deg) translate(-8px, -2px) !important;
-    box-shadow: 2px 2px 0px #14181E !important;
+    transform: rotate(-12deg) translate(-12px, -3px) scaleY(1.1) !important;
+    box-shadow: 3px 3px 0px #14181E !important;
   }
 
   /* Loading Screen */
@@ -3787,7 +3674,7 @@
     font-weight: 700 !important;
     color: var(--accent-terracotta) !important;
   }
-</style>
+</style></style>
 
 
 </head>
@@ -3958,21 +3845,6 @@
     </div>
   </div>
 
-  <!-- Left Editorial Panel (2-Column Layout: Left Column) -->
-  <div id="conrad-spec-panel">
-    <p class="csp-eyebrow">[CHAPTER 01 // CONRAD CHALLENGE 2026]</p>
-    <h2 id="csp-title" class="csp-heading">The solid-state propulsion cell</h2>
-    <div class="csp-divider"></div>
-    <p id="csp-desc" class="csp-description">Our primary breakthrough consolidates atmospheric ionization and momentum transfer into a single monolithic solid-state cell, eliminating turbines and mechanical friction entirely.</p>
-    <div class="csp-badges">
-      <span class="csp-badge">TRL: 4</span>
-      <span class="csp-badge">Patent Pending</span>
-      <span class="csp-badge">18.4 N/kW</span>
-      <span class="csp-badge">&#60; 12 dB</span>
-    </div>
-    <a href="/works/20240918F7" class="csp-cta">[INSPECT SPEC // TRL-4]</a>
-  </div>
-
   <!-- P5R Asymmetric Angled Card Menu (Corner Slab Deck) -->
   <div id="p5r-backdrop" class="p5r-backdrop" onclick="window.toggleP5RDeck()"></div>
 
@@ -4086,47 +3958,6 @@
         }
       }
     });
-
-    /*
-     * Dynamically sync the left editorial panel text with the active
-     * gallery chapter as the user scrolls through the Nuxt work slider.
-     * We observe the `.infomation__title__text` for mutations since the
-     * Nuxt app updates it in place.
-     */
-    (function syncSpecPanel() {
-      const chapterMap = {
-        'The solid-state propulsion cell':       { chapter: '01', desc: 'Our primary breakthrough consolidates atmospheric ionization and momentum transfer into a single monolithic solid-state cell, eliminating turbines and mechanical friction entirely.', badges: ['TRL: 4','Patent Pending','18.4 N/kW','&#60; 12 dB'] },
-        'Asymmetric dielectric ionization':      { chapter: '02', desc: 'By shaping micro-scale electrode geometry, the emitter generates a localized corona discharge that accelerates surrounding atmospheric ions at near-zero thermal loss.', badges: ['TRL: 4','Patent Pending','Corona Discharge'] },
-        'Empirical chamber verification':        { chapter: '03', desc: 'Rigorous benchtop vacuum and pressure chamber testing demonstrates continuous acoustic emissions below 12 dB with sub-micron drift stability across 480 hours.', badges: ['TRL: 4','Lab Verified','&#60; 12 dB'] },
-        'Stratospheric surveillance envelope':   { chapter: '04', desc: 'Designed for autonomous stratospheric lingering, the cell enables silent long-duration wildfire surveillance and atmospheric climate sensing with zero fossil fuel burn.', badges: ['TRL: 4','Silent','Zero Emission'] },
-        'Monolithic scalable production':        { chapter: '05', desc: 'Standard PCB lithography and additive carbon-composite layups bring the bill of materials down to $180/unit compared to $3,000 for legacy mechanical turbo-fan drones.', badges: ['TRL: 4','$180 BOM','Mass Producible'] },
-      };
-
-      function updatePanel(titleText) {
-        const data = chapterMap[titleText.trim()];
-        if (!data) return;
-        const titleEl = document.getElementById('csp-title');
-        const descEl  = document.getElementById('csp-desc');
-        const eyebrow = document.querySelector('.csp-eyebrow');
-        const badges  = document.querySelector('.csp-badges');
-        if (titleEl) titleEl.textContent = titleText.trim();
-        if (descEl)  descEl.textContent  = data.desc;
-        if (eyebrow) eyebrow.textContent = '[CHAPTER ' + data.chapter + ' // CONRAD CHALLENGE 2026]';
-        if (badges)  badges.innerHTML    = data.badges.map(b => '<span class="csp-badge">' + b + '</span>').join('');
-      }
-
-      /* Poll for Nuxt title element and observe changes */
-      function attachObserver() {
-        const nuxtTitle = document.querySelector('.infomation__title__text');
-        if (!nuxtTitle) { setTimeout(attachObserver, 500); return; }
-        updatePanel(nuxtTitle.textContent);
-        const observer = new MutationObserver(function() {
-          updatePanel(nuxtTitle.textContent);
-        });
-        observer.observe(nuxtTitle, { childList: true, characterData: true, subtree: true });
-      }
-      window.addEventListener('load', attachObserver);
-    })();
   </script>
 </body>
 
