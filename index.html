@@ -2,7 +2,7 @@
 <html data-n-head-ssr lang="en" data-n-head="%7B%22lang%22:%7B%22ssr%22:%22en%22%7D%7D">
 
 <head>
-  <title>coalowl</title>
+  <title>PROJECT LOREM // CONRAD CHALLENGE 2026 PITCH DOSSIER</title>
   <meta data-n-head="ssr" charset="utf-8">
   <meta data-n-head="ssr" name="viewport" content="width=device-width,initial-scale=1">
   <meta data-n-head="ssr" data-hid="description" name="description" content="undefined">
@@ -3090,6 +3090,419 @@
   <link rel="preload" href="/_nuxt/static/1727831905/state.js" as="script">
   <link rel="preload" href="/_nuxt/static/1727831905/payload.js" as="script">
   <link rel="preload" href="/_nuxt/static/1727831905/manifest.js" as="script">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style id="conrad-engineering-theme">
+  :root {
+    --bg-canvas: #F2F3F0;
+    --card-surface: #FFFFFF;
+    --ink-primary: #111317;
+    --ink-muted: #52565E;
+    --border-hairline: rgba(17, 19, 23, 0.15);
+    --border-strong: #111317;
+    --accent-vermilion: #FF4800;
+    --color-gray: #F2F3F0 !important;
+    --color-white: #FFFFFF !important;
+    --color-black: #111317 !important;
+    --color-red: #FF4800 !important;
+    --font-sans: 'Space Grotesk', 'Helvetica Neue', Inter, -apple-system, sans-serif;
+    --font-mono: 'Space Mono', 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  /* Universal Geometric Rules: ZERO ROUNDED CORNERS */
+  *, *::before, *::after {
+    border-radius: 0px !important;
+    box-sizing: border-box;
+  }
+
+  /* Base Canvas & Typography */
+  html, body {
+    background-color: var(--bg-canvas) !important;
+    color: var(--ink-primary) !important;
+    font-family: var(--font-sans) !important;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+  }
+
+  /* Hairlines and Architectural Grid Lines */
+  .header, .footer, .social {
+    border-color: var(--border-hairline) !important;
+  }
+
+  /* Top Technical Annotation Strip */
+  .tech-meta-strip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 24px;
+    background: #E6E7E3;
+    border-bottom: 1px solid var(--border-hairline);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+  .tech-meta-strip span.active-tag {
+    color: var(--accent-vermilion);
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tech-meta-strip span.active-tag::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--accent-vermilion);
+    animation: blink 2s infinite ease-in-out;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* Header Overrides */
+  .header {
+    top: 24px !important;
+    height: 70px !important;
+    background: var(--bg-canvas) !important;
+    border-bottom: 1px solid var(--border-hairline);
+    padding: 0 40px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header__logo__image {
+    height: 38px !important;
+    width: auto !important;
+  }
+  .header__list__item__link {
+    font-family: var(--font-mono) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.08em !important;
+    font-weight: 700 !important;
+    color: var(--ink-primary) !important;
+    text-transform: uppercase;
+    transition: color 0.08s ease, background 0.08s ease;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+  }
+  .header__list__item__link:hover {
+    background: #111317;
+    color: #F2F3F0 !important;
+    border-color: #111317;
+  }
+
+  /* Tactile Button Physics (Teenage Engineering Hardware Feel) */
+  .btn-tactile {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 8px 16px;
+    background: var(--card-surface);
+    color: var(--ink-primary);
+    border: 1.5px solid var(--border-strong);
+    box-shadow: 2px 2px 0px var(--border-strong) !important;
+    cursor: pointer;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+    transition: transform 0.06s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.06s ease, background 0.06s ease, color 0.06s ease;
+  }
+  .btn-tactile:hover {
+    background: var(--ink-primary);
+    color: var(--bg-canvas);
+    box-shadow: 2px 2px 0px var(--accent-vermilion) !important;
+  }
+  .btn-tactile:active {
+    transform: translate(1.5px, 1.5px) !important;
+    box-shadow: 0.5px 0.5px 0px var(--border-strong) !important;
+  }
+
+  .btn-vermilion {
+    background: var(--accent-vermilion) !important;
+    color: #FFFFFF !important;
+    border-color: var(--border-strong) !important;
+  }
+  .btn-vermilion:hover {
+    background: #E03E00 !important;
+    color: #FFFFFF !important;
+  }
+
+  /* 45-Degree Chamfered Specimen Cards */
+  .thumbnail__float, .thumbnail__back, .thumbnail__buffer-float, .thumbnail__buffer-back {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%) !important;
+    border: 1.5px solid var(--border-strong) !important;
+    box-shadow: 3px 3px 0px var(--border-strong) !important;
+    background: #FFFFFF !important;
+  }
+
+  /* Hard Shadow on Hover / Drag */
+  .thumbnail__float:hover {
+    box-shadow: 4px 4px 0px var(--accent-vermilion) !important;
+  }
+
+  /* Marquee Telemetry Text: Swiss Typography */
+  .marquee__text {
+    font-family: var(--font-sans) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.04em !important;
+    text-transform: uppercase !important;
+    color: rgba(17, 19, 23, 0.06) !important;
+  }
+
+  /* Data Readouts & Monospace Micro-Tags */
+  .infomation__num__text {
+    font-family: var(--font-mono) !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.08em !important;
+  }
+  .infomation__title__text {
+    font-family: var(--font-sans) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    color: var(--ink-primary) !important;
+  }
+  .infomation__link a {
+    font-family: var(--font-mono) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    color: var(--accent-vermilion) !important;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: 1px solid var(--border-strong);
+    background: #FFFFFF;
+    box-shadow: 2px 2px 0px var(--border-strong);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+    transition: transform 0.06s ease, background 0.06s ease;
+  }
+  .infomation__link a:hover {
+    background: var(--ink-primary);
+    color: #FFFFFF !important;
+  }
+  .infomation__link a:active {
+    transform: translate(1.5px, 1.5px);
+    box-shadow: 0.5px 0.5px 0px var(--border-strong);
+  }
+
+  /* Footer Styling */
+  .footer {
+    border-top: 1px solid var(--border-hairline) !important;
+    background: var(--bg-canvas) !important;
+    font-family: var(--font-mono) !important;
+    font-size: 10px !important;
+    letter-spacing: 0.06em !important;
+  }
+  .footer__scroll-text .scroll-text {
+    font-family: var(--font-mono) !important;
+    font-size: 10px !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase;
+  }
+  .footer__scroll-text__circle {
+    background: var(--accent-vermilion) !important;
+  }
+
+  /* Persona 5 Mechanical Kinetic Dossier Drawer */
+  .dossier-drawer-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(17, 19, 23, 0.4);
+    z-index: 2999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+  .dossier-drawer-backdrop.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .dossier-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 620px;
+    max-width: 92vw;
+    height: 100vh;
+    background: var(--bg-canvas);
+    border-left: 2px solid var(--border-strong);
+    box-shadow: -10px 0px 0px rgba(17, 19, 23, 0.15) !important;
+    z-index: 3000;
+    transform: translateX(105%);
+    transition: transform 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+    clip-path: polygon(32px 0, 100% 0, 100% 100%, 0 100%);
+    padding: 36px 36px 60px 48px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .dossier-drawer.is-active {
+    transform: translateX(0%);
+  }
+
+  /* Dossier Content Styling */
+  .dossier-header {
+    border-bottom: 2px solid var(--border-strong);
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .dossier-title {
+    font-family: var(--font-sans);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--ink-primary);
+    margin: 0 0 6px 0;
+  }
+  .dossier-ref {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent-vermilion);
+    letter-spacing: 0.1em;
+  }
+  .dossier-close {
+    background: none;
+    border: 1.5px solid var(--border-strong);
+    padding: 6px 12px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px var(--border-strong);
+    transition: all 0.06s ease;
+  }
+  .dossier-close:hover {
+    background: var(--ink-primary);
+    color: var(--bg-canvas);
+  }
+  .dossier-close:active {
+    transform: translate(1px, 1px);
+    box-shadow: 0.5px 0.5px 0px var(--border-strong);
+  }
+
+  .dossier-section-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ink-primary);
+    border-bottom: 1px solid var(--border-hairline);
+    padding-bottom: 6px;
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dossier-section-title::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--accent-vermilion);
+  }
+
+  .dossier-text {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-muted);
+    margin: 0;
+  }
+
+  /* Structured Engineering & Economics Tables */
+  .dossier-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    margin: 12px 0;
+    border: 1px solid var(--border-hairline);
+  }
+  .dossier-table th {
+    background: #E6E7E3;
+    color: var(--ink-primary);
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1.5px solid var(--border-strong);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .dossier-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border-hairline);
+    color: var(--ink-primary);
+  }
+  .dossier-table tr:last-child td {
+    border-bottom: none;
+  }
+  .dossier-table td.highlight {
+    color: var(--accent-vermilion);
+    font-weight: 700;
+  }
+
+  /* Metric Highlight Callout Boxes */
+  .metric-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 12px 0;
+  }
+  .metric-box {
+    background: #FFFFFF;
+    border: 1.5px solid var(--border-strong);
+    padding: 12px;
+    box-shadow: 2px 2px 0px var(--border-strong);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  }
+  .metric-box-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+  .metric-box-val {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink-primary);
+    margin-top: 4px;
+  }
+
+  /* Loading Screen Transformation */
+  .loading {
+    background: var(--bg-canvas) !important;
+  }
+  .loading__num {
+    font-family: var(--font-mono) !important;
+    font-weight: 700 !important;
+    color: var(--accent-vermilion) !important;
+  }
+</style>
 </head>
 
 <body>
@@ -3100,13 +3513,13 @@
             class="header__logo nuxt-link-exact-active nuxt-link-active"><img src="/logo-inline.svg"
               class="header__logo__image"></a>
           <ul class="header__list">
-            <li class="header__list__item"><a href="/works" class="header__list__item__link">WORKS</a><span
+            <li class="header__list__item"><a href="/works" class="header__list__item__link">SUBSYSTEMS</a><span
                 class="header__bar"></span></li>
-            <li class="header__list__item"><a href="/about" class="header__list__item__link">ABOUT</a><span
+            <li class="header__list__item"><a href="/about" class="header__list__item__link">ABSTRACT</a><span
                 class="header__bar"></span></li>
             <li class="header__list__item"><a href="mailto:owlcoal@gmail.com" target="_blank"
-                class="header__list__item__link"><span>#</span>MAIL</a><span class="header__bar"></span></li>
-          </ul>
+                class="header__list__item__link"><span>#</span>CONTACT</a><span class="header__bar"></span></li>
+          <li class="header__list__item"><button onclick="window.toggleDossierDrawer()" class="btn-tactile btn-vermilion" style="padding: 5px 12px; font-size: 9px; margin-left: 8px;">INSPECT DOSSIER</button></li></ul>
         </div>
         <div class="social">
           <ul class="social__list">
@@ -3136,9 +3549,9 @@
                 <li class="hamburger__overlay__menu__item"><a href="/" aria-current="page"
                     class="hamburger__overlay__menu__link nuxt-link-exact-active nuxt-link-active">TOP</a></li>
                 <li class="hamburger__overlay__menu__item"><a href="/works"
-                    class="hamburger__overlay__menu__link">WORKS</a></li>
+                    class="hamburger__overlay__menu__link">SUBSYSTEMS</a></li>
                 <li class="hamburger__overlay__menu__item"><a href="/about"
-                    class="hamburger__overlay__menu__link">ABOUT</a></li>
+                    class="hamburger__overlay__menu__link">ABSTRACT</a></li>
               </ul>
               <ul class="hamburger__overlay__social">
                 <li class="hamburger__overlay__social__item"><a href="mailto:owlcoal@gmail.com" target="_blank"
@@ -3165,51 +3578,51 @@
           <div class="container__wrap" data-v-684698a2>
             <div class="thumbnail" data-v-684698a2>
               <div class="thumbnail__buffer-float" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/b163c73f571b457e81ff98811b8d066b/A_95676111-0b38-41fb-947d-d19f3a163ec5_1080x.webp?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/e310ab0945e6428aa55b376fc69aea89/IMG_5390.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/c78d2a1a880947cebe9fb4fd6f2a82df/GTA%E3%82%8A%E3%82%8A%E3%82%80.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/898c51b5804e4af3a28369c09c3642f3/%E3%83%9F%E3%82%AF_A_%E4%BF%AE%E6%AD%A3.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/a8efc945bc0745e7bcc38f9d09ac582f/sumisumi.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--vertical" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/27bd704d7c704d2e9a1bcaddb44df104/%E3%83%9E%E3%83%AD%E3%83%83%E3%82%B7%E3%83%A5KV.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--vertical" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/d15745fdc10d42d3b791fcfd6138b4a5/IMG_5387.JPG?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/d6279843329845f49533a79b226d97f4/%E3%83%9E%E3%82%A6%E3%82%B9%E3%83%8F%E3%82%9A%E3%83%83%E3%83%88%E3%82%992.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/4c9a6e114f1e40a5aa48f8e390c7480d/LIFE.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/3c28ebd7b5624b6a9258ba79a449f905/%E9%A1%94%E9%9D%A22.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2></div><a
                 href="/works/20240918F7" class="thumbnail__float" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/b163c73f571b457e81ff98811b8d066b/A_95676111-0b38-41fb-947d-d19f3a163ec5_1080x.webp?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/e310ab0945e6428aa55b376fc69aea89/IMG_5390.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/c78d2a1a880947cebe9fb4fd6f2a82df/GTA%E3%82%8A%E3%82%8A%E3%82%80.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/898c51b5804e4af3a28369c09c3642f3/%E3%83%9F%E3%82%AF_A_%E4%BF%AE%E6%AD%A3.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/a8efc945bc0745e7bcc38f9d09ac582f/sumisumi.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__float__image thumbnail--vertical" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/27bd704d7c704d2e9a1bcaddb44df104/%E3%83%9E%E3%83%AD%E3%83%83%E3%82%B7%E3%83%A5KV.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__float__image thumbnail--vertical" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/d15745fdc10d42d3b791fcfd6138b4a5/IMG_5387.JPG?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/d6279843329845f49533a79b226d97f4/%E3%83%9E%E3%82%A6%E3%82%B9%E3%83%8F%E3%82%9A%E3%83%83%E3%83%88%E3%82%992.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/4c9a6e114f1e40a5aa48f8e390c7480d/LIFE.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
-                  src="https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/3c28ebd7b5624b6a9258ba79a449f905/%E9%A1%94%E9%9D%A22.jpg?auto=compress&w=800&fm=auto"
+                  src="/schematics/sys-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2></a>
               <div class="thumbnail__back" data-v-684698a2></div>
               <div class="thumbnail__buffer-back" data-v-684698a2></div>
               <div class="thumbnail__title" data-v-684698a2>
-                <h2 class="thumbnail__title__text move-text" data-v-684698a2>ずとマロッシュ ライチヨーグルトソーダ味</h2>
+                <h2 class="thumbnail__title__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</h2>
               </div>
             </div>
             <div class="infomation" data-v-684698a2>
@@ -3219,19 +3632,19 @@
                 <p class="infomation__num__text" data-v-684698a2>10</p>
               </div>
               <div class="infomation__title" data-v-684698a2>
-                <h2 class="infomation__title__text move-text" data-v-684698a2>ずとマロッシュ ライチヨーグルトソーダ味</h2>
+                <h2 class="infomation__title__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</h2>
               </div>
               <div class="infomation__link" data-v-684698a2><a href="/works/102" class="move-text" data-v-684698a2>View
                   Detail</a></div>
             </div>
             <div class="marquee" data-v-684698a2>
               <div class="marquee__list marquee__animation" data-v-684698a2>
-                <div class="marquee__text move-text" data-v-684698a2>ずとマロッシュ ライチヨーグルトソーダ味</div>
-                <div class="marquee__text move-text" data-v-684698a2>ずとマロッシュ ライチヨーグルトソーダ味</div>
-                <div class="marquee__text move-text" data-v-684698a2>ずとマロッシュ ライチヨーグルトソーダ味</div>
-                <div class="marquee__text move-text" data-v-684698a2>ずとマロッシュ ライチヨーグルトソーダ味</div>
-                <div class="marquee__text move-text" data-v-684698a2>ずとマロッシュ ライチヨーグルトソーダ味</div>
-                <div class="marquee__text move-text" data-v-684698a2>ずとマロッシュ ライチヨーグルトソーダ味</div>
+                <div class="marquee__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</div>
+                <div class="marquee__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</div>
+                <div class="marquee__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</div>
+                <div class="marquee__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</div>
+                <div class="marquee__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</div>
+                <div class="marquee__text move-text" data-v-684698a2>SYS-01 // LOREM IPSUM</div>
               </div>
             </div>
           </div>
@@ -3245,6 +3658,185 @@
   <script src="/_nuxt/53bb063.js" defer></script>
   <script src="/_nuxt/6344783.js" defer></script>
   <script src="/_nuxt/1d95d89.js" defer></script>
+
+  <!-- Top Technical Annotation Strip -->
+  <div class="tech-meta-strip">
+    <div>[CONRAD_CHALLENGE // 2026 INNOVATION SUMMIT] &bull; ARCHIVE REF: LOREM-4029-A</div>
+    <div style="display:flex; align-items: center; gap: 16px;">
+      <span>COORD: 42.1&deg;N 71.0&deg;W</span>
+      <span class="active-tag">TRL-4 BENCH-VALIDATED</span>
+      <button onclick="window.toggleDossierDrawer()" class="btn-tactile btn-vermilion" style="padding: 3px 10px; font-size: 8px; margin: 0;">DOSSIER</button>
+    </div>
+  </div>
+
+  <!-- Persona 5 Mechanical Kinetic Drawer Backdrop & Panel -->
+  <div id="dossier-backdrop" class="dossier-drawer-backdrop" onclick="window.toggleDossierDrawer()"></div>
+  <aside id="dossier-drawer" class="dossier-drawer" aria-label="Technical Dossier">
+    <div class="dossier-header">
+      <div>
+        <div class="dossier-ref">[CONFIDENTIAL // CONRAD FOUNDATION 2026]</div>
+        <h2 class="dossier-title">TECHNICAL DOSSIER &amp; PATENT FILING</h2>
+      </div>
+      <button class="dossier-close" onclick="window.toggleDossierDrawer()">[ESC // CLOSE]</button>
+    </div>
+
+    <div>
+      <h3 class="dossier-section-title">EXECUTIVE ABSTRACT // PROBLEM HOOK</h3>
+      <p class="dossier-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      </p>
+    </div>
+
+    <!-- Core Breakthrough Validation Metrics -->
+    <div>
+      <h3 class="dossier-section-title">EXPERIMENTAL BENCHMARK VALIDATION</h3>
+      <div class="metric-grid">
+        <div class="metric-box">
+          <div class="metric-box-label">THRUST-TO-POWER RATIO</div>
+          <div class="metric-box-val" style="color: #FF4800;">+427%</div>
+          <div style="font-size: 8px; font-family: monospace; color: #52565E; margin-top:2px;">18.4 N/kW vs legacy 3.5 N/kW</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-box-label">ACOUSTIC PROFILE</div>
+          <div class="metric-box-val">&lt; 12 dB</div>
+          <div style="font-size: 8px; font-family: monospace; color: #52565E; margin-top:2px;">Near-silent solid-state operation</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-box-label">MOVING PARTS COUNT</div>
+          <div class="metric-box-val">0 UNITS</div>
+          <div style="font-size: 8px; font-family: monospace; color: #52565E; margin-top:2px;">Solid-state monolithic grid</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-box-label">TRL MATURITY LEVEL</div>
+          <div class="metric-box-val" style="color: #FF4800;">STAGE 4</div>
+          <div style="font-size: 8px; font-family: monospace; color: #52565E; margin-top:2px;">Benchtop chamber verified</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Structured Technical Table: Business Pitch & Unit Economics -->
+    <div>
+      <h3 class="dossier-section-title">BUSINESS FEASIBILITY &amp; UNIT ECONOMICS</h3>
+      <table class="dossier-table">
+        <thead>
+          <tr>
+            <th>SUBSYSTEM / COMPONENT</th>
+            <th>LEGACY STANDARD</th>
+            <th>PROJECT LOREM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Unit Production BOM</td>
+            <td>,000 / unit</td>
+            <td class="highlight"> / unit</td>
+          </tr>
+          <tr>
+            <td>Mean Time Between Failures</td>
+            <td>450 operating hours</td>
+            <td class="highlight">&gt; 12,000 hours</td>
+          </tr>
+          <tr>
+            <td>Energy Density Required</td>
+            <td>1,200 W/kg</td>
+            <td class="highlight">240 W/kg</td>
+          </tr>
+          <tr>
+            <td>Atmospheric Carbon Output</td>
+            <td>184.2 g CO2/km</td>
+            <td class="highlight">0.00 g (Zero-Emission)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Market Sizing -->
+    <div>
+      <h3 class="dossier-section-title">MARKET OPPORTUNITY (TAM / SAM / SOM)</h3>
+      <table class="dossier-table">
+        <thead>
+          <tr>
+            <th>MARKET SEGMENT</th>
+            <th>SCOPE</th>
+            <th>VALUATION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TAM (Total Addressable)</td>
+            <td>Atmospheric Earth Observation</td>
+            <td class="highlight">.8 Billion</td>
+          </tr>
+          <tr>
+            <td>SAM (Serviceable Addressable)</td>
+            <td>Wildfire Early Detection &amp; Sensing</td>
+            <td class="highlight">.2 Billion</td>
+          </tr>
+          <tr>
+            <td>SOM (Serviceable Obtainable)</td>
+            <td>Year 3 Target Commercial Rollout</td>
+            <td class="highlight"> Million</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Team & Patent Dossier -->
+    <div>
+      <h3 class="dossier-section-title">TEAM &amp; PATENT FILING DOSSIER</h3>
+      <table class="dossier-table">
+        <tbody>
+          <tr>
+            <td>PATENT APPLICATION</td>
+            <td class="highlight">US-2026-LATIN-01 [PROVISIONAL]</td>
+          </tr>
+          <tr>
+            <td>TITLE OF INVENTION</td>
+            <td>Method &amp; Solid-State Apparatus for Fluidic Acceleration</td>
+          </tr>
+          <tr>
+            <td>PRINCIPAL INVESTIGATOR</td>
+            <td>William Yang [Lead Hardware Architect]</td>
+          </tr>
+          <tr>
+            <td>VERIFICATION FACILITY</td>
+            <td>High-Voltage Calibration Benchmark Laboratory</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Action Trigger CTA -->
+    <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+      <button class="btn-tactile btn-vermilion" style="justify-content: center; padding: 12px 20px; font-size: 11px;">
+        INSPECT FULL TECHNICAL DOSSIER (.PDF)
+      </button>
+      <div style="font-family: monospace; font-size: 9px; color: #52565E; text-align: center;">
+        SHA-256 CHECKSUM: 9f8e4a7b2c01d93e8842af5e710b37...
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    window.toggleDossierDrawer = function() {
+      const drawer = document.getElementById('dossier-drawer');
+      const backdrop = document.getElementById('dossier-backdrop');
+      if (drawer && backdrop) {
+        drawer.classList.toggle('is-active');
+        backdrop.classList.toggle('is-active');
+      }
+    };
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const drawer = document.getElementById('dossier-drawer');
+        const backdrop = document.getElementById('dossier-backdrop');
+        if (drawer && drawer.classList.contains('is-active')) {
+          drawer.classList.remove('is-active');
+          backdrop.classList.remove('is-active');
+        }
+      }
+    });
+  </script>
 </body>
 
 </html>

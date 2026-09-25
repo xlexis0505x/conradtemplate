@@ -425,7 +425,7 @@
                             staticClass: "move-text",
                             attrs: { to: "/works/".concat(t.work.num) },
                           },
-                          [t._v("View Detail")]
+                          [t._v("[INSPECT SPEC // TRL-4]")]
                         ),
                       ],
                       1

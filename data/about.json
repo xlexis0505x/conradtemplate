@@ -1,54 +1,19 @@
 {
-  "createdAt": "2020-12-24T06:26:10.684Z",
-  "updatedAt": "2024-03-26T04:10:14.680Z",
-  "publishedAt": "2020-12-24T06:26:10.684Z",
-  "revisedAt": "2024-03-26T04:10:14.680Z",
-  "description": "コールアウルと読みます。東京都在住。\nフリーのイラストレーター、アニメーション作家として活動。\n少しのユーモアとエモーションを武器に、女の子とゆるいキャラクターを描いています。",
-  "description_en": "Living in Tokyo, Japan. Started working as a freelance illustrator in 2018. Illustration for videos, animation, CD jacket design, manga, etc. With a little humor and emotion, I draw girls and loose characters.",
-  "mail": "owlcoal@gmail.com",
-  "twitter_link": "https://twitter.com/coalowl",
-  "instagram_link": "https://www.instagram.com/coal_owl/",
-  "tiktok_link": "https://vt.tiktok.com/ZS36VYno/",
+  "createdAt": "2026-09-25T00:00:00.000Z",
+  "updatedAt": "2026-09-25T00:00:00.000Z",
+  "publishedAt": "2026-09-25T00:00:00.000Z",
+  "revisedAt": "2026-09-25T00:00:00.000Z",
+  "description": "EXECUTIVE ABSTRACT // CONRAD CHALLENGE 2026:\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n\nCORE BREAKTHROUGH VALIDATION:\n- EFFICIENCY: +427% THRUST-TO-POWER RATIO (18.4 N/kW vs legacy 3.5 N/kW)\n- ACOUSTIC EMISSION: < 12 dB (NEAR SILENT SOLID-STATE OPERATION)\n- EMISSION PROFILE: 0.00 g/km CO2e (FULL ATMOSPHERIC NEUTRALITY)\n- TRL LEVEL: 4 (LABORATORY BENCHTOP VALIDATED)",
+  "description_en": "BUSINESS FEASIBILITY & UNIT ECONOMICS:\n- UNIT BOM COST:  / UNIT (vs ,000 legacy turbo-fan turbine)\n- TARGET ADDRESSABLE MARKET (TAM): .8B (Atmospheric Earth Observation & Wildfire Early Detection)\n- SERVICEABLE ADDRESSABLE MARKET (SAM): .2B\n- SERVICEABLE OBTAINABLE MARKET (SOM): M (Year 3 Projection)\n\nTEAM & PATENT DOSSIER:\n- PRINCIPAL INVESTIGATOR: William Yang [FOUNDER // LEAD HARDWARE ARCHITECT]\n- CO-INVESTIGATOR: Conrad Team Fellow [AVIONICS & EMBEDDED GAAS SYSTEMS]\n- PATENT APPLICATION: US-2026-004812-A1 [METHOD & APPARATUS FOR SOLID-STATE PROPULSION]\n- VERIFICATION LAB: HIGH-VOLTAGE CALIBRATION BENCHMARK FACILITY",
+  "mail": "conrad.team@institution.edu",
+  "twitter_link": "https://conradchallenge.org",
+  "instagram_link": "https://conradchallenge.org",
+  "tiktok_link": "https://conradchallenge.org",
   "about_images": [
     {
-      "fieldId": "images",
-      "image": {
-        "url": "https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/3ade93d55504a13b52be9f8c54643a33/about_20201230.jpg",
-        "height": 2048,
-        "width": 1366
-      }
-    },
-    {
-      "fieldId": "images",
-      "image": {
-        "url": "https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/5b7632514ac03a73732cbff0bd661f8e/about_image_1.jpg",
-        "height": 2500,
-        "width": 1667
-      }
-    },
-    {
-      "fieldId": "images",
-      "image": {
-        "url": "https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/958de15aeb3697c80822243fe3adaf3d/about_image_2.jpg",
-        "height": 2500,
-        "width": 1667
-      }
-    },
-    {
-      "fieldId": "images",
-      "image": {
-        "url": "https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/7b66332e74badfc5ccc5796ee5468848/about_image_3.jpg",
-        "height": 2500,
-        "width": 1667
-      }
-    },
-    {
-      "fieldId": "images",
-      "image": {
-        "url": "https://images.microcms-assets.io/assets/3dc575441dbc4c84932798a9e376f0a5/98397b6975b625bcba6e6265344f3cc6/about_image_4.jpg",
-        "height": 2500,
-        "width": 1667
-      }
+      "url": "/schematics/sys-01.svg",
+      "width": 600,
+      "height": 600
     }
   ]
 }
