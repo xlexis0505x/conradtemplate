@@ -3329,164 +3329,453 @@
     background: var(--accent-terracotta) !important;
   }
 
-  /* ======================================================== */
-  /* P5R-INSPIRED ASYMMETRIC ANGLED SLICE & FANNED CARD DECK */
-  /* ======================================================== */
-  .p5r-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(20, 24, 30, 0.45);
-    backdrop-filter: blur(2px);
-    z-index: 2999;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.16s ease;
+
+  /* ============================================================ */
+  /* UNCOUPLED 2-COLUMN MAIN LAYOUT                               */
+  /* ============================================================ */
+
+  /* 
+   * The original Nuxt code uses `position: fixed` for both .thumbnail
+   * and .infomation. We override both and introduce a grid wrapper.
+   */
+
+  /* Suppress the old .infomation fixed panel - we replace it with our own left column */
+  .infomation[data-v-684698a2] {
+    display: none !important;
   }
-  .p5r-backdrop.is-active {
-    opacity: 1;
+
+  /* Subdue the marquee to a barely-visible watermark - never competes with foreground */
+  .marquee[data-v-684698a2] {
+    opacity: 0.035 !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+  }
+
+  /* Re-anchor thumbnail to the right 40% of the viewport */
+  .thumbnail[data-v-684698a2] {
+    position: fixed !important;
+    top: 50% !important;
+    left: auto !important;
+    right: 7vw !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+    height: 46vh !important;
+    width: 46vh !important;
+    z-index: 8 !important;
+  }
+  @media (max-width: 1024px) {
+    .thumbnail[data-v-684698a2] {
+      right: 50% !important;
+      transform: translate(50%, -50%) !important;
+      height: 60vw !important;
+      width: 60vw !important;
+      top: 40% !important;
+    }
+  }
+
+  /* Preserved specimen card styling */
+  .thumbnail__float[data-v-684698a2],
+  .thumbnail__back[data-v-684698a2],
+  .thumbnail__buffer-float[data-v-684698a2],
+  .thumbnail__buffer-back[data-v-684698a2] {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%) !important;
+    border: 1.5px solid var(--border-card) !important;
+    box-shadow: 3px 3px 0px rgba(20, 24, 30, 0.7) !important;
+    background: #FFFFFF !important;
+  }
+  .thumbnail__float[data-v-684698a2]:hover {
+    box-shadow: 4px 4px 0px var(--accent-terracotta) !important;
+  }
+
+  /* LEFT EDITORIAL PANEL - positioned in the left half of the viewport */
+  #conrad-spec-panel {
+    position: fixed;
+    top: 50%;
+    left: 7vw;
+    transform: translateY(-50%);
+    width: 38vw;
+    max-width: 480px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     pointer-events: auto;
   }
-
-  /* Asymmetric Angled Background Slice from Top-Right */
-  .p5r-slice {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 660px;
-    max-width: 95vw;
-    height: 100vh;
-    background: #14181E;
-    box-shadow: -10px 0px 0px var(--accent-terracotta) !important;
-    z-index: 3000;
-    transform: translateX(110%);
-    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-    clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
-    padding: 36px 36px 40px 105px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .p5r-slice.is-active {
-    transform: translateX(0%);
+  @media (max-width: 1024px) {
+    #conrad-spec-panel {
+      left: 5vw;
+      right: 5vw;
+      width: auto;
+      max-width: none;
+      top: auto;
+      bottom: 100px;
+      transform: none;
+    }
   }
 
-  .p5r-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    border-bottom: 1.5px solid rgba(242, 243, 240, 0.15);
-    padding-bottom: 14px;
-  }
-  .p5r-tag {
+  .csp-eyebrow {
     font-family: var(--font-mono);
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     color: var(--accent-terracotta);
     text-transform: uppercase;
-    margin-bottom: 4px;
+    margin: 0;
   }
-  .p5r-title {
+
+  .csp-heading {
     font-family: var(--font-human);
-    font-size: 26px;
+    font-size: clamp(26px, 2.8vw, 40px);
     font-weight: 500;
-    color: #F2F3F0;
-    letter-spacing: -0.02em;
+    line-height: 1.18;
+    letter-spacing: -0.03em;
+    text-transform: none;
+    color: var(--ink-primary);
+    margin: 0;
+  }
+
+  .csp-divider {
+    width: 48px;
+    height: 1.5px;
+    background: var(--accent-terracotta);
+    margin: 0;
+  }
+
+  .csp-description {
+    font-family: var(--font-human);
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-muted);
     margin: 0;
     text-transform: none;
-  }
-  .p5r-close {
-    background: transparent;
-    border: 1.5px solid rgba(242, 243, 240, 0.3);
-    color: #F2F3F0;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 700;
-    padding: 6px 12px;
-    cursor: pointer;
-    box-shadow: 2px 2px 0px var(--accent-terracotta);
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
-    transition: all 0.08s ease;
-  }
-  .p5r-close:hover {
-    background: var(--accent-terracotta);
-    color: #FFFFFF;
-    border-color: var(--accent-terracotta);
+    max-width: 380px;
   }
 
-  /* Fanned Deck of Staggered Pitch Cards */
-  .p5r-deck {
+  .csp-badges {
     display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-top: 8px;
-    perspective: 800px;
+    flex-wrap: wrap;
+    gap: 6px;
   }
-
-  .p5r-card {
-    background: #F2F3F0;
+  .csp-badge {
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     color: var(--ink-primary);
-    border: 1.5px solid rgba(20, 24, 30, 0.3);
-    box-shadow: 3px 3px 0px rgba(200, 90, 50, 0.7);
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
-    padding: 16px 20px;
-    cursor: pointer;
-    text-decoration: none;
-    display: block;
-    transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+    border: 1px solid var(--border-card);
+    padding: 4px 9px;
+    text-transform: uppercase;
+    background: transparent;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%);
   }
 
-  /* Staggered Deck Offsets (Fanned Persona Feel) */
-  .p5r-card:nth-child(1) { margin-left: 10px; transform: rotate(-0.5deg); }
-  .p5r-card:nth-child(2) { margin-left: 22px; transform: rotate(0.2deg); }
-  .p5r-card:nth-child(3) { margin-left: 34px; transform: rotate(-0.3deg); }
-  .p5r-card:nth-child(4) { margin-left: 46px; transform: rotate(0.4deg); }
-  .p5r-card:nth-child(5) { margin-left: 58px; transform: rotate(-0.2deg); }
-
-  /* Snappy Hover Physics: Card slides forward out of stack */
-  .p5r-card:hover {
-    transform: translate(-18px, -4px) rotate(-1deg) scale(1.02) !important;
-    box-shadow: 6px 6px 0px var(--accent-terracotta) !important;
-    border-color: var(--accent-terracotta) !important;
-    background: #FFFFFF !important;
-    z-index: 10;
-  }
-  .p5r-card:active {
-    transform: translate(-14px, -1px) scale(1.01) !important;
-    box-shadow: 2px 2px 0px var(--accent-terracotta) !important;
-  }
-
-  .p5r-card-badge {
+  .csp-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-family: var(--font-mono);
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.1em;
     color: var(--accent-terracotta);
     text-transform: uppercase;
-    margin-bottom: 4px;
-    display: flex;
-    justify-content: space-between;
+    background: #FFFFFF;
+    border: 1.5px solid var(--border-card);
+    box-shadow: 2.5px 2.5px 0px rgba(20,24,30,0.65);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
+    padding: 7px 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.06s, color 0.06s, transform 0.06s;
+    align-self: flex-start;
   }
-  .p5r-card-heading {
+  .csp-cta:hover {
+    background: var(--ink-primary);
+    color: #FFFFFF;
+    border-color: var(--ink-primary);
+  }
+  .csp-cta:active {
+    transform: translate(1.5px, 1.5px);
+    box-shadow: 0.5px 0.5px 0px rgba(20,24,30,0.5);
+  }
+
+  /* Restored heading typography */
+  .infomation__title__text {
+    font-family: var(--font-human) !important;
+    font-size: 32px !important;
+    font-weight: 500 !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.02em !important;
+    text-transform: none !important;
+    color: var(--ink-primary) !important;
+  }
+
+  .marquee__text {
+    font-family: var(--font-human) !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.03em !important;
+    text-transform: none !important;
+  }
+
+  .infomation__num__text {
+    font-family: var(--font-mono) !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  /* ============================================================ */
+  /* FOOTER                                                       */
+  /* ============================================================ */
+  .footer {
+    border-top: 1px solid var(--border-hairline) !important;
+    background: var(--bg-canvas) !important;
+    font-family: var(--font-mono) !important;
+    font-size: 10px !important;
+    letter-spacing: 0.06em !important;
+  }
+  .footer__scroll-text .scroll-text {
+    font-family: var(--font-mono) !important;
+    font-size: 10px !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase;
+  }
+  .footer__scroll-text__circle {
+    background: var(--accent-terracotta) !important;
+  }
+
+  /* ============================================================ */
+  /* PERSONA 5 ROYAL — AUTHENTIC ANGLED CORNER SLAB DECK         */
+  /* ============================================================ */
+
+  /* Scrim */
+  .p5r-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 12, 16, 0.6);
+    z-index: 2999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease;
+  }
+  .p5r-backdrop.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Top-right corner wedge container */
+  .p5r-corner {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 620px;
+    max-width: 96vw;
+    height: 520px;
+    z-index: 3000;
+    pointer-events: none;
+    /* Angled dark wedge from top-right sliding down */
+    transform: translate(105%, -105%);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .p5r-corner.is-active {
+    transform: translate(0, 0);
+    pointer-events: auto;
+  }
+
+  /* The dark polygon wedge background */
+  .p5r-wedge-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #14181E;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 14% 100%);
+    /* Terracotta trim on left diagonal edge — via gradient */
+    border-right: 3px solid #BA4A28;
+  }
+
+  /* Close button anchored inside wedge top-right */
+  .p5r-corner-close {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    background: transparent;
+    border: 1.5px solid rgba(242, 243, 240, 0.35);
+    color: #F2F3F0;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 5px 10px;
+    cursor: pointer;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%);
+    z-index: 10;
+    transition: background 0.08s, color 0.08s;
+  }
+  .p5r-corner-close:hover {
+    background: #BA4A28;
+    border-color: #BA4A28;
+    color: #FFFFFF;
+  }
+
+  /* Staggered slab deck — cascades down from the wedge */
+  .p5r-slab-deck {
+    position: absolute;
+    top: 52px;
+    right: 0;
+    left: 15%;  /* aligns slabs to start after the diagonal cut */
+    display: flex;
+    flex-direction: column;
+    padding-right: 22px;
+    /* Slabs cascade downward with negative margins creating overlap */
+  }
+
+  /* Each slab = a tilted horizontal bar like a P5R save slot */
+  .p5r-slab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 72px;
+    margin-top: -12px;     /* overlap slabs to create deck cascade */
+    padding: 0 20px 0 14px;
+    cursor: pointer;
+    text-decoration: none;
+
+    /* Angled slab — tilted like P5R save slots */
+    transform: rotate(-12deg);
+    transform-origin: right center;
+
+    /* Base: paper-white with crisp graphite border */
+    background: #F8F7F5;
+    border-top: 2px solid #14181E;
+    border-bottom: 2px solid #14181E;
+    border-left: none;
+    border-right: none;
+
+    /* Depth shadow */
+    box-shadow: 4px 4px 0px #14181E;
+
+    /* Mechanical instant snap transition */
+    transition:
+      transform 0.08s cubic-bezier(0.16, 1, 0.3, 1),
+      background 0.08s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.08s cubic-bezier(0.16, 1, 0.3, 1),
+      color 0.08s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Z-layering: first slab is on top of the stack */
+  .p5r-slab:nth-child(1) { z-index: 50; margin-top: 0; }
+  .p5r-slab:nth-child(2) { z-index: 40; }
+  .p5r-slab:nth-child(3) { z-index: 30; }
+  .p5r-slab:nth-child(4) { z-index: 20; }
+  .p5r-slab:nth-child(5) { z-index: 10; }
+
+  /* LEFT INDEX NOTCH — punched-out monospace number */
+  .p5r-slab-no {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: #14181E;
+    min-width: 52px;
+    line-height: 1;
+    /* The "No." prefix is tiny */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    flex-shrink: 0;
+    border-right: 2px solid rgba(20, 24, 30, 0.2);
+    padding-right: 12px;
+    margin-right: 16px;
+  }
+  .p5r-slab-no-label {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: rgba(20, 24, 30, 0.45);
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .p5r-slab-no-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: inherit;
+    line-height: 0.9;
+  }
+
+  /* SLAB BODY — title and meta */
+  .p5r-slab-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+  }
+  .p5r-slab-title {
     font-family: var(--font-human);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: -0.01em;
-    color: var(--ink-primary);
-    margin: 0 0 6px 0;
+    color: #14181E;
     text-transform: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
   }
-  .p5r-card-desc {
-    font-family: var(--font-human);
-    font-size: 12px;
-    line-height: 1.45;
-    color: var(--ink-muted);
-    margin: 0;
-    text-transform: none;
+  .p5r-slab-meta {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: rgba(20, 24, 30, 0.45);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* RIGHT TAG — flush to the right edge */
+  .p5r-slab-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: rgba(20, 24, 30, 0.5);
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+
+  /* HOVER / ACTIVE STATE — P5R slot selection snap forward */
+  .p5r-slab:hover {
+    transform: rotate(-12deg) translate(-14px, -4px) !important;
+    background: #BA4A28 !important;
+    box-shadow: 6px 6px 0px #14181E !important;
+    border-color: #BA4A28 !important;
+    z-index: 100 !important;
+  }
+  .p5r-slab:hover .p5r-slab-no {
+    color: #FFFFFF;
+    border-right-color: rgba(255, 255, 255, 0.3);
+  }
+  .p5r-slab:hover .p5r-slab-no-label,
+  .p5r-slab:hover .p5r-slab-meta,
+  .p5r-slab:hover .p5r-slab-tag {
+    color: rgba(255, 255, 255, 0.65) !important;
+  }
+  .p5r-slab:hover .p5r-slab-title {
+    color: #FFFFFF !important;
+  }
+  .p5r-slab:active {
+    transform: rotate(-12deg) translate(-8px, -2px) !important;
+    box-shadow: 2px 2px 0px #14181E !important;
   }
 
   /* Loading Screen */
@@ -3499,6 +3788,7 @@
     color: var(--accent-terracotta) !important;
   }
 </style>
+
 
 </head>
 
@@ -3668,109 +3958,175 @@
     </div>
   </div>
 
-  <!-- P5R Asymmetric Angled Card Menu -->
+  <!-- Left Editorial Panel (2-Column Layout: Left Column) -->
+  <div id="conrad-spec-panel">
+    <p class="csp-eyebrow">[CHAPTER 01 // CONRAD CHALLENGE 2026]</p>
+    <h2 id="csp-title" class="csp-heading">The solid-state propulsion cell</h2>
+    <div class="csp-divider"></div>
+    <p id="csp-desc" class="csp-description">Our primary breakthrough consolidates atmospheric ionization and momentum transfer into a single monolithic solid-state cell, eliminating turbines and mechanical friction entirely.</p>
+    <div class="csp-badges">
+      <span class="csp-badge">TRL: 4</span>
+      <span class="csp-badge">Patent Pending</span>
+      <span class="csp-badge">18.4 N/kW</span>
+      <span class="csp-badge">&#60; 12 dB</span>
+    </div>
+    <a href="/works/20240918F7" class="csp-cta">[INSPECT SPEC // TRL-4]</a>
+  </div>
+
+  <!-- P5R Asymmetric Angled Card Menu (Corner Slab Deck) -->
   <div id="p5r-backdrop" class="p5r-backdrop" onclick="window.toggleP5RDeck()"></div>
-  <aside id="p5r-slice" class="p5r-slice" aria-label="Conrad Pitch Deck">
-    <div class="p5r-header">
-      <div>
-        <div class="p5r-tag">[CONRAD 2026 &bull; INNOVATION DOSSIER]</div>
-        <h2 class="p5r-title">Unified Pitch Deck</h2>
-      </div>
-      <button class="p5r-close" onclick="window.toggleP5RDeck()">[ESC // CLOSE]</button>
-    </div>
 
-    <!-- Fanned Deck of 5 Staggered Pitch Cards -->
-    <div class="p5r-deck">
-      <!-- Card 1: Abstract & Problem -->
-      <div class="p5r-card" onclick="window.showSectionModal('abstract')">
-        <div class="p5r-card-badge">
-          <span>01 &bull; PROBLEM &amp; THESIS</span>
-          <span>[STAGE 4]</span>
-        </div>
-        <h3 class="p5r-card-heading">Executive Abstract &amp; Problem</h3>
-        <p class="p5r-card-desc">
-          Wildfire detection and high-altitude climate observation suffer from short drone endurance and noisy, carbon-emitting mechanical turbines.
-        </p>
-      </div>
+  <div id="p5r-corner" class="p5r-corner" aria-label="Conrad Pitch Deck">
+    <!-- Dark wedge polygon background -->
+    <div class="p5r-wedge-bg"></div>
 
-      <!-- Card 2: Core Science -->
-      <div class="p5r-card" onclick="window.showSectionModal('science')">
-        <div class="p5r-card-badge">
-          <span>02 &bull; CORE SCIENCE</span>
-          <span>[+427% RATIO]</span>
+    <!-- Close button -->
+    <button class="p5r-corner-close" onclick="window.toggleP5RDeck()">[ESC / CLOSE]</button>
+
+    <!-- Slab deck: 5 tilted horizontal slabs cascading from top-right -->
+    <div class="p5r-slab-deck">
+
+      <!-- Slab 01: Abstract & Problem -->
+      <div class="p5r-slab" onclick="window.showSectionModal('abstract')">
+        <div class="p5r-slab-no">
+          <span class="p5r-slab-no-label">No.</span>
+          <span class="p5r-slab-no-num">01</span>
         </div>
-        <h3 class="p5r-card-heading">Core Science &amp; Architecture</h3>
-        <p class="p5r-card-desc">
-          Solid-state electro-hydrodynamic ionization accelerates ambient air ions directly, yielding 18.4 N/kW with zero mechanical wear.
-        </p>
+        <div class="p5r-slab-body">
+          <span class="p5r-slab-title">Executive Abstract &amp; Problem</span>
+          <span class="p5r-slab-meta">Problem &amp; Thesis</span>
+        </div>
+        <span class="p5r-slab-tag">[Stage 4]</span>
       </div>
 
-      <!-- Card 3: Business & Feasibility -->
-      <div class="p5r-card" onclick="window.showSectionModal('business')">
-        <div class="p5r-card-badge">
-          <span>03 &bull; BUSINESS MODEL</span>
-          <span>[ BOM]</span>
+      <!-- Slab 02: Core Science -->
+      <div class="p5r-slab" onclick="window.showSectionModal('science')">
+        <div class="p5r-slab-no">
+          <span class="p5r-slab-no-label">No.</span>
+          <span class="p5r-slab-no-num">02</span>
         </div>
-        <h3 class="p5r-card-heading">Business &amp; Unit Feasibility</h3>
-        <p class="p5r-card-desc">
-          Unit manufacturing BOM of  vs ,000 for legacy turbines. Target addressable market of .8B across atmospheric sensing and wildfire defense.
-        </p>
+        <div class="p5r-slab-body">
+          <span class="p5r-slab-title">Core Science &amp; Propulsion</span>
+          <span class="p5r-slab-meta">EHD Ionization</span>
+        </div>
+        <span class="p5r-slab-tag">[+427%]</span>
       </div>
 
-      <!-- Card 4: 3-Min Pitch Video -->
-      <div class="p5r-card" onclick="window.showSectionModal('video')">
-        <div class="p5r-card-badge">
-          <span>04 &bull; MULTIMEDIA</span>
-          <span>[3:00 MIN]</span>
+      <!-- Slab 03: Business Model -->
+      <div class="p5r-slab" onclick="window.showSectionModal('business')">
+        <div class="p5r-slab-no">
+          <span class="p5r-slab-no-label">No.</span>
+          <span class="p5r-slab-no-num">03</span>
         </div>
-        <h3 class="p5r-card-heading">3-Minute Pitch Video</h3>
-        <p class="p5r-card-desc">
-          Watch the founders explain the working bench prototype, high-voltage chamber test footage, and market deployment strategy.
-        </p>
+        <div class="p5r-slab-body">
+          <span class="p5r-slab-title">Business Model &amp; Unit BOM</span>
+          <span class="p5r-slab-meta">Unit Economics</span>
+        </div>
+        <span class="p5r-slab-tag">[BOM $180]</span>
       </div>
 
-      <!-- Card 5: Download Brief PDF -->
-      <div class="p5r-card" onclick="window.showSectionModal('download')">
-        <div class="p5r-card-badge">
-          <span>05 &bull; PATENT &amp; BRIEF</span>
-          <span>[PDF 4.2 MB]</span>
+      <!-- Slab 04: Pitch Video -->
+      <div class="p5r-slab" onclick="window.showSectionModal('video')">
+        <div class="p5r-slab-no">
+          <span class="p5r-slab-no-label">No.</span>
+          <span class="p5r-slab-no-num">04</span>
         </div>
-        <h3 class="p5r-card-heading">Download Executive Brief (PDF)</h3>
-        <p class="p5r-card-desc">
-          Complete technical dossier including patent provisional claims (US-2026-LATIN-01) and raw laboratory chamber sensor logs.
-        </p>
+        <div class="p5r-slab-body">
+          <span class="p5r-slab-title">3-Minute Pitch Video</span>
+          <span class="p5r-slab-meta">Multimedia</span>
+        </div>
+        <span class="p5r-slab-tag">[3:00 Min]</span>
       </div>
-    </div>
-  </aside>
+
+      <!-- Slab 05: Executive Brief PDF -->
+      <div class="p5r-slab" onclick="window.showSectionModal('download')">
+        <div class="p5r-slab-no">
+          <span class="p5r-slab-no-label">No.</span>
+          <span class="p5r-slab-no-num">05</span>
+        </div>
+        <div class="p5r-slab-body">
+          <span class="p5r-slab-title">Executive Brief &amp; Patent</span>
+          <span class="p5r-slab-meta">Patent &amp; Brief</span>
+        </div>
+        <span class="p5r-slab-tag">[PDF 4.2MB]</span>
+      </div>
+
+    </div><!-- /.p5r-slab-deck -->
+  </div><!-- /#p5r-corner -->
 
   <script>
+    /* Toggle the corner slab deck open/closed */
     window.toggleP5RDeck = function() {
-      const slice = document.getElementById('p5r-slice');
+      const corner = document.getElementById('p5r-corner');
       const backdrop = document.getElementById('p5r-backdrop');
-      if (slice && backdrop) {
-        slice.classList.toggle('is-active');
+      if (corner && backdrop) {
+        corner.classList.toggle('is-active');
         backdrop.classList.toggle('is-active');
       }
     };
+
     window.showSectionModal = function(type) {
       if (type === 'download') {
-        alert('Downloading Executive Pitch Brief & Patent Claims (PDF)...\\nSHA-256: 9f8e4a7b2c01d93e8842af5e710b37');
+        alert('Downloading Executive Pitch Brief & Patent Claims (PDF)...\nSHA-256: 9f8e4a7b2c01d93e8842af5e710b37');
       } else if (type === 'video') {
         alert('3-Minute Pitch Video player initialized: [Playing Conrad Challenge 2026 Summit Pitch...]');
       } else {
-        alert('Navigating to ' + type + ' detail section.');
+        alert('Opening section: ' + type);
       }
     };
+
+    /* Escape key closes the deck */
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        const slice = document.getElementById('p5r-slice');
+        const corner = document.getElementById('p5r-corner');
         const backdrop = document.getElementById('p5r-backdrop');
-        if (slice && slice.classList.contains('is-active')) {
-          slice.classList.remove('is-active');
+        if (corner && corner.classList.contains('is-active')) {
+          corner.classList.remove('is-active');
           backdrop.classList.remove('is-active');
         }
       }
     });
+
+    /*
+     * Dynamically sync the left editorial panel text with the active
+     * gallery chapter as the user scrolls through the Nuxt work slider.
+     * We observe the `.infomation__title__text` for mutations since the
+     * Nuxt app updates it in place.
+     */
+    (function syncSpecPanel() {
+      const chapterMap = {
+        'The solid-state propulsion cell':       { chapter: '01', desc: 'Our primary breakthrough consolidates atmospheric ionization and momentum transfer into a single monolithic solid-state cell, eliminating turbines and mechanical friction entirely.', badges: ['TRL: 4','Patent Pending','18.4 N/kW','&#60; 12 dB'] },
+        'Asymmetric dielectric ionization':      { chapter: '02', desc: 'By shaping micro-scale electrode geometry, the emitter generates a localized corona discharge that accelerates surrounding atmospheric ions at near-zero thermal loss.', badges: ['TRL: 4','Patent Pending','Corona Discharge'] },
+        'Empirical chamber verification':        { chapter: '03', desc: 'Rigorous benchtop vacuum and pressure chamber testing demonstrates continuous acoustic emissions below 12 dB with sub-micron drift stability across 480 hours.', badges: ['TRL: 4','Lab Verified','&#60; 12 dB'] },
+        'Stratospheric surveillance envelope':   { chapter: '04', desc: 'Designed for autonomous stratospheric lingering, the cell enables silent long-duration wildfire surveillance and atmospheric climate sensing with zero fossil fuel burn.', badges: ['TRL: 4','Silent','Zero Emission'] },
+        'Monolithic scalable production':        { chapter: '05', desc: 'Standard PCB lithography and additive carbon-composite layups bring the bill of materials down to $180/unit compared to $3,000 for legacy mechanical turbo-fan drones.', badges: ['TRL: 4','$180 BOM','Mass Producible'] },
+      };
+
+      function updatePanel(titleText) {
+        const data = chapterMap[titleText.trim()];
+        if (!data) return;
+        const titleEl = document.getElementById('csp-title');
+        const descEl  = document.getElementById('csp-desc');
+        const eyebrow = document.querySelector('.csp-eyebrow');
+        const badges  = document.querySelector('.csp-badges');
+        if (titleEl) titleEl.textContent = titleText.trim();
+        if (descEl)  descEl.textContent  = data.desc;
+        if (eyebrow) eyebrow.textContent = '[CHAPTER ' + data.chapter + ' // CONRAD CHALLENGE 2026]';
+        if (badges)  badges.innerHTML    = data.badges.map(b => '<span class="csp-badge">' + b + '</span>').join('');
+      }
+
+      /* Poll for Nuxt title element and observe changes */
+      function attachObserver() {
+        const nuxtTitle = document.querySelector('.infomation__title__text');
+        if (!nuxtTitle) { setTimeout(attachObserver, 500); return; }
+        updatePanel(nuxtTitle.textContent);
+        const observer = new MutationObserver(function() {
+          updatePanel(nuxtTitle.textContent);
+        });
+        observer.observe(nuxtTitle, { childList: true, characterData: true, subtree: true });
+      }
+      window.addEventListener('load', attachObserver);
+    })();
   </script>
 </body>
 
