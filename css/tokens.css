@@ -1,0 +1,25 @@
+/* ============================================================
+   tokens.css — Global Design Tokens & Color Variables
+   
+   Why this exists:
+   CSS Custom Properties (variables) define our core color palette.
+   Any component can reference var(--color-black), var(--color-gray), etc.
+   If you ever want to change a theme color, change it here!
+   ============================================================ */
+
+:root {
+  /* Core brand palette */
+  --color-black: #222;
+  --color-gray: #f2f2f2;
+  --color-white: #eaeaea;
+  
+  /* Accent colors */
+  --color-orange: #fd9e6e;
+  --color-red: #ea4c41;
+  --color-yellow: #e8c746;
+  --color-green: #79ad58;
+  --color-sky-blue: #5a9ea9;
+  --color-blue: #1e4c80;
+  --color-purple: #9d87b8;
+  --color-pink: #ffc5c5;
+}

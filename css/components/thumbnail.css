@@ -1,0 +1,309 @@
+/* ============================================================
+   thumbnail.css — Main Showcase (Thumbnail Carousel, Info & Marquee)
+   
+   Why this exists:
+   Styles the primary centerpiece of the home page:
+   1. The central floating angled card stack (.thumbnail, .thumbnail__float)
+   2. The project information panel on the right (.infomation)
+   3. The oversized scrolling background text watermark (.marquee)
+   ============================================================ */
+
+/* 1. Viewport Container Wrapper */
+.container__wrap,
+.container__wrap[data-v-684698a2] {
+  height: 100vh;
+  height: var(--wh, 100vh);
+  width: 100vw;
+  position: relative;
+}
+
+/* 2. Central Thumbnail Showcase */
+.thumbnail,
+.thumbnail[data-v-684698a2] {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 52vh;
+  width: 52vh;
+}
+
+@media (max-width: 1024px) {
+  .thumbnail,
+  .thumbnail[data-v-684698a2] {
+    height: 70vw;
+    width: 70vw;
+  }
+}
+
+/* Front active card with 10deg rotation */
+.thumbnail__float,
+.thumbnail__float[data-v-684698a2] {
+  position: absolute;
+  height: inherit;
+  width: inherit;
+  z-index: 5;
+  background: #fff;
+  transform: rotate(10deg);
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.thumbnail__float__image,
+.thumbnail__float__image[data-v-684698a2] {
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  opacity: 0;
+}
+
+/* Behind shadow cards */
+.thumbnail__back,
+.thumbnail__back[data-v-684698a2] {
+  z-index: 1;
+  background: #eaeaea;
+  position: absolute;
+  height: inherit;
+  width: inherit;
+}
+
+/* Buffer card that flies in when scrolling */
+.thumbnail__buffer-float,
+.thumbnail__buffer-float[data-v-684698a2] {
+  position: absolute;
+  height: inherit;
+  width: inherit;
+  z-index: 6;
+  background: #fff;
+  transform: translateY(-100vh) rotate(70deg);
+}
+
+.thumbnail__buffer-float__image,
+.thumbnail__buffer-float__image[data-v-684698a2] {
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  opacity: 0;
+}
+
+.thumbnail__buffer-back,
+.thumbnail__buffer-back[data-v-684698a2] {
+  position: absolute;
+  height: inherit;
+  width: inherit;
+  z-index: 0;
+  background: #eaeaea;
+}
+
+/* Card Title below the thumbnail */
+.thumbnail__title,
+.thumbnail__title[data-v-684698a2] {
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  top: auto;
+  bottom: -10vh;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .thumbnail__title,
+  .thumbnail__title[data-v-684698a2] {
+    display: none;
+  }
+}
+
+.thumbnail__title__text,
+.thumbnail__title__text[data-v-684698a2] {
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+
+/* Image Orientation Adjustments */
+.thumbnail--horizonal,
+.thumbnail--horizonal[data-v-684698a2] {
+  width: auto;
+  height: calc(100% - 8rem);
+}
+
+.thumbnail--vertical,
+.thumbnail--vertical[data-v-684698a2] {
+  width: calc(100% - 8rem);
+  height: auto;
+}
+
+/* 3. Project Information Panel (Right Side on Desktop / Bottom on Mobile) */
+.infomation,
+.infomation[data-v-684698a2] {
+  height: 280px;
+  width: 400px;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: auto;
+  right: 10vw;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+@media (max-width: 1024px) {
+  .infomation,
+  .infomation[data-v-684698a2] {
+    height: -moz-fit-content;
+    height: fit-content;
+    width: 100vw;
+    flex-direction: column;
+    align-items: flex-end;
+    right: 0;
+    padding: 0 5rem;
+    bottom: 14rem;
+    top: auto;
+  }
+
+  .infomation > *,
+  .infomation > [data-v-684698a2] {
+    margin: 0 0 4rem;
+  }
+
+  .infomation > :last-child,
+  .infomation[data-v-684698a2] > :last-child {
+    margin: 0;
+  }
+}
+
+/* Number Counter & Dividing Line */
+.infomation__num,
+.infomation__num[data-v-684698a2] {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.infomation__num > *,
+.infomation__num > [data-v-684698a2] {
+  margin: 0 6rem 0 0;
+}
+
+.infomation__num > :last-child,
+.infomation__num[data-v-684698a2] > :last-child {
+  margin: 0;
+}
+
+.infomation__num__bar,
+.infomation__num__bar[data-v-684698a2] {
+  height: 1px;
+  width: 5rem;
+  background: #222;
+  background: var(--color-black);
+}
+
+/* Project Title in Info Panel (Mobile Only) */
+.infomation__title,
+.infomation__title[data-v-684698a2] {
+  overflow: hidden;
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .infomation__title,
+  .infomation__title[data-v-684698a2] {
+    display: block;
+  }
+}
+
+.infomation__title__text,
+.infomation__title__text[data-v-684698a2] {
+  padding: 1rem 0;
+  white-space: nowrap;
+  width: 100%;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100vw - 10rem);
+}
+
+/* Detail CTA Link */
+.infomation__link,
+.infomation__link[data-v-684698a2] {
+  overflow: hidden;
+}
+
+/* 4. Background Animated Marquee */
+@keyframes scroll-684698a2 {
+  0% {
+    transform: translateZ(0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee,
+.marquee[data-v-684698a2] {
+  top: 0;
+  left: 0;
+  position: fixed;
+  pointer-events: none;
+  z-index: 2;
+  height: 100vh;
+  height: var(--wh, 100vh);
+  width: 100vw;
+  overflow: hidden;
+}
+
+.marquee .marquee__list,
+.marquee .marquee__list[data-v-684698a2] {
+  display: flex;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  overflow: hidden;
+  padding: 2rem 0;
+  will-change: transform;
+}
+
+.marquee .marquee__text,
+.marquee .marquee__text[data-v-684698a2] {
+  font-size: 140px;
+  white-space: nowrap;
+  padding-right: 60rem;
+}
+
+.move-text[data-v-684698a2] {
+  display: block;
+}

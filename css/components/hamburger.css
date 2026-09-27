@@ -1,0 +1,108 @@
+/* ============================================================
+   hamburger.css — Mobile Navigation Menu & Overlay
+   
+   Why this exists:
+   Styles the mobile hamburger button (two bars in the top-right)
+   and the full-screen overlay menu that slides/fades in on mobile.
+   ============================================================ */
+
+/* Hide completely on desktop screens */
+@media (min-width: 1025px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+/* 1. Mobile Menu Trigger Button */
+.hamburger__button {
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding: 5rem;
+  width: 4rem;
+  min-height: 1rem;
+  box-sizing: content-box;
+  z-index: 100;
+}
+
+.hamburger__button__bar {
+  width: 4rem;
+  height: 1px;
+  background: #222;
+  background: var(--color-black);
+}
+
+.hamburger__button__top {
+  margin-bottom: 2.2px;
+}
+
+/* 2. Fullscreen Overlay Backdrop */
+.hamburger__overlay {
+  display: none;
+  height: 100vh;
+  height: var(--wh, 100vh);
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background: #f2f2f2;
+  background: var(--color-gray);
+  opacity: 0;
+}
+
+.hamburger__overlay__wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 32rem 5rem 5rem;
+}
+
+/* 3. Overlay Navigation Links */
+.hamburger__overlay__menu {
+  width: 100%;
+}
+
+.hamburger__overlay__menu__item {
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  overflow: hidden;
+}
+
+.hamburger__overlay__menu__link {
+  transform: translateY(-100%);
+  display: block;
+  margin-bottom: 2rem;
+}
+
+/* 4. Overlay Social Media Links */
+.hamburger__overlay__social {
+  margin-top: 8rem;
+  width: 100%;
+}
+
+.hamburger__overlay__social > * {
+  margin: 0 0 2rem;
+}
+
+.hamburger__overlay__social > :last-child {
+  margin: 0;
+}
+
+.hamburger__overlay__social__item {
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  overflow: hidden;
+}
+
+.hamburger__overlay__social__link {
+  transform: translateY(-100%);
+  display: block;
+}

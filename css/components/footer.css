@@ -1,0 +1,67 @@
+/* ============================================================
+   footer.css — Bottom-Left Scroll Indicator & Copyright
+   
+   Why this exists:
+   Styles the fixed status indicator at the bottom-left of the screen,
+   including the pulsing circle, "SCROLL DOWN" prompt, and copyright label.
+   ============================================================ */
+
+.footer {
+  position: fixed;
+  bottom: 15rem;
+  left: 15rem;
+  z-index: 98;
+  height: 4rem;
+  width: 40rem;
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    bottom: 5rem;
+    left: 5rem;
+  }
+}
+
+.footer__copylight,
+.footer__scroll-text {
+  position: absolute;
+}
+
+.footer__copylight p,
+.footer__scroll-text p {
+  line-height: 100%;
+}
+
+/* Scroll prompt text & dot */
+.footer__scroll-text {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.footer__scroll-text p {
+  white-space: nowrap;
+}
+
+.footer__scroll-text__circle {
+  margin-right: 8rem;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  background: #222;
+  background: var(--color-black);
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .footer__scroll-text__circle {
+    margin-right: 6rem;
+  }
+}
+
+/* Copyright notice (hidden on mobile) */
+@media (max-width: 1024px) {
+  .footer__copylight {
+    display: none;
+  }
+}
