@@ -157,7 +157,11 @@
                           (d = e.sent),
                           (e.next = 6),
                           n.state.works.find(function (t) {
-                            return t.createdNum === o.params.num;
+                            return (
+                              t.createdNum === o.params.num ||
+                              t.num === o.params.num ||
+                              t.id === o.params.num
+                            );
                           })
                         );
                       case 6:
@@ -248,7 +252,7 @@
               var e = function (element) {
                 return t.querySelectorAll(element);
               };
-              this.$gsap.set(e(".move-text"), { y: "-120%" }),
+              this.$gsap.set(e(".move-text"), { y: "-140%" }),
                 this.$gsap.set(e(".move-item:first-child"), { y: "-100vh" }),
                 this.$gsap.set(e(".nextlink"), { opacity: 0 }),
                 e(".move-item").length >= 2 &&
@@ -266,7 +270,7 @@
                   .forEach(function (t, i) {
                     n.to(
                       t,
-                      { duration: i / 5 + 0.6, ease: "expo.out", y: "0%" },
+                      { duration: 0.55 + i * 0.08, ease: "expo.out", y: "0%" },
                       "show"
                     );
                   }),
@@ -296,7 +300,7 @@
               this.$gsap.utils.toArray(".move-text").forEach(function (t, i) {
                 n.to(
                   t,
-                  { duration: i / 5 + 0.6, ease: "expo.in", y: "120%" },
+                  { duration: 0.55 + i * 0.08, ease: "expo.in", y: "140%" },
                   "hide"
                 );
               }),
@@ -372,49 +376,72 @@
                           ? e(
                               "div",
                               {
-                                staticClass:
-                                  "infomation__link infomation__text",
+                                staticClass: "infomation__link",
                               },
                               [
                                 t.work.client.length
-                                  ? e("p", { staticClass: "move-text" }, [
-                                      t._v("Client : " + t._s(t.work.client)),
-                                    ])
-                                  : t._e(),
-                                t.work.client.length || t.work.viewUrl.length
-                                  ? e("span", { staticClass: "move-text" }, [
-                                      t._v("/"),
-                                    ])
+                                  ? e(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "infomation__link__item",
+                                      },
+                                      [
+                                        e(
+                                          "p",
+                                          { staticClass: "move-text" },
+                                          [
+                                            t._v(
+                                              "Client : " +
+                                                t._s(t.work.client)
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    )
                                   : t._e(),
                                 t.work.viewUrl.length
                                   ? e(
-                                      "a",
+                                      "div",
                                       {
-                                        staticClass: "move-text",
-                                        attrs: {
-                                          href: t.work.viewUrl,
-                                          target: "_blank",
-                                        },
+                                        staticClass:
+                                          "infomation__link__item",
                                       },
-                                      [t._v("View Project")]
+                                      [
+                                        e(
+                                          "a",
+                                          {
+                                            staticClass: "move-text",
+                                            attrs: {
+                                              href: t.work.viewUrl,
+                                              target: "_blank",
+                                            },
+                                          },
+                                          [t._v("View Project")]
+                                        ),
+                                      ]
                                     )
                                   : t._e(),
                                 t.work.viewUrlSite.length
-                                  ? e("span", { staticClass: "move-text" }, [
-                                      t._v("/"),
-                                    ])
-                                  : t._e(),
-                                t.work.viewUrlSite.length
                                   ? e(
-                                      "a",
+                                      "div",
                                       {
-                                        staticClass: "move-text",
-                                        attrs: {
-                                          href: t.work.viewUrlSite,
-                                          target: "_blank",
-                                        },
+                                        staticClass:
+                                          "infomation__link__item",
                                       },
-                                      [t._v("Visit Site")]
+                                      [
+                                        e(
+                                          "a",
+                                          {
+                                            staticClass: "move-text",
+                                            attrs: {
+                                              href: t.work.viewUrlSite,
+                                              target: "_blank",
+                                            },
+                                          },
+                                          [t._v("Visit Site")]
+                                        ),
+                                      ]
                                     )
                                   : t._e(),
                               ]

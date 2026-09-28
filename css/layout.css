@@ -1,0 +1,137 @@
+/* ============================================================
+   layout.css — Global Layout, Canvas, and Utility Classes
+   
+   Why this exists:
+   Controls global viewport scaling (rem base), scrollbar styles,
+   responsive helpers (.pc-only / .sp-only), Nuxt progress bar,
+   and page canvas overflow prevention.
+   ============================================================ */
+
+/* 1. Global Viewport and Canvas */
+html {
+  font-size: 4px; /* Base rem unit: 1rem = 4px */
+  background: #f2f2f2;
+  background: var(--color-gray);
+}
+
+body,
+html {
+  min-height: 100vh;
+  min-height: var(--wh, 100vh);
+  overscroll-behavior: none;
+}
+
+body *,
+html * {
+  color: #222;
+  color: var(--color-black);
+}
+
+img {
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+/* 2. Responsive Visibility Helpers */
+/* Desktop-only: hide on tablet and mobile (<= 1024px) */
+@media (max-width: 1024px) {
+  .pc-only {
+    display: none !important;
+  }
+}
+
+/* Mobile-only: hide on desktop (>= 1025px) */
+@media (min-width: 1025px) {
+  .sp-only {
+    display: none !important;
+  }
+}
+
+/* 3. Custom Scrollbar Styling */
+.scrollbar-track {
+  background: transparent !important;
+}
+
+.scrollbar-track .scrollbar-thumb {
+  border-radius: 0;
+  background: #222;
+  background: var(--color-black);
+  transition: height 0.5s ease-in;
+}
+
+.scrollbar-track-x {
+  height: 1rem !important;
+}
+
+.scrollbar-track-y {
+  width: 1rem !important;
+}
+
+/* 4. Main Container and Overscroll Lock */
+.container {
+  min-height: 100vh;
+  min-height: var(--wh, 100vh);
+}
+
+.index,
+.index > body,
+.index > body > body,
+.index > body > body > body,
+.index > body > body > body > body,
+.index > body > body > body > body > body,
+.index > body > body > body > body > body > body,
+.index > body > body > body > body > body > body > body,
+.index > body > body > body > body > body > body > body > body,
+.index > body > body > body > body > body > body > body > body > body,
+.index > body > body > body > body > body > body > body > body > body > body,
+.index > body > body > body > body > body > body > body > body > body > body > body,
+.index > body > body > body > body > body > body > body > body > body > body > body > body,
+.index > body > body > body > body > body > body > body > body > body > body > body > body > body,
+.index > body > body > body > body > body > body > body > body > body > body > body > body > body > body,
+.index > body > body > body > body > body > body > body > body > body > body > body > body > body > body > body {
+  overscroll-behavior: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 5. Inline Text Block Animation Utility */
+.move-text {
+  display: inline-block;
+}
+
+/* 6. Top Nuxt Progress Indicator */
+.nuxt-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  opacity: 1;
+  transition: width 0.1s, opacity 0.4s;
+  background-color: #000;
+  z-index: 999999;
+}
+
+.nuxt-progress.nuxt-progress-notransition {
+  transition: none;
+}
+
+.nuxt-progress-failed {
+  background-color: red;
+}
+
+/* 7. Positioned Action Button */
+.button,
+.button[data-v-684698a2] {
+  position: fixed;
+  top: 60rem;
+  left: 20rem;
+  z-index: 20;
+}

@@ -1,0 +1,27 @@
+/* ============================================================
+   copy.css — Mobile Description & Copy Block
+   
+   Why this exists:
+   Styles the secondary text paragraph visible on mobile layouts,
+   providing a brief profile or artwork synopsis.
+   ============================================================ */
+
+.copy,
+.copy[data-v-684698a2] {
+  width: 100%;
+  height: auto;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 1025px) {
+  .copy,
+  .copy[data-v-684698a2] {
+    display: none;
+  }
+}
+
+.copy p,
+.copy p[data-v-684698a2] {
+  width: 100%;
+  text-align: center;
+}

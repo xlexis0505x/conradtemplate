@@ -1,0 +1,34 @@
+/* ============================================================
+   social.css — Bottom-Right Social Media Links
+   
+   Why this exists:
+   Styles the fixed desktop list of social media links (Twitter,
+   Instagram, TikTok) placed at the bottom-right corner.
+   ============================================================ */
+
+.social {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding-bottom: 16rem;
+  padding-right: 16rem;
+  z-index: 100;
+}
+
+@media (max-width: 1024px) {
+  .social {
+    display: none;
+  }
+}
+
+.social__list {
+  display: flex;
+}
+
+.social__list > * {
+  margin: 0 8rem 0 0;
+}
+
+.social__list > :last-child {
+  margin: 0;
+}

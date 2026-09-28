@@ -1,7 +1,7 @@
 <svg width="240" height="47" viewBox="0 0 240 47" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="0" y="2" width="14" height="14" fill="#FF4800" />
-  <text x="22" y="14" font-family="'Space Mono', 'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#111317" letter-spacing="1.2">CONRAD // 2026</text>
-  <text x="0" y="38" font-family="'Helvetica Neue', Inter, -apple-system, sans-serif" font-size="24" font-weight="900" fill="#111317" letter-spacing="-1">PROJECT LOREM</text>
-  <line x1="205" y1="26" x2="238" y2="26" stroke="#111317" stroke-width="1.5" />
-  <circle cx="238" cy="26" r="3" fill="#FF4800" />
+  <rect x="0" y="2" width="12" height="12" fill="#C85A32" />
+  <text x="20" y="13" font-family="'JetBrains Mono', 'Space Mono', monospace" font-size="9" font-weight="700" fill="#14181E" letter-spacing="1.2">CONRAD &#8226; 2026</text>
+  <text x="0" y="38" font-family="'Helvetica neue', 'Noto Sans JP', sans-serif" font-size="22" font-weight="500" fill="#14181E" letter-spacing="-0.5">Project Lorem</text>
+  <line x1="165" y1="26" x2="215" y2="26" stroke="rgba(20, 24, 30, 0.25)" stroke-width="1.5" />
+  <circle cx="215" cy="26" r="3" fill="#C85A32" />
 </svg>

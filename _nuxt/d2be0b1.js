@@ -423,7 +423,7 @@
                           "n-link",
                           {
                             staticClass: "move-text",
-                            attrs: { to: "/works/".concat(t.work.num) },
+                            attrs: { to: "/works/".concat(t.work.createdNum) },
                           },
                           [t._v("[INSPECT SPEC // TRL-4]")]
                         ),

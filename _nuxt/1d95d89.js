@@ -323,79 +323,23 @@
                       ),
                       t("li", { staticClass: "header__list__item" }, [
                         t(
-                          "a",
+                          "button",
                           {
-                            staticClass: "header__list__item__link",
-                            attrs: {
-                              href: "mailto:".concat(e.$store.state.about.mail),
-                              target: "_blank",
+                            staticClass: "btn-pitch-deck",
+                            on: {
+                              click: function () {
+                                window.toggleMenu && window.toggleMenu();
+                              },
                             },
                           },
-                          [t("span", [e._v("#")]), e._v("MAIL")]
+                          [e._v("PITCH DECK")]
                         ),
-                        t("span", { staticClass: "header__bar" }),
                       ]),
                     ]),
                   ],
                   1
                 ),
-                t(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: "works-num" !== e.$route.name,
-                        expression: "$route.name !== 'works-num'",
-                      },
-                    ],
-                    staticClass: "social",
-                  },
-                  [
-                    t("ul", { staticClass: "social__list" }, [
-                      t("li", { staticClass: "social__item" }, [
-                        t(
-                          "a",
-                          {
-                            staticClass: "social__item__link",
-                            attrs: {
-                              href: e.$store.state.about.twitter_link,
-                              target: "_blank",
-                            },
-                          },
-                          [e._v("TWITTER")]
-                        ),
-                      ]),
-                      t("li", { staticClass: "social__item" }, [
-                        t(
-                          "a",
-                          {
-                            staticClass: "social__item__link",
-                            attrs: {
-                              href: e.$store.state.about.instagram_link,
-                              target: "_blank",
-                            },
-                          },
-                          [e._v("INSTAGRAM")]
-                        ),
-                      ]),
-                      t("li", { staticClass: "social__item" }, [
-                        t(
-                          "a",
-                          {
-                            staticClass: "social__item__link",
-                            attrs: {
-                              href: e.$store.state.about.tiktok_link,
-                              target: "_blank",
-                            },
-                          },
-                          [e._v("TIKTOK")]
-                        ),
-                      ]),
-                    ]),
-                  ]
-                ),
+                e._e(),
                 e._m(0),
                 t("div", { staticClass: "hamburger sp-only" }, [
                   t(
@@ -482,79 +426,29 @@
                           ],
                           1
                         ),
-                      ]),
-                      t("ul", { staticClass: "hamburger__overlay__social" }, [
                         t(
                           "li",
-                          { staticClass: "hamburger__overlay__social__item" },
+                          { staticClass: "hamburger__overlay__menu__item" },
                           [
                             t(
                               "a",
                               {
-                                staticClass: "hamburger__overlay__social__link",
-                                attrs: {
-                                  href: "mailto:".concat(
-                                    e.$store.state.about.mail
-                                  ),
-                                  target: "_blank",
+                                staticClass: "hamburger__overlay__menu__link",
+                                style: { color: "var(--accent-terracotta)" },
+                                attrs: { href: "javascript:void(0)" },
+                                on: {
+                                  click: function () {
+                                    e.menuToggle = !1;
+                                    window.toggleMenu && window.toggleMenu();
+                                  },
                                 },
                               },
-                              [e._v("MAIL")]
-                            ),
-                          ]
-                        ),
-                        t(
-                          "li",
-                          { staticClass: "hamburger__overlay__social__item" },
-                          [
-                            t(
-                              "a",
-                              {
-                                staticClass: "hamburger__overlay__social__link",
-                                attrs: {
-                                  href: e.$store.state.about.twitter_link,
-                                  target: "_blank",
-                                },
-                              },
-                              [e._v("TWITTER")]
-                            ),
-                          ]
-                        ),
-                        t(
-                          "li",
-                          { staticClass: "hamburger__overlay__social__item" },
-                          [
-                            t(
-                              "a",
-                              {
-                                staticClass: "hamburger__overlay__social__link",
-                                attrs: {
-                                  href: e.$store.state.about.instagram_link,
-                                  target: "_blank",
-                                },
-                              },
-                              [e._v("INSTAGRAM")]
-                            ),
-                          ]
-                        ),
-                        t(
-                          "li",
-                          { staticClass: "hamburger__overlay__social__item" },
-                          [
-                            t(
-                              "a",
-                              {
-                                staticClass: "hamburger__overlay__social__link",
-                                attrs: {
-                                  href: e.$store.state.about.tiktok_link,
-                                  target: "_blank",
-                                },
-                              },
-                              [e._v("TIKTOK")]
+                              [e._v("PITCH DECK")]
                             ),
                           ]
                         ),
                       ]),
+                      e._e(),
                     ]),
                   ]),
                 ]),

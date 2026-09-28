@@ -1,0 +1,89 @@
+/* ============================================================
+   header.css — Top Navigation Header & Logo
+   
+   Why this exists:
+   Styles the fixed top navigation bar, brand logo image, desktop
+   navigation links, and the animated underline bar on hover.
+   ============================================================ */
+
+.header {
+  position: fixed;
+  width: 100vw;
+  padding: 16rem 16rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 100;
+}
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 5rem 5rem 0;
+  }
+}
+
+/* Brand Logo */
+.header__logo {
+  padding-bottom: 2rem;
+}
+
+.header__logo__image {
+  width: 61rem;
+}
+
+@media (max-width: 1024px) {
+  .header__logo__image {
+    width: 31rem;
+  }
+}
+
+/* Navigation Link List */
+.header__list {
+  display: flex;
+}
+
+.header__list > * {
+  margin: 0 8rem 0 0;
+}
+
+.header__list > :last-child {
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .header__list {
+    display: none;
+  }
+}
+
+.header__list__item {
+  position: relative;
+}
+
+/* Underline Animation on Hover */
+.header__list__item:hover > .header__bar {
+  transform: scaleX(1);
+  transform-origin: right;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+
+.header__list__item__link {
+  text-transform: uppercase;
+}
+
+.header__list__item__link span {
+  margin-right: 1rem;
+}
+
+.header__bar {
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  background: #222;
+  background: var(--color-black);
+  bottom: -0.5rem;
+  left: 0;
+  transform: scaleX(0);
+  transition: all 0.6s cubic-bezier(0.7, 0, 0.84, 0) 0.2s;
+  transform-origin: left;
+}

@@ -1,0 +1,117 @@
+/* ============================================================
+   loading.css — Initial Loading Screen & Progress Animation
+   
+   Why this exists:
+   Styles the full-page preloader splash screen that displays the
+   brand logo and counting percentage (00 -> 100) before fading out.
+   ============================================================ */
+
+/* 1. Full-screen Loading Backdrop */
+.loading,
+.loading[data-v-24e1ce7b] {
+  position: fixed;
+  z-index: 1000;
+  width: 100vw;
+  background: #f2f2f2;
+  background: var(--color-gray);
+  cursor: progress;
+}
+
+.loading,
+.loading[data-v-24e1ce7b],
+.loading__wrap,
+.loading__wrap[data-v-24e1ce7b] {
+  height: 100vh;
+  height: var(--wh, 100vh);
+}
+
+/* 2. Content Wrapper */
+.loading__wrap,
+.loading__wrap[data-v-24e1ce7b] {
+  max-width: 1200px;
+  width: 100%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  box-sizing: content-box;
+  padding-left: 60px;
+  padding-right: 60px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .loading__wrap,
+  .loading__wrap[data-v-24e1ce7b] {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+}
+
+/* 3. Progress Container and Dividing Line */
+.loading__wrap__progress,
+.loading__wrap__progress[data-v-24e1ce7b] {
+  width: -moz-fit-content;
+  width: fit-content;
+  justify-content: flex-end;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  overflow-y: hidden;
+}
+
+.loading__margin,
+.loading__margin[data-v-24e1ce7b] {
+  width: 60vw;
+  height: 1px;
+  background: #222;
+  background: var(--color-black);
+}
+
+@media (max-width: 1024px) {
+  .loading__margin,
+  .loading__margin[data-v-24e1ce7b] {
+    width: 0;
+  }
+}
+
+/* 4. Loading Logo */
+.loading__logo,
+.loading__logo[data-v-24e1ce7b] {
+  margin-right: 8rem;
+  overflow-y: hidden;
+}
+
+@media (max-width: 1024px) {
+  .loading__logo,
+  .loading__logo[data-v-24e1ce7b] {
+    margin-right: 4rem;
+  }
+}
+
+.loading__logo img,
+.loading__logo img[data-v-24e1ce7b] {
+  width: 74rem;
+}
+
+@media (max-width: 1024px) {
+  .loading__logo img,
+  .loading__logo img[data-v-24e1ce7b] {
+    width: 50rem;
+  }
+}
+
+/* 5. Percentage Number Counter */
+.loading__num,
+.loading__num[data-v-24e1ce7b] {
+  font-family: "Helvetica neue", YakuHanJP, "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 1.4px;
+  align-self: flex-start;
+}

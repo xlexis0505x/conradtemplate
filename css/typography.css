@@ -1,0 +1,172 @@
+/* ============================================================
+   typography.css — Fonts, Headings, and Text Utility Classes
+   
+   Why this exists:
+   Defines the custom @font-face rules, base font families,
+   and standard typography sizes used across the website.
+   ============================================================ */
+
+/* 1. Custom Font Definitions */
+@font-face {
+  font-family: "Helvetica neue";
+  src: url("/_nuxt/fonts/HELVETICANEUE.27ccdcb.ttf") format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Helvetica neue";
+  src: url("/_nuxt/fonts/HELVETICANEUE-MEDIUM.02cb846.ttf") format("truetype");
+  font-weight: 400;
+}
+
+/* 2. Global Base Font Stack */
+body {
+  font-family: "Helvetica neue", YakuHanJP, "Noto Sans JP", sans-serif;
+}
+
+/* 3. Navigation & Small Copy (14px desktop / 12px mobile) */
+.copy p,
+.font-nav,
+.footer__copylight p,
+.footer__scroll-text p,
+.hamburger__overlay__social__link,
+.header__list__item__link,
+.social__item__link,
+.infomation__num__text {
+  font-family: "Helvetica neue", YakuHanJP, "Noto Sans JP", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 1.4px;
+  line-height: 17px;
+}
+
+@media (max-width: 1024px) {
+  .copy p,
+  .font-nav,
+  .footer__copylight p,
+  .footer__scroll-text p,
+  .hamburger__overlay__social__link,
+  .header__list__item__link,
+  .social__item__link,
+  .infomation__num__text {
+    font-size: 12px;
+    font-family: "Helvetica neue", YakuHanJP, "Noto Sans JP", sans-serif;
+    font-weight: 300;
+    letter-spacing: 1.4px;
+    line-height: 17px;
+  }
+}
+
+/* 4. Large Works Title (80px desktop / 40px mobile) */
+.font-works-title,
+.infomation__title__text {
+  font-size: 80px;
+  font-family: "Helvetica neue", YakuHanJP, "Noto Sans JP", sans-serif;
+  font-weight: 500;
+  line-height: 90px;
+  letter-spacing: 1.4px;
+}
+
+@media (max-width: 1024px) {
+  .font-works-title,
+  .infomation__title__text {
+    font-size: 40px;
+    line-height: 110%;
+  }
+}
+
+/* 5. Works Category Subtitle (24px desktop / 16px mobile) */
+.font-works-category {
+  font-size: 24px;
+  font-family: "Helvetica neue", YakuHanJP, "Noto Sans JP", sans-serif;
+  font-weight: 300;
+  letter-spacing: 1.4px;
+}
+
+@media (max-width: 1024px) {
+  .font-works-category {
+    font-size: 16px;
+  }
+}
+
+/* 6. Underlined Links (14px desktop / 12px mobile) */
+.font-underline,
+.infomation__link a {
+  font-size: 14px;
+  font-family: "Helvetica neue", YakuHanJP, "Noto Sans JP", sans-serif;
+  font-weight: 300;
+  text-decoration: underline;
+  letter-spacing: 1.4px;
+  line-height: 17px;
+}
+
+@media (max-width: 1024px) {
+  .font-underline,
+  .infomation__link a {
+    font-size: 12px;
+  }
+}
+
+/* 7. About Page Titles */
+.font-about-title-one {
+  font-size: 88px;
+  font-family: "Helvetica neue", YakuHanJP, "Noto Sans JP", sans-serif;
+  font-weight: 300;
+  letter-spacing: 4px;
+  line-height: 105px;
+}
+
+@media (max-width: 1024px) {
+  .font-about-title-one {
+    font-size: 28px;
+    line-height: 33.4px;
+  }
+}
+
+.font-about-title-second {
+  font-size: 48px;
+  font-family: "Helvetica neue", YakuHanJP, "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  line-height: 70px;
+  letter-spacing: 4px;
+}
+
+@media (max-width: 1024px) {
+  .font-about-title-second {
+    font-size: 20px;
+  }
+}
+
+/* 8. About Page Body Text */
+.font-about-text {
+  font-size: 12px;
+  font-family: "Helvetica neue", YakuHanJP, "Noto Sans JP", sans-serif;
+  font-weight: 300;
+  line-height: 240%;
+  letter-spacing: 1.4px;
+}
+
+@media (max-width: 1024px) {
+  .font-about-text {
+    font-size: 10px;
+    line-height: 200%;
+  }
+}
+
+.font-about-text-second {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 188%;
+  font-family: "Helvetica neue", YakuHanJP, "Noto Sans JP", sans-serif;
+  letter-spacing: 1px;
+}
+
+/* 9. Mobile Overlay Menu Titles (56px) */
+.font-menu,
+.hamburger__overlay__menu__link {
+  font-family: "Helvetica neue", YakuHanJP, "Noto Sans JP", sans-serif;
+  font-size: 56px;
+  font-weight: 500;
+  line-height: 80%;
+  letter-spacing: 1px;
+}
