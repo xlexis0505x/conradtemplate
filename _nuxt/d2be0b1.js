@@ -184,9 +184,11 @@
                   { y: -1e3, rotate: "50deg", duration: 0.6 },
                   "start"
                 ),
-                  e.to(".move-text", { duration: 0.6, y: "-120%" }, "start"),
+                  e.to(".move-text", { duration: 0.45, y: "-120%", opacity: 0 }, "start"),
                   e.set(".move-text", {
+                    visibility: "hidden",
                     y: "120%",
+                    opacity: 0,
                     onComplete: function () {
                       t.reMarqueeListAnimeRemove();
                     },
@@ -221,7 +223,7 @@
                       t.reMarqueeListAnimeAdd();
                   }),
                   e.set(".thumbnail__back", { rotate: "0deg" }),
-                  e.to(".move-text", { duration: 0.4, y: "0%" });
+                  e.to(".move-text", { duration: 0.4, y: "0%", opacity: 1, visibility: "visible" });
                 var n = this.$$(".thumbnail__float__image")[
                     this.currentIndex + 1
                   ],
@@ -260,15 +262,16 @@
                   .to(
                     ".move-text",
                     {
-                      duration: 0.6,
+                      duration: 0.45,
                       y: "120%",
+                      opacity: 0,
                       onComplete: function () {
                         t.reMarqueeListAnimeRemove();
                       },
                     },
                     "start"
                   )
-                  .set(".move-text", { y: "-120%" })
+                  .set(".move-text", { visibility: "hidden", y: "-120%", opacity: 0 })
                   .to(
                     ".thumbnail__float__image",
                     {
@@ -288,8 +291,10 @@
                   .to(
                     ".move-text",
                     {
-                      duration: 1,
+                      duration: 0.4,
                       y: "0%",
+                      opacity: 1,
+                      visibility: "visible",
                       onStart: function () {
                         t.reMarqueeListAnimeAdd();
                       },

@@ -95,11 +95,12 @@
       (w.pluginName = "horizontalScroll"), (w.defaultOptions = { enabled: !1 });
       var y = {
           head: function () {
-            var title = this.work.title + " - coalowl",
+            var w = this.work || {};
+            var title = (w.title || "") + " - coalowl",
               t =
-                this.work.description +
+                (w.description || "") +
                 " - coalowlです。女の子と音楽、イラストやアニメーションを作ります。",
-              image = this.work.gallery[0].url + "?auto=compress&fm=auto&w=700";
+              image = (w.gallery && w.gallery[0] && w.gallery[0].url) ? w.gallery[0].url + "?auto=compress&fm=auto&w=700" : "";
             return {
               title: title,
               description:
@@ -154,21 +155,18 @@
                         );
                       case 3:
                         return (
-                          (d = e.sent),
-                          (e.next = 6),
-                          n.state.works.find(function (t) {
+                          (d = e.sent || n.state.works),
+                          (c = d.findIndex(function (t) {
                             return (
                               t.createdNum === o.params.num ||
                               t.num === o.params.num ||
-                              t.id === o.params.num
+                              t.id === o.params.num ||
+                              ("20260925ST" === o.params.num && 1 === t.index)
                             );
-                          })
-                        );
-                      case 6:
-                        return (
-                          (r = e.sent),
-                          (c = d.indexOf(r) + 1),
-                          (l = d[c] ? n.state.works[c] : n.state.works[0]),
+                          })),
+                          -1 === c && (c = 0),
+                          (r = d[c]),
+                          (l = d[(c + 1) % d.length]),
                           e.abrupt("return", { work: r, nextWorks: l })
                         );
                       case 10:
@@ -180,8 +178,10 @@
             )();
           },
           data: function () {
+            var w0 = (this.$store && this.$store.state && this.$store.state.works && this.$store.state.works[0]) || { gallery: [{url: ""}], client: "", viewUrl: "", title: "", description: "", createdNum: "01" };
             return {
-              work: {},
+              work: w0,
+              nextWorks: w0,
               computedPaddingLeft: "10px",
               computedPaddingRight: "10px",
             };
@@ -190,23 +190,47 @@
             v.a.registerPlugin(m.ScrollTrigger),
               this.scrollbarOnTrigger(),
               this.getItemPadding(),
-              window.addEventListener("resize", this.getItemPadding(), !1),
+              window.addEventListener("resize", this.getItemPadding, !1),
               this.scrollDownAnime();
           },
-          created: function () {},
+          created: function () {
+            this.syncCurrentWorks();
+          },
+          watch: {
+            $route: function () {
+              this.syncCurrentWorks();
+            },
+          },
           methods: {
+            syncCurrentWorks: function () {
+              var num = this.$route && this.$route.params && this.$route.params.num;
+              var works = (this.$store && this.$store.state && this.$store.state.works) || [];
+              if (!works.length) return;
+              var idx = works.findIndex(function (t) {
+                return (
+                  t.createdNum === num ||
+                  t.num === num ||
+                  t.id === num ||
+                  ("20260925ST" === num && 1 === t.index)
+                );
+              });
+              if (idx === -1) idx = 0;
+              this.work = works[idx];
+              this.nextWorks = works[(idx + 1) % works.length];
+            },
             getItemPadding: function () {
+              var el = this.$ && this.$(".gallery__wrap");
               if (
-                this.$(".gallery__wrap").classList.contains(
-                  "gallery__wrap--list"
-                )
+                el &&
+                el.classList &&
+                el.classList.contains("gallery__wrap--list")
               ) {
                 window.innerWidth;
                 var t = window.innerHeight,
-                  e = this.work.gallery[0],
+                  e = (this.work && this.work.gallery && this.work.gallery[0]) || { width: 600, height: 600 },
                   n = 0.7 * t,
                   o = (e.width * n) / e.height,
-                  d = this.work.gallery.slice(-1)[0],
+                  d = (this.work && this.work.gallery && this.work.gallery.slice(-1)[0]) || e,
                   r = (d.width * n) / d.height;
                 v.a.set(".gallery__wrap--list", {
                   paddingLeft: "calc((100vw - ".concat(o, "px) / 2)"),
@@ -217,6 +241,7 @@
             scrollbarOnTrigger: function () {
               f.a.destroyAll();
               var t = this.$refs.workContainer;
+              if (!t) return;
               f.a.use(w),
                 (this.bodyScrollBar = f.a.init(t, {
                   damping: 0.2,
@@ -245,6 +270,9 @@
                 t.to(".scroll-text", { duration: 1, ease: "expo.out", y: 0 });
             },
           },
+          key: function (t) {
+            return t.fullPath;
+          },
           transition: {
             mode: "out-in",
             css: !1,
@@ -252,7 +280,7 @@
               var e = function (element) {
                 return t.querySelectorAll(element);
               };
-              this.$gsap.set(e(".move-text"), { y: "-140%" }),
+              this.$gsap.set(e(".move-text"), { y: "-150%" }),
                 this.$gsap.set(e(".move-item:first-child"), { y: "-100vh" }),
                 this.$gsap.set(e(".nextlink"), { opacity: 0 }),
                 e(".move-item").length >= 2 &&
@@ -270,24 +298,24 @@
                   .forEach(function (t, i) {
                     n.to(
                       t,
-                      { duration: 0.55 + i * 0.08, ease: "expo.out", y: "0%" },
+                      { duration: 0.38, ease: "power2.out", y: "0%" },
                       "show"
                     );
                   }),
                 n.to(
                   ".nextlink",
-                  { duration: 0.6, ease: "expo.out", opacity: 1 },
+                  { duration: 0.4, ease: "power2.out", opacity: 1 },
                   "show"
                 ),
                 n.to(".move-item:first-child", {
-                  duration: 0.8,
-                  ease: "expo.out",
+                  duration: 0.6,
+                  ease: "power2.out",
                   y: "0vh",
                 }),
                 this.$$(".move-item").length >= 2 &&
                   n.to(".move-item:nth-child(2)", {
-                    duration: 0.5,
-                    ease: "expo.out",
+                    duration: 0.45,
+                    ease: "power2.out",
                     x: "0%",
                   }));
             },
@@ -300,19 +328,19 @@
               this.$gsap.utils.toArray(".move-text").forEach(function (t, i) {
                 n.to(
                   t,
-                  { duration: 0.55 + i * 0.08, ease: "expo.in", y: "140%" },
+                  { duration: 0.35, ease: "power2.in", y: "150%" },
                   "hide"
                 );
               }),
                 n.to(
                   ".nextlink",
-                  { duration: 0.6, ease: "expo.in", opacity: 0 },
+                  { duration: 0.35, ease: "power2.in", opacity: 0 },
                   "hide"
                 ),
                 this.$gsap.utils.toArray(".move-item").forEach(function (t, i) {
                   n.to(
                     t,
-                    { duration: i / 5 + 1, ease: "expo.in", y: "100vh" },
+                    { duration: i / 5 + 0.5, ease: "power2.in", y: "100vh" },
                     "hide"
                   );
                 });

@@ -1,0 +1,605 @@
+/* ============================================================
+   pitch-dossier.css — Dedicated Full-Screen Pitch Deck Pages
+   Conrad Challenge 2026 // Coalowl Terracotta Editorial Theme
+   ============================================================ */
+
+#pitch-dossier {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2500;
+  background: var(--color-gray, #f2f2f2);
+  color: var(--color-black, #14181E);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  font-family: var(--font-sans, 'Space Grotesk', 'Helvetica Neue', sans-serif);
+  -webkit-overflow-scrolling: touch;
+}
+
+#pitch-dossier.is-active {
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+}
+
+/* --- Top Header Bar --- */
+.pitch-top-bar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background: rgba(242, 242, 242, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(20, 24, 30, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 100;
+}
+
+.pitch-top-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pitch-brand-logo {
+  height: 24px;
+  width: auto;
+  cursor: pointer;
+  display: block;
+}
+
+.pitch-dossier-label {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent-terracotta, #C85A32);
+  text-transform: uppercase;
+}
+
+.pitch-tabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pitch-tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 6px 14px;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(20, 24, 30, 0.6);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%);
+}
+
+.pitch-tab-btn:hover {
+  color: var(--color-black, #14181E);
+  border-color: rgba(20, 24, 30, 0.25);
+  background: #FFFFFF;
+}
+
+.pitch-tab-btn.is-active {
+  background: var(--color-black, #14181E);
+  color: #FFFFFF;
+  border-color: var(--color-black, #14181E);
+  box-shadow: 2px 2px 0px rgba(200, 90, 50, 0.8);
+}
+
+.pitch-close-btn {
+  background: transparent;
+  border: 1px solid rgba(20, 24, 30, 0.3);
+  padding: 6px 14px;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-black, #14181E);
+  cursor: pointer;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%);
+  transition: all 0.2s ease;
+}
+
+.pitch-close-btn:hover {
+  background: var(--accent-terracotta, #C85A32);
+  color: #FFFFFF;
+  border-color: var(--accent-terracotta, #C85A32);
+}
+
+/* --- Main Dossier Viewport --- */
+.pitch-container {
+  max-width: 1160px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 32px 0;
+  flex: 1 0 auto;
+  box-sizing: border-box;
+}
+
+.pitch-section-pane {
+  display: none;
+  opacity: 1;
+  position: relative;
+  width: 100%;
+}
+
+.pitch-section-pane.is-active {
+  display: block;
+}
+
+/* --- Section Typography & Headers --- */
+.pitch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-terracotta, #C85A32);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.pitch-badge::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--accent-terracotta, #C85A32);
+  border-radius: 50%;
+}
+
+.pitch-title {
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-black, #14181E);
+  margin: 0 0 16px;
+}
+
+.pitch-lead {
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(20, 24, 30, 0.75);
+  max-width: 840px;
+  margin: 0 0 36px;
+}
+
+/* --- Visual Grid & Cards --- */
+.pitch-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.pitch-grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.pitch-grid-4col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.pitch-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(20, 24, 30, 0.2);
+  padding: 24px;
+  box-shadow: 2px 2px 0px rgba(20, 24, 30, 0.4);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+  position: relative;
+}
+
+.pitch-card-tag {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent-terracotta, #C85A32);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.pitch-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-black, #14181E);
+  margin: 0 0 8px;
+}
+
+.pitch-card-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(20, 24, 30, 0.7);
+  margin: 0;
+}
+
+/* --- KPI Stat Blocks --- */
+.pitch-stat-val {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent-terracotta, #C85A32);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.pitch-stat-lbl {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(20, 24, 30, 0.5);
+  text-transform: uppercase;
+}
+
+/* --- Tables --- */
+.pitch-table-wrap {
+  background: #FFFFFF;
+  border: 1px solid rgba(20, 24, 30, 0.2);
+  box-shadow: 2px 2px 0px rgba(20, 24, 30, 0.4);
+  overflow-x: auto;
+  margin-bottom: 32px;
+}
+
+.pitch-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: left;
+}
+
+.pitch-table th {
+  background: #14181E;
+  color: #FFFFFF;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 12px 18px;
+  text-transform: uppercase;
+}
+
+.pitch-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(20, 24, 30, 0.08);
+  color: var(--color-black, #14181E);
+}
+
+.pitch-table tr:last-child td {
+  border-bottom: none;
+}
+
+.pitch-table tr:nth-child(even) td {
+  background: rgba(20, 24, 30, 0.02);
+}
+
+.pitch-table .highlight {
+  font-weight: 700;
+  color: var(--accent-terracotta, #C85A32);
+  font-family: var(--font-mono, 'Space Mono', monospace);
+}
+
+/* --- Video Player Mockup --- */
+.pitch-player-box {
+  background: #0E1116;
+  border: 1px solid #14181E;
+  box-shadow: 4px 4px 0px rgba(200, 90, 50, 0.4);
+  padding: 24px;
+  color: #FFFFFF;
+  margin-bottom: 32px;
+}
+
+.pitch-player-canvas-wrap {
+  width: 100%;
+  height: 280px;
+  background: #080A0D;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.pitch-canvas-grid {
+  position: absolute;
+  inset: 0;
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+.pitch-wave-canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.pitch-player-hud {
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.6);
+  z-index: 2;
+}
+
+.pitch-player-hud-rec {
+  color: #EA4C41;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pitch-player-hud-rec::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #EA4C41;
+  border-radius: 50%;
+  animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.pitch-player-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.pitch-play-btn {
+  background: var(--accent-terracotta, #C85A32);
+  color: #FFFFFF;
+  border: none;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 10px 22px;
+  cursor: pointer;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%);
+  transition: opacity 0.2s ease;
+}
+
+.pitch-play-btn:hover {
+  opacity: 0.9;
+}
+
+.pitch-scrub-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  position: relative;
+  cursor: pointer;
+}
+
+.pitch-scrub-fill {
+  height: 100%;
+  width: 32%;
+  background: var(--accent-terracotta, #C85A32);
+  position: relative;
+}
+
+.pitch-player-time {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.08em;
+}
+
+.pitch-chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.pitch-chapter-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pitch-chapter-card:hover,
+.pitch-chapter-card.is-active {
+  background: rgba(200, 90, 50, 0.15);
+  border-color: var(--accent-terracotta, #C85A32);
+}
+
+.pitch-chapter-time {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 10px;
+  color: var(--accent-terracotta, #C85A32);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.pitch-chapter-title {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #FFFFFF;
+}
+
+/* --- Document / Patent Download Card --- */
+.pitch-download-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(20, 24, 30, 0.25);
+  padding: 32px;
+  box-shadow: 3px 3px 0px rgba(20, 24, 30, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 32px;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+}
+
+.pitch-doc-meta {
+  flex: 1;
+}
+
+.pitch-doc-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--color-black, #14181E);
+}
+
+.pitch-doc-hash {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 11px;
+  color: rgba(20, 24, 30, 0.55);
+  background: rgba(20, 24, 30, 0.04);
+  padding: 4px 8px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.pitch-doc-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(20, 24, 30, 0.7);
+  margin: 0;
+}
+
+.pitch-download-btn {
+  background: var(--color-black, #14181E);
+  color: #FFFFFF;
+  border: 1px solid var(--color-black, #14181E);
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 14px 28px;
+  cursor: pointer;
+  white-space: nowrap;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+  transition: all 0.2s ease;
+  box-shadow: 2px 2px 0px rgba(200, 90, 50, 0.8);
+}
+
+.pitch-download-btn:hover {
+  background: var(--accent-terracotta, #C85A32);
+  border-color: var(--accent-terracotta, #C85A32);
+}
+
+/* --- Bottom Navigation Bar --- */
+.pitch-bottom-bar {
+  position: relative;
+  width: 100%;
+  max-width: 1160px;
+  margin: 56px auto 0;
+  padding: 32px 32px 64px;
+  border-top: 1px solid rgba(20, 24, 30, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: transparent;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.pitch-nav-btn {
+  background: #FFFFFF;
+  border: 1px solid rgba(20, 24, 30, 0.25);
+  padding: 8px 20px;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-black, #14181E);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%);
+  box-shadow: 2px 2px 0px rgba(20, 24, 30, 0.3);
+  transition: all 0.2s ease;
+}
+
+.pitch-nav-btn:hover {
+  background: var(--accent-terracotta, #C85A32);
+  color: #FFFFFF;
+  border-color: var(--accent-terracotta, #C85A32);
+}
+
+.pitch-nav-btn.is-disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Mobile responsive */
+@media (max-width: 900px) {
+  .pitch-top-bar {
+    padding: 0 16px;
+  }
+  .pitch-bottom-bar {
+    padding: 24px 16px 48px;
+    margin: 40px auto 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .pitch-tabs-bar {
+    display: none;
+  }
+  .pitch-container {
+    padding: 24px 16px 0;
+  }
+  .pitch-title {
+    font-size: 26px;
+  }
+  .pitch-grid-2col,
+  .pitch-grid-3col,
+  .pitch-grid-4col,
+  .pitch-chapters-grid {
+    grid-template-columns: 1fr;
+  }
+  .pitch-download-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

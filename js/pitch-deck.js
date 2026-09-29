@@ -19,16 +19,8 @@ window.toggleMenu = function () {
 window.toggleP5RDeck = window.toggleMenu;
 
 window.showSectionModal = function (type) {
-  if (type === 'download') {
-    alert(
-      'Downloading Executive Pitch Brief & Patent Claims (PDF)...\nSHA-256: 9f8e4a7b2c01d93e8842af5e710b37'
-    );
-  } else if (type === 'video') {
-    alert(
-      '3-Minute Pitch Video player initialized: [Playing Conrad Challenge 2026 Summit Pitch...]'
-    );
-  } else {
-    alert('Opening section: ' + type);
+  if (window.openPitchPage) {
+    window.openPitchPage(type);
   }
 };
 

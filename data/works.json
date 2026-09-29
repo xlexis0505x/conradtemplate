@@ -107,7 +107,7 @@
       "client": "CONRAD CHALLENGE • CHAPTER 05",
       "url": "/schematics/story-05.svg",
       "url_site": "https://conradchallenge.org",
-      "description": "Standard PCB lithography and additive carbon-composite layups bring the bill of materials down to  per unit compared to ,000 for legacy mechanical small-scale turbo-fan drones.",
+      "description": "Standard PCB lithography and additive carbon-composite layups bring the bill of materials down to $180 per unit compared to $24,000 for legacy mechanical small-scale turbo-fan drones.",
       "status": [
         "TRL: 4",
         "PATENT PENDING"
@@ -124,9 +124,134 @@
           }
         }
       ]
+    },
+    {
+      "id": "story-06",
+      "title": "High-voltage solid-state power stage",
+      "created_day": "2026-09-25T00:00:00.000Z",
+      "client": "CONRAD CHALLENGE • CHAPTER 06",
+      "url": "/schematics/story-06.svg",
+      "url_site": "https://conradchallenge.org",
+      "description": "Gallium nitride (GaN) switching topology converts 24V bus power to 38kV micro-pulses at 98.4% power efficiency with active thermal spreading.",
+      "status": [
+        "TRL: 4",
+        "PATENT PENDING"
+      ],
+      "color": [
+        "レッド"
+      ],
+      "works": [
+        {
+          "picture": {
+            "url": "/schematics/story-06.svg",
+            "width": 600,
+            "height": 600
+          }
+        }
+      ]
+    },
+    {
+      "id": "story-07",
+      "title": "Aero-ionic boundary layer control",
+      "created_day": "2026-09-25T00:00:00.000Z",
+      "client": "CONRAD CHALLENGE • CHAPTER 07",
+      "url": "/schematics/story-07.svg",
+      "url_site": "https://conradchallenge.org",
+      "description": "Electro-hydrodynamic shear flow eliminates boundary layer separation along the airfoil surface, delaying stall by 34% in low-Reynolds stratospheric regimes.",
+      "status": [
+        "TRL: 4",
+        "PATENT PENDING"
+      ],
+      "color": [
+        "レッド"
+      ],
+      "works": [
+        {
+          "picture": {
+            "url": "/schematics/story-07.svg",
+            "width": 600,
+            "height": 600
+          }
+        }
+      ]
+    },
+    {
+      "id": "story-08",
+      "title": "Autonomous avionics telemetry array",
+      "created_day": "2026-09-25T00:00:00.000Z",
+      "client": "CONRAD CHALLENGE • CHAPTER 08",
+      "url": "/schematics/story-08.svg",
+      "url_site": "https://conradchallenge.org",
+      "description": "Integrated dual-redundant flight computer monitors ion current densities across 64 individual emitter sectors with real-time impedance tracking.",
+      "status": [
+        "TRL: 4",
+        "PATENT PENDING"
+      ],
+      "color": [
+        "レッド"
+      ],
+      "works": [
+        {
+          "picture": {
+            "url": "/schematics/story-08.svg",
+            "width": 600,
+            "height": 600
+          }
+        }
+      ]
+    },
+    {
+      "id": "story-09",
+      "title": "Closed-loop feedback sensor mesh",
+      "created_day": "2026-09-25T00:00:00.000Z",
+      "client": "CONRAD CHALLENGE • CHAPTER 09",
+      "url": "/schematics/story-09.svg",
+      "url_site": "https://conradchallenge.org",
+      "description": "Embedded capacitive probe arrays sense atmospheric humidity and density fluctuations, adjusting voltage curves dynamically in under 2 milliseconds.",
+      "status": [
+        "TRL: 4",
+        "PATENT PENDING"
+      ],
+      "color": [
+        "レッド"
+      ],
+      "works": [
+        {
+          "picture": {
+            "url": "/schematics/story-09.svg",
+            "width": 600,
+            "height": 600
+          }
+        }
+      ]
+    },
+    {
+      "id": "story-10",
+      "title": "Multi-cell modular thrust vectoring",
+      "created_day": "2026-09-25T00:00:00.000Z",
+      "client": "CONRAD CHALLENGE • CHAPTER 10",
+      "url": "/schematics/story-10.svg",
+      "url_site": "https://conradchallenge.org",
+      "description": "Differential voltage modulation between quadrant emitter channels produces agile roll, pitch, and yaw control without any mechanical ailerons or servos.",
+      "status": [
+        "TRL: 4",
+        "PATENT PENDING"
+      ],
+      "color": [
+        "レッド"
+      ],
+      "works": [
+        {
+          "picture": {
+            "url": "/schematics/story-10.svg",
+            "width": 600,
+            "height": 600
+          }
+        }
+      ]
     }
   ],
-  "totalCount": 5,
+  "totalCount": 10,
   "offset": 0,
-  "limit": 5
+  "limit": 10
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html data-n-head-ssr lang="en" data-n-head="%7B%22lang%22:%7B%22ssr%22:%22en%22%7D%7D">
+<html  lang="en" data-n-head="%7B%22lang%22:%7B%22ssr%22:%22en%22%7D%7D">
 
 <head>
   <title>PROJECT LOREM // CONRAD CHALLENGE 2026 PITCH DOSSIER</title>
@@ -57,6 +57,7 @@
 
   <!-- Conrad Challenge / P5R Editorial Theme Override -->
   <link rel="stylesheet" href="/css/theme/aesthetic-override.css">
+  <link rel="stylesheet" href="/css/components/pitch-dossier.css">
 
   <!-- Nuxt 2 Static Assets Preload -->
   <link rel="preload" href="/_nuxt/static/1727831905/state.js" as="script">
@@ -64,7 +65,7 @@
   <link rel="preload" href="/_nuxt/static/1727831905/manifest.js" as="script">
 </head>
 <body>
-  <div data-server-rendered="true" id="__nuxt"><!---->
+  <div  id="__nuxt"><!---->
     <div id="__layout">
       <div style="--wh:100vh">
         <div class="header"><a href="/" aria-current="page"
@@ -139,7 +140,7 @@
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2><img
                   src="/schematics/story-01.svg"
                   class="thumbnail__buffer-float__image thumbnail--horizonal" data-v-684698a2></div><a
-                href="/works/20260925ST" class="thumbnail__float" data-v-684698a2><img
+                href="/works/01" class="thumbnail__float" data-v-684698a2><img
                   src="/schematics/story-01.svg"
                   class="thumbnail__float__image thumbnail--horizonal" data-v-684698a2><img
                   src="/schematics/story-01.svg"
@@ -175,7 +176,7 @@
               <div class="infomation__title" data-v-684698a2>
                 <h2 class="infomation__title__text move-text" data-v-684698a2>The solid-state propulsion cell</h2>
               </div>
-              <div class="infomation__link" data-v-684698a2><a href="/works/20260925ST" class="move-text" data-v-684698a2>[INSPECT SPEC // TRL-4]</a></div>
+              <div class="infomation__link" data-v-684698a2><a href="/works/01" class="move-text" data-v-684698a2>[INSPECT SPEC // TRL-4]</a></div>
             </div>
             <div class="marquee" data-v-684698a2>
               <div class="marquee__list marquee__animation" data-v-684698a2>
@@ -216,7 +217,7 @@
     <div class="menu-deck p5r-slab-deck">
 
       <!-- Slab 01: Abstract & Problem -->
-      <div class="menu-item p5r-slab" onclick="window.showSectionModal('abstract')">
+      <div class="menu-item p5r-slab" onclick="window.openPitchPage('abstract')">
         <div class="menu-item-no p5r-slab-no">
           <span class="menu-item-no-label p5r-slab-no-label">No.</span>
           <span class="menu-item-no-num p5r-slab-no-num">01</span>
@@ -229,7 +230,7 @@
       </div>
 
       <!-- Slab 02: Core Science -->
-      <div class="menu-item p5r-slab" onclick="window.showSectionModal('science')">
+      <div class="menu-item p5r-slab" onclick="window.openPitchPage('science')">
         <div class="menu-item-no p5r-slab-no">
           <span class="menu-item-no-label p5r-slab-no-label">No.</span>
           <span class="menu-item-no-num p5r-slab-no-num">02</span>
@@ -242,7 +243,7 @@
       </div>
 
       <!-- Slab 03: Business Model -->
-      <div class="menu-item p5r-slab" onclick="window.showSectionModal('business')">
+      <div class="menu-item p5r-slab" onclick="window.openPitchPage('business')">
         <div class="menu-item-no p5r-slab-no">
           <span class="menu-item-no-label p5r-slab-no-label">No.</span>
           <span class="menu-item-no-num p5r-slab-no-num">03</span>
@@ -255,7 +256,7 @@
       </div>
 
       <!-- Slab 04: Pitch Video -->
-      <div class="menu-item p5r-slab" onclick="window.showSectionModal('video')">
+      <div class="menu-item p5r-slab" onclick="window.openPitchPage('video')">
         <div class="menu-item-no p5r-slab-no">
           <span class="menu-item-no-label p5r-slab-no-label">No.</span>
           <span class="menu-item-no-num p5r-slab-no-num">04</span>
@@ -268,7 +269,7 @@
       </div>
 
       <!-- Slab 05: Executive Brief PDF -->
-      <div class="menu-item p5r-slab" onclick="window.showSectionModal('download')">
+      <div class="menu-item p5r-slab" onclick="window.openPitchPage('download')">
         <div class="menu-item-no p5r-slab-no">
           <span class="menu-item-no-label p5r-slab-no-label">No.</span>
           <span class="menu-item-no-num p5r-slab-no-num">05</span>
@@ -285,6 +286,410 @@
 
 
   <!-- Slide-Out Menu Interactions -->
+  
+  <!-- ============================================================
+       Dedicated Pitch Deck Pages (5 Comprehensive Sections)
+       ============================================================ -->
+  <div id="pitch-dossier" class="pitch-dossier" aria-label="Pitch Deck Dossier">
+    <!-- Top Header Bar -->
+    <header class="pitch-top-bar">
+      <div class="pitch-top-left">
+        <img src="/logo-inline.svg" class="pitch-brand-logo" alt="Coalowl" onclick="window.closePitchPage()">
+        <span class="pitch-dossier-label">CONRAD 2026 // PITCH DOSSIER</span>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="pitch-tabs-bar" aria-label="Pitch Sections">
+        <button class="pitch-tab-btn is-active" onclick="window.openPitchPage(1)">[01 ABSTRACT]</button>
+        <button class="pitch-tab-btn" onclick="window.openPitchPage(2)">[02 PROPULSION]</button>
+        <button class="pitch-tab-btn" onclick="window.openPitchPage(3)">[03 ECONOMICS]</button>
+        <button class="pitch-tab-btn" onclick="window.openPitchPage(4)">[04 VIDEO]</button>
+        <button class="pitch-tab-btn" onclick="window.openPitchPage(5)">[05 PATENT]</button>
+      </nav>
+
+      <button class="pitch-close-btn" onclick="window.closePitchPage()">[ESC // CLOSE]</button>
+    </header>
+
+    <!-- Main Dossier Container -->
+    <main class="pitch-container">
+
+      <!-- ==========================================
+           SECTION 01: Executive Abstract & Problem
+           ========================================== -->
+      <section id="pane-abstract" class="pitch-section-pane is-active">
+        <div class="pitch-badge">[CHAPTER 01 // PROBLEM IDENTIFICATION &amp; THESIS]</div>
+        <h1 class="pitch-title">Executive Abstract &amp; Atmospheric Surveillance Gap</h1>
+        <p class="pitch-lead">
+          Persistent stratospheric loitering is required for planetary wildfire detection, ozone tracking, and climate observation. 
+          Existing airborne platforms fail in thin atmospheric regimes due to rotating mechanical wear, low-Reynolds stall, audible acoustics, and prohibitive capital expenditures.
+        </p>
+
+        <!-- KPI Summary Cards -->
+        <div class="pitch-grid-4col">
+          <div class="pitch-card">
+            <div class="pitch-stat-val">TRL 4</div>
+            <div class="pitch-stat-lbl">BENCHTOP VALIDATED</div>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-stat-val">&lt; 12 dB</div>
+            <div class="pitch-stat-lbl">ACOUSTIC NOISE PROFILE</div>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-stat-val">0.00 g</div>
+            <div class="pitch-stat-lbl">CARBON EMISSIONS / KM</div>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-stat-val">480 hrs</div>
+            <div class="pitch-stat-lbl">VACUUM CHAMBER STABILITY</div>
+          </div>
+        </div>
+
+        <!-- Problem Diagnosis Grid -->
+        <div class="pitch-grid-3col">
+          <div class="pitch-card">
+            <div class="pitch-card-tag">[FAILURE MODE A]</div>
+            <h3 class="pitch-card-title">Mechanical Blade Stall</h3>
+            <p class="pitch-card-text">
+              Low air densities at 20km+ altitude demand ultra-high rotational tip speeds, inducing catastrophic boundary layer detachment and supersonic blade flutter in legacy turbo-fans.
+            </p>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-card-tag">[FAILURE MODE B]</div>
+            <h3 class="pitch-card-title">Thermal &amp; Acoustic Signatures</h3>
+            <p class="pitch-card-text">
+              Propeller turbines generate 84+ dB of noise and 600°C thermal exhaust columns, disturbing local wildlife habitats and preventing covert environmental and wildfire tracking.
+            </p>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-card-tag">[FAILURE MODE C]</div>
+            <h3 class="pitch-card-title">Prohibitive Lifecycle CapEx</h3>
+            <p class="pitch-card-text">
+              Small turbine surveillance drones cost $24,000 to $120,000 per airframe, requiring full engine overhauls every 300 flight hours due to bearing lubrication freeze at -55°C.
+            </p>
+          </div>
+        </div>
+
+        <!-- Solution Thesis Banner -->
+        <div class="pitch-card" style="border-left: 4px solid var(--accent-terracotta);">
+          <div class="pitch-card-tag" style="color: var(--accent-terracotta);">[OUR SOLID-STATE SOLUTION]</div>
+          <h3 class="pitch-card-title">Monolithic Solid-State Electro-Hydrodynamic (EHD) Propulsion</h3>
+          <p class="pitch-card-text">
+            Our architecture consolidates ionization, momentum coupling, and flight control into a single flat-panel cell with <strong>zero moving parts</strong>. 
+            By accelerating atmospheric nitrogen and oxygen ions via high-voltage corona micro-pulses, the system delivers continuous thrust in near-vacuum stratospheric conditions with 98.4% electrical conversion efficiency.
+          </p>
+        </div>
+      </section>
+
+
+      <!-- ==========================================
+           SECTION 02: Core Science & Propulsion
+           ========================================== -->
+      <section id="pane-science" class="pitch-section-pane">
+        <div class="pitch-badge">[CHAPTER 02 // TECHNICAL SPECIFICATION &amp; PLASMA PHYSICS]</div>
+        <h1 class="pitch-title">Core Science &amp; Electro-Hydrodynamic Propulsion</h1>
+        <p class="pitch-lead">
+          Direct momentum transfer from ionized atmospheric species eliminates the thermodynamic losses of combustion turbines. 
+          Asymmetric dielectric geometry concentrates electric field lines beyond the 30 kV/cm Townsend breakdown threshold at negligible thermal dissipation.
+        </p>
+
+        <!-- Fundamental Equation & Mechanism Card -->
+        <div class="pitch-grid-2col">
+          <div class="pitch-card">
+            <div class="pitch-card-tag">[GOVERNING PLASMA EQUATION]</div>
+            <h3 class="pitch-card-title">Direct Ionic Momentum Coupling</h3>
+            <p class="pitch-card-text" style="font-family: var(--font-mono); font-size: 14px; background: rgba(20,24,30,0.04); padding: 12px; margin: 12px 0;">
+              F = (I &times; d) / &mu;
+            </p>
+            <p class="pitch-card-text">
+              Where <strong>F</strong> is total fluidic thrust, <strong>I</strong> is corona emitter current, <strong>d</strong> is anode-to-cathode gap distance, and <strong>&mu;</strong> is ionic mobility within the stratospheric pressure envelope.
+            </p>
+          </div>
+
+          <div class="pitch-card">
+            <div class="pitch-card-tag">[POWER CONVERSION ARCHITECTURE]</div>
+            <h3 class="pitch-card-title">38 kV Micro-Pulsed GaN Stage</h3>
+            <p class="pitch-card-text">
+              Gallium Nitride (GaN) high-frequency switching converters step 24V DC bus voltage up to 38kV with 98.4% efficiency. Sub-microsecond pulse widths maintain non-thermal glow discharge without arcing or electrode erosion.
+            </p>
+          </div>
+        </div>
+
+        <!-- Engineering Specifications Comparison Table -->
+        <div class="pitch-table-wrap">
+          <table class="pitch-table">
+            <thead>
+              <tr>
+                <th>ENGINEERING PARAMETER</th>
+                <th>CONRAD SOLID-STATE CELL</th>
+                <th>LEGACY TURBINE UAV</th>
+                <th>PERFORMANCE VARIANCE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Moving / Rotating Components</td>
+                <td class="highlight">0 (Solid-State)</td>
+                <td>48 (Rotors/Bearings)</td>
+                <td class="highlight">-100% Elimination</td>
+              </tr>
+              <tr>
+                <td>Thrust-to-Power Efficiency</td>
+                <td class="highlight">18.4 N / kW</td>
+                <td>3.5 N / kW</td>
+                <td class="highlight">+427% Improvement</td>
+              </tr>
+              <tr>
+                <td>Maximum Operating Ceiling</td>
+                <td class="highlight">22,000 m (Stratosphere)</td>
+                <td>4,500 m</td>
+                <td class="highlight">+388% Altitude Gain</td>
+              </tr>
+              <tr>
+                <td>Acoustic Signature (@ 5m)</td>
+                <td class="highlight">&lt; 12 dB (Near-Silent)</td>
+                <td>84.5 dB</td>
+                <td class="highlight">-72.5 dB Reduction</td>
+              </tr>
+              <tr>
+                <td>Mean Time Between Failures</td>
+                <td class="highlight">&gt; 25,000 Hours</td>
+                <td>1,200 Hours</td>
+                <td class="highlight">+1,980% Lifespan</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+
+      <!-- ==========================================
+           SECTION 03: Business Model & Unit BOM
+           ========================================== -->
+      <section id="pane-business" class="pitch-section-pane">
+        <div class="pitch-badge">[CHAPTER 03 // COMMERCIAL VIABILITY &amp; UNIT ECONOMICS]</div>
+        <h1 class="pitch-title">Commercial Viability &amp; Bill of Materials (BOM)</h1>
+        <p class="pitch-lead">
+          Replacing titanium turbine alloys with printed carbon-composite lithography cuts single-cell production costs to <strong>$180</strong> — a 133x cost reduction versus equivalent $24,000 mechanical propulsion suites.
+        </p>
+
+        <!-- Bill of Materials Table -->
+        <div class="pitch-table-wrap">
+          <table class="pitch-table">
+            <thead>
+              <tr>
+                <th>SUB-COMPONENT</th>
+                <th>SPECIFICATION / MATERIAL</th>
+                <th>SUPPLIER / METHOD</th>
+                <th>UNIT COST (USD)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Monolithic Emitter Substrate</td>
+                <td>4-Layer Additive Carbon-Composite Layup</td>
+                <td>Commercial PCB Lithography</td>
+                <td class="highlight">$38.50</td>
+              </tr>
+              <tr>
+                <td>High-Voltage Power Converter</td>
+                <td>GaN FET High-Frequency Switching Matrix (38kV)</td>
+                <td>Surface Mount Automated Assembly</td>
+                <td class="highlight">$54.20</td>
+              </tr>
+              <tr>
+                <td>Dielectric Barrier Insulation</td>
+                <td>High-Dielectric Micro-Ceramic Spacers</td>
+                <td>Precision Alumina Extrusion</td>
+                <td class="highlight">$22.00</td>
+              </tr>
+              <tr>
+                <td>Solid-State Avionics &amp; Sensors</td>
+                <td>Dual-Core Flight Controller &amp; Density Probes</td>
+                <td>Automotive-Grade MEMS</td>
+                <td class="highlight">$45.30</td>
+              </tr>
+              <tr>
+                <td>Enclosure &amp; Structural Interconnects</td>
+                <td>Aerospace Polyimide Housing &amp; Gold Pins</td>
+                <td>Vacuum Injection Molding</td>
+                <td class="highlight">$20.00</td>
+              </tr>
+              <tr style="background: rgba(200, 90, 50, 0.08); font-weight: 700;">
+                <td colspan="3" style="text-align: right; padding-right: 24px;">TOTAL MONOLITHIC CELL BOM:</td>
+                <td class="highlight" style="font-size: 16px;">$180.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Market Sizing Cards -->
+        <div class="pitch-grid-3col">
+          <div class="pitch-card">
+            <div class="pitch-stat-val">$14.8B</div>
+            <div class="pitch-stat-lbl">TOTAL ADDRESSABLE MARKET (TAM)</div>
+            <p class="pitch-card-text" style="margin-top: 8px;">
+              Global market for persistent earth observation, wildfire tracking, climate data sensing, and atmospheric intelligence.
+            </p>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-stat-val">$3.2B</div>
+            <div class="pitch-stat-lbl">SERVICEABLE ADDRESSABLE MARKET (SAM)</div>
+            <p class="pitch-card-text" style="margin-top: 8px;">
+              Stratospheric High-Altitude Pseudo-Satellite (HAPS) fleets and long-duration environmental sensing deployments.
+            </p>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-stat-val">$480M</div>
+            <div class="pitch-stat-lbl">SERVICEABLE OBTAINABLE MARKET (SOM)</div>
+            <p class="pitch-card-text" style="margin-top: 8px;">
+              Year-3 projected capture of state forestry wildfire monitoring contracts and research loitering nodes.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ==========================================
+           SECTION 04: 3-Minute Pitch Video
+           ========================================== -->
+      <section id="pane-video" class="pitch-section-pane">
+        <div class="pitch-badge">[CHAPTER 04 // MULTIMEDIA PRESENTATION]</div>
+        <h1 class="pitch-title">3-Minute Executive Pitch Video</h1>
+        <p class="pitch-lead">
+          View the recorded executive presentation demonstrating the solid-state propulsion cell in operation, including benchtop vacuum chamber trials and telemetry telemetry feed.
+        </p>
+
+        <!-- Custom Video Player Console -->
+        <div class="pitch-player-box">
+          <div class="pitch-player-canvas-wrap">
+            <div class="pitch-canvas-grid"></div>
+            <canvas id="pitch-wave-canvas" class="pitch-wave-canvas"></canvas>
+
+            <div class="pitch-player-hud">
+              <span class="pitch-player-hud-rec">REC // 1080P 60FPS</span>
+              <span>CONRAD CHALLENGE 2026 // PITCH TRANSMISSION</span>
+              <span>STEREO TELEMETRY</span>
+            </div>
+
+            <div style="z-index: 2; text-align: center; pointer-events: none;">
+              <p style="font-family: var(--font-mono); font-size: 13px; color: #FFFFFF; letter-spacing: 0.1em; margin: 0 0 6px;">
+                SOLID-STATE FLUIDIC ACCELERATION TRIAL
+              </p>
+              <p style="font-size: 11px; color: var(--accent-terracotta); font-family: var(--font-mono); margin: 0;">
+                LIVE TELEMETRY STREAM // 480 HRS CONTINUOUS RUN
+              </p>
+            </div>
+          </div>
+
+          <!-- Controls Bar -->
+          <div class="pitch-player-controls">
+            <button class="pitch-play-btn" onclick="alert('Playing 3-minute executive presentation video...')">&#9658; PLAY VIDEO</button>
+            <div class="pitch-scrub-bar" onclick="window.seekPitchVideo('01:30', 50, this)">
+              <div id="pitch-scrub-fill" class="pitch-scrub-fill"></div>
+            </div>
+            <span id="pitch-player-time" class="pitch-player-time">00:00 / 03:00</span>
+          </div>
+
+          <!-- Chapter Navigation Grid -->
+          <div class="pitch-chapters-grid">
+            <div class="pitch-chapter-card is-active" onclick="window.seekPitchVideo('00:00', 0, this)">
+              <div class="pitch-chapter-time">[00:00 - 00:45]</div>
+              <div class="pitch-chapter-title">01. Atmospheric Surveillance Crisis</div>
+            </div>
+            <div class="pitch-chapter-card" onclick="window.seekPitchVideo('00:45', 25, this)">
+              <div class="pitch-chapter-time">[00:45 - 01:30]</div>
+              <div class="pitch-chapter-title">02. Solid-State EHD Breakthrough</div>
+            </div>
+            <div class="pitch-chapter-card" onclick="window.seekPitchVideo('01:30', 50, this)">
+              <div class="pitch-chapter-time">[01:30 - 02:15]</div>
+              <div class="pitch-chapter-title">03. Vacuum Chamber Data &amp; Verification</div>
+            </div>
+            <div class="pitch-chapter-card" onclick="window.seekPitchVideo('02:15', 75, this)">
+              <div class="pitch-chapter-time">[02:15 - 03:00]</div>
+              <div class="pitch-chapter-title">04. Scalable $180 BOM &amp; Team Roadmap</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ==========================================
+           SECTION 05: Executive Brief & Patent
+           ========================================== -->
+      <section id="pane-download" class="pitch-section-pane">
+        <div class="pitch-badge">[CHAPTER 05 // INTELLECTUAL PROPERTY &amp; DOSSIER]</div>
+        <h1 class="pitch-title">Executive Brief &amp; Patent Claims Dossier</h1>
+        <p class="pitch-lead">
+          Official intellectual property filings and the complete 24-page technical dossier submitted for the Conrad Challenge 2026 Innovation Summit.
+        </p>
+
+        <!-- Download Card -->
+        <div class="pitch-download-card">
+          <div class="pitch-doc-meta">
+            <div class="pitch-card-tag">[OFFICIAL SUMMIT DOSSIER]</div>
+            <h3 class="pitch-doc-title">Conrad Challenge 2026 Executive Pitch Brief</h3>
+            <div class="pitch-doc-hash">SHA-256: 9f8e4a7b2c01d93e8842af5e710b37498c1d5e2a6b8c9d0e1f2a3b4c5d6e7f8</div>
+            <p class="pitch-doc-desc">
+              Contains complete mathematical derivations, vacuum benchtop calibration raw telemetry, thermal dissipation imaging, and formal team letters of recommendation.
+            </p>
+          </div>
+          <button id="pitch-pdf-btn" class="pitch-download-btn" onclick="window.downloadExecutivePDF()">
+            [DOWNLOAD PDF // 4.2 MB]
+          </button>
+        </div>
+
+        <!-- Patent Filing Claims Card -->
+        <div class="pitch-card" style="margin-bottom: 24px;">
+          <div class="pitch-card-tag">[PATENT SPECIFICATION SUMMARY]</div>
+          <h3 class="pitch-card-title">Patent Application US-2026-004812-A1</h3>
+          <p class="pitch-card-text" style="margin-bottom: 16px;">
+            <strong>Title:</strong> Method and Apparatus for High-Efficiency Solid-State Atmospheric Electro-Hydrodynamic Propulsion and Multi-Axis Flight Control.
+          </p>
+          <div class="pitch-grid-2col" style="margin-bottom: 0;">
+            <div style="font-size: 13px; line-height: 1.6; color: rgba(20,24,30,0.75);">
+              <strong>Independent Claim 1:</strong> A solid-state propulsor comprising an asymmetric dielectric barrier and micro-wire emitter configured to produce corona discharge ionization with fluidic coupling exceeding 18 N/kW.
+            </div>
+            <div style="font-size: 13px; line-height: 1.6; color: rgba(20,24,30,0.75);">
+              <strong>Independent Claim 8:</strong> A multi-quadrant solid-state flight control method modulating differential voltage arrays to generate pitch, roll, and yaw torque without control surfaces.
+            </div>
+          </div>
+        </div>
+
+        <!-- Team & Signatories -->
+        <div class="pitch-grid-2col">
+          <div class="pitch-card">
+            <div class="pitch-card-tag">[PRINCIPAL INVESTIGATOR]</div>
+            <h3 class="pitch-card-title">Lead Hardware Architect</h3>
+            <p class="pitch-card-text">
+              Founder &amp; Lead Hardware Architect. Designed micro-scale electrode lithography and high-voltage power stage.
+            </p>
+          </div>
+          <div class="pitch-card">
+            <div class="pitch-card-tag">[BENCHMARK FACILITY]</div>
+            <h3 class="pitch-card-title">High-Voltage Calibration Facility</h3>
+            <p class="pitch-card-text">
+              Testing conducted under calibrated ISO 17025 vacuum and environmental simulation chamber across 480 continuous operational hours.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Sticky Bottom Navigation Bar -->
+    <footer class="pitch-bottom-bar">
+      <button id="pitch-nav-prev" class="pitch-nav-btn is-disabled">&larr; START OF DOSSIER</button>
+      <button class="pitch-nav-btn" onclick="window.closePitchPage()">[RETURN TO OVERVIEW]</button>
+      <button id="pitch-nav-next" class="pitch-nav-btn">[02] 02 PROPULSION &rarr;</button>
+    </footer>
+  </div>
+
+  <!-- GSAP Motion Library -->
+  <script src="/js/gsap.min.js"></script>
+
+  <!-- Dedicated Pitch Dossier Script -->
+  <script src="/js/pitch-dossier.js"></script>
+
   <script src="/js/menu.js"></script>
 </body>
 
