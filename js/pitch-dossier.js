@@ -1,6 +1,6 @@
 /* ============================================================
    pitch-dossier.js — Pitch Deck Pages Motion & Route Controller
-   Conrad Challenge 2026 // Coalowl Terracotta Editorial Theme
+   Conrad Challenge 2026 // Terracotta Editorial Theme
    ============================================================ */
 
 (function () {
@@ -33,7 +33,7 @@
 
   /**
    * Opens the full-screen pitch deck dossier at the given section.
-   * Smoothly slides in the dossier sheet from below (Coalowl signature motion),
+   * Smoothly slides in the dossier sheet from below,
    * tucks away the slide-out menu (if active), and staggers section content.
    */
   window.openPitchPage = function (sectionKey) {
@@ -48,8 +48,8 @@
     }
 
     // 1. Close slide-out menu smoothly if active
-    const menuPanel = document.getElementById('menu-panel') || document.getElementById('p5r-corner');
-    const menuBackdrop = document.getElementById('menu-backdrop') || document.getElementById('p5r-backdrop');
+    const menuPanel = document.getElementById('menu-panel');
+    const menuBackdrop = document.getElementById('menu-backdrop');
     if (menuPanel && menuPanel.classList.contains('is-active')) {
       menuPanel.classList.remove('is-active');
       if (menuBackdrop) menuBackdrop.classList.remove('is-active');
@@ -101,7 +101,7 @@
         });
         currentTL = tl;
 
-        // Sheet drops up from below (Coalowl vertical sheet slide)
+        // Sheet drops up from below (vertical sheet slide)
         tl.fromTo(dossier,
           { y: '100vh', opacity: 1 },
           { y: '0vh', opacity: 1, duration: 0.52, ease: 'power3.out' }
@@ -257,9 +257,8 @@
 
   /**
    * Smoothly closes the pitch deck dossier and returns to the main page.
-   * The entire dossier sheet slides DOWN off the viewport (y: 100vh) in
-   * authentic Coalowl editorial style, simultaneously revealing the main page
-   * and smoothly settling the home page elements.
+   * The entire dossier sheet slides DOWN off the viewport (y: 100vh),
+   * simultaneously revealing the main page and smoothly settling the home page elements.
    */
   window.closePitchPage = function () {
     const dossier = document.getElementById('pitch-dossier');
@@ -313,7 +312,7 @@
         }, 0);
       }
 
-      // 4. The entire dossier sheet slides DOWN off the viewport (Coalowl signature motion)
+      // 4. The entire dossier sheet slides DOWN off the viewport
       tl.to(dossier, {
         y: '100vh',
         duration: 0.48,

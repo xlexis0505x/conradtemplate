@@ -17,7 +17,7 @@
     <path d="M 568 556 L 556 556 M 556 568 L 556 556" fill="none" stroke="rgba(20, 24, 30, 0.4)" stroke-width="1" />
     <path d="M 32 556 L 44 556 M 44 568 L 44 556" fill="none" stroke="rgba(20, 24, 30, 0.4)" stroke-width="1" />
     
-    <!-- Header Block (Coalowl Helvetica Neue / Sentence Case) -->
+    <!-- Header Block (Helvetica Neue / Sentence Case) -->
     <text x="42" y="58" font-family="'JetBrains Mono', 'Space Mono', monospace" font-size="10" font-weight="700" fill="#C85A32" letter-spacing="1.5">[CHAPTER 05 &#8226; UNIT ECONOMICS]</text>
     <text x="42" y="82" font-family="'Helvetica neue', 'Noto Sans JP', sans-serif" font-size="20" font-weight="500" fill="#14181E" letter-spacing="-0.3">Monolithic scalable production</text>
     <text x="42" y="101" font-family="'Helvetica neue', 'Noto Sans JP', sans-serif" font-size="11" fill="rgba(20, 24, 30, 0.65)" letter-spacing="0.2">98% manufacturing cost reduction over legacy mechanical turbines</text>

@@ -59,9 +59,8 @@
   }
 }
 
-/* Copyright notice (hidden on mobile) */
-@media (max-width: 1024px) {
-  .footer__copylight {
-    display: none;
-  }
+/* Copyright notice (removed) */
+.footer__copylight {
+  display: none !important;
 }
+
