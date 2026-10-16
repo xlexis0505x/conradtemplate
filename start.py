@@ -60,6 +60,14 @@ SITES = [
         "script": "server.py",
         "args": ["8085"],
         "url": "http://localhost:8085/"
+    },
+    {
+        "name": "Walk Alone",
+        "dir": "walkal.one",
+        "port": 8086,
+        "script": "server.py",
+        "args": ["8086"],
+        "url": "http://localhost:8086/"
     }
 ]
 

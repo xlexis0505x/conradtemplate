@@ -1,12 +1,12 @@
-# 6 Website Local Inspiration Folders
+# 7 Website Local Inspiration Folders
 
 This directory contains standalone, clean local copies of world-class frontend design benchmarks. Each website has its own dedicated folder with clean source code, formatted HTML, assets, and its own local server.
 
 ---
 
-## ⚡ Quick Start (Launch All 6 Sites)
+## ⚡ Quick Start (Launch All 7 Sites)
 
-Run one command in this directory to bring all 6 websites online simultaneously:
+Run one command in this directory to bring all 7 websites online simultaneously:
 
 ```bash
 python3 start.py
@@ -20,12 +20,13 @@ python3 start.py
 | **Helion Energy** | [http://localhost:8083/](http://localhost:8083/) | `8083` | Pulsed plasma confinement & recovered `src/` source code |
 | **Teenage Engineering** | [http://localhost:8084/](http://localhost:8084/) | `8084` | Brutalist grid, tactile buttons & custom `TE20L.woff2` fonts |
 | **Anduril Industries** | [http://localhost:8085/](http://localhost:8085/) | `8085` | Defense-tech aerospace UI, WebGL shaders & telemetry cards |
+| **Walk Alone** | [http://localhost:8086/](http://localhost:8086/) | `8086` | Astro.build creative portfolio, typography, & video embeds |
 
 *(Press `Ctrl+C` anytime in the terminal to stop all servers)*
 
 ---
 
-## 📁 The 6 Website Folders
+## 📁 The 7 Website Folders
 
 ### 1. `coalowl.com/`
 - Minimalist Japanese portfolio with high-contrast Persona 5 Royal (P5R) angled slab deck.
@@ -56,3 +57,8 @@ python3 start.py
 - Next-gen defense hardware & autonomous systems design benchmark.
 - Formatted `index.html` with WebGL shaders in `assets/shaders/`, fonts, and telemetry layouts.
 - Run locally: `cd anduril.com && python3 server.py` (Port 8085)
+
+### 7. `walkal.one/`
+- Astro-powered creative director / filmmaker portfolio with Vimeo video integrations and editorial typography.
+- Formatted `index.html` with assets in `_astro/` and responsive layouts.
+- Run locally: `cd walkal.one && python3 server.py` (Port 8086)
