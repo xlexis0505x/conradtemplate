@@ -1,97 +1,78 @@
-# Coalowl.com — Modular Frontend Architecture
+# 5 Website Local Inspiration Folders
 
-Welcome! This codebase is a modularized, beginner-friendly static portfolio and interactive pitch dossier built on top of the Coalowl website template.
-
----
-
-## 🌿 Branches Overview
-
-This repository maintains two distinct aesthetic directions:
-
-1. **`main` (Classic Coalowl Template)**
-   - Minimalist Japanese aesthetic with the original Coalowl artwork, soft gray background, and fluid animations.
-   - Clean, lightweight, modular HTML and CSS without extraneous theme overrides.
-
-2. **`New-Aesthetic-Changes-Test` (Conrad Challenge 2026 Pitch Dossier)**
-   - High-contrast editorial style featuring a terracotta/vermilion color scheme.
-   - Chamfered geometric cards (zero rounded corners).
-   - Top technical metadata strip and an interactive **Persona 5 Royal (P5R) angled corner slab deck** with tactile sound/modal triggers.
+This directory contains standalone, clean local copies of five frontend design benchmarks. Each website has its own dedicated folder with clean source code, formatted HTML, assets, and its own local server.
 
 ---
 
-## 📁 Directory Structure
+## ⚡ Quick Start (Launch All 5 Sites)
 
-```text
-coalowl.com/
-├── index.html                   # Lean HTML shell with semantic structure (<250 lines)
-├── README.md                    # Project guide & beginner documentation
-├── sw.js                        # Cache clearing service worker for local development
-│
-├── css/                         # Modular stylesheets (ordered by responsibility)
-│   ├── reset.css                # destyle.css baseline to normalize browser defaults
-│   ├── tokens.css               # Design variables (colors, spacing, theme tokens)
-│   ├── typography.css           # @font-face rules, headings, and font size classes
-│   ├── layout.css               # Global canvas (100vh lock), scrollbar, and responsive helpers
-│   │
-│   ├── components/              # Individual component stylesheets
-│   │   ├── header.css           # Fixed top navigation bar, logo, and hover underlines
-│   │   ├── footer.css           # Bottom-left "SCROLL DOWN" prompt and copyright
-│   │   ├── social.css           # Bottom-right desktop social media links
-│   │   ├── hamburger.css        # Mobile hamburger toggle and full-screen menu overlay
-│   │   ├── loading.css          # Initial splash preloader and percentage counter
-│   │   ├── thumbnail.css        # Center floating card showcase, info panel & marquee
-│   │   └── copy.css             # Mobile profile description block
-│   │
-│   └── theme/                   # Aesthetic overrides
-│       └── aesthetic-override.css  # [New-Aesthetic-Changes-Test branch] P5R corner slab & Conrad styling
-│
-├── js/                          # Modular JavaScript
-│   └── pitch-deck.js            # [New-Aesthetic-Changes-Test branch] P5R corner menu toggles & shortcuts
-│
-├── data/                        # JSON structured data
-│   ├── works.json               # Showcase items, schematic diagrams, and descriptions
-│   └── about.json               # Biography, timeline, and background info
-│
-├── schematics/                  # SVG technical drawings and story graphics
-│   ├── story-01.svg .. story-05.svg
-│   └── sys-01.svg   .. sys-10.svg
-│
-└── _nuxt/                       # Pre-compiled Nuxt 2 runtime scripts and web fonts
-```
+Run one command in this directory to bring all 5 websites online simultaneously:
 
----
-
-## 🎨 How Stylesheet Loading Works
-
-Stylesheets are loaded in `index.html` in a specific cascading order:
-
-1. **`reset.css`**: Clears default browser styling.
-2. **`tokens.css`**: Defines CSS variables (`--color-black`, `--color-gray`, etc.).
-3. **`typography.css`**: Configures custom fonts and utility classes (`.font-works-title`, etc.).
-4. **`layout.css`**: Establishes grid/viewport constraints and utility classes (`.pc-only`, `.sp-only`).
-5. **`components/*.css`**: Styles individual UI elements independently.
-6. *(Aesthetic branch)* **`theme/aesthetic-override.css`**: Injects editorial colors and the P5R slab deck on top of the base system.
-
----
-
-## 🚀 Running Locally
-
-No bundlers, node modules, or build commands required! You can run the site using any static web server:
-
-### Using Python (recommended)
 ```bash
-# In the project root directory:
-python3 -m http.server 8080
+python3 start.py
 ```
-Then visit **[http://localhost:8080](http://localhost:8080)** in your web browser.
 
-### Using VS Code Live Server
-Right-click `index.html` and choose **"Open with Live Server"**.
+| Website | Local Address | Port |
+| :--- | :--- | :--- |
+| **Coalowl** | [http://localhost:8080/](http://localhost:8080/) | `8080` |
+| **Radiant Nuclear** | [http://localhost:8081/](http://localhost:8081/) | `8081` |
+| **Varda Space** | [http://localhost:8082/](http://localhost:8082/) | `8082` |
+| **Helion Energy** | [http://localhost:8083/](http://localhost:8083/) | `8083` |
+| **Teenage Engineering** | [http://localhost:8084/](http://localhost:8084/) | `8084` |
+
+*(Press `Ctrl+C` anytime in the terminal to stop all servers)*
 
 ---
 
-## 💡 Beginner Tips
+## 📁 The 5 Website Folders
 
-- **Change Theme Colors**: Open `css/tokens.css` (or `css/theme/aesthetic-override.css` on the aesthetic branch) to adjust `--color-black`, `--color-gray`, or `--accent-terracotta`.
-- **Edit Navigation Links**: Check the `<div class="header">` element in `index.html` and styles in `css/components/header.css`.
-- **Modify Showcase Slides**: Update text and image references in `data/works.json`.
+### 1. `coalowl.com/`
+- Minimalist Japanese portfolio with high-contrast Persona 5 Royal (P5R) angled slab deck.
+- Modularized CSS in `css/` (`reset.css`, `tokens.css`, `typography.css`, `layout.css`, `components/`).
+- JSON data in `data/` (`works.json`, `about.json`).
+- Run locally:
+  ```bash
+  cd coalowl.com && python3 server.py 8080
+  ```
+
+### 2. `radiantnuclear.com/`
+- Clean-tech nuclear microreactor engineering showcase with warm sand and charcoal tones.
+- Formatted `index.html` (<900 lines) with clean semantic structure.
+- Extracted 3D WebGL GLB microreactor model in `models/reactor.glb`.
+- Draco 3D mesh decompression scripts in `draco/`.
+- Run locally:
+  ```bash
+  cd radiantnuclear.com && python3 server.py
+  # Open http://localhost:8081/
+  ```
+
+### 3. `varda.com/`
+- Dark aerospace aesthetic, orbital mission timeline, and microgravity capsule telemetry.
+- Formatted `index.html` with tracking scripts removed.
+- **Reconstructed original uncompiled JavaScript source code** in `src/` (`tabs.js`, `slider.js`, `theme-toggle.js`, `accordion.js`, `inline-video.js`).
+- Run locally:
+  ```bash
+  cd varda.com && python3 server.py
+  # Open http://localhost:8082/
+  ```
+
+### 4. `helionenergy.com/`
+- Commercial fusion power plant with pulsed plasma magnetic compression visuals and high-energy physics storytelling.
+- Formatted `index.html` with tracking scripts removed.
+- **Reconstructed original uncompiled JavaScript source code** in `src/` (`theme-toggle.js`).
+- Run locally:
+  ```bash
+  cd helionenergy.com && python3 server.py
+  # Open http://localhost:8083/
+  ```
+
+### 5. `teenage.engineering/`
+- Iconic Swedish industrial hardware design with Swiss/Nordic brutalist typography and responsive layout.
+- Formatted `index.html`.
+- Custom Teenage Engineering fonts (`assets/TE20L.*.woff2`, `TE40L.*.woff2`).
+- Modular component scripts and styles (`button.*`, `container.*`, `flex.*`).
+- Run locally:
+  ```bash
+  cd teenage.engineering && python3 server.py
+  # Open http://localhost:8084/
+  ```
