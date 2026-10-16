@@ -1,0 +1,11 @@
+{
+  "name": "clone-website-skill-scripts",
+  "version": "1.0.0",
+  "description": "Dependencies for website cloner skill",
+  "main": "clone.js",
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "puppeteer-core": "^24.4.0",
+    "source-map": "^0.7.4"
+  }
+}

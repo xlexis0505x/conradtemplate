@@ -5,3 +5,4 @@ Thumbs.db
 *.pem
 *.key
 .system_generated/
+node_modules/
