@@ -52,6 +52,14 @@ SITES = [
         "script": "server.py",
         "args": ["8084"],
         "url": "http://localhost:8084/"
+    },
+    {
+        "name": "Anduril Industries",
+        "dir": "anduril.com",
+        "port": 8085,
+        "script": "server.py",
+        "args": ["8085"],
+        "url": "http://localhost:8085/"
     }
 ]
 
