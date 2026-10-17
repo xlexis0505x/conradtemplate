@@ -1,0 +1,746 @@
+{
+  "_createdAt": "2026-06-27T00:20:54Z",
+  "_id": "764c8f3e-6104-4a7e-be94-59adc647c513",
+  "_rev": "h7jyTqsbY1egLREo25pWES",
+  "_system": {
+    "base": {
+      "id": "764c8f3e-6104-4a7e-be94-59adc647c513",
+      "rev": "0YKpiHcLUDtAprmSUdSwNZ"
+    }
+  },
+  "_type": "page",
+  "_updatedAt": "2026-10-06T20:04:55Z",
+  "category": "company",
+  "excludeFromSearch": false,
+  "parent": null,
+  "slices": [
+    {
+      "_key": "f54e712010ad",
+      "_type": "productHeaderSlice",
+      "backgroundColor": {
+        "_createdAt": "2025-03-28T19:47:50Z",
+        "_id": "0970ba10-788c-4613-b319-39009fd75a2a",
+        "_rev": "UXH5eRH3LWIQEsoDKxb1Mv",
+        "_system": {
+          "base": {
+            "id": "0970ba10-788c-4613-b319-39009fd75a2a",
+            "rev": "g3LktQjILKhofqwxYxP0ke"
+          }
+        },
+        "_type": "color",
+        "_updatedAt": "2026-06-04T16:31:45Z",
+        "contrastColor": "#FFFFFF",
+        "hex": "#010101",
+        "metadata": null,
+        "name": "Black"
+      },
+      "column1": [
+        {
+          "_key": "4426afab6c3b",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "7c9c3d84e24a",
+              "_type": "span",
+              "marks": [],
+              "text": "TO REBUILD THE ARSENAL, WE MUST"
+            }
+          ],
+          "markDefs": [],
+          "style": "detail"
+        },
+        {
+          "_key": "b751d33545fe",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "7c9c3d84e24a",
+              "_type": "span",
+              "marks": [],
+              "text": "HYPERSCALE "
+            }
+          ],
+          "markDefs": [],
+          "style": "detail"
+        },
+        {
+          "_key": "306ded64f0e8",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "7c9c3d84e24a",
+              "_type": "span",
+              "marks": [],
+              "text": "MANUFACTURING"
+            }
+          ],
+          "markDefs": [],
+          "style": "detail"
+        }
+      ],
+      "media": [
+        {
+          "_key": "795e62196c38",
+          "_type": "videoWithMeta",
+          "asset": {
+            "_id": "file-e2ce0f10b84da3e32741d91fef7652c37f594e6c-mp4",
+            "_type": "sanity.fileAsset",
+            "mimeType": "video/mp4",
+            "duration": 30.071708,
+            "width": 1920,
+            "height": 1080,
+            "optimized": [
+              {
+                "_key": "70c5322e003a",
+                "_type": "videoWithMeta",
+                "asset": {
+                  "_id": "file-f80ba7eca30003984c8f417a5ad7f3ae1df01278-mp4",
+                  "_type": "sanity.fileAsset",
+                  "mimeType": "video/mp4",
+                  "duration": 30.071708,
+                  "width": 1920,
+                  "height": 1080,
+                  "thumbnail": {
+                    "_type": "image",
+                    "asset": {
+                      "_ref": "image-d16558e1fa26549a59bd5b8db8abc5e7df61085c-1920x1080-png",
+                      "_type": "reference"
+                    }
+                  }
+                }
+              },
+              {
+                "_key": "d11cb5c349c6",
+                "_type": "videoWithMeta",
+                "asset": {
+                  "_id": "file-1ddabec97187fda488ade6d5197b9acd2176229a-mp4",
+                  "_type": "sanity.fileAsset",
+                  "mimeType": "video/mp4",
+                  "duration": 30.071708,
+                  "width": 1600,
+                  "height": 900,
+                  "thumbnail": {
+                    "_type": "image",
+                    "asset": {
+                      "_ref": "image-d16558e1fa26549a59bd5b8db8abc5e7df61085c-1920x1080-png",
+                      "_type": "reference"
+                    }
+                  }
+                }
+              },
+              {
+                "_key": "641e848604ce",
+                "_type": "videoWithMeta",
+                "asset": {
+                  "_id": "file-155668b8d61468d2ddcd6d83bdaf0e28e761c910-mp4",
+                  "_type": "sanity.fileAsset",
+                  "mimeType": "video/mp4",
+                  "duration": 30.071708,
+                  "width": 1280,
+                  "height": 720,
+                  "thumbnail": {
+                    "_type": "image",
+                    "asset": {
+                      "_ref": "image-d16558e1fa26549a59bd5b8db8abc5e7df61085c-1920x1080-png",
+                      "_type": "reference"
+                    }
+                  }
+                }
+              },
+              {
+                "_key": "0cabe5bf6a3b",
+                "_type": "videoWithMeta",
+                "asset": {
+                  "_id": "file-a487fe6fee98667b16dd275dd0a3c8e761a78748-mp4",
+                  "_type": "sanity.fileAsset",
+                  "mimeType": "video/mp4",
+                  "duration": 30.071708,
+                  "width": 854,
+                  "height": 480,
+                  "thumbnail": {
+                    "_type": "image",
+                    "asset": {
+                      "_ref": "image-d16558e1fa26549a59bd5b8db8abc5e7df61085c-1920x1080-png",
+                      "_type": "reference"
+                    }
+                  }
+                }
+              }
+            ],
+            "thumbnail": {
+              "_type": "image",
+              "asset": {
+                "_id": "image-d16558e1fa26549a59bd5b8db8abc5e7df61085c-1920x1080-png",
+                "_type": "sanity.imageAsset",
+                "mimeType": "image/png",
+                "metadata": {
+                  "_type": "sanity.imageMetadata",
+                  "dimensions": {
+                    "_type": "sanity.imageDimensions",
+                    "aspectRatio": 1.7777777777777777,
+                    "height": 1080,
+                    "width": 1920
+                  },
+                  "hasAlpha": false,
+                  "isOpaque": true
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": "Arsenal"
+    },
+    {
+      "_key": "ccd99a7c498d",
+      "_type": "twoColumnRichText",
+      "arsenalPadding": false,
+      "backgroundColor": {
+        "_createdAt": "2025-03-28T19:47:50Z",
+        "_id": "0970ba10-788c-4613-b319-39009fd75a2a",
+        "_rev": "UXH5eRH3LWIQEsoDKxb1Mv",
+        "_system": {
+          "base": {
+            "id": "0970ba10-788c-4613-b319-39009fd75a2a",
+            "rev": "g3LktQjILKhofqwxYxP0ke"
+          }
+        },
+        "_type": "color",
+        "_updatedAt": "2026-06-04T16:31:45Z",
+        "contrastColor": "#FFFFFF",
+        "hex": "#010101",
+        "metadata": null,
+        "name": "Black"
+      },
+      "column1": [
+        {
+          "_key": "b325554e7fc2",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "df3e92942f91",
+              "_type": "span",
+              "marks": [],
+              "text": "Discover Arsenal"
+            }
+          ],
+          "markDefs": [],
+          "style": "detail"
+        }
+      ],
+      "column2": [
+        {
+          "_key": "002ed2e13bc5",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "9c3ecfcedc19",
+              "_type": "span",
+              "marks": [],
+              "text": "Advanced Defense Capabilities. Produced at Hyperscale."
+            }
+          ],
+          "markDefs": [],
+          "style": "h5"
+        },
+        {
+          "_key": "55dbdfd7815f",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "377f5d3c029d",
+              "_type": "span",
+              "marks": [],
+              "text": ""
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "b55cb9bd6c01",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "5ffd4792df4e",
+              "_type": "span",
+              "marks": [],
+              "text": "We need orders of magnitude more weapons. This requires a new product, and we are making an even larger investment to deliver it. This product is not a weapon itself, but a maker of weapons. We call it Arsenal."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "2babaf7bc6d0",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "6abd51f73934",
+              "_type": "span",
+              "marks": [],
+              "text": ""
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "792b55437015",
+          "_type": "internalLinkButton",
+          "internalLink": {
+            "_type": "internalLink",
+            "reference": {
+              "_id": "fb6bc49e-5988-46e6-ae9d-501e30ca0db3",
+              "_type": "page",
+              "language": null,
+              "parent": {
+                "_id": "764c8f3e-6104-4a7e-be94-59adc647c513",
+                "parent": null,
+                "slug": {
+                  "_type": "slug",
+                  "current": "arsenal"
+                }
+              },
+              "slug": {
+                "_type": "slug",
+                "current": "arsenal-1"
+              },
+              "title": "Arsenal-1"
+            }
+          },
+          "text": "Arsenal-1"
+        },
+        {
+          "_key": "9bb3c12f0231",
+          "_type": "internalLinkButton",
+          "internalLink": {
+            "_type": "internalLink",
+            "reference": {
+              "_id": "3dbedbc5-dc42-4792-a7b1-afb99f3a234e",
+              "_type": "page",
+              "language": null,
+              "parent": {
+                "_id": "764c8f3e-6104-4a7e-be94-59adc647c513",
+                "parent": null,
+                "slug": {
+                  "_type": "slug",
+                  "current": "arsenal"
+                }
+              },
+              "slug": {
+                "_type": "slug",
+                "current": "arsenalos"
+              },
+              "title": "ArsenalOS\u2122"
+            }
+          },
+          "text": "ArsenalOS\u2122"
+        }
+      ],
+      "columnRatio": "ratio-6-6",
+      "mobileSpacing": "none"
+    },
+    {
+      "_key": "8a86376743c9",
+      "_type": "arsenalSlice",
+      "arsenalList": [
+        {
+          "_key": "584daecf2fbb",
+          "_type": "arsenalListItem",
+          "image": {
+            "_type": "imageWithMeta",
+            "asset": {
+              "_id": "image-bf1545878e8ef76600cd522becab5280ba5c9f7f-3456x1588-png",
+              "_type": "sanity.imageAsset",
+              "mimeType": "image/png",
+              "metadata": {
+                "_type": "sanity.imageMetadata",
+                "dimensions": {
+                  "_type": "sanity.imageDimensions",
+                  "aspectRatio": 2.1763224181360203,
+                  "height": 1588,
+                  "width": 3456
+                },
+                "hasAlpha": true,
+                "isOpaque": true
+              }
+            }
+          },
+          "page": {
+            "_type": "internalLink",
+            "reference": {
+              "_id": "3dbedbc5-dc42-4792-a7b1-afb99f3a234e",
+              "_type": "page",
+              "language": null,
+              "parent": {
+                "_id": "764c8f3e-6104-4a7e-be94-59adc647c513",
+                "parent": null,
+                "slug": {
+                  "_type": "slug",
+                  "current": "arsenal"
+                }
+              },
+              "slug": {
+                "_type": "slug",
+                "current": "arsenalos"
+              },
+              "title": "ArsenalOS\u2122"
+            },
+            "text": "ArsenalOS\u2122"
+          },
+          "subtitle": "The Digital Backbone of Modern Defense Manufacturing"
+        },
+        {
+          "_key": "1daf5d49f0d0",
+          "_type": "arsenalListItem",
+          "image": {
+            "_type": "imageWithMeta",
+            "asset": {
+              "_id": "image-b3a671f3a39291681b26483bb5e31ea22f53fa37-2844x1600-png",
+              "_type": "sanity.imageAsset",
+              "mimeType": "image/png",
+              "metadata": {
+                "_type": "sanity.imageMetadata",
+                "dimensions": {
+                  "_type": "sanity.imageDimensions",
+                  "aspectRatio": 1.7775,
+                  "height": 1600,
+                  "width": 2844
+                },
+                "hasAlpha": true,
+                "isOpaque": false
+              }
+            }
+          },
+          "page": {
+            "_type": "internalLink",
+            "reference": {
+              "_id": "fb6bc49e-5988-46e6-ae9d-501e30ca0db3",
+              "_type": "page",
+              "language": null,
+              "parent": {
+                "_id": "764c8f3e-6104-4a7e-be94-59adc647c513",
+                "parent": null,
+                "slug": {
+                  "_type": "slug",
+                  "current": "arsenal"
+                }
+              },
+              "slug": {
+                "_type": "slug",
+                "current": "arsenal-1"
+              },
+              "title": "Arsenal-1"
+            }
+          },
+          "subtitle": "A New Standard in Defense Manufacturing"
+        },
+        {
+          "_key": "93eaeebd39a5",
+          "_type": "arsenalListItem",
+          "image": {
+            "_type": "imageWithMeta",
+            "asset": {
+              "_id": "image-8ebeb3a8451267bc85fb7d7373e3f6a11ea9af36-3268x1839-png",
+              "_type": "sanity.imageAsset",
+              "mimeType": "image/png",
+              "metadata": {
+                "_type": "sanity.imageMetadata",
+                "dimensions": {
+                  "_type": "sanity.imageDimensions",
+                  "aspectRatio": 1.77705274605764,
+                  "height": 1839,
+                  "width": 3268
+                },
+                "hasAlpha": false,
+                "isOpaque": true
+              }
+            }
+          },
+          "page": {
+            "_type": "internalLink",
+            "reference": {
+              "_id": "6d773bdc-8935-4ad9-bbb8-a79ac576e981",
+              "_type": "page",
+              "language": null,
+              "parent": {
+                "_id": "764c8f3e-6104-4a7e-be94-59adc647c513",
+                "parent": null,
+                "slug": {
+                  "_type": "slug",
+                  "current": "arsenal"
+                }
+              },
+              "slug": {
+                "_type": "slug",
+                "current": "arsenal-2"
+              },
+              "title": "Arsenal-2"
+            },
+            "text": "Arsenal-2"
+          },
+          "subtitle": "Refitting America\u2019s fleet"
+        }
+      ],
+      "backgroundColor": {
+        "_createdAt": "2025-03-28T19:58:31Z",
+        "_id": "42e423b4-7b69-454a-b56f-20c07094ddd7",
+        "_rev": "Rmu8w9WmfRS5MFvcURmUwe",
+        "_type": "color",
+        "_updatedAt": "2025-06-18T01:02:14Z",
+        "contrastColor": "#010101",
+        "hex": "#D8D8D4",
+        "metadata": null,
+        "name": "Light Gray"
+      },
+      "hideSlice": false
+    },
+    {
+      "_key": "5deb7d15b39a",
+      "_type": "spacerSlice",
+      "backgroundColor": {
+        "_createdAt": "2025-03-28T19:48:15Z",
+        "_id": "4ef72091-a5e5-4392-b0bb-30764a72ee0f",
+        "_rev": "UXH5eRH3LWIQEsoDKxb1Mv",
+        "_system": {
+          "base": {
+            "id": "4ef72091-a5e5-4392-b0bb-30764a72ee0f",
+            "rev": "7VWAhJjM6fDIh2mauhtJEa"
+          }
+        },
+        "_type": "color",
+        "_updatedAt": "2026-06-04T16:31:45Z",
+        "contrastColor": "#010101",
+        "hex": "#FFFFFF",
+        "metadata": null,
+        "name": "White"
+      },
+      "horizontalRule": false,
+      "spacerHeight": "xl"
+    },
+    {
+      "_key": "b8693768fb99",
+      "_type": "textContentSlice",
+      "backgroundColor": {
+        "_createdAt": "2025-03-28T19:48:15Z",
+        "_id": "4ef72091-a5e5-4392-b0bb-30764a72ee0f",
+        "_rev": "UXH5eRH3LWIQEsoDKxb1Mv",
+        "_system": {
+          "base": {
+            "id": "4ef72091-a5e5-4392-b0bb-30764a72ee0f",
+            "rev": "7VWAhJjM6fDIh2mauhtJEa"
+          }
+        },
+        "_type": "color",
+        "_updatedAt": "2026-06-04T16:31:45Z",
+        "contrastColor": "#010101",
+        "hex": "#FFFFFF",
+        "metadata": null,
+        "name": "White"
+      },
+      "text": "THE FACTORY </br> IS </br> THE WEAPON ",
+      "width": "100"
+    },
+    {
+      "_key": "f2d1a5f8d104",
+      "_type": "spacerSlice",
+      "backgroundColor": {
+        "_createdAt": "2025-03-28T19:48:15Z",
+        "_id": "4ef72091-a5e5-4392-b0bb-30764a72ee0f",
+        "_rev": "UXH5eRH3LWIQEsoDKxb1Mv",
+        "_system": {
+          "base": {
+            "id": "4ef72091-a5e5-4392-b0bb-30764a72ee0f",
+            "rev": "7VWAhJjM6fDIh2mauhtJEa"
+          }
+        },
+        "_type": "color",
+        "_updatedAt": "2026-06-04T16:31:45Z",
+        "contrastColor": "#010101",
+        "hex": "#FFFFFF",
+        "metadata": null,
+        "name": "White"
+      },
+      "horizontalRule": false,
+      "spacerHeight": "xl"
+    },
+    {
+      "_key": "575b5766430e",
+      "_type": "mediaLinkSlice",
+      "cards": [
+        {
+          "_key": "6f3d33264635",
+          "_type": "mediaLinkCard",
+          "color": {
+            "_createdAt": "2025-03-28T19:57:45Z",
+            "_id": "312278d0-9291-4102-932f-2fbe38d107f5",
+            "_rev": "x8r7rwnZNJLuzU8uziaQjt",
+            "_system": {
+              "base": {
+                "id": "312278d0-9291-4102-932f-2fbe38d107f5",
+                "rev": "3h6Aq9HwJKloB0447GtDIQ"
+              }
+            },
+            "_type": "color",
+            "_updatedAt": "2025-06-18T01:03:01Z",
+            "contrastColor": "#FFFFFF",
+            "hex": "#505544",
+            "metadata": null,
+            "name": "Green"
+          },
+          "cta": [
+            {
+              "_key": "9e20ca4d9594",
+              "_type": "internalLink",
+              "reference": {
+                "_id": "80da306c-8db6-459b-a6ab-7886f484aee7",
+                "_type": "page",
+                "language": null,
+                "parent": null,
+                "slug": {
+                  "_type": "slug",
+                  "current": "rebooting-the-arsenal"
+                },
+                "title": "Rebooting the Arsenal"
+              },
+              "text": "Read More"
+            }
+          ],
+          "image": {
+            "_type": "imageWithMeta",
+            "asset": {
+              "_id": "image-f0b2246e105ade418c3ad0675a9dfe27efb9d248-1920x1080-png",
+              "_type": "sanity.imageAsset",
+              "mimeType": "image/png",
+              "metadata": {
+                "_type": "sanity.imageMetadata",
+                "dimensions": {
+                  "_type": "sanity.imageDimensions",
+                  "aspectRatio": 1.7777777777777777,
+                  "height": 1080,
+                  "width": 1920
+                },
+                "hasAlpha": true,
+                "isOpaque": true
+              }
+            },
+            "crop": {
+              "_type": "sanity.imageCrop",
+              "bottom": 0.20371700557479686,
+              "left": 0.02121725638929767,
+              "right": 0.01654320509038,
+              "top": 0.027689702887665257
+            },
+            "hotspot": {
+              "_type": "sanity.imageHotspot",
+              "height": 0.7685932915375379,
+              "width": 0.9622395385203223,
+              "x": 0.5023370256494588,
+              "y": 0.4119863486564342
+            }
+          },
+          "label": "PT \u2014 \n01 / 02",
+          "title": "Rebooting\nThe Arsenal"
+        },
+        {
+          "_key": "b06e743a417e",
+          "_type": "mediaLinkCard",
+          "color": {
+            "_createdAt": "2025-03-28T19:59:10Z",
+            "_id": "06a5beb4-22c7-4d8c-97f1-2776c1f020e8",
+            "_rev": "s4FbY1rNJZOqUnJhlMyiRj",
+            "_type": "color",
+            "_updatedAt": "2025-06-18T01:02:36Z",
+            "contrastColor": "#010101",
+            "hex": "#8E9291",
+            "metadata": null,
+            "name": "Mid Gray"
+          },
+          "cta": [
+            {
+              "_key": "1deceee41d19",
+              "_type": "internalLink",
+              "reference": {
+                "_id": "449e16c3-e512-4532-8981-477835429a02",
+                "_type": "page",
+                "language": null,
+                "parent": null,
+                "slug": {
+                  "_type": "slug",
+                  "current": "rebuild-the-arsenal"
+                },
+                "title": "Rebuild the Arsenal"
+              },
+              "text": "Read More"
+            }
+          ],
+          "image": {
+            "_type": "imageWithMeta",
+            "asset": {
+              "_id": "image-cd12cd9d1cc64c0510641ec939697ad31549ca2d-1920x1080-png",
+              "_type": "sanity.imageAsset",
+              "mimeType": "image/png",
+              "metadata": {
+                "_type": "sanity.imageMetadata",
+                "dimensions": {
+                  "_type": "sanity.imageDimensions",
+                  "aspectRatio": 1.7777777777777777,
+                  "height": 1080,
+                  "width": 1920
+                },
+                "hasAlpha": true,
+                "isOpaque": false
+              }
+            },
+            "crop": {
+              "_type": "sanity.imageCrop",
+              "bottom": 0.20918235827844653,
+              "left": 0.00952806794812483,
+              "right": 0.013054949873917303,
+              "top": 0.024166099797875668
+            },
+            "hotspot": {
+              "_type": "sanity.imageHotspot",
+              "height": 0.7666515419236778,
+              "width": 0.9719466939389793,
+              "x": 0.49550141491761446,
+              "y": 0.40749187075971455
+            }
+          },
+          "label": "PT \u2014 \n02 / 02",
+          "title": "Rebuild\nThe Arsenal"
+        }
+      ]
+    },
+    {
+      "_key": "fb84c26b3bdb",
+      "_type": "spacerSlice",
+      "backgroundColor": {
+        "_createdAt": "2025-03-28T19:47:50Z",
+        "_id": "0970ba10-788c-4613-b319-39009fd75a2a",
+        "_rev": "UXH5eRH3LWIQEsoDKxb1Mv",
+        "_system": {
+          "base": {
+            "id": "0970ba10-788c-4613-b319-39009fd75a2a",
+            "rev": "g3LktQjILKhofqwxYxP0ke"
+          }
+        },
+        "_type": "color",
+        "_updatedAt": "2026-06-04T16:31:45Z",
+        "contrastColor": "#FFFFFF",
+        "hex": "#010101",
+        "metadata": null,
+        "name": "Black"
+      },
+      "horizontalRule": false,
+      "spacerHeight": "xl"
+    }
+  ],
+  "slug": {
+    "_type": "slug",
+    "current": "business"
+  },
+  "title": "Business",
+  "path": "business"
+}

@@ -68,6 +68,14 @@ SITES = [
         "script": "server.py",
         "args": ["8086"],
         "url": "http://localhost:8086/"
+    },
+    {
+        "name": "Conrad Prototype",
+        "dir": "conrad.prototype",
+        "port": 8087,
+        "script": "server.py",
+        "args": ["8087"],
+        "url": "http://localhost:8087/"
     }
 ]
 
