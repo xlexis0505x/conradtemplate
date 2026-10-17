@@ -89,10 +89,55 @@ If the user maintains a multi-site project with a master launcher (e.g. `start.p
 
 ---
 
-## 💡 Troubleshooting & Edge Cases
+## 💡 Architecture Patterns & Field Debugging Guide
 
-- **Site Behind Heavy Cloudflare Captcha**: If a site uses interactive Turnstile/Captcha that blocks headless browsing, launch Chrome in non-headless mode or specify an existing Chrome profile:
-  `--user-data-dir="<path_to_profile>"`
-- **Missing Lazy Images**: If high-resolution hero images are missing, increase the wait timeout in `clone.js` or trigger click events on tab/slider controls before taking the DOM snapshot.
-- **Port Conflicts**: If the target port is in use, pass a different port to `server.py`:
-  `python3 server.py 9000`
+Based on real-world edge cases encountered across modern production websites (e.g. Teenage Engineering, Anduril Industries, Walk Alone), apply these critical lessons:
+
+### 1. SSR / Framework Data Slices (`.data`, `_rsc`, `_next/data`)
+- **Symptom**: Clicking subpage navigation or tabs causes blank screens, infinite spinners, or "Can't find page" errors even though HTML exists.
+- **Root Cause**: Frameworks like Remix, Next.js, and Astro do not perform full HTML page reloads. Instead, client-side routers fetch data endpoints (e.g. `/products.data`, `/store.data`, or `_next/data/.../page.json`).
+- **Solution**:
+  - In `server.py`, implement transparent upstream fallback caching: when an uncached `.data` or data JSON request arrives, fetch it dynamically from upstream, write it to disk, and serve it.
+  - Pre-fetch critical route data payloads during the initial crawl.
+
+### 2. Client-Side Hydration vs. Static DOM Snapshot Conflicts
+- **Symptom**: Page renders, but buttons cannot be clicked, hover animations do not fire, and navigation does nothing.
+- **Root Cause**: When a cloner serializes the rendered DOM into `index.html`, it freezes dynamic container nodes (e.g. `#Stage`, `#app`, `<header>`, `<nav>`). When the runtime bundle executes, it mounts new runtime component instances. The static "ghost" DOM nodes sit on top of the dynamic nodes, intercepting pointer events and blocking `:hover` states and click handlers.
+- **Solution**:
+  - Keep initial HTML mount points clean. In SPAs that build the DOM dynamically from embedded state, preserve only critical SSR state scripts (e.g. `<script id="ssgContent" type="application/json">`, `<script id="ssgSiteSettings">`, `window.__INITIAL_STATE__`), leaving the mount container empty so runtime code hydrates without duplication.
+  - **Deduplicate Scripts**: Never convert `<link rel="preload" as="script">` into `<script>` tags, which causes libraries (like `@theatre/core` or `lenis`) to execute twice and crash.
+
+### 3. SPA Route Data Files (`<route>.json`)
+- **Symptom**: SPA navigation freezes on first click, and console shows `SyntaxError: Unexpected token '<'`.
+- **Root Cause**: Client routers often request `/<route>.json` (e.g. `/space/space.json`, `/arsenal.json`, `/404.json`). When missing locally, standard servers return a 404 HTML document. The router tries to parse HTML as JSON, throws an unhandled exception, and crashes the router state machine permanently.
+- **Solution**:
+  - Extract all internal route paths from the navigation tree.
+  - Pre-download all `/<route>.json` payloads.
+  - In `server.py`, ensure missing `.json` files are fetched from upstream or return a valid fallback `{}` rather than an HTML 404 page.
+
+### 4. Interactive Carousels & 3D Stacking Order
+- **Symptom**: In carousels (e.g. Walk Alone), clicking takes 5–10 seconds to load, or clicking the center card opens a completely different project.
+- **Root Cause**:
+  1. **Blocking Upstream Fallback**: If subpages are not pre-downloaded, synchronous server-side `urllib` requests against bot-protected sites (Cloudflare) hang for 5–10s before timing out.
+  2. **False Fallback to Home**: When the timeout occurs, naive server fallback returns `index.html` (the home page), which resets the carousel to index 0, giving the user the impression that the "wrong page" loaded.
+  3. **3D Transformed Card Stacking**: Rotated, absolutely positioned cards overlap bounding boxes. Elements placed later in DOM order capture mouse clicks meant for earlier centered items.
+- **Solution**:
+  - **Pre-download all subpages upfront**: Scrape all carousel work items and gallery images so every click resolves locally in 0ms.
+  - **Elevate Active Item Z-Index**: Add `.base-works__item[data-item-center] { z-index: 10 !important; }` so the visually centered item always has highest stacking priority.
+
+### 5. Server Fallback Hygiene
+- **Rule**: `server.py` must **ONLY** fall back to `index.html` for extensionless routes (SPA navigation).
+- **Never** fall back to `index.html` for missing assets with extensions (`.json`, `.png`, `.avif`, `.css`), as serving HTML in place of images/JSON corrupts browser parsers.
+
+---
+
+## 🛠️ Edge Cases Quick Reference
+
+| Issue | Root Cause | Fix |
+| :--- | :--- | :--- |
+| **Black/Blocked Screen** | WebGL canvas with opaque background or missing textures | Set `canvas { display: none !important; }` or mock missing shaders/textures |
+| **Double Components / Inactive Buttons** | Static DOM tree captured during clone conflicting with runtime mount | Clear static children from mount container in `index.html` |
+| **Router Crash on Route Click** | Missing `/<route>.json` or `/<route>.data` returning 404 HTML | Pre-download route data files; add dynamic proxy fallback in `server.py` |
+| **Wrong Project on Carousel Click** | Later DOM elements overlapping in 3D space or failed fetch falling back to `index.html` | Pre-download all subpages; elevate centered item with `z-index: 10` |
+| **Video Playback Fails/Freezes** | Server lacks HTTP 206 Byte-Range streaming | Use `ThreadingHTTPServer` with `Range` header slicing in `server.py` |
+
