@@ -10,6 +10,15 @@ window.dataLayer = [];
 window.gtag = function(){};
 </script>
 <base href="/"/>
+<script src="./assets/js/lib/gsap.min.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "./assets/js/lib/three.module.js",
+    "three/": "./assets/js/lib/"
+  }
+}
+</script>
 <meta charset="utf-8"/>
 <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimal-ui, viewport-fit=cover" name="viewport"/>
@@ -41,7 +50,497 @@ window.gtag = function(){};
 <meta content="#ffffff" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <style>
    html,body{background-color:#000;height:100%}
-  </style>
+  
+/* === 1. BENTO GRID: CLEAN IN-PLACE CARD ZOOM & EXPANSION === */
+.FeaturedProducts {
+  position: relative !important;
+}
+
+.FeaturedProducts .FeaturedProductsCard,
+.FeaturedProducts a {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease !important;
+  will-change: transform !important;
+}
+
+.FeaturedProducts .FeaturedProductsCard:hover {
+  transform: translateY(-4px) scale(1.01) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Bento Expanding Picture View */
+#conrad-bento-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+#conrad-bento-modal.active {
+  display: flex !important;
+  pointer-events: auto;
+  cursor: zoom-out;
+}
+
+.bento-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  pointer-events: auto;
+  cursor: zoom-out;
+}
+
+.bento-modal-container {
+  position: relative;
+  z-index: 1;
+  width: 84vw;
+  max-width: 1080px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  background: #080808;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95);
+  overflow: hidden;
+  cursor: zoom-out;
+  border-radius: 2px;
+}
+
+.bento-modal-media {
+  width: 100%;
+  height: 56vh;
+  max-height: 540px;
+  background: #000000;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.bento-modal-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.bento-modal-info {
+  padding: 1.75rem 2.25rem 2rem;
+  background: #080808;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: HelveticaNowDisplay, Helvetica, Arial, sans-serif;
+}
+
+.bento-modal-title {
+  font-family: HelveticaNowDisplay, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+}
+
+.bento-modal-subtitle {
+  font-family: HelveticaNowDisplay, Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0.65rem;
+}
+
+.bento-modal-desc {
+  font-family: HelveticaNowDisplay, Helvetica, Arial, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+  max-width: 820px;
+}
+
+/* === 2. ARSENAL STRIPS: 4 Vertical Columns with exact original hover & style === */
+.ArsenalSlice {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 1.5rem !important;
+  padding: 4rem 2rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background-color: #010101 !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 1100px) {
+  .ArsenalSlice {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .ArsenalSlice {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.ArsenalSlice .ArsenalItem {
+  min-height: 560px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  background-color: #080808 !important;
+  overflow: hidden !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+  transform: none !important;
+  transition: border-color 0.3s ease-out !important;
+}
+
+.ArsenalSlice .ArsenalItem:hover {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.ArsenalSlice .ArsenalItem .bg {
+  background: #ffffff !important;
+  transform-origin: bottom !important;
+  width: 100% !important;
+  height: 100% !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  transform: scaleY(0) !important;
+  z-index: 0 !important;
+}
+
+.ArsenalSlice .ArsenalItem:hover .bg {
+  transform: scaleY(1) !important;
+}
+
+.ArsenalSlice .ArsenalItem .content {
+  position: relative !important;
+  z-index: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  min-height: 560px !important;
+  padding: 2.5rem 1.75rem 2rem !important;
+  margin: 0 !important;
+  border: none !important;
+  gap: 1.5rem !important;
+  box-sizing: border-box !important;
+}
+
+.ArsenalSlice .ArsenalItem .title {
+  font-size: 3.8rem !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.05rem !important;
+  color: #ffffff !important;
+  margin: 0 !important;
+  grid-area: auto !important;
+  transition: color 0.3s ease-out !important;
+  font-family: HelveticaNowDisplay, Helvetica, Arial, sans-serif !important;
+}
+
+.ArsenalSlice .ArsenalItem:hover .title,
+.ArsenalSlice .ArsenalItem:hover h3,
+.ArsenalSlice .ArsenalItem:hover p,
+.ArsenalSlice .ArsenalItem:hover .subtitle {
+  color: #010101 !important;
+}
+
+.ArsenalSlice .ArsenalItem .ResponsiveImage {
+  max-height: 160px !important;
+  width: 100% !important;
+  object-fit: contain !important;
+  grid-area: auto !important;
+  margin: auto 0 !important;
+}
+
+.ArsenalSlice .ArsenalItem .bottom {
+  grid-area: auto !important;
+  margin-top: auto !important;
+  align-self: stretch !important;
+}
+
+.ArsenalSlice .ArsenalItem .subtitle {
+  font-size: 0.95rem !important;
+  line-height: 1.45 !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0.01rem !important;
+  white-space: pre-wrap !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: color 0.3s ease-out !important;
+}
+
+/* === 3. MERGED BOTTOM POSTER: 1 Full-width promotional video card === */
+.MediaLinkSlice .sticky-wrapper .carousel {
+  grid-template-columns: 1fr !important;
+  display: block !important;
+}
+
+.MediaLinkSlice .MediaLinkCard {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 70vh !important;
+}
+
+
+/* === REMOVE NEWS & INSIGHTS BLOCK COMPLETELY === */
+.NewsFeaturedSlice,
+.newsFeaturedSlice,
+[data-slice-type="newsFeaturedSlice"] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Ensure PageView main allows position: sticky to pin correctly */
+.PageView main,
+main {
+  overflow: visible !important;
+}
+
+/* === RADIANT JANUS SCROLL-PINNED INFOGRAPHIC === */
+#conrad-radiant-janus-track {
+  width: 100% !important;
+  height: 450vh !important;
+  position: relative !important;
+  background-color: #F1F0EA !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+#conrad-radiant-janus-sticky {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  min-height: 650px !important;
+  overflow: hidden !important;
+  background-color: #F1F0EA !important;
+  color: #2b292a !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: 3rem 3rem 2.5rem !important;
+  box-sizing: border-box !important;
+  z-index: 20 !important;
+}
+
+#conrad-radiant-janus-sticky .janus-canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+#conrad-radiant-janus-sticky .janus-inner {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 3.5rem 4rem 2.5rem !important;
+  box-sizing: border-box !important;
+  pointer-events: none !important;
+  z-index: 10 !important;
+}
+
+#conrad-radiant-janus-sticky .janus-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+  pointer-events: none !important;
+}
+
+#conrad-radiant-janus-sticky .janus-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03rem;
+  color: #2b292a;
+  margin: 0 0 0.5rem;
+  font-family: HelveticaNowDisplay, Helvetica, Arial, sans-serif;
+}
+
+#conrad-radiant-janus-sticky .janus-subtitle {
+  font-size: 1rem;
+  line-height: 1.45;
+  color: #555252;
+  max-width: 780px;
+  margin: 0;
+}
+
+#conrad-radiant-janus-sticky .janus-nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  pointer-events: auto !important;
+}
+
+#conrad-radiant-janus-sticky .janus-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(43, 41, 42, 0.2);
+  background: rgba(43, 41, 42, 0.05);
+  color: #2b292a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-size: 1.1rem;
+  pointer-events: auto !important;
+}
+
+#conrad-radiant-janus-sticky .janus-btn:hover:not(:disabled) {
+  background: #2b292a;
+  color: #ffffff;
+  border-color: #2b292a;
+}
+
+#conrad-radiant-janus-sticky .janus-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+#conrad-radiant-janus-sticky .janus-captions {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 6.8rem !important;
+  transform: translateX(-50%) !important;
+  height: 70px !important;
+  width: 90% !important;
+  max-width: 820px !important;
+  margin: 0 !important;
+  pointer-events: none !important;
+}
+
+#conrad-radiant-janus-sticky .janus-step-text {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  text-align: center !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+#conrad-radiant-janus-sticky .janus-step-text.active {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+#conrad-radiant-janus-sticky .janus-line {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+#conrad-radiant-janus-sticky .janus-step-heading {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #2b292a;
+  margin-bottom: 0.25rem;
+}
+
+#conrad-radiant-janus-sticky .janus-step-desc {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #666363;
+}
+
+#conrad-radiant-janus-sticky .janus-progress-container {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 3.5rem !important;
+  transform: translateX(-50%) !important;
+  width: 50% !important;
+  max-width: 600px !important;
+  height: 4px !important;
+  margin: 0 !important;
+  z-index: 25 !important;
+  pointer-events: auto !important;
+}
+
+#conrad-radiant-janus-sticky .janus-arrow-indicator {
+  position: absolute !important;
+  top: -22px !important;
+  left: 0 !important;
+  width: 12px !important;
+  height: 11px !important;
+  display: block !important;
+  pointer-events: none !important;
+  z-index: 26 !important;
+}
+
+#conrad-radiant-janus-sticky .janus-cells {
+  display: flex !important;
+  width: 100% !important;
+  height: 100% !important;
+  align-items: center !important;
+  gap: 0 !important;
+  pointer-events: auto !important;
+}
+
+#conrad-radiant-janus-sticky .janus-cell {
+  flex: 1 !important;
+  height: 2px;
+  background: rgba(43, 41, 42, 0.15);
+  position: relative !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  transition: height 0.25s ease, background-color 0.25s ease;
+}
+
+#conrad-radiant-janus-sticky .janus-cell::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  bottom: -14px;
+  left: 0;
+  right: 0;
+  cursor: pointer;
+  z-index: 27;
+}
+
+#conrad-radiant-janus-sticky .janus-cell.active {
+  height: 4px;
+  background: rgba(43, 41, 42, 0.32);
+}
+
+#conrad-radiant-janus-sticky .janus-cell-fill {
+  position: absolute !important;
+  inset: 0 !important;
+  background: #2b292a !important;
+  transform-origin: left center !important;
+  transform: scaleX(0);
+}
+
+</style>
 <script>
    (function() {
             try {
@@ -85,11 +584,8 @@ window.gtag = function(){};
 <style type="text/css">
    .GLA11y * {position:relative!important;}
   </style>
-<script id="ssgContent" type="application/json">
-        {"_createdAt":"2025-03-18T06:14:17Z","_id":"e89bef56-785e-4374-a5ed-02677442fcd5","_rev":"DJbfSLnRy3scRAYOi53QWC","_system":{"base":{"id":"e89bef56-785e-4374-a5ed-02677442fcd5","rev":"DJbfSLnRy3scRAYOi0aayK"}},"_type":"page","_updatedAt":"2026-10-13T19:24:15Z","category":"","meta":{"_type":"meta","description":"Anduril Industries builds advanced autonomous systems and defense technology to protect US and allied forces. Creating the future of national security through AI, robotics, and cutting-edge engineering. ","title":"Transforming U.S. Defense Capabilities with Advanced Technology"},"parent":null,"slices":[{"_key":"9c45887c2b61","_type":"navColorSlice","navColorMode":"solid-black"},{"_key":"a688e3231e4a","_type":"homeHero","heroMedia":[{"_key":"64fbe72f393b","breakpoint":0,"video":{"_type":"videoWithMeta","asset":{"_id":"file-df3ecf45617cc98348221cb192cd7b43b7bacf17-mp4","_type":"sanity.fileAsset","mimeType":"video/mp4","duration":30.78075,"width":1920,"height":1080,"optimized":[{"_key":"952189acdecb","_type":"videoWithMeta","asset":{"_id":"file-0521ac63b49c86418ee3e858508b311f021b7dd1-mp4","_type":"sanity.fileAsset","mimeType":"video/mp4","duration":30.78075,"width":1920,"height":1080,"thumbnail":{"_type":"image","asset":{"_ref":"image-cb21015c90b01ff45e416a1cf8766ec64b1c6851-1920x1080-png","_type":"reference"}}}},{"_key":"02b367eaf43e","_type":"videoWithMeta","asset":{"_id":"file-e84b9d303c09edffc395636a6ce6fb43a0e84042-mp4","_type":"sanity.fileAsset","mimeType":"video/mp4","duration":30.78075,"width":1600,"height":900,"thumbnail":{"_type":"image","asset":{"_ref":"image-cb21015c90b01ff45e416a1cf8766ec64b1c6851-1920x1080-png","_type":"reference"}}}},{"_key":"14cd44dcd137","_type":"videoWithMeta","asset":{"_id":"file-9aed9a65bbe0de562b9cbcf1d8596526dfd27316-mp4","_type":"sanity.fileAsset","mimeType":"video/mp4","duration":30.78075,"width":1280,"height":720,"thumbnail":{"_type":"image","asset":{"_ref":"image-cb21015c90b01ff45e416a1cf8766ec64b1c6851-1920x1080-png","_type":"reference"}}}},{"_key":"dc205b6f21f2","_type":"videoWithMeta","asset":{"_id":"file-04c006e84c06833930764f48bdbb6589dc970525-mp4","_type":"sanity.fileAsset","mimeType":"video/mp4","duration":30.78075,"width":854,"height":480,"thumbnail":{"_type":"image","asset":{"_ref":"image-cb21015c90b01ff45e416a1cf8766ec64b1c6851-1920x1080-png","_type":"reference"}}}}],"thumbnail":{"_type":"image","asset":{"_id":"image-cb21015c90b01ff45e416a1cf8766ec64b1c6851-1920x1080-png","_type":"sanity.imageAsset","mimeType":"image/png","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":1.7777777777777777,"height":1080,"width":1920},"hasAlpha":false,"isOpaque":true}}}}}},{"_key":"7fe6b34482b1","breakpoint":768,"video":{"_type":"videoWithMeta","asset":{"_id":"file-bd2c4e89a086133499fbc4f47e284e1adb05c547-mp4","_type":"sanity.fileAsset","mimeType":"video/mp4","duration":30.78075,"width":1080,"height":1920,"optimized":[{"_key":"da0e3902ebc0","_type":"videoWithMeta","asset":{"_id":"file-1cdb520f900f3d15d20eb0b4fc267f738d2a0fa4-mp4","_type":"sanity.fileAsset","mimeType":"video/mp4","duration":30.78075,"width":608,"height":1080,"thumbnail":{"_type":"image","asset":{"_ref":"image-c90c5474680ff0729e0e157aba6b00b067bdc3b9-1080x1920-png","_type":"reference"}}}},{"_key":"be94c32f62b9","_type":"videoWithMeta","asset":{"_id":"file-3540514a63a339b481fa2847a579556449aa17ac-mp4","_type":"sanity.fileAsset","mimeType":"video/mp4","duration":30.78075,"width":506,"height":900,"thumbnail":{"_type":"image","asset":{"_ref":"image-c90c5474680ff0729e0e157aba6b00b067bdc3b9-1080x1920-png","_type":"reference"}}}},{"_key":"137f473e3438","_type":"videoWithMeta","asset":{"_id":"file-49809f8ba0a5ce2ff7828604202cfeb350372b6b-mp4","_type":"sanity.fileAsset","mimeType":"video/mp4","duration":30.78075,"width":406,"height":720,"thumbnail":{"_type":"image","asset":{"_ref":"image-c90c5474680ff0729e0e157aba6b00b067bdc3b9-1080x1920-png","_type":"reference"}}}},{"_key":"114af0886218","_type":"videoWithMeta","asset":{"_id":"file-bc259af70ecd2f1a41963d3579884680ad846a42-mp4","_type":"sanity.fileAsset","mimeType":"video/mp4","duration":30.78075,"width":270,"height":480,"thumbnail":{"_type":"image","asset":{"_ref":"image-c90c5474680ff0729e0e157aba6b00b067bdc3b9-1080x1920-png","_type":"reference"}}}}],"thumbnail":{"_type":"image","asset":{"_id":"image-c90c5474680ff0729e0e157aba6b00b067bdc3b9-1080x1920-png","_type":"sanity.imageAsset","mimeType":"image/png","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":0.5625,"height":1920,"width":1080},"hasAlpha":false,"isOpaque":true}}}}}}]},{"_key":"c4a9e6e10228","_type":"featuredAnnouncementSlice","description":"Refit the Fleet","hideSlice":false,"mediaType":"video","page":[{"_key":"adf016f0681f","_type":"externalLink","href":"https://www.anduril.com/arsenal/arsenal-2","text":"Arsenal-2"}],"title":"Arsenal-2","video":{"_type":"videoWithMeta","asset":{"_id":"file-35043dafac099ecb39a0d0f57637ce0dc13ee802-mp4","_type":"sanity.fileAsset","mimeType":"video/mp4","duration":34.045,"width":1920,"height":1080,"thumbnail":{"_type":"image","asset":{"_id":"image-1747f341deedbb5455e5b370cb54547c353dd99c-1920x1080-png","_type":"sanity.imageAsset","mimeType":"image/png","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":1.7777777777777777,"height":1080,"width":1920},"hasAlpha":false,"isOpaque":true}}}}}},{"_key":"4738f3b86511","_type":"featuredProducts","cards":[{"_key":"e5a34e8b3fbf","_type":"featuredProduct","description":"Reload the Arsenal","image":{"_type":"imageWithMeta","asset":{"_id":"image-9ea5ae8181d48c78365c6f8d8e3f3f35208e5f55-3000x2000-jpg","_type":"sanity.imageAsset","mimeType":"image/jpeg","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":1.5,"height":2000,"width":3000},"hasAlpha":false,"isOpaque":true}}},"layout":"","mediaType":"image","page":[{"_key":"bb79cd48f2f0","_type":"internalLink","reference":{"_id":"eddd69d4-325e-4a26-a3da-90730078263f","_type":"page","language":null,"parent":null,"slug":{"_type":"slug","current":"steelfin"},"title":"Steelfin"}}],"title":"Steelfin"},{"_key":"360b2b2d9ea4","_type":"featuredProduct","description":"Bring Mass to the Fight","image":{"_type":"imageWithMeta","alt":"test","asset":{"_id":"image-d23c6903421f10c7191873592b8e823362fecbe8-882x878-png","_type":"sanity.imageAsset","mimeType":"image/png","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":1.0045558086560364,"height":878,"width":882},"hasAlpha":true,"isOpaque":false}}},"layout":"","mediaType":"image","page":[{"_key":"17540996b132","_type":"internalLink","reference":{"_id":"4950b5ef-48d9-4dd1-8c95-3d3cbba939bb","_type":"page","language":null,"parent":null,"slug":{"_type":"slug","current":"barracuda"},"title":"Barracuda"},"targetBlank":false}],"title":"Barracuda"},{"_key":"0a5ecc59f60a","_type":"featuredProduct","description":"Autonomy for Every Mission","image":{"_type":"imageWithMeta","asset":{"_id":"image-c79ccecf787d455420edb440cbc7bf6a114cc680-882x878-png","_type":"sanity.imageAsset","mimeType":"image/png","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":1.0045558086560364,"height":878,"width":882},"hasAlpha":true,"isOpaque":false}}},"layout":"","mediaType":"image","page":[{"_key":"bbfa97e287ea","_type":"internalLink","reference":{"_id":"b3a76414-cc7d-4b11-bc92-d746db987acb","_type":"page","language":null,"parent":{"_id":"9b2a6f22-bf61-4544-a460-6584975cb7d9","parent":null,"slug":{"_type":"slug","current":"lattice"}},"slug":{"_type":"slug","current":"lattice-mesh"},"title":"Lattice Mesh"},"targetBlank":false}],"title":"Lattice"},{"_key":"35fe2e286a1b","_type":"featuredProduct","description":"Launch, Loiter, Recover, Reuse","image":{"_type":"imageWithMeta","asset":{"_id":"image-955e14dfee80e6022b1744580b6996cd435c6153-976x1952-jpg","_type":"sanity.imageAsset","mimeType":"image/jpeg","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":0.5,"height":1952,"width":976},"hasAlpha":false,"isOpaque":true}},"crop":{"_type":"sanity.imageCrop","bottom":0.14131470706260033,"left":0,"right":0,"top":0.003122491974317819},"hotspot":{"_type":"sanity.imageHotspot","height":0.8555628009630819,"width":1,"x":0.5,"y":0.43090389245585875}},"layout":"tall","page":[{"_key":"9f4a0f091257","_type":"internalLink","reference":{"_id":"af79ff2e-ad51-45a3-a99b-9b36796081c2","_type":"page","language":null,"parent":null,"slug":{"_type":"slug","current":"roadrunner"},"title":"Roadrunner"},"targetBlank":false}],"title":"Roadrunner"},{"_key":"d63e20ce1a60","_type":"featuredProduct","description":"Fight Unfair","image":{"_type":"imageWithMeta","asset":{"_id":"image-35c91ba3a0603c99720933d52bad4c73f9fdca5f-3000x1500-jpg","_type":"sanity.imageAsset","mimeType":"image/jpeg","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":2,"height":1500,"width":3000},"hasAlpha":false,"isOpaque":true}}},"layout":"wide","mediaType":"image","page":[{"_key":"51342d2d575c","_type":"internalLink","reference":{"_id":"6880f541-179e-4366-9d2d-646d163d4c1c","_type":"page","language":null,"parent":null,"slug":{"_type":"slug","current":"fury"},"title":"Fury"},"targetBlank":false}],"title":"Fury"},{"_key":"85b57dc5c580","_type":"featuredProduct","description":"Own the Edge","image":{"_type":"imageWithMeta","asset":{"_id":"image-16113e3a588bd30e5c67bf2ee6d7a0847845fb28-3000x3000-jpg","_type":"sanity.imageAsset","mimeType":"image/jpeg","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":1,"height":3000,"width":3000},"hasAlpha":false,"isOpaque":true}}},"layout":"","mediaType":"image","page":[{"_key":"4f06d8b68ba6","_type":"internalLink","reference":{"_id":"185ea94b-5dfd-4ef1-b4c8-7dcc23cbe7ba","_type":"page","language":null,"parent":null,"slug":{"_type":"slug","current":"menace-x"},"title":"Menace-X"},"targetBlank":false}],"title":"Menace"},{"_key":"49c191ad0528","_type":"featuredProduct","description":"A League of Its Own","image":{"_type":"imageWithMeta","asset":{"_id":"image-a005eecc853d709de52769704c0a6cc1083ac7c4-1131x630-png","_type":"sanity.imageAsset","mimeType":"image/png","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":1.7952380952380953,"height":630,"width":1131},"hasAlpha":true,"isOpaque":true}},"crop":{"_type":"sanity.imageCrop","bottom":0,"left":0,"right":0,"top":0},"hotspot":{"_type":"sanity.imageHotspot","height":1,"width":1,"x":0.5,"y":0.5}},"layout":"","mediaType":"image","page":[{"_key":"973f2ed7bd0f","_type":"internalLink","reference":{"_id":"21da8916-530e-401f-95d1-06c409aa1d25","_type":"page","language":null,"parent":null,"slug":{"_type":"slug","current":"dive-xl"},"title":"Dive-XL"},"targetBlank":false}],"title":"Dive-XL"}]},{"_key":"93ecd5d33c69","_type":"spacerSlice","backgroundColor":{"_createdAt":"2025-03-28T19:47:50Z","_id":"0970ba10-788c-4613-b319-39009fd75a2a","_rev":"UXH5eRH3LWIQEsoDKxb1Mv","_system":{"base":{"id":"0970ba10-788c-4613-b319-39009fd75a2a","rev":"g3LktQjILKhofqwxYxP0ke"}},"_type":"color","_updatedAt":"2026-06-04T16:31:45Z","contrastColor":"#FFFFFF","hex":"#010101","metadata":null,"name":"Black"},"hideSlice":false,"horizontalRule":false,"spacerHeight":"xl"},{"_key":"d53806f593f9","_type":"arsenalSlice","arsenalList":[{"_key":"a7ffd6380143","_type":"arsenalListItem","image":{"_type":"imageWithMeta","asset":{"_id":"image-bf1545878e8ef76600cd522becab5280ba5c9f7f-3456x1588-png","_type":"sanity.imageAsset","mimeType":"image/png","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":2.1763224181360203,"height":1588,"width":3456},"hasAlpha":true,"isOpaque":true}}},"page":{"_type":"internalLink","reference":{"_id":"3dbedbc5-dc42-4792-a7b1-afb99f3a234e","_type":"page","language":null,"parent":{"_id":"764c8f3e-6104-4a7e-be94-59adc647c513","parent":null,"slug":{"_type":"slug","current":"arsenal"}},"slug":{"_type":"slug","current":"arsenalos"},"title":"ArsenalOS™"},"text":"ArsenalOS™"},"subtitle":"The Digital Backbone of Modern Defense Manufacturing"},{"_key":"33a5d45af006","_type":"arsenalListItem","image":{"_type":"imageWithMeta","asset":{"_id":"image-b3a671f3a39291681b26483bb5e31ea22f53fa37-2844x1600-png","_type":"sanity.imageAsset","mimeType":"image/png","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":1.7775,"height":1600,"width":2844},"hasAlpha":true,"isOpaque":false}}},"page":{"_type":"internalLink","reference":{"_id":"fb6bc49e-5988-46e6-ae9d-501e30ca0db3","_type":"page","language":null,"parent":{"_id":"764c8f3e-6104-4a7e-be94-59adc647c513","parent":null,"slug":{"_type":"slug","current":"arsenal"}},"slug":{"_type":"slug","current":"arsenal-1"},"title":"Arsenal-1"}},"subtitle":"A New Standard in Defense Manufacturing"}],"backgroundColor":{"_createdAt":"2025-03-28T19:59:10Z","_id":"06a5beb4-22c7-4d8c-97f1-2776c1f020e8","_rev":"s4FbY1rNJZOqUnJhlMyiRj","_type":"color","_updatedAt":"2025-06-18T01:02:36Z","contrastColor":"#010101","hex":"#8E9291","metadata":null,"name":"Mid Gray"},"hideSlice":false},{"_key":"0fe9236fe0df","_type":"newsFeaturedSlice","cta":[{"_key":"958be5dead45","_type":"internalLink","reference":{"_id":"cb940787-64b7-481d-8379-537ea6a1cf56","_type":"page","language":null,"parent":null,"slug":{"_type":"slug","current":"news"},"title":"Newsroom"},"targetBlank":false,"text":"All articles","type":"primary"}],"header":"News & Insights","highlightedArticle":{"_type":"newsLink","link":{"_createdAt":"2026-10-06T20:02:48Z","_id":"deba6017-6ea9-492e-a4f6-78f295f14d6a","_rev":"N1G5rtOZj8187JlhVXzJqD","_system":{"base":{"id":"deba6017-6ea9-492e-a4f6-78f295f14d6a","rev":"0YKpiHcLUDtAprmSVAUkBh"}},"_type":"article","_updatedAt":"2026-10-07T17:20:25Z","authors":[{"_createdAt":"2025-04-10T02:38:50Z","_id":"c1dbab2b-5fb8-472a-bb84-9db80e122a31","_rev":"8QtQE8S3U2lXjdjxKMFvCL","_type":"person","_updatedAt":"2025-11-18T00:08:12Z","bio":[],"fullName":"Anduril Industries","image":{"_type":"image","asset":{"_ref":"image-a990fb8ef1bae814dc01807f8757917489c9e64d-2536x2536-jpg","_type":"reference"}},"metadata":null,"slug":{"_type":"slug","current":"anduril-industries"}}],"categories":[{"_createdAt":"2025-04-10T03:57:42Z","_id":"76930408-9dd1-4e94-a22a-e3fb91a252c8","_rev":"eBmLOIrMzK4fuf6o6EXXw6","_type":"articleCategory","_updatedAt":"2025-09-30T19:16:31Z","metadata":null,"slug":{"_type":"slug","current":"news"},"title":"News"}],"category":"","date":"2026-10-06","excludeFromSearch":false,"image":{"_type":"imageWithMeta","asset":{"_id":"image-ba1e81fce684d896ea9e0ed0c9375b8d62468e00-1920x1080-png","_type":"sanity.imageAsset","mimeType":"image/png","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":1.7777777777777777,"height":1080,"width":1920},"hasAlpha":false,"isOpaque":true}}},"meta":{"_type":"meta","excludeLLM":false},"metadata":null,"parent":{"_createdAt":"2025-03-18T06:18:29Z","_id":"cb940787-64b7-481d-8379-537ea6a1cf56","_rev":"N1G5rtOZj8187JlhVNj8ZV","_system":{"base":{"id":"cb940787-64b7-481d-8379-537ea6a1cf56","rev":"U0oN0QIqDw3OWy2Rvws2n8"}},"_type":"page","_updatedAt":"2026-10-06T20:13:24Z","category":"company","meta":{"description":"The latest news, announcements, and insights from Anduril Industries.","title":"Newsroom"},"metadata":null,"slices":[{"_key":"be226df55718","_type":"navColorSlice","navColorMode":"dark"},{"_key":"862b9c27dddf","_type":"newsroomHeader","header":"News & Insights","headerLabel":"NEWSROOM","highlightedArticle":{"_type":"newsLink","link":{"_ref":"deba6017-6ea9-492e-a4f6-78f295f14d6a","_type":"reference"}}},{"_key":"54576d983b87","_type":"newsListSlice","header":"All articles"}],"slug":{"_type":"slug","current":"news"},"title":"Newsroom"},"slices":[{"_key":"c6fbc45ae09f","_type":"oneColumnRichText","content":[{"_key":"cfe7d09b5dcd","_type":"block","children":[{"_key":"779faa151fe1","_type":"span","marks":["strong","em"],"text":"Arsenal-2 Will Increase Production Capacity for Virginia-Class Submarine Program\n"},{"_key":"633296adc428","_type":"span","marks":[],"text":"President Donald J. Trump today announced Arsenal-2, a new software-defined shipyard backed by a $3.7 billion private capital investment by Anduril Industries. The facility will manufacture critical components for the Virginia-class submarine, adding significant new capacity to America's submarine industrial base in support of the Navy's effort to increase attack submarine production.\n\nUnder President Trump’s leadership, the U.S. Navy has awarded Anduril a contract of up to $2.9 billion, with payments tied directly to demonstrated production outcomes. This contract structure ensures that Anduril, not the taxpayer, takes on the majority of the execution risk, aligning incentives to ensure on-time, high-quality submarine production. Altogether, this equates to a $6.6 billion investment in America’s submarine industrial base.\n\nVirginia-class submarines are built by General Dynamics Electric Boat and Huntington Ingalls Industries’ Newport News Shipbuilding as part of one of the most complex manufacturing enterprises in the country. Meeting domestic fleet requirements and AUKUS commitments will require substantial growth across that enterprise, including new suppliers, infrastructure, workforce, and production capacity. Arsenal-2 is intended to contribute to that expansion.\n\nArsenal-2 will build complex components and large scale assemblies of the Virginia-class submarine and deliver them to Electric Boat and Newport News Shipbuilding for final assembly. Adding another source of this work will allow more submarine construction to happen in parallel across the industrial base and increase the overall capacity available to the Virginia-class program.\n\n"},{"_key":"455a1d9496a2","_type":"span","marks":["strong","strong"],"text":"Building Arsenal-2 in Baltimore County"},{"_key":"022f94c3ca83","_type":"span","marks":[],"text":"\nThe scale of the production plan is reflected in the physical infrastructure and workforce required for its execution. Arsenal-2 will be built at Tradepoint Atlantic in Baltimore County, Maryland, where the project will create 3,100 direct jobs and support more than 11,000 indirect jobs. The site will drive $2 billion in annual economic output, including an estimated $312 million in wages each year.\n\nPermitting and site preparation will begin immediately, with construction commencing as soon as the necessary approvals are in place. Initial operations are expected to come online in 2030, with production scaling progressively thereafter as Anduril builds the workforce, supplier base, infrastructure, and manufacturing throughput required for submarine production.\n\nArsenal-2 will sit within the Sparrows Point complex, a site central to America's maritime heritage and well positioned for a new generation of heavy industry. Existing road, rail, and maritime infrastructure connect the site to suppliers and to the nation's two primary submarine builders. Baltimore's shipyards produced the first Liberty Ship during World War II, and Sparrows Point was once known as the 'Patriarch of U.S. Tanker Builders.'; Arsenal-2 will return shipbuilding to a site that once helped define American naval power.\n\n"},{"_key":"64bf1605867a","_type":"span","marks":["strong","strong"],"text":"A Shipyard Designed for Production"},{"_key":"0b41bb254e61","_type":"span","marks":[],"text":"\nArsenal-2 is designed as a product in its own right: a modern shipbuilding system built around software-defined production and advanced manufacturing. At more than 2 million square feet — roughly 40 football fields — the facility will be purpose-built on a 187-acre site for high-volume, high-precision production of undersea naval capabilities.\n\nThe shipyard's layout is optimized for production. Reduced distances between fabrication, assembly, testing, and integration areas eliminate the staging bottlenecks that slow conventional yards. A functional 1,200-foot graving dock and multimodal road and rail access support large-scale component movement. High-bay assembly halls, adjacent fabrication areas, and reconfigurable production lines allow the yard to shift rapidly as Navy requirements evolve.\n\nArsenalOS, Anduril's industrial software platform, will provide the digital backbone for the yard and its production systems. It will connect fabrication workflows, outfitting sequences, material movement, inspection protocols, and documentation requirements in a single system, giving workers and managers real-time visibility into the state of production. Digital work instructions, embedded quality controls, modern sensing, and automation will support the expertise of welders, pipefitters, electricians, shipfitters, inspectors, and other skilled trades. By making production requirements more visible and processes more consistent, ArsenalOS will help new workers train faster while preserving the technical rigor, judgment, and quality required for submarine construction.\n\n"},{"_key":"8cc57a95f36a","_type":"span","marks":["strong"],"text":"Building the Industrial Foundation"},{"_key":"626451848999","_type":"span","marks":[],"text":"\nIn parallel with Arsenal-2's construction, Anduril is already standing up the manufacturing capabilities that will anchor operations at the new yard. Anduril will manufacture critical Virginia-class submarine components at a new 160,000-square-foot facility in Orange County, California, purpose-built to support key submarine construction processes and SUBSAFE-qualified production qualification efforts.\n\nThe Orange County facility gives Anduril a two-year operational head start to develop and validate manufacturing methods, production workflows, and quality systems before Arsenal-2 comes online. It will support prototyping and production of Virginia-class test assets and critical maritime components, including torpedo tubes, while allowing Anduril to recruit and train the early workforce on the systems and standards that will ultimately scale at Arsenal-2. Once Arsenal-2 comes online, the Orange County facility will continue supporting broader maritime manufacturing efforts across Anduril's industrial network.\n\nThis is the same approach Anduril has used at Arsenal-1 in Ohio: building the workforce, processes, and production system ahead of full-scale operations.\n\n"},{"_key":"06a0d73b7035","_type":"span","marks":["strong"],"text":"A Distributed Industrial Network"},{"_key":"a9553b6296f9","_type":"span","marks":[],"text":"\nArsenal-2 is also part of a broader network of Anduril production facilities spanning the United States and allied nations — including Arsenal-1 in the Columbus, Ohio region; its maritime factory at Quonset Point, Rhode Island; its Ghost Shark factory in Sydney, Australia; a rocket motor facility in McHenry, Mississippi; and more than 15 additional production sites. Together, these facilities form a distributed industrial network designed to rapidly scale production of the systems, components, and infrastructure required for modern defense.\n\nClosing the gap between current Virginia-class output and the Navy’s requirement will require expansion across the submarine industrial base. By investing private capital in additional shipbuilding infrastructure, proving out its production system years before Arsenal-2 opens, and accepting a contract structure tied to measurable outcomes, Anduril is adding capacity to an existing national enterprise and helping create the industrial scale required to increase Virginia-class production.\n\nFor a deeper dive on how Anduril is refitting America’s fleet, visit "},{"_key":"15306a8b1f0c","_type":"span","marks":["5cb83c24dc1f"],"text":"Anduril.com/shipyard"},{"_key":"a0bc3dfd133e","_type":"span","marks":[],"text":".\n\n———\n\n"},{"_key":"771ac9f72fb5","_type":"span","marks":["strong"],"text":"Quotes on Arsenal-2\nU.S. SENATE"}],"markDefs":[{"_key":"5cb83c24dc1f","_type":"link","href":"http://Anduril.com/shipyard"}],"style":"normal"},{"_key":"49455fe10f23","_type":"block","children":[{"_key":"6c93b261a45d","_type":"span","marks":["strong"],"text":"Senator Angela Alsobrooks, MD:"},{"_key":"db84afe541ca","_type":"span","marks":[],"text":"\n“This $3.7 billion investment is indication once again of the strength of Baltimore, and the impact Baltimore has on our entire state and country. Maryland continues to be at the forefront of technology, innovation, and advancing our national security goals. This investment will be a huge economic boost to our region – adding 14,000 total jobs – and it will support the Navy’s efforts to increase production and advance their submarine technology.\"\n\n"},{"_key":"f5f0d9d227ff","_type":"span","marks":["strong"],"text":"U.S. House of Representatives"},{"_key":"64eedf01b4bf","_type":"span","marks":[],"text":"\n"},{"_key":"427b4cae0c30","_type":"span","marks":["strong"],"text":"Congressman Johnny Olszewski, MD-02:"},{"_key":"1b9d6a3467a9","_type":"span","marks":[],"text":"\n\"Every family deserves the dignity that comes with a good paycheck, and this project will help deliver that promise to thousands of Marylanders. As someone whose roots run deep in Sparrows Point, I know what this historic site has meant to generations of Marylanders and what it means to see good jobs and advanced manufacturing return to this community. Not only does this project strengthen our economic and national security — it also gives us a chance to write the next chapter of Sparrows Point's storied industrial legacy. I'm proud to welcome this investment to Baltimore County and excited about what it will mean for workers, families, and our entire region.“\n\n"},{"_key":"8f4032f4ebde","_type":"span","marks":["strong"],"text":"Congresswoman Sarah Elfreth, MD-03"},{"_key":"a57e2601fa80","_type":"span","marks":[],"text":"\n\"By bringing over 13,000 jobs to the Baltimore region, we are once again investing in Maryland's long and storied history of shipbuilding and maritime manufacturing. I am glad to see this critical combination of private sector and government investment to support our economy, strengthen our national security, and revitalize key industries. Sparrows Point built the first Liberty Ship in WWII, and it is only fitting that the same site will now produce critical components for modern submarines. I will continue to fight for additional investment at Coast Guard Yard Baltimore and the redevelopment of Curtis Creek to complement these investments as we take inspiration from what once was to build a bright and successful future for Maryland's maritime industry.“\n\n"},{"_key":"f7a5434afe03","_type":"span","marks":["strong"],"text":"Congressman Steny H. Hoyer, MD-05:"},{"_key":"54fb8291581f","_type":"span","marks":[],"text":"\n\"This is an exciting announcement for Maryland, and the benefits of this investment and partnership will be felt not only in the greater Baltimore area but all across our state. Much of the future of defense technology centers on out-innovating our adversaries on autonomous and uncrewed vehicles at sea and in the air, and Maryland is already emerging as a leader in this field, thanks to the work we've done in Southern Maryland around Pax River as well as partnerships with educational institutions like the College of Southern Maryland. I thank Anduril for recognizing this leadership and for seizing this opportunity to create good jobs in our state and advance our national security.“\n\n"},{"_key":"4ebf96b4180a","_type":"span","marks":["strong"],"text":"Congressman Andy Harris, MD-01:"},{"_key":"f9b1939b066a","_type":"span","marks":[],"text":"\n\"Thanks to the One Big Beautiful Bill, which laid the groundwork for efforts like this to expand our defense industrial base in Maryland, adding thousands of good-paying jobs in the state while providing the best weaponry possible for our men and women in uniform.\"\n"}],"markDefs":[],"style":"normal"},{"_key":"09dd724bcf7b","_type":"block","children":[{"_key":"2ef7b440cf5a","_type":"span","marks":["strong"],"text":"State of Maryland — Executive"}],"markDefs":[],"style":"normal"},{"_key":"fc4064db1452","_type":"block","children":[{"_key":"2ef7b440cf5a","_type":"span","marks":["strong"],"text":"Governor Wes Moore, State of Maryland:"},{"_key":"b05a68a5d0bf","_type":"span","marks":[],"text":"\n\"This massive new project will deliver the largest private investment, drive billions of dollars in economic activity, and create the most jobs in Maryland in history. That means thousands of Marylanders will have a new pathway to work, wages, and wealth through advanced training and high-skilled maritime manufacturing jobs. We thank Anduril for choosing Maryland, and we're ready to build the future of our aerospace and defense economy together.\"\n\n"},{"_key":"154cc2ad3192","_type":"span","marks":["strong"],"text":"Lt. Governor Aruna Miller, State of Maryland:"},{"_key":"0658add2415a","_type":"span","marks":[],"text":"\n\"This new facility is a generational investment in Maryland's future, strengthening our position as a national leader in advanced manufacturing, aerospace, and defense. The project builds on our proud manufacturing legacy while bringing thousands of good-paying jobs to Sparrows Point. The Moore-Miller Administration is proud to partner with Anduril to ensure the technologies and vessels shaping America's future are built right here in Maryland.\"\n\n"},{"_key":"3976844282df","_type":"span","marks":["strong"],"text":"Comptroller Brooke E. Lierman, State of Maryland:"},{"_key":"b2708d2420ee","_type":"span","marks":[],"text":"\n\"Maryland has a skilled manufacturing workforce with a long tradition of shipbuilding that goes back centuries. I'm pleased to welcome Anduril to the Baltimore region and to Tradepoint Atlantic, a world-class facility and global hub for innovation. This commitment will create thousands of high-paying jobs for Marylanders. I invite others to join Anduril in investing in a region on the rise.\"\n\n"},{"_key":"6e9fc6ba4b97","_type":"span","marks":["strong"],"text":"Secretary Harry Coker, Jr., Maryland Department of Commerce:"},{"_key":"24c84779073c","_type":"span","marks":[],"text":"\n\"Anduril Industries' landmark investment confirms Maryland's status as a global leader in maritime defense manufacturing and a home to the industries of the future. We are thrilled to be working with Anduril to support this transformative project and bring thousands of new jobs to Maryland.\"\n"}],"markDefs":[],"style":"normal"},{"_key":"3afa477a9706","_type":"block","children":[{"_key":"3dcfe00c9f0d","_type":"span","marks":["strong"],"text":"Maryland General Assembly\nSpeaker Joseline Peña-Melnyk, Speaker of the Maryland House of Delegates:"},{"_key":"e705317f19cc","_type":"span","marks":[],"text":"\n\"Maryland has a proud history of building things, and we have the skilled workforce and infrastructure to help build what comes next. We welcome this investment by Anduril at Sparrows Point and the thousands of good-paying manufacturing jobs it will bring to our state. This is an exciting opportunity to build on the remarkable revitalization of Sparrows Point, strengthen Maryland's manufacturing economy, and create new opportunities for Maryland workers and families.\"\n\n"},{"_key":"64d759a8d95a","_type":"span","marks":["strong"],"text":"Delegate Ben Barnes, Chair, House Appropriations Committee:"},{"_key":"d2c65d502c2f","_type":"span","marks":[],"text":"\n\"For decades, Bethlehem Steel provided good paying jobs for families across Maryland. Today, Anduril's investment in Baltimore puts us back on the map for manufacturing and makes our economy even stronger for Maryland families.\"\n\n"},{"_key":"6c75985ea03d","_type":"span","marks":["strong"],"text":"Senator Guy Guzzone, Chair, Budget and Taxation Committee:"},{"_key":"173e508c041d","_type":"span","marks":[],"text":"\n\"I'm very pleased to welcome Anduril to Tradepoint Atlantic and look forward to working with them to put Baltimore back in the shipbuilding business. Manufacturing jobs are critical to Maryland's future, and Anduril's significant investment will make a big difference in leading the way forward.\"\n\n"},{"_key":"d75d770ae177","_type":"span","marks":["strong"],"text":"Delegate Bob Long, District 6:"},{"_key":"07039c311f0d","_type":"span","marks":[],"text":"\n\"Sparrows Point's proud history of helping protect our country is being recognized by the Trump Administration and Anduril Industries. Bringing manufacturing and good-paying jobs to our community and continuing that proud legacy.\"\n\n"},{"_key":"fe462f2ef986","_type":"span","marks":["strong"],"text":"Senator Johnny Ray Salling, District 6:"},{"_key":"efa86ea815cf","_type":"span","marks":[],"text":"\n\"I want to thank Our President Donald J. Trump and Anduril Industries for coming to Tradepoint Atlantic and being a part of a new opportunity in our community. Looking forward to being a part of history and working with Anduril on this exciting project.\"\n"}],"markDefs":[],"style":"normal"},{"_key":"0d12ab81d32f","_type":"block","children":[{"_key":"7e2d80b8290c","_type":"span","marks":["strong"],"text":"Baltimore County"}],"markDefs":[],"style":"normal"},{"_key":"10455e30d061","_type":"block","children":[{"_key":"7e2d80b8290c","_type":"span","marks":["strong"],"text":"County Executive Kathy Klausmeier, Baltimore County:"},{"_key":"509db9810c37","_type":"span","marks":[],"text":"\n\"Arsenal 2 marks a turning point for Sparrows Point. For generations, this site shaped America's steel and shipbuilding legacy, including its critical role during World War II, when workers here built the vessels that helped defend our nation. Seeing new life and advanced manufacturing return to this historic area is exciting for Baltimore County. This project will bring thousands of good jobs, new opportunities for local businesses, and billions in long-term economic value, strengthening our county for decades to come. It also reflects the significant progress at Tradepoint Atlantic, solidifying its status as a premier maritime hub and key partner in our region's economic future, building a stronger, more resilient foundation for the entire region.“\n\n"},{"_key":"a4975e127968","_type":"span","marks":["strong"],"text":"Council Chairman Mike Ertel, District 6:"},{"_key":"7c027c9f78d5","_type":"span","marks":[],"text":"\n\"For decades, Sparrows Point defined American industry, and Anduril's investment carries that legacy forward in a huge way. As we welcome Anduril to Baltimore County, we are thrilled to see the return of manufacturing and shipbuilding to this historic site. With thousands of new jobs and billions in economic investment on the way, this project represents a key milestone and transformative moment in Baltimore County's history.\"\n\n"},{"_key":"9b37535b6cc7","_type":"span","marks":["strong"],"text":"Councilman Pat Young, District 1:"},{"_key":"82873c115a79","_type":"span","marks":[],"text":"\n\"With thousands of manufacturing jobs on the way and a billion-dollar economic boost, this project represents extraordinary momentum for our region and a significant opportunity for our communities. This investment will help strengthen our industrial base and build a stronger, more resilient economic future.\"\n\n"},{"_key":"783bade470db","_type":"span","marks":["strong"],"text":"Councilman Julian Jones, District 4:"},{"_key":"1de73a61e2f9","_type":"span","marks":[],"text":"\n\"Sparrows Point has long been an economic engine for our region, and as the son of a factory worker who spent decades at the steel mill there, I know firsthand what those opportunities have meant to working families across Baltimore County. Anduril's multi-billion-dollar investment will have a transformative impact for this community, creating more than 3,000 new jobs and marking the historic return of shipbuilding to Sparrows Point. I welcome Anduril to our community and look forward to a close partnership that continues to drive economic growth across Baltimore County.\"\n\n"},{"_key":"58374e98c0cd","_type":"span","marks":["strong"],"text":"Councilman David Marks, District 5:"},{"_key":"980d50928f0b","_type":"span","marks":[],"text":"\n\"This is a historic announcement that keeps with Baltimore's tradition as a center for industry and shipbuilding.\"\n\n"},{"_key":"79431e7a1801","_type":"span","marks":["strong"],"text":"Councilman Todd Crandell, District 7:"},{"_key":"716b615e30af","_type":"span","marks":[],"text":"\n\"Over the last 10 years, Tradepoint Atlantic has led a transformative redevelopment of Sparrows Point, bringing nearly 20,000 jobs back to our community. With billions in economic investment and thousands of jobs, Anduril's investment will bring Sparrows Point's total employment to more than 23,000 workers, eclipsing the job totals last seen during the days of Bethlehem Steel. This resurgence is a testament to the incredible strength and resilience of our community and our heritage in industry.\"\n"}],"markDefs":[],"style":"normal"},{"_key":"bf05528402a2","_type":"block","children":[{"_key":"8e2f014d4508","_type":"span","marks":["strong"],"text":"Industry & Commerce"}],"markDefs":[],"style":"normal"},{"_key":"f2ce197f6cdf","_type":"block","children":[{"_key":"d39767b023c7","_type":"span","marks":["strong"],"text":"Kerry Doyle, Managing Director, Tradepoint Atlantic:"},{"_key":"fdf60de08f06","_type":"span","marks":[],"text":"\n\"Today's announcement is about more than welcoming a new tenant—it's about restoring one of America's most important industrial assets to its historic purpose. For generations, Sparrows Point helped build the ships that defended our nation. Today, that legacy continues as Anduril reactivates this iconic shipyard to support the next generation of American defense capabilities. Tradepoint Atlantic is uniquely built for this mission. Our strategic East Coast location, deep-water port, robust rail and interstate connections, and access to a world-class workforce make this one of the most capable industrial sites in the country. Together with Anduril, we're bringing a legacy industry back to Baltimore, creating thousands of skilled jobs, and helping strengthen America's defense industrial base for decades to come.“"}],"markDefs":[],"style":"normal"}],"fullBleed":false,"hideSlice":false,"paragraphWidth":"w-100"}],"slug":{"_type":"slug","current":"anduril-u-s-navy-invest-usd6-6-billion-to-expand-america-s-submarine-industrial-base"},"title":"Anduril, U.S. Navy Invest $6.6 Billion to Expand America's Submarine Industrial Base","viewType":"main"}},"showThumbnail":false},{"_key":"7421e4647b68","_type":"mediaLinkSlice","cards":[{"_key":"57a5d3c0a644","_type":"mediaLinkCard","color":{"_createdAt":"2025-03-28T19:57:45Z","_id":"312278d0-9291-4102-932f-2fbe38d107f5","_rev":"x8r7rwnZNJLuzU8uziaQjt","_system":{"base":{"id":"312278d0-9291-4102-932f-2fbe38d107f5","rev":"3h6Aq9HwJKloB0447GtDIQ"}},"_type":"color","_updatedAt":"2025-06-18T01:03:01Z","contrastColor":"#FFFFFF","hex":"#505544","metadata":null,"name":"Green"},"cta":[{"_key":"58a12ec6d617","_type":"internalLink","reference":{"_id":"80da306c-8db6-459b-a6ab-7886f484aee7","_type":"page","language":null,"parent":null,"slug":{"_type":"slug","current":"rebooting-the-arsenal"},"title":"Rebooting the Arsenal"},"targetBlank":false,"text":"Read More"}],"image":{"_type":"imageWithMeta","asset":{"_id":"image-dddfeebfe9d2f943790ffdbbf2bdbcca1efe6a0d-3840x2160-png","_type":"sanity.imageAsset","mimeType":"image/png","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":1.7777777777777777,"height":2160,"width":3840},"hasAlpha":true,"isOpaque":true}}},"label":"PT — \n01 / 02","title":"Rebooting\nThe Arsenal"},{"_key":"f958cf641d83","_type":"mediaLinkCard","color":{"_createdAt":"2025-03-28T19:59:10Z","_id":"06a5beb4-22c7-4d8c-97f1-2776c1f020e8","_rev":"s4FbY1rNJZOqUnJhlMyiRj","_type":"color","_updatedAt":"2025-06-18T01:02:36Z","contrastColor":"#010101","hex":"#8E9291","metadata":null,"name":"Mid Gray"},"cta":[{"_key":"31180e5151b4","_type":"internalLink","reference":{"_id":"449e16c3-e512-4532-8981-477835429a02","_type":"page","language":null,"parent":null,"slug":{"_type":"slug","current":"rebuild-the-arsenal"},"title":"Rebuild the Arsenal"},"targetBlank":false,"text":"Read More"}],"image":{"_type":"imageWithMeta","asset":{"_id":"image-a3ee20317f076eb30c952e3ac7ab05308f55d6dd-3840x2160-png","_type":"sanity.imageAsset","mimeType":"image/png","metadata":{"_type":"sanity.imageMetadata","dimensions":{"_type":"sanity.imageDimensions","aspectRatio":1.7777777777777777,"height":2160,"width":3840},"hasAlpha":true,"isOpaque":true}}},"label":"PT — \n02 / 02","title":"Rebuild\nThe Arsenal"}]}],"slug":{"_type":"slug","current":"home"},"title":"Home","path":""}
-    </script>
+<script id="ssgContent" type="application/json">{"_createdAt": "2025-03-18T06:14:17Z", "_id": "e89bef56-785e-4374-a5ed-02677442fcd5", "_rev": "DJbfSLnRy3scRAYOi53QWC", "_system": {"base": {"id": "e89bef56-785e-4374-a5ed-02677442fcd5", "rev": "DJbfSLnRy3scRAYOi0aayK"}}, "_type": "page", "_updatedAt": "2026-10-13T19:24:15Z", "category": "", "meta": {"_type": "meta", "description": "Anduril Industries builds advanced autonomous systems and defense technology to protect US and allied forces. Creating the future of national security through AI, robotics, and cutting-edge engineering. ", "title": "Transforming U.S. Defense Capabilities with Advanced Technology"}, "parent": null, "slices": [{"_key": "9c45887c2b61", "_type": "navColorSlice", "navColorMode": "solid-black"}, {"_key": "a688e3231e4a", "_type": "homeHero", "heroMedia": [{"_key": "64fbe72f393b", "breakpoint": 0, "video": {"_type": "videoWithMeta", "asset": {"_id": "file-df3ecf45617cc98348221cb192cd7b43b7bacf17-mp4", "_type": "sanity.fileAsset", "mimeType": "video/mp4", "duration": 30.78075, "width": 1920, "height": 1080, "optimized": [{"_key": "952189acdecb", "_type": "videoWithMeta", "asset": {"_id": "file-0521ac63b49c86418ee3e858508b311f021b7dd1-mp4", "_type": "sanity.fileAsset", "mimeType": "video/mp4", "duration": 30.78075, "width": 1920, "height": 1080, "thumbnail": {"_type": "image", "asset": {"_ref": "image-cb21015c90b01ff45e416a1cf8766ec64b1c6851-1920x1080-png", "_type": "reference"}}}}, {"_key": "02b367eaf43e", "_type": "videoWithMeta", "asset": {"_id": "file-e84b9d303c09edffc395636a6ce6fb43a0e84042-mp4", "_type": "sanity.fileAsset", "mimeType": "video/mp4", "duration": 30.78075, "width": 1600, "height": 900, "thumbnail": {"_type": "image", "asset": {"_ref": "image-cb21015c90b01ff45e416a1cf8766ec64b1c6851-1920x1080-png", "_type": "reference"}}}}, {"_key": "14cd44dcd137", "_type": "videoWithMeta", "asset": {"_id": "file-9aed9a65bbe0de562b9cbcf1d8596526dfd27316-mp4", "_type": "sanity.fileAsset", "mimeType": "video/mp4", "duration": 30.78075, "width": 1280, "height": 720, "thumbnail": {"_type": "image", "asset": {"_ref": "image-cb21015c90b01ff45e416a1cf8766ec64b1c6851-1920x1080-png", "_type": "reference"}}}}, {"_key": "dc205b6f21f2", "_type": "videoWithMeta", "asset": {"_id": "file-04c006e84c06833930764f48bdbb6589dc970525-mp4", "_type": "sanity.fileAsset", "mimeType": "video/mp4", "duration": 30.78075, "width": 854, "height": 480, "thumbnail": {"_type": "image", "asset": {"_ref": "image-cb21015c90b01ff45e416a1cf8766ec64b1c6851-1920x1080-png", "_type": "reference"}}}}], "thumbnail": {"_type": "image", "asset": {"_id": "image-cb21015c90b01ff45e416a1cf8766ec64b1c6851-1920x1080-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 1.7777777777777777, "height": 1080, "width": 1920}, "hasAlpha": false, "isOpaque": true}}}}}}, {"_key": "7fe6b34482b1", "breakpoint": 768, "video": {"_type": "videoWithMeta", "asset": {"_id": "file-bd2c4e89a086133499fbc4f47e284e1adb05c547-mp4", "_type": "sanity.fileAsset", "mimeType": "video/mp4", "duration": 30.78075, "width": 1080, "height": 1920, "optimized": [{"_key": "da0e3902ebc0", "_type": "videoWithMeta", "asset": {"_id": "file-1cdb520f900f3d15d20eb0b4fc267f738d2a0fa4-mp4", "_type": "sanity.fileAsset", "mimeType": "video/mp4", "duration": 30.78075, "width": 608, "height": 1080, "thumbnail": {"_type": "image", "asset": {"_ref": "image-c90c5474680ff0729e0e157aba6b00b067bdc3b9-1080x1920-png", "_type": "reference"}}}}, {"_key": "be94c32f62b9", "_type": "videoWithMeta", "asset": {"_id": "file-3540514a63a339b481fa2847a579556449aa17ac-mp4", "_type": "sanity.fileAsset", "mimeType": "video/mp4", "duration": 30.78075, "width": 506, "height": 900, "thumbnail": {"_type": "image", "asset": {"_ref": "image-c90c5474680ff0729e0e157aba6b00b067bdc3b9-1080x1920-png", "_type": "reference"}}}}, {"_key": "137f473e3438", "_type": "videoWithMeta", "asset": {"_id": "file-49809f8ba0a5ce2ff7828604202cfeb350372b6b-mp4", "_type": "sanity.fileAsset", "mimeType": "video/mp4", "duration": 30.78075, "width": 406, "height": 720, "thumbnail": {"_type": "image", "asset": {"_ref": "image-c90c5474680ff0729e0e157aba6b00b067bdc3b9-1080x1920-png", "_type": "reference"}}}}, {"_key": "114af0886218", "_type": "videoWithMeta", "asset": {"_id": "file-bc259af70ecd2f1a41963d3579884680ad846a42-mp4", "_type": "sanity.fileAsset", "mimeType": "video/mp4", "duration": 30.78075, "width": 270, "height": 480, "thumbnail": {"_type": "image", "asset": {"_ref": "image-c90c5474680ff0729e0e157aba6b00b067bdc3b9-1080x1920-png", "_type": "reference"}}}}], "thumbnail": {"_type": "image", "asset": {"_id": "image-c90c5474680ff0729e0e157aba6b00b067bdc3b9-1080x1920-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 0.5625, "height": 1920, "width": 1080}, "hasAlpha": false, "isOpaque": true}}}}}}]}, {"_key": "c4a9e6e10228", "_type": "featuredAnnouncementSlice", "description": "Refit the Fleet", "hideSlice": false, "mediaType": "video", "page": [{"_key": "adf016f0681f", "_type": "externalLink", "href": "https://www.anduril.com/arsenal/arsenal-2", "text": "Arsenal-2"}], "title": "Arsenal-2", "video": {"_type": "videoWithMeta", "asset": {"_id": "file-35043dafac099ecb39a0d0f57637ce0dc13ee802-mp4", "_type": "sanity.fileAsset", "mimeType": "video/mp4", "duration": 34.045, "width": 1920, "height": 1080, "thumbnail": {"_type": "image", "asset": {"_id": "image-1747f341deedbb5455e5b370cb54547c353dd99c-1920x1080-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 1.7777777777777777, "height": 1080, "width": 1920}, "hasAlpha": false, "isOpaque": true}}}}}}, {"_key": "4738f3b86511", "_type": "featuredProducts", "cards": [{"_key": "e5a34e8b3fbf", "_type": "featuredProduct", "description": "High-Throughput Thermodynamic Cycle & Integrated Powertrain", "image": {"_type": "imageWithMeta", "asset": {"_id": "image-9ea5ae8181d48c78365c6f8d8e3f3f35208e5f55-3000x2000-jpg", "_type": "sanity.imageAsset", "mimeType": "image/jpeg", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 1.5, "height": 2000, "width": 3000}, "hasAlpha": false, "isOpaque": true}}}, "layout": "", "mediaType": "image", "page": [], "title": "01 // PROPULSION CORE"}, {"_key": "360b2b2d9ea4", "_type": "featuredProduct", "description": "Real-Time Sensor Fusion & Edge Tactical Processing", "image": {"_type": "imageWithMeta", "alt": "test", "asset": {"_id": "image-d23c6903421f10c7191873592b8e823362fecbe8-882x878-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 1.0045558086560364, "height": 878, "width": 882}, "hasAlpha": true, "isOpaque": false}}}, "layout": "", "mediaType": "image", "page": [], "title": "02 // AUTONOMOUS GUIDANCE"}, {"_key": "0a5ecc59f60a", "_type": "featuredProduct", "description": "Advanced Lightweight Metallurgy & Aerodynamic Envelope", "image": {"_type": "imageWithMeta", "asset": {"_id": "image-c79ccecf787d455420edb440cbc7bf6a114cc680-882x878-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 1.0045558086560364, "height": 878, "width": 882}, "hasAlpha": true, "isOpaque": false}}}, "layout": "", "mediaType": "image", "page": [], "title": "03 // COMPOSITE AIRFRAME"}, {"_key": "35fe2e286a1b", "_type": "featuredProduct", "description": "Rapid Turnaround & Standard Mechanical Interface", "image": {"_type": "imageWithMeta", "asset": {"_id": "image-955e14dfee80e6022b1744580b6996cd435c6153-976x1952-jpg", "_type": "sanity.imageAsset", "mimeType": "image/jpeg", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 0.5, "height": 1952, "width": 976}, "hasAlpha": false, "isOpaque": true}}, "crop": {"_type": "sanity.imageCrop", "bottom": 0.14131470706260033, "left": 0, "right": 0, "top": 0.003122491974317819}, "hotspot": {"_type": "sanity.imageHotspot", "height": 0.8555628009630819, "width": 1, "x": 0.5, "y": 0.43090389245585875}}, "layout": "tall", "page": [], "title": "04 // MODULAR PAYLOAD BAY"}, {"_key": "d63e20ce1a60", "_type": "featuredProduct", "description": "Resilient Distributed Telemetry Across Operating Theaters", "image": {"_type": "imageWithMeta", "asset": {"_id": "image-35c91ba3a0603c99720933d52bad4c73f9fdca5f-3000x1500-jpg", "_type": "sanity.imageAsset", "mimeType": "image/jpeg", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 2, "height": 1500, "width": 3000}, "hasAlpha": false, "isOpaque": true}}}, "layout": "wide", "mediaType": "image", "page": [], "title": "05 // SWARM & MESH NETWORK"}, {"_key": "85b57dc5c580", "_type": "featuredProduct", "description": "Zero Specialized Ground Infrastructure Required", "image": {"_type": "imageWithMeta", "asset": {"_id": "image-16113e3a588bd30e5c67bf2ee6d7a0847845fb28-3000x3000-jpg", "_type": "sanity.imageAsset", "mimeType": "image/jpeg", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 1, "height": 3000, "width": 3000}, "hasAlpha": false, "isOpaque": true}}}, "layout": "", "mediaType": "image", "page": [], "title": "06 // EXPEDITIONARY LOGISTICS"}, {"_key": "49c191ad0528", "_type": "featuredProduct", "description": "Software-Defined Precision Assembly & Mass Production", "image": {"_type": "imageWithMeta", "asset": {"_id": "image-a005eecc853d709de52769704c0a6cc1083ac7c4-1131x630-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 1.7952380952380953, "height": 630, "width": 1131}, "hasAlpha": true, "isOpaque": true}}, "crop": {"_type": "sanity.imageCrop", "bottom": 0, "left": 0, "right": 0, "top": 0}, "hotspot": {"_type": "sanity.imageHotspot", "height": 1, "width": 1, "x": 0.5, "y": 0.5}}, "layout": "", "mediaType": "image", "page": [], "title": "07 // SOVEREIGN TOOLING"}]}, {"_key": "93ecd5d33c69", "_type": "spacerSlice", "backgroundColor": {"_createdAt": "2025-03-28T19:47:50Z", "_id": "0970ba10-788c-4613-b319-39009fd75a2a", "_rev": "UXH5eRH3LWIQEsoDKxb1Mv", "_system": {"base": {"id": "0970ba10-788c-4613-b319-39009fd75a2a", "rev": "g3LktQjILKhofqwxYxP0ke"}}, "_type": "color", "_updatedAt": "2026-06-04T16:31:45Z", "contrastColor": "#FFFFFF", "hex": "#010101", "metadata": null, "name": "Black"}, "hideSlice": false, "horizontalRule": false, "spacerHeight": "xl"}, {"_key": "d53806f593f9", "_type": "arsenalSlice", "arsenalList": [{"_key": "item-10x", "_type": "arsenalListItem", "image": {"_type": "imageWithMeta", "asset": {"_id": "image-bf1545878e8ef76600cd522becab5280ba5c9f7f-3456x1588-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 2.1763224181360203, "height": 1588, "width": 3456}, "hasAlpha": true, "isOpaque": true}}}, "page": {"_type": "internalLink", "text": "10x", "reference": {"title": "10x"}}, "subtitle": "Throughput Multiplier\nAutonomous performance exceeding legacy systems by an order of magnitude."}, {"_key": "item-75pct", "_type": "arsenalListItem", "image": {"_type": "imageWithMeta", "asset": {"_id": "image-b3a671f3a39291681b26483bb5e31ea22f53fa37-2844x1600-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 1.7775, "height": 1600, "width": 2844}, "hasAlpha": true, "isOpaque": false}}}, "page": {"_type": "internalLink", "text": "-75%", "reference": {"title": "-75%"}}, "subtitle": "Unit Lifecycle Cost\nRadical reduction in capital expenditure and recurring operational cost."}, {"_key": "item-12wks", "_type": "arsenalListItem", "image": {"_type": "imageWithMeta", "asset": {"_id": "image-bf1545878e8ef76600cd522becab5280ba5c9f7f-3456x1588-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 2.1763224181360203, "height": 1588, "width": 3456}, "hasAlpha": true, "isOpaque": true}}}, "page": {"_type": "internalLink", "text": "<12 Wks", "reference": {"title": "<12 Wks"}}, "subtitle": "Build to Deployment\nCompressing multi-year procurement into weeks with software-defined tooling."}, {"_key": "item-100pct", "_type": "arsenalListItem", "image": {"_type": "imageWithMeta", "asset": {"_id": "image-b3a671f3a39291681b26483bb5e31ea22f53fa37-2844x1600-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 1.7775, "height": 1600, "width": 2844}, "hasAlpha": true, "isOpaque": false}}}, "page": {"_type": "internalLink", "text": "100%", "reference": {"title": "100%"}}, "subtitle": "Rig Validation\nClosed-loop hardware telemetry verified under operational stress."}], "backgroundColor": {"_createdAt": "2025-03-28T19:59:10Z", "_id": "06a5beb4-22c7-4d8c-97f1-2776c1f020e8", "_rev": "s4FbY1rNJZOqUnJhlMyiRj", "_type": "color", "_updatedAt": "2025-06-18T01:02:36Z", "contrastColor": "#010101", "hex": "#8E9291", "metadata": null, "name": "Mid Gray"}, "hideSlice": false}, {"_key": "7421e4647b68", "_type": "mediaLinkSlice", "cards": [{"_key": "57a5d3c0a644", "_type": "mediaLinkCard", "color": {"_createdAt": "2025-03-28T19:57:45Z", "_id": "312278d0-9291-4102-932f-2fbe38d107f5", "_rev": "x8r7rwnZNJLuzU8uziaQjt", "_system": {"base": {"id": "312278d0-9291-4102-932f-2fbe38d107f5", "rev": "3h6Aq9HwJKloB0447GtDIQ"}}, "_type": "color", "_updatedAt": "2025-06-18T01:03:01Z", "contrastColor": "#FFFFFF", "hex": "#505544", "metadata": null, "name": "Green"}, "cta": [{"_key": "cta-yt", "_type": "externalLink", "text": "Watch on YouTube", "href": "#"}], "image": {"_type": "imageWithMeta", "asset": {"_id": "image-dddfeebfe9d2f943790ffdbbf2bdbcca1efe6a0d-3840x2160-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 1.7777777777777777, "height": 2160, "width": 3840}, "hasAlpha": true, "isOpaque": true}}}, "label": "PROMO FILM // 01", "title": "Conrad\nIn Motion"}]}], "slug": {"_type": "slug", "current": "home"}, "title": "Home", "path": ""}</script>
 <script id="ssgSiteSettings" type="application/json">{"_createdAt": "2025-03-18T06:04:19Z", "_id": "site-settings", "_rev": "08637a01-5c94-4285-8e4e-cf867dd4b065", "_system": {"base": {"id": "site-settings", "rev": "MkeIIDuGc7PHMsbgNc9vbr"}}, "_type": "settings", "_updatedAt": "2026-10-13T01:37:02Z", "companySection": {"_type": "menuSection", "title": "", "linkLists": []}, "contactLink": {"_type": "externalLink", "href": "mailto:contact@anduril.com", "text": "contact@anduril.com"}, "contactTitle": "Contact", "cookieAcceptText": "Accept", "cookieBannerText": [{"_key": "7341e6727d5e", "_type": "block", "children": [{"_key": "4d32b47c2534", "_type": "span", "marks": [], "text": "We use optional analytics cookies to understand how you use our site so we can improve it. View our "}, {"_key": "01fb8c8389c1", "_type": "span", "marks": ["d51deb5c91f0"], "text": "Privacy Policy"}, {"_key": "6f9874936159", "_type": "span", "marks": [], "text": " for details."}], "markDefs": [{"_key": "d51deb5c91f0", "_type": "internalLink", "reference": {"_id": "f531d820-57ae-42c6-a886-7860cbdd672a", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "privacy-policy"}, "title": "Privacy Policy"}, "targetBlank": false}], "style": "normal"}], "cookieRejectText": "Reject", "copyright": "Copyright \u00a9 2026 Anduril Industries", "countries": [{"_key": "jnZmvNoHPLvbqxUHiLR1MP", "checkbox": "United States"}, {"_key": "jnZmvNoHPLvbqxUHiLQwNl", "checkbox": "Afghanistan"}, {"_key": "jnZmvNoHPLvbqxUHiLQwPR", "checkbox": "Albania"}, {"_key": "jnZmvNoHPLvbqxUHiLQwR7", "checkbox": "Algeria"}, {"_key": "jnZmvNoHPLvbqxUHiLQwSn", "checkbox": "Andorra"}, {"_key": "jnZmvNoHPLvbqxUHiLQwUT", "checkbox": "Angola"}, {"_key": "jnZmvNoHPLvbqxUHiLQwW9", "checkbox": "Antigua and Barbuda"}, {"_key": "jnZmvNoHPLvbqxUHiLQwXp", "checkbox": "Argentina"}, {"_key": "jnZmvNoHPLvbqxUHiLQwZV", "checkbox": "Armenia"}, {"_key": "jnZmvNoHPLvbqxUHiLQwbB", "checkbox": "Australia"}, {"_key": "jnZmvNoHPLvbqxUHiLQwcr", "checkbox": "Austria"}, {"_key": "jnZmvNoHPLvbqxUHiLQweX", "checkbox": "Azerbaijan"}, {"_key": "jnZmvNoHPLvbqxUHiLQwgD", "checkbox": "Bahamas"}, {"_key": "jnZmvNoHPLvbqxUHiLQwht", "checkbox": "Bahrain"}, {"_key": "jnZmvNoHPLvbqxUHiLQwjZ", "checkbox": "Bangladesh"}, {"_key": "jnZmvNoHPLvbqxUHiLQwlF", "checkbox": "Barbados"}, {"_key": "jnZmvNoHPLvbqxUHiLQwmv", "checkbox": "Belarus"}, {"_key": "jnZmvNoHPLvbqxUHiLQwob", "checkbox": "Belgium"}, {"_key": "jnZmvNoHPLvbqxUHiLQwqH", "checkbox": "Belize"}, {"_key": "jnZmvNoHPLvbqxUHiLQwrx", "checkbox": "Benin"}, {"_key": "jnZmvNoHPLvbqxUHiLQwtd", "checkbox": "Bhutan"}, {"_key": "jnZmvNoHPLvbqxUHiLQwvJ", "checkbox": "Bolivia"}, {"_key": "jnZmvNoHPLvbqxUHiLQwwz", "checkbox": "Bosnia and Herzegovina"}, {"_key": "jnZmvNoHPLvbqxUHiLQwyf", "checkbox": "Botswana"}, {"_key": "jnZmvNoHPLvbqxUHiLQx0L", "checkbox": "Brazil"}, {"_key": "jnZmvNoHPLvbqxUHiLQx21", "checkbox": "Brunei"}, {"_key": "jnZmvNoHPLvbqxUHiLQx3h", "checkbox": "Bulgaria"}, {"_key": "jnZmvNoHPLvbqxUHiLQx5N", "checkbox": "Burkina Faso"}, {"_key": "jnZmvNoHPLvbqxUHiLQx73", "checkbox": "Burundi"}, {"_key": "jnZmvNoHPLvbqxUHiLQx8j", "checkbox": "Cabo Verde"}, {"_key": "jnZmvNoHPLvbqxUHiLQxAP", "checkbox": "Cambodia"}, {"_key": "jnZmvNoHPLvbqxUHiLQxC5", "checkbox": "Cameroon"}, {"_key": "jnZmvNoHPLvbqxUHiLQxDl", "checkbox": "Canada"}, {"_key": "jnZmvNoHPLvbqxUHiLQxFR", "checkbox": "Central African Republic (CAR)"}, {"_key": "jnZmvNoHPLvbqxUHiLQxH7", "checkbox": "Chad"}, {"_key": "jnZmvNoHPLvbqxUHiLQxIn", "checkbox": "Chile"}, {"_key": "jnZmvNoHPLvbqxUHiLQxKT", "checkbox": "China"}, {"_key": "jnZmvNoHPLvbqxUHiLQxM9", "checkbox": "Colombia"}, {"_key": "jnZmvNoHPLvbqxUHiLQxNp", "checkbox": "Comoros"}, {"_key": "jnZmvNoHPLvbqxUHiLQxPV", "checkbox": "Congo (Congo-Brazzaville)"}, {"_key": "jnZmvNoHPLvbqxUHiLQxRB", "checkbox": "Costa Rica"}, {"_key": "jnZmvNoHPLvbqxUHiLQxSr", "checkbox": "Croatia"}, {"_key": "jnZmvNoHPLvbqxUHiLQxUX", "checkbox": "Cuba"}, {"_key": "jnZmvNoHPLvbqxUHiLQxWD", "checkbox": "Cyprus"}, {"_key": "jnZmvNoHPLvbqxUHiLQxXt", "checkbox": "Czech Republic (Czechia)"}, {"_key": "jnZmvNoHPLvbqxUHiLQxZZ", "checkbox": "Democratic Republic of the Congo"}, {"_key": "jnZmvNoHPLvbqxUHiLQxbF", "checkbox": "Denmark"}, {"_key": "jnZmvNoHPLvbqxUHiLQxcv", "checkbox": "Djibouti"}, {"_key": "jnZmvNoHPLvbqxUHiLQxeb", "checkbox": "Dominica"}, {"_key": "jnZmvNoHPLvbqxUHiLQxgH", "checkbox": "Dominican Republic"}, {"_key": "jnZmvNoHPLvbqxUHiLQxhx", "checkbox": "East Timor (Timor-Leste)"}, {"_key": "jnZmvNoHPLvbqxUHiLQxjd", "checkbox": "Ecuador"}, {"_key": "jnZmvNoHPLvbqxUHiLQxlJ", "checkbox": "Egypt"}, {"_key": "jnZmvNoHPLvbqxUHiLQxmz", "checkbox": "El Salvador"}, {"_key": "jnZmvNoHPLvbqxUHiLQxof", "checkbox": "Equatorial Guinea"}, {"_key": "jnZmvNoHPLvbqxUHiLQxqL", "checkbox": "Eritrea"}, {"_key": "jnZmvNoHPLvbqxUHiLQxs1", "checkbox": "Estonia"}, {"_key": "jnZmvNoHPLvbqxUHiLQxth", "checkbox": "Eswatini (fmr. \"Swaziland\")"}, {"_key": "jnZmvNoHPLvbqxUHiLQxvN", "checkbox": "Ethiopia"}, {"_key": "jnZmvNoHPLvbqxUHiLQxx3", "checkbox": "Fiji"}, {"_key": "jnZmvNoHPLvbqxUHiLQxyj", "checkbox": "Finland"}, {"_key": "jnZmvNoHPLvbqxUHiLQy0P", "checkbox": "France"}, {"_key": "jnZmvNoHPLvbqxUHiLQy25", "checkbox": "Gabon"}, {"_key": "jnZmvNoHPLvbqxUHiLQy3l", "checkbox": "Gambia"}, {"_key": "jnZmvNoHPLvbqxUHiLQy5R", "checkbox": "Georgia"}, {"_key": "jnZmvNoHPLvbqxUHiLQy77", "checkbox": "Germany"}, {"_key": "jnZmvNoHPLvbqxUHiLQy8n", "checkbox": "Ghana"}, {"_key": "jnZmvNoHPLvbqxUHiLQyAT", "checkbox": "Greece"}, {"_key": "jnZmvNoHPLvbqxUHiLQyC9", "checkbox": "Grenada"}, {"_key": "jnZmvNoHPLvbqxUHiLQyDp", "checkbox": "Guatemala"}, {"_key": "jnZmvNoHPLvbqxUHiLQyFV", "checkbox": "Guinea"}, {"_key": "jnZmvNoHPLvbqxUHiLQyHB", "checkbox": "Guinea-Bissau"}, {"_key": "jnZmvNoHPLvbqxUHiLQyIr", "checkbox": "Guyana"}, {"_key": "jnZmvNoHPLvbqxUHiLQyKX", "checkbox": "Haiti"}, {"_key": "jnZmvNoHPLvbqxUHiLQyMD", "checkbox": "Honduras"}, {"_key": "jnZmvNoHPLvbqxUHiLQyNt", "checkbox": "Hungary"}, {"_key": "jnZmvNoHPLvbqxUHiLQyPZ", "checkbox": "Iceland"}, {"_key": "jnZmvNoHPLvbqxUHiLQyRF", "checkbox": "India"}, {"_key": "jnZmvNoHPLvbqxUHiLQySv", "checkbox": "Indonesia"}, {"_key": "jnZmvNoHPLvbqxUHiLQyUb", "checkbox": "Iran"}, {"_key": "jnZmvNoHPLvbqxUHiLQyWH", "checkbox": "Iraq"}, {"_key": "jnZmvNoHPLvbqxUHiLQyXx", "checkbox": "Ireland"}, {"_key": "jnZmvNoHPLvbqxUHiLQyZd", "checkbox": "Israel"}, {"_key": "jnZmvNoHPLvbqxUHiLQybJ", "checkbox": "Italy"}, {"_key": "jnZmvNoHPLvbqxUHiLQycz", "checkbox": "Jamaica"}, {"_key": "jnZmvNoHPLvbqxUHiLQyef", "checkbox": "Japan"}, {"_key": "jnZmvNoHPLvbqxUHiLQygL", "checkbox": "Jordan"}, {"_key": "jnZmvNoHPLvbqxUHiLQyi1", "checkbox": "Kazakhstan"}, {"_key": "jnZmvNoHPLvbqxUHiLQyjh", "checkbox": "Kenya"}, {"_key": "jnZmvNoHPLvbqxUHiLQylN", "checkbox": "Kiribati"}, {"_key": "jnZmvNoHPLvbqxUHiLQyn3", "checkbox": "Korea (North)"}, {"_key": "jnZmvNoHPLvbqxUHiLQyoj", "checkbox": "Korea (South)"}, {"_key": "jnZmvNoHPLvbqxUHiLQyqP", "checkbox": "Kosovo"}, {"_key": "jnZmvNoHPLvbqxUHiLQys5", "checkbox": "Kuwait"}, {"_key": "jnZmvNoHPLvbqxUHiLQytl", "checkbox": "Kyrgyzstan"}, {"_key": "jnZmvNoHPLvbqxUHiLQyvR", "checkbox": "Laos"}, {"_key": "jnZmvNoHPLvbqxUHiLQyx7", "checkbox": "Latvia"}, {"_key": "jnZmvNoHPLvbqxUHiLQyyn", "checkbox": "Lebanon"}, {"_key": "jnZmvNoHPLvbqxUHiLQz0T", "checkbox": "Lesotho"}, {"_key": "jnZmvNoHPLvbqxUHiLQz29", "checkbox": "Liberia"}, {"_key": "jnZmvNoHPLvbqxUHiLQz3p", "checkbox": "Libya"}, {"_key": "jnZmvNoHPLvbqxUHiLQz5V", "checkbox": "Liechtenstein"}, {"_key": "jnZmvNoHPLvbqxUHiLQz7B", "checkbox": "Lithuania"}, {"_key": "jnZmvNoHPLvbqxUHiLQz8r", "checkbox": "Luxembourg"}, {"_key": "jnZmvNoHPLvbqxUHiLQzAX", "checkbox": "Madagascar"}, {"_key": "jnZmvNoHPLvbqxUHiLQzCD", "checkbox": "Malawi"}, {"_key": "jnZmvNoHPLvbqxUHiLQzDt", "checkbox": "Malaysia"}, {"_key": "jnZmvNoHPLvbqxUHiLQzFZ", "checkbox": "Maldives"}, {"_key": "jnZmvNoHPLvbqxUHiLQzHF", "checkbox": "Mali"}, {"_key": "jnZmvNoHPLvbqxUHiLQzIv", "checkbox": "Malta"}, {"_key": "jnZmvNoHPLvbqxUHiLQzKb", "checkbox": "Marshall Islands"}, {"_key": "jnZmvNoHPLvbqxUHiLQzMH", "checkbox": "Mauritania"}, {"_key": "jnZmvNoHPLvbqxUHiLQzNx", "checkbox": "Mauritius"}, {"_key": "jnZmvNoHPLvbqxUHiLQzPd", "checkbox": "Mexico"}, {"_key": "jnZmvNoHPLvbqxUHiLQzRJ", "checkbox": "Micronesia"}, {"_key": "jnZmvNoHPLvbqxUHiLQzSz", "checkbox": "Moldova"}, {"_key": "jnZmvNoHPLvbqxUHiLQzUf", "checkbox": "Monaco"}, {"_key": "jnZmvNoHPLvbqxUHiLQzWL", "checkbox": "Mongolia"}, {"_key": "jnZmvNoHPLvbqxUHiLQzY1", "checkbox": "Montenegro"}, {"_key": "jnZmvNoHPLvbqxUHiLQzZh", "checkbox": "Morocco"}, {"_key": "jnZmvNoHPLvbqxUHiLQzbN", "checkbox": "Mozambique"}, {"_key": "jnZmvNoHPLvbqxUHiLQzd3", "checkbox": "Namibia"}, {"_key": "jnZmvNoHPLvbqxUHiLQzej", "checkbox": "Nauru"}, {"_key": "jnZmvNoHPLvbqxUHiLQzgP", "checkbox": "Nepal"}, {"_key": "jnZmvNoHPLvbqxUHiLQzi5", "checkbox": "Netherlands"}, {"_key": "jnZmvNoHPLvbqxUHiLQzjl", "checkbox": "New Zealand"}, {"_key": "jnZmvNoHPLvbqxUHiLQzlR", "checkbox": "Nicaragua"}, {"_key": "jnZmvNoHPLvbqxUHiLQzn7", "checkbox": "Niger"}, {"_key": "jnZmvNoHPLvbqxUHiLQzon", "checkbox": "Nigeria"}, {"_key": "jnZmvNoHPLvbqxUHiLQzqT", "checkbox": "North Macedonia"}, {"_key": "jnZmvNoHPLvbqxUHiLQzs9", "checkbox": "Norway"}, {"_key": "jnZmvNoHPLvbqxUHiLQztp", "checkbox": "Oman"}, {"_key": "jnZmvNoHPLvbqxUHiLQzvV", "checkbox": "Pakistan"}, {"_key": "jnZmvNoHPLvbqxUHiLQzxB", "checkbox": "Palau"}, {"_key": "jnZmvNoHPLvbqxUHiLQzyr", "checkbox": "Panama"}, {"_key": "jnZmvNoHPLvbqxUHiLR00X", "checkbox": "Papua New Guinea"}, {"_key": "jnZmvNoHPLvbqxUHiLR02D", "checkbox": "Paraguay"}, {"_key": "jnZmvNoHPLvbqxUHiLR03t", "checkbox": "Peru"}, {"_key": "jnZmvNoHPLvbqxUHiLR05Z", "checkbox": "Philippines"}, {"_key": "jnZmvNoHPLvbqxUHiLR07F", "checkbox": "Poland"}, {"_key": "jnZmvNoHPLvbqxUHiLR08v", "checkbox": "Portugal"}, {"_key": "jnZmvNoHPLvbqxUHiLR0Ab", "checkbox": "Qatar"}, {"_key": "jnZmvNoHPLvbqxUHiLR0CH", "checkbox": "Romania"}, {"_key": "jnZmvNoHPLvbqxUHiLR0Dx", "checkbox": "Russia"}, {"_key": "jnZmvNoHPLvbqxUHiLR0Fd", "checkbox": "Rwanda"}, {"_key": "jnZmvNoHPLvbqxUHiLR0HJ", "checkbox": "Saint Kitts and Nevis"}, {"_key": "jnZmvNoHPLvbqxUHiLR0Iz", "checkbox": "Saint Lucia"}, {"_key": "jnZmvNoHPLvbqxUHiLR0Kf", "checkbox": "Saint Vincent and the Grenadines"}, {"_key": "jnZmvNoHPLvbqxUHiLR0ML", "checkbox": "Samoa"}, {"_key": "jnZmvNoHPLvbqxUHiLR0O1", "checkbox": "San Marino"}, {"_key": "jnZmvNoHPLvbqxUHiLR0Ph", "checkbox": "S\u00e3o Tom\u00e9 and Pr\u00edncipe"}, {"_key": "jnZmvNoHPLvbqxUHiLR0RN", "checkbox": "Saudi Arabia"}, {"_key": "jnZmvNoHPLvbqxUHiLR0T3", "checkbox": "Senegal"}, {"_key": "jnZmvNoHPLvbqxUHiLR0Uj", "checkbox": "Serbia"}, {"_key": "jnZmvNoHPLvbqxUHiLR0WP", "checkbox": "Seychelles"}, {"_key": "jnZmvNoHPLvbqxUHiLR0Y5", "checkbox": "Sierra Leone"}, {"_key": "jnZmvNoHPLvbqxUHiLR0Zl", "checkbox": "Singapore"}, {"_key": "jnZmvNoHPLvbqxUHiLR0bR", "checkbox": "Slovakia"}, {"_key": "jnZmvNoHPLvbqxUHiLR0d7", "checkbox": "Slovenia"}, {"_key": "jnZmvNoHPLvbqxUHiLR0en", "checkbox": "Solomon Islands"}, {"_key": "jnZmvNoHPLvbqxUHiLR0gT", "checkbox": "Somalia"}, {"_key": "jnZmvNoHPLvbqxUHiLR0i9", "checkbox": "South Africa"}, {"_key": "jnZmvNoHPLvbqxUHiLR0jp", "checkbox": "South Sudan"}, {"_key": "jnZmvNoHPLvbqxUHiLR0lV", "checkbox": "Spain"}, {"_key": "jnZmvNoHPLvbqxUHiLR0nB", "checkbox": "Sri Lanka"}, {"_key": "jnZmvNoHPLvbqxUHiLR0or", "checkbox": "Sudan"}, {"_key": "jnZmvNoHPLvbqxUHiLR0qX", "checkbox": "Suriname"}, {"_key": "jnZmvNoHPLvbqxUHiLR0sD", "checkbox": "Sweden"}, {"_key": "jnZmvNoHPLvbqxUHiLR0tt", "checkbox": "Switzerland"}, {"_key": "jnZmvNoHPLvbqxUHiLR0vZ", "checkbox": "Syria"}, {"_key": "jnZmvNoHPLvbqxUHiLR0xF", "checkbox": "Taiwan"}, {"_key": "jnZmvNoHPLvbqxUHiLR0yv", "checkbox": "Tajikistan"}, {"_key": "jnZmvNoHPLvbqxUHiLR10b", "checkbox": "Tanzania"}, {"_key": "jnZmvNoHPLvbqxUHiLR12H", "checkbox": "Thailand"}, {"_key": "jnZmvNoHPLvbqxUHiLR13x", "checkbox": "Togo"}, {"_key": "jnZmvNoHPLvbqxUHiLR15d", "checkbox": "Tonga"}, {"_key": "jnZmvNoHPLvbqxUHiLR17J", "checkbox": "Trinidad and Tobago"}, {"_key": "jnZmvNoHPLvbqxUHiLR18z", "checkbox": "Tunisia"}, {"_key": "jnZmvNoHPLvbqxUHiLR1Af", "checkbox": "Turkey"}, {"_key": "jnZmvNoHPLvbqxUHiLR1CL", "checkbox": "Turkmenistan"}, {"_key": "jnZmvNoHPLvbqxUHiLR1E1", "checkbox": "Tuvalu"}, {"_key": "jnZmvNoHPLvbqxUHiLR1Fh", "checkbox": "Uganda"}, {"_key": "jnZmvNoHPLvbqxUHiLR1HN", "checkbox": "Ukraine"}, {"_key": "jnZmvNoHPLvbqxUHiLR1J3", "checkbox": "United Arab Emirates (UAE)"}, {"_key": "jnZmvNoHPLvbqxUHiLR1Kj", "checkbox": "United Kingdom"}, {"_key": "jnZmvNoHPLvbqxUHiLR1O5", "checkbox": "Uruguay"}, {"_key": "jnZmvNoHPLvbqxUHiLR1Pl", "checkbox": "Uzbekistan"}, {"_key": "jnZmvNoHPLvbqxUHiLR1RR", "checkbox": "Vanuatu"}, {"_key": "jnZmvNoHPLvbqxUHiLR1T7", "checkbox": "Vatican City"}, {"_key": "jnZmvNoHPLvbqxUHiLR1Un", "checkbox": "Venezuela"}, {"_key": "jnZmvNoHPLvbqxUHiLR1WT", "checkbox": "Vietnam"}, {"_key": "jnZmvNoHPLvbqxUHiLR1Y9", "checkbox": "Yemen"}, {"_key": "jnZmvNoHPLvbqxUHiLR1Zp", "checkbox": "Zambia"}, {"_key": "jnZmvNoHPLvbqxUHiLR1bV", "checkbox": "Zimbabwe"}], "footerLinks": [{"_key": "87b45c52e033", "_type": "linkList", "links": [{"_key": "4fd353d6a726", "_type": "internalLink", "reference": {"_id": "8ad5b67f-d2a2-4d41-8a94-fec4c4d833ad", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "mission"}, "title": "Mission"}, "targetBlank": false, "text": "Mission"}, {"_key": "3417f3ec3e8a", "_type": "internalLink", "reference": {"_id": "cb940787-64b7-481d-8379-537ea6a1cf56", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "news"}, "title": "Newsroom"}, "targetBlank": false, "text": "Newsroom"}, {"_key": "ac182a5b1b0c", "_type": "internalLink", "reference": {"_id": "d507a0a3-b913-4639-b6d1-45ba32ad3c7c", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "anduril-leadership"}, "title": "Anduril Leadership"}, "targetBlank": false, "text": "Leadership"}, {"_key": "0fb9c8e83ce9", "_type": "externalLink", "href": "https://gear.anduril.com/", "text": "Gear Store"}], "title": "Company"}, {"_key": "3c70fba06018", "_type": "linkList", "links": [{"_key": "1860ffb87367", "_type": "internalLink", "reference": {"_id": "a4f36046-112e-4003-92c1-8590bec6104d", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "careers"}, "title": "Careers"}, "targetBlank": false, "text": "Careers"}, {"_key": "29d948513bec", "_type": "internalLink", "reference": {"_id": "95fb8e9e-b85a-4f2e-8505-eace3df317d4", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "early-careers"}, "title": "Early Careers"}, "targetBlank": false, "text": "Early Career"}, {"_key": "216cedf74b0b", "_type": "internalLink", "reference": {"_id": "1b4751b5-a179-4850-b96d-053d56399bf7", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "veteran-careers"}, "title": "Veteran Careers"}, "targetBlank": false, "text": "Veteran Careers"}, {"_key": "131fdc9b1b85", "_type": "internalLink", "reference": {"_id": "a3b29cea-a8b8-48f6-9786-be1c5301515a", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "open-roles"}, "title": "Open Roles"}, "targetBlank": false, "text": "Open Roles"}], "title": "Work with us"}, {"_key": "2fc72fe304db", "_type": "linkList", "links": [{"_key": "b2c1bbe20ce9", "_type": "externalLink", "href": "https://x.com/anduriltech", "text": "X"}, {"_key": "2af8df054c35", "_type": "externalLink", "href": "https://www.youtube.com/@Anduril", "text": "YouTube"}, {"_key": "7f1f15b03eff", "_type": "externalLink", "href": "https://www.instagram.com/anduril", "text": "Instagram"}, {"_key": "cf26f41bba1a", "_type": "externalLink", "href": "https://www.facebook.com/andurilindustries/", "text": "Facebook"}, {"_key": "179bb6cb207c", "_type": "externalLink", "href": "https://www.linkedin.com/company/anduril/", "text": "LinkedIn"}], "title": "Social"}], "footerSmallPrintLinks": [{"_key": "3c356ec9c429", "_type": "internalLink", "reference": {"_id": "f531d820-57ae-42c6-a886-7860cbdd672a", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "privacy-policy"}, "title": "Privacy Policy"}, "targetBlank": false, "text": "Privacy Policy"}, {"_key": "c60f5c26ea06", "_type": "internalLink", "reference": {"_id": "94b9783a-b49d-4f3f-a970-23c3d28005b3", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "terms-of-use"}, "title": "Terms of Use"}, "targetBlank": false, "text": "Terms of Use"}, {"_key": "00f373265ad4", "_type": "internalLink", "reference": {"_id": "c1c86b6c-f9a6-4c94-a798-ec8fc634a099", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "modern-anti-slavery-policy"}, "title": "Modern Anti-Slavery Policy"}, "targetBlank": false, "type": "primary"}, {"_key": "1d78d1dd3559", "_type": "internalLink", "reference": {"_id": "cb9a7aa7-6494-4557-87f2-e3f7be7709c2", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "investor-relations"}, "title": "Investor Relations"}, "targetBlank": false}, {"_key": "f8111382aa52", "_type": "internalLink", "reference": {"_id": "8e0bc047-7e12-41ba-84c3-0c5baa235003", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "supplier-relations"}, "title": "Supplier Relations"}, "targetBlank": false}, {"_key": "05c49d5ca42aa55e3bbb781726ceff72", "_type": "internalLink", "reference": {"_id": "432b562b-c62a-4ba2-bf03-215bd6433b8d", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "uk-carbon-reduction-plan"}, "title": "UK Carbon Reduction Plan"}, "targetBlank": false}], "menuSections": [{"_key": "nav_home", "_type": "internalLink", "reference": {"_id": "ref_home", "_type": "page", "slug": {"_type": "slug", "current": ""}, "title": "Home"}, "targetBlank": false, "text": "Home", "type": "primary"}, {"_key": "nav_tech", "_type": "internalLink", "reference": {"_id": "ref_tech", "_type": "page", "slug": {"_type": "slug", "current": "technology"}, "title": "Technology"}, "targetBlank": false, "text": "Technology", "type": "primary"}, {"_key": "nav_biz", "_type": "internalLink", "reference": {"_id": "ref_biz", "_type": "page", "slug": {"_type": "slug", "current": "business"}, "title": "Business"}, "targetBlank": false, "text": "Business", "type": "primary"}, {"_key": "nav_about", "_type": "internalLink", "reference": {"_id": "ref_about", "_type": "page", "slug": {"_type": "slug", "current": "about"}, "title": "About Us"}, "targetBlank": false, "text": "About Us", "type": "primary"}], "metaDescription": "Anduril Industries, Inc. is an American defense technology company that specializes in advanced autonomous systems.", "metaImage": {"_type": "image", "asset": {"_id": "image-f7d0f077c398e8e24666e9430611395186d347bd-1200x630-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 1.9047619047619047, "height": 630, "width": 1200}, "hasAlpha": false, "isOpaque": true}}}, "metaSiteName": "Anduril", "metaTitle": "Anduril ", "newsDefaultImage": {"_type": "imageWithMeta", "asset": {"_id": "image-1fa7fddde7f8064464c322de055723cc1caa8407-1152x648-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 1.7777777777777777, "height": 648, "width": 1152}, "hasAlpha": true, "isOpaque": true}}}, "newsFeaturedArticlesCta": [{"_key": "860a4904ff08", "_type": "internalLink", "reference": {"_id": "cb940787-64b7-481d-8379-537ea6a1cf56", "_type": "page", "language": null, "parent": null, "slug": {"_type": "slug", "current": "news"}, "title": "Newsroom"}, "targetBlank": false, "text": "All articles", "type": "primary"}], "newsRelatedArticlesTitle": "Similar News", "orgDescription": "Anduril Industries, Inc. is an American defense technology company that specializes in advanced autonomous systems.", "orgFoundingDate": "2017-06-21", "orgIndustry": "Defence", "orgLogo": {"square": {"_type": "image", "asset": {"_id": "image-62b0349aab0dbe8d6eab984c38eb7969e80c0af3-256x256-png", "_type": "sanity.imageAsset", "mimeType": "image/png", "metadata": {"_type": "sanity.imageMetadata", "dimensions": {"_type": "sanity.imageDimensions", "aspectRatio": 1, "height": 256, "width": 256}, "hasAlpha": true, "isOpaque": true}}}}, "orgName": "Anduril Industries", "orgUrl": "https://www.anduril.com/", "redirects": {"_createdAt": "2025-04-24T23:40:30Z", "_id": "redirects", "_rev": "KcOogy2Mgj3gcdnepg7z2H", "_system": {"base": {"id": "redirects", "rev": "MkeIIDuGc7PHMsbgNShzAy"}}, "_type": "redirects", "_updatedAt": "2026-10-12T04:04:37Z", "rules": [{"_key": "19a49d45af71", "_type": "rules", "from": "/lattice/", "to": "/", "type": 301}, {"_key": "1ef95a12262dc7778c1fa56dc1510365", "_type": "rules", "from": "/air/", "to": "/", "type": 301}, {"_key": "75d72e9e6c78c65bd64d51382b0f3045", "_type": "rules", "from": "/land/", "to": "/", "type": 301}, {"_key": "fdc0d1ea0aeb5d7fc43feebf0a3b2917", "_type": "rules", "from": "/sea/", "to": "/", "type": 301}, {"_key": "cf2822742e4cbb0e14f493aa3d70761d", "_type": "rules", "from": "/space/", "to": "/", "type": 301}, {"_key": "2d35293074c9610093a930ff78eeedc5", "_type": "rules", "from": "/subterranean/", "to": "/", "type": 301}, {"_key": "f71920be4d79", "_type": "rules", "from": "/command-and-control/", "to": "/lattice/command-and-control", "type": 301}, {"_key": "3a129b29320b", "_type": "rules", "from": "/mission-autonomy/", "to": "/lattice/mission-autonomy", "type": 301}, {"_key": "c5bd01ffe615", "_type": "rules", "from": "/lattice-partner-program/", "to": "/lattice/lattice-partner-program", "type": 301}, {"_key": "712f97ae7b1d", "_type": "rules", "from": "/lattice-sdk/", "to": "/lattice/lattice-sdk", "type": 301}, {"_key": "329e6844cc7a", "_type": "rules", "from": "/newsroom/", "to": "/news", "type": 301}, {"_key": "05eb38620cb0", "_type": "rules", "from": "/internships-at-anduril/", "to": "/emerging-talent", "type": 301}, {"_key": "d2ecc5294481", "_type": "rules", "from": "/media/", "to": "/press", "type": 301}, {"_key": "51abddc7a8f9", "_type": "rules", "from": "/leadership/", "to": "/anduril-founders", "type": 301}, {"_key": "5a86466b7f9f", "_type": "rules", "from": "/capability/counter-uas/", "to": "/land/ground-and-air-deterrence", "type": 301}, {"_key": "d8ad6055b90f", "_type": "rules", "from": "/capability/land/", "to": "/land/ground-and-air-deterrence", "type": 301}, {"_key": "1bc23fdea710", "_type": "rules", "from": "/capability/Sea/", "to": "/sea/maritime", "type": 301}, {"_key": "c10ab00babb8", "_type": "rules", "from": "/hardware/altius/", "to": "/altius", "type": 301}, {"_key": "e379f2729dd6", "_type": "rules", "from": "/hardware/anvil/", "to": "/anvil", "type": 301}, {"_key": "e30df2b3f30f", "_type": "rules", "from": "/hardware/bolt/", "to": "/bolt", "type": 301}, {"_key": "54913ab050d5", "_type": "rules", "from": "/hardware/copperhead/", "to": "/copperhead", "type": 301}, {"_key": "1edc9ecdf8c8", "_type": "rules", "from": "/hardware/dive-ld/", "to": "/dive-ld", "type": 301}, {"_key": "e84022ff871e", "_type": "rules", "from": "/hardware/dive-xl/", "to": "/dive-xl", "type": 301}, {"_key": "f5285a5d406a", "_type": "rules", "from": "/hardware/ghost-autonomous-suas/", "to": "/ghost", "type": 301}, {"_key": "9dfa2d699adf", "_type": "rules", "from": "/hardware/iris/", "to": "/air/air-dominance-and-strike", "type": 301}, {"_key": "17654bbf4cdc", "_type": "rules", "from": "/hardware/menace/", "to": "/land/connected-warfare", "type": 301}, {"_key": "638cf04ee972", "_type": "rules", "from": "/hardware/pulsar/", "to": "/pulsar", "type": 301}, {"_key": "14aac03980ca", "_type": "rules", "from": "/hardware/seabed-sentry/", "to": "/seabed-sentry", "type": 301}, {"_key": "202120895da6", "_type": "rules", "from": "/hardware/sentry/", "to": "/land/ground-and-air-deterrence", "type": 301}, {"_key": "d7cb115846c3", "_type": "rules", "from": "/hardware/solid-rocket-motors/", "to": "/solid-rocket-motors", "type": 301}, {"_key": "97bbb8a089f3", "_type": "rules", "from": "/voyager-support", "to": "https://www.klasgroup.com/support/", "type": 301}, {"_key": "c3e3a33a509e", "_type": "rules", "from": "/NASCAR", "to": "https://gear.anduril.com/pages/sweepstakes", "type": 301}, {"_key": "6dcc5945aecf", "_type": "rules", "from": "/nascar", "to": "https://gear.anduril.com/pages/sweepstakes", "type": 301}, {"_key": "0672ec88bd79", "_type": "rules", "from": "/arsenal/arsenal-1-old", "to": "/arsenal/arsenal-1", "type": 301}, {"_key": "7ee2d6caed85", "_type": "rules", "from": "/shipyard", "to": "/arsenal/arsenal-2", "type": 302}, {"_key": "466f6d809eab", "_type": "rules", "from": "/Shipyard", "to": "/arsenal/arsenal-2", "type": 302}, {"_key": "a889c83ad452", "_type": "rules", "from": "/counter-uas", "to": "/air-defense", "type": 301}]}, "searchPlaceholder": "Search Anduril.com", "searchTitle": "Search", "shareTemplate": "Check out this article [TITLE]", "shareTitle": "Share", "socialLinks": [{"_key": "74e0ce35bae9", "_type": "socialLink", "href": "https://twitter.com/anduriltech", "name": "Twitter", "shortName": "X"}, {"_key": "c065f843bbaa", "_type": "socialLink", "href": "https://www.youtube.com/@Anduril", "name": "YouTube", "shortName": "YT"}, {"_key": "d3137061af51", "_type": "socialLink", "href": "https://www.instagram.com/anduril", "name": "Instagram", "shortName": "IG"}, {"_key": "8d5fc3d5714b", "_type": "socialLink", "href": "https://www.facebook.com/andurilindustries/", "name": "Facebook", "shortName": "FB"}, {"_key": "b923c25f529d", "_type": "socialLink", "href": "https://www.linkedin.com/company/anduril", "name": "LinkedIn", "shortName": "LI"}], "socialLinksTitle": "Social", "title": "Transforming US & allied military capabilities with advanced technology.", "imageUrlBuilderOptions": {"baseUrl": "/_external/cdn.sanity.io", "projectId": "61nocsj5", "dataset": "production"}}</script>
-
 <style id="conrad-nav-styling">
   /* 1. Eliminate the transparent grey page overlay */
   .navOverlay {
@@ -170,6 +666,623 @@ window.gtag = function(){};
   window.addEventListener("popstate", updateActive);
   setInterval(updateActive, 300);
   document.addEventListener("DOMContentLoaded", updateActive);
+})();
+</script>
+
+
+<script id="conrad-radiant-janus-script" type="module">
+import { JanusScene } from "./janus-engine.js";
+
+(function() {
+  var trackHTML = `
+  <div id="conrad-radiant-janus-track">
+    <section id="conrad-radiant-janus-sticky">
+      <canvas id="janus-canvas" class="janus-canvas"></canvas>
+      <div class="janus-inner">
+        <div class="janus-head">
+          <div>
+            <h2 class="janus-title">JANUS:<br>THE LAUNCH PAD FOR COMMERCIAL DEPLOYMENTS</h2>
+            <p class="janus-subtitle">One product for government and commercial customers. Radiant will deploy 15 reactors to the military by 2030 that are identical to the units we will deliver to our commercial customers.</p>
+          </div>
+          <div class="janus-nav">
+            <button id="janus-prev" class="janus-btn" aria-label="Previous">&lt;</button>
+            <button id="janus-next" class="janus-btn" aria-label="Next">&gt;</button>
+          </div>
+        </div>
+
+        <div class="janus-captions">
+          <div class="janus-step-text active" data-step="0">
+            <div class="janus-step-heading janus-line">From prototype to product:</div>
+            <div class="janus-step-desc janus-line">Janus volume establishes Kaleidos as a repeatable energy product.</div>
+          </div>
+          <div class="janus-step-text" data-step="1">
+            <div class="janus-step-heading janus-line">Capacity built for scale:</div>
+            <div class="janus-step-desc janus-line">Janus accelerates the timeline to mass-produce reactors. Kaleidos will be refined through multiple design iterations incorporating inputs from the government’s top experts.</div>
+          </div>
+          <div class="janus-step-text" data-step="2">
+            <div class="janus-step-heading janus-line">Real-world operating experience:</div>
+            <div class="janus-step-desc janus-line">A fleet of Kaleidos will be deployed to bases across the US, generating years of combined operating experience each calendar year. This is an exponential accelerant to Radiant’s readiness for deployments at scale.</div>
+          </div>
+          <div class="janus-step-text" data-step="3">
+            <div class="janus-step-heading janus-line">A proven path to market:</div>
+            <div class="janus-step-desc janus-line">The Janus program shortens the runway to adoption across government, national security, data centers, physical AI, 24/7 critical load, main street businesses and more.</div>
+          </div>
+          <div class="janus-step-text" data-step="4">
+            <div class="janus-step-heading janus-line">Volume to reduce costs:</div>
+            <div class="janus-step-desc janus-line">The production volume achieved through the Janus program enables the reliability, efficiency and cost reduction required for commercial deployments while reducing costs for government customers.</div>
+          </div>
+        </div>
+
+        <div class="janus-progress-container">
+          <img src="infographic-arrow.png" class="janus-arrow-indicator" id="janus-arrow" alt="" />
+          <div class="janus-cells">
+            <div class="janus-cell" data-step="0"><div class="janus-cell-fill"></div></div>
+            <div class="janus-cell" data-step="1"><div class="janus-cell-fill"></div></div>
+            <div class="janus-cell" data-step="2"><div class="janus-cell-fill"></div></div>
+            <div class="janus-cell" data-step="3"><div class="janus-cell-fill"></div></div>
+            <div class="janus-cell" data-step="4"><div class="janus-cell-fill"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  `;
+
+  var numSections = 5;
+  var currentStep = 0;
+  var lastStep = -1;
+  var janusScene = null;
+  var captionTimeline = null;
+
+  function ensureTrackPosition() {
+    var track = document.getElementById("conrad-radiant-janus-track");
+    var mediaLink = document.querySelector(".MediaLinkSlice");
+    var arsenal = document.querySelector(".ArsenalSlice");
+    if (!track) return false;
+
+    if (mediaLink && track.nextElementSibling !== mediaLink) {
+      mediaLink.parentNode.insertBefore(track, mediaLink);
+      return true;
+    } else if (arsenal && track.previousElementSibling !== arsenal) {
+      if (arsenal.nextSibling) {
+        arsenal.parentNode.insertBefore(track, arsenal.nextSibling);
+      } else {
+        arsenal.parentNode.appendChild(track);
+      }
+      return true;
+    }
+    return false;
+  }
+
+  function getArrowX(stepIndex) {
+    var container = document.querySelector("#conrad-radiant-janus-sticky .janus-progress-container");
+    if (!container) return 0;
+    return ((stepIndex + 0.5) / numSections) * container.clientWidth;
+  }
+
+  function initJanus() {
+    var arsenal = document.querySelector(".ArsenalSlice");
+    var mediaLink = document.querySelector(".MediaLinkSlice");
+    var main = document.querySelector("main");
+
+    if (!arsenal && !mediaLink && !main) return;
+
+    var track = document.getElementById("conrad-radiant-janus-track");
+    if (!track) {
+      var wrapper = document.createElement("div");
+      wrapper.innerHTML = trackHTML;
+      track = wrapper.firstElementChild;
+
+      if (mediaLink) {
+        mediaLink.parentNode.insertBefore(track, mediaLink);
+      } else if (arsenal && arsenal.nextSibling) {
+        arsenal.parentNode.insertBefore(track, arsenal.nextSibling);
+      } else if (main) {
+        main.appendChild(track);
+      }
+    } else {
+      ensureTrackPosition();
+    }
+
+    var canvas = document.getElementById("janus-canvas");
+    if (canvas && !janusScene) {
+      try {
+        janusScene = new JanusScene(canvas);
+        janusScene.setSize(window.innerWidth, window.innerHeight);
+      } catch (err) {
+        console.error("[janus 3D scene init error]", err);
+      }
+    }
+
+    var arrow = document.getElementById("janus-arrow");
+    if (arrow && window.gsap) {
+      gsap.set(arrow, { xPercent: -50, x: getArrowX(0) });
+    }
+
+    bindEvents();
+    if (window.Global && Global.lenis) {
+      Global.lenis.resize();
+    }
+    updateScroll();
+  }
+
+  function updateScroll() {
+    var track = document.getElementById("conrad-radiant-janus-track");
+    if (!track) return;
+
+    var rect = track.getBoundingClientRect();
+    var trackHeight = track.offsetHeight;
+    var viewportHeight = window.innerHeight;
+    var scrollableDistance = trackHeight - viewportHeight;
+
+    if (scrollableDistance <= 0) return;
+
+    var scrolled = -rect.top;
+    var progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
+
+    var c = numSections;
+    var t = Math.max(0, Math.min(c, progress * c));
+    var step = Math.min(c - 1, Math.floor(t));
+    currentStep = step;
+
+    var uArr = [];
+    for (var i = 0; i < c; i++) {
+      uArr[i] = Math.max(0, Math.min(1, t - i));
+    }
+
+    if (janusScene) {
+      janusScene.setProgress(progress, uArr);
+    }
+
+    // Active cell fill scales with progress inside that section
+    var cells = document.querySelectorAll("#conrad-radiant-janus-sticky .janus-cell");
+    cells.forEach(function(cell, idx) {
+      var cellFill = cell.querySelector(".janus-cell-fill");
+      if (cellFill) {
+        var scale = (idx === step) ? uArr[idx] : 0;
+        if (window.gsap) {
+          gsap.set(cellFill, { scaleX: scale, transformOrigin: "left center" });
+        } else {
+          cellFill.style.transform = "scaleX(" + scale + ")";
+        }
+      }
+    });
+
+    // When crossing into a section, quickly move the blue arrow and update section state
+    if (step !== lastStep) {
+      var isInitial = (lastStep === -1);
+      var prevStep = lastStep;
+      lastStep = step;
+
+      // 1. QUICKLY MOVE BLUE ARROW TO MIDDLE OF ACTIVE SECTION WITH back.out(0.5)
+      var arrow = document.getElementById("janus-arrow");
+      if (arrow) {
+        var targetX = getArrowX(step);
+        if (window.gsap) {
+          gsap.to(arrow, {
+            x: targetX,
+            duration: isInitial ? 0 : 0.45,
+            ease: "back.out(0.5)",
+            overwrite: true
+          });
+        } else {
+          var container = document.querySelector("#conrad-radiant-janus-sticky .janus-progress-container");
+          var cWidth = container ? container.clientWidth : 1;
+          var leftPct = ((step + 0.5) / c) * 100;
+          arrow.style.left = leftPct + "%";
+        }
+      }
+
+      // 2. Cell track height & background animation
+      cells.forEach(function(cell, idx) {
+        var isActive = (idx === step);
+        if (isActive) {
+          cell.classList.add("active");
+        } else {
+          cell.classList.remove("active");
+        }
+        if (window.gsap) {
+          gsap.to(cell, {
+            height: isActive ? 4 : 2,
+            backgroundColor: isActive ? "rgba(43, 41, 42, 0.32)" : "rgba(43, 41, 42, 0.15)",
+            duration: isInitial ? 0 : 0.25,
+            ease: "power2.out",
+            overwrite: true
+          });
+        }
+      });
+
+      // 3. Staggered Captions Animation
+      var allStepTexts = document.querySelectorAll("#conrad-radiant-janus-sticky .janus-step-text");
+      if (window.gsap) {
+        if (captionTimeline) captionTimeline.kill();
+        captionTimeline = gsap.timeline();
+
+        allStepTexts.forEach(function(el, idx) {
+          var lines = el.querySelectorAll(".janus-line");
+          if (idx === step) {
+            el.classList.add("active");
+            if (isInitial) {
+              gsap.set(lines, { y: 0, opacity: 1 });
+            } else {
+              captionTimeline.fromTo(lines,
+                { y: 14, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: "power2.out" },
+                0.1
+              );
+            }
+          } else if (idx === prevStep) {
+            captionTimeline.to(lines, {
+              opacity: 0,
+              duration: 0.28,
+              ease: "power1.out",
+              onComplete: function() {
+                el.classList.remove("active");
+                gsap.set(lines, { y: 14, opacity: 0 });
+              }
+            }, 0);
+          } else {
+            el.classList.remove("active");
+            gsap.set(lines, { y: 14, opacity: 0 });
+          }
+        });
+      } else {
+        allStepTexts.forEach(function(el, idx) {
+          if (idx === step) {
+            el.classList.add("active");
+          } else {
+            el.classList.remove("active");
+          }
+        });
+      }
+
+      // 4. Update Prev / Next Buttons
+      var prevBtn = document.getElementById("janus-prev");
+      var nextBtn = document.getElementById("janus-next");
+      if (prevBtn) prevBtn.disabled = (step === 0);
+      if (nextBtn) nextBtn.disabled = (step === c - 1);
+    }
+  }
+
+  function goToStep(targetStep) {
+    if (targetStep < 0) targetStep = 0;
+    if (targetStep > 4) targetStep = 4;
+    var track = document.getElementById("conrad-radiant-janus-track");
+    if (!track) return;
+
+    if (window.Global && Global.lenis) {
+      Global.lenis.resize();
+    }
+
+    var trackHeight = track.offsetHeight;
+    var viewportHeight = window.innerHeight;
+    var scrollableDistance = trackHeight - viewportHeight;
+
+    var targetProgress = (targetStep + 0.5) / numSections;
+    var trackTop = track.offsetTop;
+    var targetScrollY = trackTop + targetProgress * scrollableDistance;
+
+    if (window.Global && Global.lenis) {
+      Global.lenis.scrollTo(targetScrollY, { duration: 1.2 });
+    } else {
+      window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+    }
+  }
+  window.goToStep = goToStep;
+
+  var eventsBound = false;
+  function bindEvents() {
+    if (eventsBound) return;
+    eventsBound = true;
+
+    var prevBtn = document.getElementById("janus-prev");
+    var nextBtn = document.getElementById("janus-next");
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function() { goToStep(currentStep - 1); });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function() { goToStep(currentStep + 1); });
+    }
+
+    var cells = document.querySelectorAll("#conrad-radiant-janus-sticky .janus-cell");
+    cells.forEach(function(c) {
+      c.addEventListener("click", function() {
+        var s = parseInt(c.getAttribute("data-step"), 10);
+        goToStep(s);
+      });
+    });
+
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    if (window.Global && Global.lenis) {
+      Global.lenis.on("scroll", updateScroll);
+    }
+
+    window.addEventListener("resize", function() {
+      if (janusScene) {
+        janusScene.setSize(window.innerWidth, window.innerHeight);
+      }
+      var arrow = document.getElementById("janus-arrow");
+      if (arrow && lastStep >= 0 && window.gsap) {
+        gsap.set(arrow, { x: getArrowX(lastStep) });
+      }
+      updateScroll();
+    }, { passive: true });
+  }
+
+  var checkInterval = setInterval(function() {
+    ensureTrackPosition();
+    if (document.querySelector(".ArsenalSlice") && !document.getElementById("conrad-radiant-janus-track")) {
+      initJanus();
+    }
+  }, 100);
+
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    initJanus();
+  } else {
+    window.addEventListener("DOMContentLoaded", initJanus);
+    window.addEventListener("load", initJanus);
+  }
+})();
+</script>
+
+<script id="conrad-bento-zoom-script">
+(function() {
+  const SUB_DATA = [
+    {
+      title: "01 // Propulsion Core",
+      subtitle: "High-Throughput Thermodynamic Cycle & Integrated Powertrain",
+      desc: "Engineered for maximum reliability and responsive thrust modulation in contested flight profiles, eliminating single-point mechanical valves in favor of software-governed electromagnetic pintle actuation.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/9ea5ae8181d48c78365c6f8d8e3f3f35208e5f55-3000x2000.jpg"
+    },
+    {
+      title: "02 // Autonomous Guidance",
+      subtitle: "Real-Time Sensor Fusion & Edge Tactical Processing",
+      desc: "Fully autonomous navigation and edge computing architecture operating independently of GPS, fusing optical, thermal, and inertial streams to calculate dynamic evasion vectors in real time.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/d23c6903421f10c7191873592b8e823362fecbe8-882x878.png"
+    },
+    {
+      title: "03 // Composite Airframe",
+      subtitle: "Advanced Lightweight Metallurgy & Aerodynamic Envelope",
+      desc: "Monocoque carbon-fiber composite architecture designed for high dynamic pressures and thermal gradients encountered during rapid supersonic transition and terminal maneuvering.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/c79ccecf787d455420edb440cbc7bf6a114cc680-882x878.png"
+    },
+    {
+      title: "04 // Modular Payload Bay",
+      subtitle: "Rapid Turnaround & Standard Mechanical Interface",
+      desc: "Software-defined reconfigurable architecture supporting kinetic, electronic warfare, and sensor packages with automated interface handshake and sub-90-second mechanical swap times.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/955e14dfee80e6022b1744580b6996cd435c6153-976x1952.jpg"
+    },
+    {
+      title: "05 // Swarm & Mesh Network",
+      subtitle: "Resilient Distributed Telemetry Across Operating Theaters",
+      desc: "Decentralized ad-hoc directional communication protocol immune to single-node degradation, enabling autonomous consensus and distributed cooperative mission execution.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/35c91ba3a0603c99720933d52bad4c73f9fdca5f-3000x1500.jpg"
+    },
+    {
+      title: "06 // Expeditionary Logistics",
+      subtitle: "Zero Specialized Ground Infrastructure Required",
+      desc: "Austere-field deployment capability containerized in standard military pallet footprints, enabling launch and operation without specialized runways or depot tooling.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/16113e3a588bd30e5c67bf2ee6d7a0847845fb28-3000x3000.jpg"
+    },
+    {
+      title: "07 // Sovereign Tooling",
+      subtitle: "Software-Defined Precision Assembly & Mass Production",
+      desc: "Arsenal-scale automated manufacturing workcells guided by digital twin simulations, delivering rapid aerospace-grade serial production at a fraction of traditional lead times.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/a005eecc853d709de52769704c0a6cc1083ac7c4-1131x630.png"
+    }
+  ];
+
+  var activeCard = null;
+  var isClosing = false;
+  var isOpen = false;
+
+  function ensureModalDOM() {
+    // Remove old remnants if any
+    var oldBackdrop = document.getElementById("conrad-inspection-backdrop");
+    if (oldBackdrop) oldBackdrop.remove();
+    var oldPanel = document.getElementById("conrad-inspection-panel");
+    if (oldPanel) oldPanel.remove();
+
+    // Clean old pills
+    document.querySelectorAll(".inspect-pill").forEach(function(p) { p.remove(); });
+
+    if (document.getElementById("conrad-bento-modal")) return;
+
+    var modal = document.createElement("div");
+    modal.id = "conrad-bento-modal";
+    modal.innerHTML = `
+      <div class="bento-modal-backdrop"></div>
+      <div class="bento-modal-container">
+        <div class="bento-modal-media">
+          <img id="bento-modal-img" src="" alt="Subsystem Expanded View">
+        </div>
+        <div class="bento-modal-info">
+          <h3 class="bento-modal-title" id="bento-modal-title"></h3>
+          <div class="bento-modal-subtitle" id="bento-modal-subtitle"></div>
+          <p class="bento-modal-desc" id="bento-modal-desc"></p>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    modal.addEventListener("click", function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      zoomBack();
+    });
+  }
+
+  function zoomOutwards(card, index) {
+    if (isOpen || isClosing) return;
+    ensureModalDOM();
+
+    var data = SUB_DATA[index];
+    if (!data) return;
+
+    var modal = document.getElementById("conrad-bento-modal");
+    var container = modal.querySelector(".bento-modal-container");
+    var backdrop = modal.querySelector(".bento-modal-backdrop");
+    var imgEl = document.getElementById("bento-modal-img");
+    var titleEl = document.getElementById("bento-modal-title");
+    var subEl = document.getElementById("bento-modal-subtitle");
+    var descEl = document.getElementById("bento-modal-desc");
+
+    // Prefer high quality loaded card image
+    var cardImg = card.querySelector("img");
+    var imgSrc = (cardImg && (cardImg.currentSrc || cardImg.src)) || data.image;
+
+    imgEl.src = imgSrc;
+    titleEl.textContent = data.title;
+    subEl.textContent = data.subtitle;
+    descEl.textContent = data.desc;
+
+    activeCard = card;
+    isOpen = true;
+
+    var cardRect = card.getBoundingClientRect();
+
+    modal.style.display = "flex";
+    modal.classList.add("active");
+
+    if (window.gsap) {
+      gsap.killTweensOf([container, backdrop]);
+      var finalRect = container.getBoundingClientRect();
+
+      var scaleX = Math.max(0.2, cardRect.width / finalRect.width);
+      var scaleY = Math.max(0.2, cardRect.height / finalRect.height);
+      var deltaX = (cardRect.left + cardRect.width / 2) - (finalRect.left + finalRect.width / 2);
+      var deltaY = (cardRect.top + cardRect.height / 2) - (finalRect.top + finalRect.height / 2);
+
+      gsap.fromTo(backdrop, 
+        { opacity: 0, backdropFilter: "blur(0px)", WebkitBackdropFilter: "blur(0px)" }, 
+        { opacity: 1, backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", duration: 0.38, ease: "power2.out" }
+      );
+
+      gsap.fromTo(container,
+        {
+          x: deltaX,
+          y: deltaY,
+          scaleX: scaleX,
+          scaleY: scaleY,
+          opacity: 0.85,
+          transformOrigin: "center center"
+        },
+        {
+          x: 0,
+          y: 0,
+          scaleX: 1,
+          scaleY: 1,
+          opacity: 1,
+          duration: 0.42,
+          ease: "power3.out"
+        }
+      );
+    }
+  }
+
+  function zoomBack() {
+    if (!isOpen || isClosing) return;
+    isClosing = true;
+
+    var modal = document.getElementById("conrad-bento-modal");
+    if (!modal) {
+      isOpen = false;
+      isClosing = false;
+      return;
+    }
+
+    var container = modal.querySelector(".bento-modal-container");
+    var backdrop = modal.querySelector(".bento-modal-backdrop");
+
+    if (window.gsap && activeCard) {
+      var currentCardRect = activeCard.getBoundingClientRect();
+      var finalRect = container.getBoundingClientRect();
+
+      var scaleX = Math.max(0.2, currentCardRect.width / finalRect.width);
+      var scaleY = Math.max(0.2, currentCardRect.height / finalRect.height);
+      var deltaX = (currentCardRect.left + currentCardRect.width / 2) - (finalRect.left + finalRect.width / 2);
+      var deltaY = (currentCardRect.top + currentCardRect.height / 2) - (finalRect.top + finalRect.height / 2);
+
+      gsap.killTweensOf([container, backdrop]);
+
+      gsap.to(backdrop, {
+        opacity: 0,
+        backdropFilter: "blur(0px)",
+        WebkitBackdropFilter: "blur(0px)",
+        duration: 0.3,
+        ease: "power2.inOut"
+      });
+
+      gsap.to(container, {
+        x: deltaX,
+        y: deltaY,
+        scaleX: scaleX,
+        scaleY: scaleY,
+        opacity: 0,
+        duration: 0.32,
+        ease: "power2.inOut",
+        onComplete: function() {
+          modal.style.display = "none";
+          modal.classList.remove("active");
+          gsap.set(container, { clearProps: "all" });
+          gsap.set(backdrop, { clearProps: "all" });
+          isOpen = false;
+          isClosing = false;
+          activeCard = null;
+        }
+      });
+    } else {
+      modal.style.display = "none";
+      modal.classList.remove("active");
+      isOpen = false;
+      isClosing = false;
+      activeCard = null;
+    }
+  }
+
+  function attachCardListeners() {
+    ensureModalDOM();
+
+    var cards = document.querySelectorAll(".FeaturedProductsCard");
+    cards.forEach(function(card, idx) {
+      // Remove any unwanted pills
+      var pill = card.querySelector(".inspect-pill");
+      if (pill) pill.remove();
+
+      if (!card.dataset.bentoZoomBound) {
+        card.dataset.bentoZoomBound = "true";
+        card.dataset.bentoIndex = idx;
+
+        card.addEventListener("click", function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          if (isClosing) return;
+          var index = parseInt(card.dataset.bentoIndex, 10);
+          if (isOpen && activeCard === card) {
+            zoomBack();
+          } else {
+            zoomOutwards(card, index);
+          }
+        }, true);
+      }
+    });
+  }
+
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      zoomBack();
+    }
+  });
+
+  var checkTimer = setInterval(attachCardListeners, 250);
+
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    attachCardListeners();
+  } else {
+    window.addEventListener("DOMContentLoaded", attachCardListeners);
+    window.addEventListener("load", attachCardListeners);
+  }
 })();
 </script>
 
