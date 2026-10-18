@@ -12,8 +12,8 @@
   "_updatedAt": "2026-08-11T23:46:14Z",
   "category": "product",
   "meta": {
-    "description": "Dive-LD is a large diameter autonomous undersea vehicle with modular payloads, 10-day endurance, and 6,000m depth for defense and commercial use.",
-    "title": "Dive-LD"
+    "title": "CONRAD A-1 | Technology",
+    "description": "Multi-mission autonomous defense platform engineered for contested air, maritime, and electronic warfare environments. Powered by the DRUNKEAST subsystem architecture."
   },
   "parent": null,
   "slices": [
@@ -46,7 +46,7 @@
               "_key": "ce9b27318a26",
               "_type": "span",
               "marks": [],
-              "text": "LARGE DIAMETER AUTONOMOUS UNDERSEA VEHICLE"
+              "text": "MULTI-MISSION AUTONOMOUS DEFENSE PLATFORM"
             }
           ],
           "markDefs": [],
@@ -74,7 +74,7 @@
               "_key": "492d535ca959",
               "_type": "span",
               "marks": [],
-              "text": "[LD-AUV]"
+              "text": "[DRUNKEAST // SYSTEM ARCHITECTURE]"
             }
           ],
           "markDefs": [],
@@ -90,7 +90,7 @@
               "_key": "39a7abf7f47b",
               "_type": "span",
               "marks": [],
-              "text": "Dive-LD combines exceptional payload flexibility, low logistics, and superior performance to enable a wide range of defense and commercial mission sets. "
+              "text": "CONRAD A-1 combines advanced low-observable aerostructures, hybrid-electric loiter propulsion, distributed multi-spectral sensor fusion, and decentralized tactical edge autonomy. Engineered for mass manufacture and rapid theater deployment."
             }
           ],
           "markDefs": [],
@@ -209,7 +209,7 @@
           }
         }
       ],
-      "title": "Dive-LD"
+      "title": "CONRAD A-1"
     },
     {
       "_key": "0145f9d625c0c4a6adc7fddb84893ec0",
@@ -243,28 +243,40 @@
           "_type": "productVariant",
           "characteristics": [
             {
-              "_key": "8cc3951e25f8",
+              "_key": "c1",
               "_type": "characteristic",
-              "label": "Length",
-              "value": "~5.8 m (19 ft)"
+              "label": "WINGSPAN",
+              "value": "7.20 m (23.6 ft)"
             },
             {
-              "_key": "4e60034e3db6",
+              "_key": "c2",
               "_type": "characteristic",
-              "label": "DIAMETER",
-              "value": "~1.2 m (4 ft)"
+              "label": "FUSELAGE LENGTH",
+              "value": "5.40 m (17.7 ft)"
             },
             {
-              "_key": "f121591c4739",
+              "_key": "c3",
               "_type": "characteristic",
               "label": "MAX ENDURANCE",
-              "value": "~10 days"
+              "value": "48 Hours (Silent Loiter)"
             },
             {
-              "_key": "d0e83ebee087",
+              "_key": "c4",
               "_type": "characteristic",
-              "label": "MAX DEPTH ",
-              "value": "~6000 m"
+              "label": "COMBAT RADIUS",
+              "value": "1,200 nm (2,220 km)"
+            },
+            {
+              "_key": "c5",
+              "_type": "characteristic",
+              "label": "DASH SPEED",
+              "value": "Mach 0.85 (560 KTAS)"
+            },
+            {
+              "_key": "c6",
+              "_type": "characteristic",
+              "label": "SERVICE CEILING",
+              "value": "45,000 ft MSL"
             }
           ],
           "optionalCta": [
@@ -310,7 +322,8 @@
               "y": 0.47396979225850694
             }
           },
-          "productTitle": "General System Desc. "
+          "productTitle": "General System Desc. ",
+          "title": "CONRAD A-1 Core Envelope"
         }
       ]
     },
@@ -330,11 +343,11 @@
         {
           "_key": "468963efe88b",
           "_type": "product3dVariant",
-          "accordionTitle": "Dive-LD:\nAutonomous Undersea Vehicle",
+          "accordionTitle": "Conrad A-1 / Dive-LD:\nAutonomous Strike & Undersea Architecture",
           "content": [
             {
               "_key": "67416cb3135a",
-              "description": "Over 1 m\u00b3 in payload capacity for rapid integration of virtually any mission-specific payload and sensor suite.  ",
+              "description": "Over 1 m\u00b3 in payload capacity for rapid integration of virtually any mission-specific payload and sensor suite.",
               "slug": {
                 "_type": "slug",
                 "current": "modular-free-flooded-payload-interface"
@@ -343,7 +356,7 @@
             },
             {
               "_key": "cfe4e0ca8f2c",
-              "description": "Reduces the logistical burden required to handle, ship, deploy, and operate. ",
+              "description": "Reduces the logistical burden required to handle, ship, deploy, and operate.",
               "slug": {
                 "_type": "slug",
                 "current": "single-point-lift-and-tow"
@@ -352,7 +365,7 @@
             },
             {
               "_key": "9b9372dbed78",
-              "description": "Increases efficiency and reduces acoustic signature. ",
+              "description": "Increases efficiency and reduces acoustic signature.",
               "slug": {
                 "_type": "slug",
                 "current": "direct-drive-electric-propulsion"
@@ -407,9 +420,10 @@
       },
       "qualities": [
         {
-          "_key": "9a7345d4fa67",
+          "_key": "q1",
           "_type": "productQuality",
-          "description": "Extensive open interfaces, generous payload bays, and the use of additive manufacturing enable rapid integration of a variety of sensors and effectors for customized defense and commercial mission sets.",
+          "title": "Modular Subsystem Rail",
+          "description": "Extensive open interfaces, standardized MIL-STD-1760 internal payload bays, and rapid field-swappable envelopes enable multi-mission ISR, kinetic strike, and electronic warfare configurations.",
           "media": [
             {
               "_key": "484e5c176b41",
@@ -432,13 +446,13 @@
                 }
               }
             }
-          ],
-          "title": "Modular"
+          ]
         },
         {
-          "_key": "6e7ea14b8b0c",
+          "_key": "q2",
           "_type": "productQuality",
-          "description": "Able to autonomously conduct missions for up to 10 days with an architecture that scales for multi-week missions.",
+          "title": "Long-Endurance Hybrid",
+          "description": "High-efficiency micro-turbofan coupled with solid-state auxiliary battery reserves achieves continuous 48-hour acoustic loiter and instant high-g dash acceleration.",
           "media": [
             {
               "_key": "46c3d6d07270",
@@ -461,13 +475,13 @@
                 }
               }
             }
-          ],
-          "title": "Long-Endurance"
+          ]
         },
         {
-          "_key": "3b2f34fdb5d8",
+          "_key": "q3",
           "_type": "productQuality",
-          "description": "Capable of conducting missions along the seafloor at up to 6000 meters ocean depth.",
+          "title": "Contested Survivability",
+          "description": "Unitary low-observable carbon monocoque airframe with active radar cross-section minimization and passive wideband 0.5\u201340 GHz ESM surveillance.",
           "media": [
             {
               "_key": "5a12c8737b48",
@@ -579,13 +593,13 @@
                 }
               }
             }
-          ],
-          "title": "Operating Depth"
+          ]
         },
         {
-          "_key": "7ab489752738",
+          "_key": "q4",
           "_type": "productQuality",
-          "description": "Pier-launched, towed to sea, or stowed, launched, and recovered from a variety of vessels of opportunity.",
+          "title": "Expeditionary Logistics",
+          "description": "Shipped and deployed directly from standard 20-foot ISO intermodal containers without requiring specialized runway infrastructure or heavy logistics support.",
           "media": [
             {
               "_key": "8fa53877e264",
@@ -608,11 +622,10 @@
                 }
               }
             }
-          ],
-          "title": "Portable"
+          ]
         }
       ],
-      "title": "Build Qualities"
+      "title": "Architectural Qualities"
     },
     {
       "_key": "c497c5da55cc",
