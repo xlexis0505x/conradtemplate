@@ -1,8 +1,36 @@
+# Operating System
 .DS_Store
 Thumbs.db
+._*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Editor & IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs & Environment
 *.log
+.env
+.env.*
+!.env.example
+
+# Certificates & Keys
 .certs/
 *.pem
 *.key
-.system_generated/
+
+# Local server runtimes
+server.py
+
+# Dependencies & Generated Artifacts
 node_modules/
+.system_generated/
