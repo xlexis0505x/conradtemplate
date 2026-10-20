@@ -1,12 +1,12 @@
-# 7 Website Local Inspiration Folders
+# 8 Website Local Inspiration & Prototype Folders
 
-This directory contains standalone, clean local copies of world-class frontend design benchmarks. Each website has its own dedicated folder with clean source code, formatted HTML, assets, and its own local server.
+This directory contains standalone, clean local copies of world-class frontend design benchmarks and a custom defense-grade pitch prototype. Each website has its own dedicated folder with clean source code, formatted HTML, assets, and its own local server.
 
 ---
 
-## ⚡ Quick Start (Launch All 7 Sites)
+## ⚡ Quick Start (Launch All 8 Sites)
 
-Run one command in this directory to bring all 7 websites online simultaneously:
+Run one command in this directory to bring all 8 websites online simultaneously:
 
 ```bash
 python3 start.py
@@ -21,7 +21,7 @@ python3 start.py
 | **Teenage Engineering** | [http://localhost:8084/](http://localhost:8084/) | `8084` | Brutalist grid, tactile buttons & custom `TE20L.woff2` fonts |
 | **Anduril Industries** | [http://localhost:8085/](http://localhost:8085/) | `8085` | Restored 3D interactive hardware models across all 19 systems with Draco geometry & KTX2 |
 | **Walk Alone** | [http://localhost:8086/](http://localhost:8086/) | `8086` | Astro.build creative portfolio, typography, & video embeds |
-| **Conrad Prototype** | [http://localhost:8087/](http://localhost:8087/) | `8087` | Conrad Challenge pitch platform with Coalowl hover line & 4 clean routes |
+| **Conrad Prototype** | [http://localhost:8087/](http://localhost:8087/) | `8087` | Conrad Challenge pitch platform: 4 routes, 3D dissection scrubber, unit economics, conveyor showcase & diligence modal |
 
 *(Press `Ctrl+C` anytime in the terminal to stop all servers)*
 
@@ -66,6 +66,11 @@ python3 start.py
 - Run locally: `cd walkal.one && python3 server.py` (Port 8086)
 
 ### 8. `conrad.prototype/`
-- Dedicated Conrad Challenge pitch website (Energy & Environment: Deep-Sea Mining Sediment Plume Mitigation).
-- 4 clean top-level routes (`/`, `/technology`, `/business`, `/about`), Coalowl animated underline transitions, and interactive 3D hardware slice.
+- Dedicated Conrad Challenge pitch website (Energy & Environment: Deep-Sea Mining Sediment Plume Acoustic Suppression).
+- **Multi-Route Architecture**: 4 clean top-level routes (`/`, `/technology`, `/business`, `/about`) featuring Coalowl-inspired animated underline navigation and persistent frosted-glass sticky header.
+- **Interactive 3D Hardware Model**: Real-time orbit controls, exploded view scrubber, and "TAKE CONTROL" inspection mode.
+- **Technology Page**: Interactive 3D dissection scrubber, technical specification matrix, and hydrodynamic acoustic mitigation breakdown.
+- **Business Page**: Defense-grade unit economics table, financial scaling model, factory footprint cards, roadmap milestones, and interactive diligence data-room modal.
+- **About Us Page**: Narrative scroll showcase, Walkalone horizontal conveyor mechanics, leadership & doctrine cards, and contact block.
+- **Design System**: Global `HelveticaNowDisplay` typography consistency and dark-mode aesthetic.
 - Run locally: `cd conrad.prototype && python3 server.py 8087` (Port 8087)
