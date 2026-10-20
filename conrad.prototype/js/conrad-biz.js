@@ -269,56 +269,58 @@
 
     var richText = document.querySelector(".TwoColumnRichText");
     var header = document.querySelector(".ProductHeaderSlice");
-    var main = document.querySelector("main");
 
-    var anchor = richText || header || main;
+    // Must wait for Hydra slices to mount so custom sections never mount at the top of <main>
+    var anchor = richText || header;
     if (!anchor) return;
 
     var newlyMounted = false;
 
-    // 1. Mount Doctrine
+    // 1. Mount or reposition Doctrine
     if (!doctrine) {
       var w1 = document.createElement("div");
       w1.innerHTML = doctrineHTML;
       doctrine = w1.firstElementChild;
-      if (richText && richText.nextSibling) {
-        richText.parentNode.insertBefore(doctrine, richText.nextSibling);
-      } else if (header && header.nextSibling) {
-        header.parentNode.insertBefore(doctrine, header.nextSibling);
-      } else if (main) {
-        main.appendChild(doctrine);
-      }
+      anchor.parentNode.insertBefore(doctrine, anchor.nextSibling);
       newlyMounted = true;
+    } else if (doctrine.previousElementSibling !== anchor) {
+      anchor.parentNode.insertBefore(doctrine, anchor.nextSibling);
     }
 
-    // 2. Mount Economics
+    // 2. Mount or reposition Economics
     if (!economics && doctrine) {
       var w2 = document.createElement("div");
       w2.innerHTML = economicsHTML;
       economics = w2.firstElementChild;
       doctrine.parentNode.insertBefore(economics, doctrine.nextSibling);
       newlyMounted = true;
+    } else if (economics && doctrine && economics.previousElementSibling !== doctrine) {
+      doctrine.parentNode.insertBefore(economics, doctrine.nextSibling);
     }
 
-    // 3. Mount Factory
+    // 3. Mount or reposition Factory
     if (!factory && economics) {
       var w3 = document.createElement("div");
       w3.innerHTML = factoryHTML;
       factory = w3.firstElementChild;
       economics.parentNode.insertBefore(factory, economics.nextSibling);
       newlyMounted = true;
+    } else if (factory && economics && factory.previousElementSibling !== economics) {
+      economics.parentNode.insertBefore(factory, economics.nextSibling);
     }
 
-    // 4. Mount Roadmap
+    // 4. Mount or reposition Roadmap
     if (!roadmap && factory) {
       var w4 = document.createElement("div");
       w4.innerHTML = roadmapHTML;
       roadmap = w4.firstElementChild;
       factory.parentNode.insertBefore(roadmap, factory.nextSibling);
       newlyMounted = true;
+    } else if (roadmap && factory && roadmap.previousElementSibling !== factory) {
+      factory.parentNode.insertBefore(roadmap, factory.nextSibling);
     }
 
-    // 5. Mount Diligence Modal CTA
+    // 5. Mount or reposition Diligence Modal CTA
     if (!ctaModal && roadmap) {
       var w5 = document.createElement("div");
       w5.innerHTML = diligenceModalHTML;
@@ -330,6 +332,8 @@
         bindModalEvents();
       }
       newlyMounted = true;
+    } else if (ctaModal && roadmap && ctaModal.previousElementSibling !== roadmap) {
+      roadmap.parentNode.insertBefore(ctaModal, roadmap.nextSibling);
     }
 
     if (newlyMounted && window.Global && Global.lenis) {

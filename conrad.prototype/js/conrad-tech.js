@@ -271,10 +271,10 @@
     var variations = document.querySelector(".ProductVariationsSlice");
     var header = document.querySelector(".ProductHeaderSlice");
     var qualities = document.querySelector(".ProductQualitiesSlice");
-    var main = document.querySelector("main");
 
+    // Must wait for Hydra slices to mount so custom sections never mount at the top of <main>
     var anchor = qualities || p3d || variations || header;
-    if (!anchor && !main) return;
+    if (!anchor) return;
 
     var newlyMounted = false;
     if (!specMatrix) {
@@ -283,16 +283,22 @@
       specMatrix = w.firstElementChild;
       if (qualities) {
         qualities.parentNode.insertBefore(specMatrix, qualities);
-      } else if (anchor && anchor.nextSibling) {
-        anchor.parentNode.insertBefore(specMatrix, anchor.nextSibling);
-      } else if (main) {
-        main.appendChild(specMatrix);
+      } else if (p3d && p3d.nextSibling) {
+        p3d.parentNode.insertBefore(specMatrix, p3d.nextSibling);
+      } else if (variations && variations.nextSibling) {
+        variations.parentNode.insertBefore(specMatrix, variations.nextSibling);
+      } else if (header && header.nextSibling) {
+        header.parentNode.insertBefore(specMatrix, header.nextSibling);
       }
       bindSpecTabs();
       newlyMounted = true;
     } else {
       if (qualities && specMatrix.nextElementSibling !== qualities && specMatrix !== qualities) {
-        qualities.parentNode.insertBefore(specMatrix, qualities);
+        if (!compareSec || specMatrix.nextElementSibling !== compareSec || compareSec.nextElementSibling !== qualities) {
+          qualities.parentNode.insertBefore(specMatrix, qualities);
+        }
+      } else if (!qualities && p3d && p3d.nextElementSibling !== specMatrix) {
+        p3d.parentNode.insertBefore(specMatrix, p3d.nextSibling);
       }
     }
 
