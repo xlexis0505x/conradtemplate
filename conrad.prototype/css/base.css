@@ -1,0 +1,57 @@
+/* === CONRAD PROTOTYPE: BASE DESIGN SYSTEM & TOKENS === */
+
+:root {
+  --color-bg: #000000;
+  --color-text: #ffffff;
+  --color-text-muted: rgba(255, 255, 255, 0.65);
+  --color-text-dim: rgba(255, 255, 255, 0.5);
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-border-dim: rgba(255, 255, 255, 0.08);
+  --font-primary: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif;
+  --section-max-width: 1440px;
+  --section-padding: 0 4rem;
+  --header-offset: 86px;
+}
+
+:root, html, body, #Stage, .PageView, .ViewController, .Container, .Footer, main {
+  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  color-scheme: dark !important;
+  background-color: #000000 !important;
+  background: #000000 !important;
+  height: 100%;
+}
+
+/* Ensure PageView main allows position: sticky to pin correctly */
+.PageView main,
+main {
+  overflow: visible !important;
+}
+
+/* === Common Modernist Design System Tokens === */
+.conrad-kicker {
+  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  margin-bottom: 0.85rem !important;
+}
+
+.conrad-section-title {
+  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-size: clamp(2rem, 3.5vw, 3.2rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+  color: #ffffff !important;
+  line-height: 1.1 !important;
+  margin: 0 0 1rem !important;
+}
+
+.conrad-section-lead {
+  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-size: 1.05rem !important;
+  line-height: 1.6 !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  max-width: 820px !important;
+  margin: 0 !important;
+}

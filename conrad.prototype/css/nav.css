@@ -1,0 +1,122 @@
+/* === CONRAD PROTOTYPE: HEADER & NAVIGATION STYLING === */
+
+/* 1. Eliminate the transparent grey page overlay and scroll backdrop masks */
+.navOverlay,
+.HeaderDesktop .navOverlay,
+.HeaderMobile .navOverlay,
+.HeaderDesktop .navWrapper:after,
+.HeaderMobile .mainWrapper > .mainScreen .nav-bg:after,
+.HeaderDesktop:before,
+.HeaderMobile:before,
+.Header .navWrapper:after,
+.Header:before {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  content: none !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Reset dynamic CSS variables that trigger white/grey washes on scroll */
+:root,
+.HeaderDesktop,
+.HeaderMobile,
+.Header,
+.HeaderDesktop .navWrapper,
+.HeaderMobile .mainWrapper,
+.HeaderMobile .mainWrapper > .mainScreen {
+  --backgroundColor: transparent !important;
+  --backgroundOpacity: 0 !important;
+  --frosted: 0 !important;
+}
+
+/* Hide top header smoothly when Product3DSlice interactive view dialog is open */
+body:has(.Product3DSlice dialog[open]) .Header,
+body:has(.Product3DSlice dialog[open]) .HeaderDesktop,
+body:has(.Product3DSlice dialog[open]) .HeaderMobile,
+body.modal-3d-open .Header,
+body.modal-3d-open .HeaderDesktop,
+body.modal-3d-open .HeaderMobile {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(-100%) !important;
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease !important;
+}
+
+/* 2. Frosted black glass header bar */
+.HeaderDesktop,
+.HeaderDesktop:hover,
+.Header,
+.HeaderMobile {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  background-color: rgba(0, 0, 0, 0.88) !important;
+  background: rgba(0, 0, 0, 0.88) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease !important;
+}
+
+.HeaderDesktop .navWrapper,
+.HeaderMobile .mainWrapper,
+.HeaderMobile .mainWrapper > .mainScreen {
+  transform: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.HeaderDesktop a,
+.HeaderDesktop span,
+.HeaderDesktop .HeaderLink,
+.HeaderDesktop .logo,
+.HeaderDesktop svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* 3. Coalowl-inspired animated horizontal bar under nav buttons */
+.center-wrapper .HeaderLink {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  padding-bottom: 4px !important;
+  color: #ffffff !important;
+  opacity: 0.8 !important;
+  text-decoration: none !important;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.center-wrapper .HeaderLink:hover {
+  opacity: 1 !important;
+}
+
+.center-wrapper .HeaderLink::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 1.5px !important;
+  background-color: #ffffff !important;
+  transform: scaleX(0) !important;
+  transform-origin: left !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.center-wrapper .HeaderLink:hover::after,
+.center-wrapper .HeaderLink.active::after {
+  transform: scaleX(1) !important;
+}

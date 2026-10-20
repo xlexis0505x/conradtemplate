@@ -1,0 +1,196 @@
+/* === CONRAD PROTOTYPE: TECHNOLOGY ROUTE STYLES === */
+
+/* --- TEENAGE ENGINEERING-INSPIRED TACTILE SPEC MATRIX --- */
+.conrad-spec-section {
+  width: 100% !important;
+  background-color: #000000 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  padding: 1.5rem 0 1rem !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.conrad-spec-inner {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 0 4rem !important;
+  box-sizing: border-box !important;
+}
+
+.conrad-spec-tabs {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.45rem !important;
+  margin: 1rem 0 0.85rem !important;
+  position: relative !important;
+}
+
+.conrad-spec-tab {
+  padding: 0.45rem 0.95rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border-radius: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.conrad-spec-tab:hover {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.45) !important;
+  transform: translateY(-1px) !important;
+}
+
+.conrad-spec-tab:active {
+  transform: translateY(0px) scale(0.98) !important;
+}
+
+.conrad-spec-tab.active {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.08) !important;
+  transform: translateY(0) !important;
+}
+
+.conrad-spec-table {
+  width: 100% !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  position: relative !important;
+}
+
+.conrad-spec-row {
+  display: grid;
+  grid-template-columns: 280px 1fr 240px;
+  align-items: center;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color 0.2s ease, opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.conrad-spec-row:hover {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+.conrad-spec-param {
+  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.conrad-spec-val {
+  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+}
+
+.conrad-spec-meta {
+  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  text-align: right !important;
+}
+
+/* --- HEAD-TO-HEAD COMPARATIVE ADVANTAGE MATRIX --- */
+.conrad-compare-section {
+  width: 100% !important;
+  background-color: #000000 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  padding: 1.5rem 0 2rem !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.conrad-compare-inner {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 0 4rem !important;
+  box-sizing: border-box !important;
+}
+
+.conrad-compare-table-wrap {
+  margin-top: 1.25rem !important;
+  overflow-x: auto !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.conrad-compare-table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  text-align: left !important;
+}
+
+.conrad-compare-table th {
+  padding: 1.25rem 1.75rem !important;
+  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.conrad-compare-table td {
+  padding: 1.5rem 1.75rem !important;
+  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-size: 0.95rem !important;
+  line-height: 1.45 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.conrad-compare-table tr:last-child td {
+  border-bottom: none !important;
+}
+
+.col-metric {
+  width: 25% !important;
+  font-weight: 600 !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.col-conrad {
+  width: 38% !important;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.025) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.col-conrad strong {
+  font-size: 1.15rem !important;
+  color: #ffffff !important;
+  margin-right: 0.6rem !important;
+}
+
+.col-conrad .tag {
+  display: inline-block !important;
+  padding: 0.2rem 0.55rem !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #ffffff !important;
+  vertical-align: middle !important;
+}
+
+.col-legacy {
+  width: 37% !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
