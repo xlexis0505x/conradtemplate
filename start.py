@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Quick Multi-Site Server Launcher
-Starts all 5 local website servers concurrently.
+Starts all 8 local website servers concurrently.
 """
 
 import sys
@@ -85,7 +85,7 @@ def main():
     processes = []
 
     print("\n" + "=" * 65)
-    print("🚀  STARTING ALL 5 WEBSITE LOCAL SERVERS")
+    print("🚀  STARTING ALL 8 WEBSITE LOCAL SERVERS")
     print("=" * 65)
 
     for site in SITES:
@@ -117,7 +117,7 @@ def main():
         print(f"  ➜  {site['name']:<22} {site['url']}")
 
     print("-" * 65)
-    print("All 5 sites are online! Press Ctrl+C anytime to stop all servers.")
+    print("All 8 sites are online! Press Ctrl+C anytime to stop all servers.")
     print("=" * 65 + "\n")
 
     def shutdown(signum=None, frame=None):

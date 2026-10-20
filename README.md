@@ -68,6 +68,7 @@ python3 start.py
 ### 8. `conrad.prototype/`
 - Dedicated Conrad Challenge pitch website (Energy & Environment: Deep-Sea Mining Sediment Plume Acoustic Suppression).
 - **Multi-Route Architecture**: 4 clean top-level routes (`/`, `/technology`, `/business`, `/about`) featuring Coalowl-inspired animated underline navigation and persistent frosted-glass sticky header.
+- **Modular Component Architecture**: Refactored into scoped CSS modules (`css/`) and discrete JS controllers (`js/`) with a centralized SPA router (`js/conrad-router.js`) and transparent WebGL stage integration.
 - **Interactive 3D Hardware Model**: Real-time orbit controls, exploded view scrubber, and "TAKE CONTROL" inspection mode.
 - **Technology Page**: Interactive 3D dissection scrubber, technical specification matrix, and hydrodynamic acoustic mitigation breakdown.
 - **Business Page**: Defense-grade unit economics table, financial scaling model, factory footprint cards, roadmap milestones, and interactive diligence data-room modal.
