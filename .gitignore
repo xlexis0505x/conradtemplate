@@ -28,9 +28,6 @@ env/
 *.pem
 *.key
 
-# Local server runtimes
-server.py
-
 # Dependencies & Generated Artifacts
 node_modules/
 .system_generated/
