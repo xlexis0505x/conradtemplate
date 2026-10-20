@@ -13,12 +13,18 @@
   --header-offset: 86px;
 }
 
-:root, html, body, #Stage, .PageView, .ViewController, .Container, .Footer, main {
+:root, html, body {
   font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
   color-scheme: dark !important;
-  background-color: #000000 !important;
-  background: #000000 !important;
+  background-color: #000000;
+  background: #000000;
   height: 100%;
+}
+
+#Stage, .PageView, .ViewController, .Container, main {
+  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  background-color: transparent !important;
+  background: transparent !important;
 }
 
 /* Ensure PageView main allows position: sticky to pin correctly */
