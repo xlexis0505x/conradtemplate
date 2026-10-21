@@ -1,6 +1,89 @@
 /* === CONRAD PROTOTYPE: HOME ROUTE STYLES === */
 
 /* === 1. BENTO GRID: CLEAN IN-PLACE CARD ZOOM & EXPANSION === */
+/* === CONRAD PROTOTYPE: COMPANY STATS STRIP === */
+.conrad-stats-section {
+  width: 100% !important;
+  background-color: #030303 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 4rem 2rem !important;
+  box-sizing: border-box !important;
+}
+
+.conrad-stats-inner {
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 0 2rem !important;
+  box-sizing: border-box !important;
+}
+
+.conrad-stats-header {
+  margin-bottom: 2.25rem !important;
+}
+
+.conrad-stats-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 1.5rem !important;
+}
+
+@media (max-width: 1100px) {
+  .conrad-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .conrad-stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.conrad-stat-card {
+  background: #080808 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  padding: 2.25rem 1.75rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  min-height: 180px !important;
+  box-sizing: border-box !important;
+  transition: border-color 0.3s ease, transform 0.3s ease !important;
+}
+
+.conrad-stat-card:hover {
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  transform: translateY(-3px) !important;
+}
+
+.conrad-stat-val {
+  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-size: clamp(2rem, 2.8vw, 3rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+  color: #ffffff !important;
+  line-height: 1 !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.conrad-stat-label {
+  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.conrad-stat-sub {
+  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-size: 0.85rem !important;
+  line-height: 1.5 !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
 .FeaturedProducts {
   position: relative !important;
 }

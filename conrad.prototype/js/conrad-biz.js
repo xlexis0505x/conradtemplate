@@ -1,251 +1,280 @@
 /**
  * Conrad Prototype — Business Route Sections & Diligence Modal
+ * Deep-sea mining commercial strategy, Cook Islands TAM/SAM/SOM, pipeline & PESTLE.
  */
 
 (function() {
-  var doctrineHTML = `
-  <section id="conrad-biz-doctrine" class="conrad-biz-section">
-    <div class="conrad-biz-inner">
-      <div class="conrad-biz-header">
-        <div class="conrad-kicker">01 // COMMERCIAL DEFENSE DOCTRINE</div>
-        <h2 class="conrad-section-title">Fixed-Price Defense vs. The Cost-Plus Trap</h2>
-        <p class="conrad-section-lead">The traditional defense industrial base is constrained by outdated contracting incentives. Conrad delivers military capabilities with private capital efficiency.</p>
-      </div>
+  function getBizData() {
+    return (window.Conrad && Conrad.content && Conrad.content.get("biz")) || {};
+  }
 
-      <div class="conrad-doctrine-grid">
-        <div class="conrad-doctrine-card broken-card">
-          <div class="doctrine-badge">THE BROKEN DEFENSE PARADIGM</div>
-          <h3 class="doctrine-title">Legacy Cost-Plus Contracting</h3>
-          <ul class="doctrine-list">
-            <li><strong>Perverse Financial Incentives:</strong> Contractors bill costs plus a guaranteed profit percentage, directly rewarding delays and inflated budgets.</li>
-            <li><strong>Multi-Year Component Lead Times:</strong> Bespoke custom military-spec semiconductors cause 24-to-36 month production delays.</li>
-            <li><strong>Depot Maintenance Overhead:</strong> Proprietary hardware locks military customers into perpetual contractor logistics support.</li>
-          </ul>
+  function generateBizHTML() {
+    var biz = getBizData();
+    var brand = (window.Conrad && Conrad.content && Conrad.content.get("brandName")) || "DRUNKEAST";
+    var sizingCards = (biz.sizing && biz.sizing.cards) || [];
+    var pestleFactors = (biz.pestle && biz.pestle.factors) || [];
+    var pipelineRegions = (biz.pipeline && biz.pipeline.regions) || [];
+
+    var doctrineHTML = `
+    <section id="conrad-biz-doctrine" class="conrad-biz-section">
+      <div class="conrad-biz-inner">
+        <div class="conrad-biz-header">
+          <div class="conrad-kicker">${biz.kicker || "01 // COMMERCIAL STRATEGY &amp; VALUE PROPOSITION"}</div>
+          <h2 class="conrad-section-title">${biz.title || "Unlocking the Environmental License to Operate"}</h2>
+          <p class="conrad-section-lead">${biz.lead || "Seabed mineral developers face an existential hurdle: without verifiable sediment plume control, regulatory bodies cannot grant commercial exploitation contracts. " + brand + " turns environmental compliance into a permitted, defensible asset."}</p>
         </div>
 
-        <div class="conrad-doctrine-card solution-card">
-          <div class="doctrine-badge">THE CONRAD COMMERCIAL MODEL</div>
-          <h3 class="doctrine-title">Fixed-Price Commercial Scale</h3>
-          <ul class="doctrine-list">
-            <li><strong>Privately Funded R&amp;D:</strong> We invest our own capital to design and validate platforms before offering them at fixed, predictable prices.</li>
-            <li><strong>Automotive &amp; Commercial Supply Chains:</strong> Leveraging high-volume industrial suppliers to secure resilient, low-cost component pipelines.</li>
-            <li><strong>Software-Defined Modularity:</strong> Autonomous software updates deploy over the air, eliminating costly hardware teardowns.</li>
-          </ul>
-          <div class="doctrine-img-wrap">
-            <img src="/_external/cdn.sanity.io/images/61nocsj5/production/53ca8797832d67af5425ab4abdebd6233cbd441c-4000x2660.png" alt="Automated Commercial Aerospace Production" />
+        <div class="conrad-doctrine-grid">
+          <div class="conrad-doctrine-card broken-card">
+            <div class="doctrine-badge">THE UNMITIGATED PLUME DILEMMA</div>
+            <h3 class="doctrine-title">Uncontrolled Sediment Dispersion</h3>
+            <ul class="doctrine-list">
+              <li><strong>Existential Permitting Barrier:</strong> Commercial exploitation licences cannot be granted under ISA or Cook Islands regulations without demonstrated, verifiable plume containment.</li>
+              <li><strong>Transboundary Drift Liability:</strong> Sub-micron clay plumes drift 50–100+ km in the oceanic water column, causing severe ecological damage and catastrophic reputational risk.</li>
+              <li><strong>Post-Hoc Monitoring Deadlock:</strong> Passive sensor buoys merely observe damage without preventing it, risking sudden shut-down orders and stranded multimillion-dollar mining capex.</li>
+            </ul>
           </div>
+
+          <div class="conrad-doctrine-card solution-card">
+            <div class="doctrine-badge">THE ${brand} PERMITTING MODEL</div>
+            <h3 class="doctrine-title">In-Situ Chemical Flocculation</h3>
+            <ul class="doctrine-list">
+              <li><strong>Unlocking the License to Operate:</strong> We de-risk environmental approval by providing concession holders with certified, auditable sedimentation control data.</li>
+              <li><strong>Accelerated Benthic Deposition:</strong> Non-toxic biodegradable biopolymer binds micro-particles into dense flocs, confining redeposition strictly to primary mining swaths.</li>
+              <li><strong>Automated G09 &amp; ISA Telemetry:</strong> In-situ ADCP and optical backscatter sensors stream real-time compliance proof directly to maritime authorities and stakeholders.</li>
+            </ul>
+            <div class="doctrine-img-wrap">
+              <img src="/_external/cdn.sanity.io/images/61nocsj5/production/53ca8797832d67af5425ab4abdebd6233cbd441c-4000x2660.png" alt="Deep-Sea Sediment Mitigation Operation" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    `;
+
+    var economicsHTML = `
+    <section id="conrad-biz-economics" class="conrad-biz-section">
+      <div class="conrad-biz-inner">
+        <div class="conrad-biz-header">
+          <div class="conrad-kicker">02 // MARKET SIZING &amp; VALIDATION ROADMAP</div>
+          <h2 class="conrad-section-title">From Island Testbed to Global Abyssal Concessions</h2>
+          <p class="conrad-section-lead">A structured beachhead strategy validating in-situ plume mitigation in the Cook Islands before expanding across global International Seabed Authority concessions.</p>
+        </div>
+
+        <div class="conrad-economics-grid">
+          ${sizingCards.map(function(card) {
+            return `
+              <div class="conrad-econ-card">
+                <div class="econ-stage">${card.stage}</div>
+                <div class="econ-cost">${card.cost}</div>
+                <div class="econ-sub">${card.sub}</div>
+                <div class="econ-divider"></div>
+                <div class="econ-meta">
+                  ${card.meta.map(function(m) {
+                    return `<div class="econ-row"><span>${m.label}</span><span>${m.value}</span></div>`;
+                  }).join("")}
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    </section>
+    `;
+
+    var factoryHTML = `
+    <section id="conrad-biz-factory" class="conrad-biz-section">
+      <div class="conrad-biz-inner">
+        <div class="conrad-biz-header">
+          <div class="conrad-kicker">03 // ADDRESSABLE CONCESSION PIPELINE</div>
+          <h2 class="conrad-section-title">22 Global Seabed Concession Opportunities</h2>
+          <p class="conrad-section-lead">Identifiable contract opportunities spanning sovereign Pacific exclusive economic zones and International Seabed Authority (ISA) deep-ocean sectors.</p>
+        </div>
+
+        <div class="conrad-factory-grid">
+          <div class="conrad-cell-card">
+            <div class="cell-num">01</div>
+            <div class="cell-content">
+              <h3 class="cell-title">Cook Islands Sovereign EEZ</h3>
+              <p class="cell-desc">254,654 km² total exploration area across 3 commercial license holders (CIC Limited, Moana Minerals, CSR Ltd). Immediate launch testbed under national SBMA G09 guidance.</p>
+              <div class="cell-specs">
+                <div class="cell-spec-item"><span class="spec-k">Licences</span><span class="spec-v">3 National</span></div>
+                <div class="cell-spec-item"><span class="spec-k">Target Area</span><span class="spec-v">254,654 km²</span></div>
+                <div class="cell-spec-item"><span class="spec-k">Relevance</span><span class="spec-v">★★★★★ Prime</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="conrad-cell-card">
+            <div class="cell-num">02</div>
+            <div class="cell-content">
+              <h3 class="cell-title">Clarion-Clipperton Zone (CCZ)</h3>
+              <p class="cell-desc">The epicenter of global abyssal polymetallic nodule exploration. 17 active contracts sponsored by Nauru (TMC/NORI), Tonga (TOML), Belgium (GSR), UK (UKSR), China Minmetals, and Germany (BGR).</p>
+              <div class="cell-specs">
+                <div class="cell-spec-item"><span class="spec-k">Contracts</span><span class="spec-v">17 Exploration</span></div>
+                <div class="cell-spec-item"><span class="spec-k">Target Mineral</span><span class="spec-v">Ni-Co-Cu Nodules</span></div>
+                <div class="cell-spec-item"><span class="spec-k">Relevance</span><span class="spec-v">★★★★★ Core</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="conrad-cell-card">
+            <div class="cell-num">03</div>
+            <div class="cell-content">
+              <h3 class="cell-title">Central Indian &amp; W. Pacific Basins</h3>
+              <p class="cell-desc">Bilateral state-backed polymetallic nodule reserves held by the Government of India and Beijing Pioneer Hi-Tech Development Corporation, facing high baseline turbidity requirements.</p>
+              <div class="cell-specs">
+                <div class="cell-spec-item"><span class="spec-k">Contracts</span><span class="spec-v">2 Exploration</span></div>
+                <div class="cell-spec-item"><span class="spec-k">Jurisdiction</span><span class="spec-v">ISA / Sovereign</span></div>
+                <div class="cell-spec-item"><span class="spec-k">Relevance</span><span class="spec-v">★★★★★ High</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="conrad-cell-card">
+            <div class="cell-num">04</div>
+            <div class="cell-content">
+              <h3 class="cell-title">Hydrothermal Ridges &amp; Seamounts</h3>
+              <p class="cell-desc">Polymetallic sulfide and cobalt-rich crust tracts along the Mid-Atlantic Ridge and Pacific Seamounts (China COMRA, Japan JOGMEC, South Korea, France Ifremer, Russia).</p>
+              <div class="cell-specs">
+                <div class="cell-spec-item"><span class="spec-k">Contracts</span><span class="spec-v">12 Contracts</span></div>
+                <div class="cell-spec-item"><span class="spec-k">Deposit Type</span><span class="spec-v">Sulfides &amp; Crusts</span></div>
+                <div class="cell-spec-item"><span class="spec-k">Relevance</span><span class="spec-v">★★★ Expansion</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    `;
+
+    var roadmapHTML = `
+    <section id="conrad-biz-roadmap" class="conrad-biz-section">
+      <div class="conrad-biz-inner">
+        <div class="conrad-biz-header">
+          <div class="conrad-kicker">04 // PESTLE STRATEGIC FRAMEWORK</div>
+          <h2 class="conrad-section-title">Sovereign, Ecological &amp; Regulatory Drivers</h2>
+          <p class="conrad-section-lead">A comprehensive macro-environmental evaluation anchoring our technology in legal frameworks, economic efficiency, and ocean preservation.</p>
+        </div>
+
+        <div class="conrad-roadmap-timeline">
+          ${pestleFactors.map(function(item) {
+            return `
+              <div class="conrad-milestone-card">
+                <div class="milestone-quarter">${item.letter}</div>
+                <div class="milestone-content">
+                  <div class="milestone-title">${item.name}</div>
+                  <ul style="margin: 0.75rem 0 0; padding-left: 1.25rem; font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.7);">
+                    ${item.points.map(function(pt) { return `<li style="margin-bottom: 0.45rem;">${pt}</li>`; }).join("")}
+                  </ul>
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    </section>
+    `;
+
+    var diligenceModalHTML = `
+    <section id="conrad-biz-diligence" class="conrad-biz-section diligence-banner-section">
+      <div class="conrad-biz-inner">
+        <div class="conrad-diligence-banner">
+          <div class="diligence-text-block">
+            <div class="conrad-kicker">05 // ENVIRONMENTAL DATA ROOM</div>
+            <h2 class="conrad-section-title">Access Technical Diligence &amp; G09 Dossier</h2>
+            <p class="conrad-section-lead">Download certified G09 EMMP compliance dossiers, Nature Communications (2025) benthic sediment benchmarks, and OECD 202/203 flocculant ecotoxicity laboratory certifications.</p>
+          </div>
+          <div class="diligence-cta-block">
+            <button id="conrad-open-diligence-btn" class="conrad-diligence-btn">
+              <span>REQUEST DATA ROOM ACCESS</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </button>
+            <div class="diligence-secure-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>AUDITABLE COMPLIANCE DOSSIER</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diligence Request Modal -->
+    <div id="conrad-diligence-modal" class="conrad-modal" aria-hidden="true">
+      <div class="conrad-modal-backdrop" id="conrad-modal-backdrop"></div>
+      <div class="conrad-modal-dialog">
+        <div class="conrad-modal-header">
+          <div>
+            <div class="modal-kicker">VERIFIED INSTITUTIONAL ACCESS</div>
+            <h3 class="modal-title">Environmental Data Room Dossier</h3>
+          </div>
+          <button id="conrad-close-modal-btn" class="modal-close-btn" aria-label="Close dialog">&times;</button>
+        </div>
+        <div class="conrad-modal-body">
+          <p class="modal-desc">Authorized concession operators, marine scientists, and regulatory observers may request the full technical dossier, including:</p>
+          <div class="modal-files-list">
+            <div class="modal-file-item">
+              <div class="file-icon">PDF</div>
+              <div class="file-info">
+                <span class="file-name">Cook Islands SBMA G09 EMMP Technical Compliance Architecture</span>
+                <span class="file-size">Environmental Management &amp; Monitoring Plan Guide · 4.8 MB</span>
+              </div>
+            </div>
+            <div class="modal-file-item">
+              <div class="file-icon">PDF</div>
+              <div class="file-info">
+                <span class="file-name">Benthic Plume Dispersion &amp; Redeposition Dynamics (Nature Comm. 2025)</span>
+                <span class="file-size">Empirical Seafloor Nodule Disturbance Analysis · 8.2 MB</span>
+              </div>
+            </div>
+            <div class="modal-file-item">
+              <div class="file-icon">PDF</div>
+              <div class="file-info">
+                <span class="file-name">Eco-Compatible Flocculant Ecotoxicity &amp; Biodegradation Report</span>
+                <span class="file-size">OECD 202/203 Standard Laboratory Certification · 3.1 MB</span>
+              </div>
+            </div>
+          </div>
+
+          <form id="conrad-diligence-form" class="modal-form">
+            <div class="form-row">
+              <input type="text" class="modal-input" placeholder="Organization / Concession Entity *" required />
+              <input type="email" class="modal-input" placeholder="Official Institutional Email *" required />
+            </div>
+            <div class="form-row">
+              <select class="modal-input" required>
+                <option value="" disabled selected>Primary Area of Interest *</option>
+                <option value="cook-islands">Cook Islands Concession Baseline</option>
+                <option value="ccz">Clarion-Clipperton Zone (CCZ) Integration</option>
+                <option value="regulatory">Regulatory &amp; ISA Observer Inquiries</option>
+                <option value="scientific">Academic / Oceanographic Collaboration</option>
+              </select>
+            </div>
+            <button type="submit" id="diligence-submit-btn" class="modal-submit-btn">REQUEST ACCESS CREDENTIALS</button>
+            <div id="diligence-success-msg" class="modal-success-msg" style="display: none;">
+              ✓ Request submitted. Our team will deliver credentials to your institutional address within 24 hours.
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </section>
-  `;
+    `;
 
-  var economicsHTML = `
-  <section id="conrad-biz-economics" class="conrad-biz-section">
-    <div class="conrad-biz-inner">
-      <div class="conrad-biz-header">
-        <div class="conrad-kicker">02 // CAPITAL EFFICIENCY &amp; UNIT ECONOMICS</div>
-        <h2 class="conrad-section-title">Hyperscale Manufacturing Learning Curve</h2>
-        <p class="conrad-section-lead">As production volume accelerates, our software-first automated tooling drives aggressive unit cost deflation and expanding operating margins.</p>
-      </div>
-
-      <div class="conrad-economics-grid">
-        <div class="conrad-econ-card">
-          <div class="econ-img-wrap">
-            <img src="/_external/cdn.sanity.io/images/61nocsj5/production/16113e3a588bd30e5c67bf2ee6d7a0847845fb28-3000x3000.jpg" alt="Phase 1 Airframe Prototyping" />
-          </div>
-          <div class="econ-stage">PHASE 1 // PROTOTYPING &amp; TEST</div>
-          <div class="econ-cost">$1,200,000</div>
-          <div class="econ-sub">PER AIRFRAME (UNITS 1 – 10)</div>
-          <div class="econ-divider"></div>
-          <div class="econ-meta">
-            <div class="econ-row"><span>Production Cycle</span><span>60 Days</span></div>
-            <div class="econ-row"><span>Assembly Method</span><span>Semi-Automated Layup</span></div>
-            <div class="econ-row"><span>Milestone Target</span><span>Flight Envelope Clearance</span></div>
-          </div>
-        </div>
-
-        <div class="conrad-econ-card">
-          <div class="econ-img-wrap">
-            <img src="/_external/cdn.sanity.io/images/61nocsj5/production/a005eecc853d709de52769704c0a6cc1083ac7c4-1131x630.png" alt="Phase 2 Robotic Workcell" />
-          </div>
-          <div class="econ-stage">PHASE 2 // LOW-RATE INITIAL PRODUCTION</div>
-          <div class="econ-cost">$650,000</div>
-          <div class="econ-sub">PER AIRFRAME (UNITS 11 – 100)</div>
-          <div class="econ-divider"></div>
-          <div class="econ-meta">
-            <div class="econ-row"><span>Production Cycle</span><span>21 Days</span></div>
-            <div class="econ-row"><span>Assembly Method</span><span>Hard Tooling &amp; Robotics</span></div>
-            <div class="econ-row"><span>Milestone Target</span><span>DoD Operational Trials</span></div>
-          </div>
-        </div>
-
-        <div class="conrad-econ-card highlight">
-          <div class="econ-img-wrap">
-            <img src="/_external/cdn.sanity.io/images/61nocsj5/production/362212f069102419e04043c85353fc572ead5649-4000x2660.png" alt="Phase 3 Hyperscale Flightline" />
-          </div>
-          <div class="econ-stage">PHASE 3 // FULL-RATE PRODUCTION (FRP)</div>
-          <div class="econ-cost">$390,000</div>
-          <div class="econ-sub">PER AIRFRAME (UNITS 100+)</div>
-          <div class="econ-divider"></div>
-          <div class="econ-meta">
-            <div class="econ-row"><span>Production Cycle</span><span>14 Days</span></div>
-            <div class="econ-row"><span>Gross Margin</span><span>58% Hardware / 82% SaaS</span></div>
-            <div class="econ-row"><span>Milestone Target</span><span>Allied Defense Fleets</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  `;
-
-  var factoryHTML = `
-  <section id="conrad-biz-factory" class="conrad-biz-section">
-    <div class="conrad-biz-inner">
-      <div class="conrad-biz-header">
-        <div class="conrad-kicker">03 // HYPERSCALE FACTORY FOOTPRINT</div>
-        <h2 class="conrad-section-title">Modular Autonomous Assembly Cells</h2>
-        <p class="conrad-section-lead">Decentralized, repeatable factory modules built for rapid geographic deployment across allied territories.</p>
-      </div>
-
-      <div class="conrad-factory-visual-wrap">
-        <img src="/_external/cdn.sanity.io/images/61nocsj5/production/5769b611ee1f98af6b5ed02b0a0eb31ed6599318-4000x2660.png" alt="Modular Aerospace Factory Cleanroom" />
-        <div class="factory-visual-badge">FACILITY SPEC // 50,000 SQ FT ADVANCED CELL</div>
-      </div>
-
-      <div class="conrad-factory-grid">
-        <div class="conrad-factory-card">
-          <div class="factory-num">50k</div>
-          <div class="factory-unit">SQ FT PER PRODUCTION CELL</div>
-          <h4 class="factory-title">Modular Factory Units</h4>
-          <p class="factory-desc">Compact, capital-efficient assembly modules capable of producing 500 airframes annually without colossal capital outlays.</p>
-        </div>
-
-        <div class="conrad-factory-card">
-          <div class="factory-num">92%</div>
-          <div class="factory-unit">AUTOMATED LAYUP COVERAGE</div>
-          <h4 class="factory-title">Robotic Composite Layup</h4>
-          <p class="factory-desc">Precision robotic tape placement eliminates manual bottlenecks and ensures aerospace structural consistency across every hull.</p>
-        </div>
-
-        <div class="conrad-factory-card">
-          <div class="factory-num">100%</div>
-          <div class="factory-unit">FIVE EYES SUPPLY SOVEREIGNTY</div>
-          <h4 class="factory-title">Sovereign Supply Chain</h4>
-          <p class="factory-desc">Zero critical reliance on adversarial semiconductor or rare-earth supplies. Guaranteed component availability in contested scenarios.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  `;
-
-  var roadmapHTML = `
-  <section id="conrad-biz-roadmap" class="conrad-biz-section">
-    <div class="conrad-biz-inner">
-      <div class="conrad-biz-header">
-        <div class="conrad-kicker">04 // PROCUREMENT &amp; DEPLOYMENT ROADMAP</div>
-        <h2 class="conrad-section-title">Phased Defense Acquisition Milestones</h2>
-        <p class="conrad-section-lead">A proven, risk-mitigated progression from private prototype validation to allied fleet deployment.</p>
-      </div>
-
-      <div class="conrad-roadmap-track">
-        <div class="conrad-roadmap-item">
-          <div class="roadmap-phase">PHASE I // Q4 2024</div>
-          <div class="roadmap-title">Aerodynamic Validation</div>
-          <div class="roadmap-desc">Subscale aerodynamic flight testing, Mach 0.85 dash clearance, and autonomous stall recovery algorithms successfully completed.</div>
-        </div>
-        <div class="conrad-roadmap-item">
-          <div class="roadmap-phase">PHASE II // Q2 2025</div>
-          <div class="roadmap-title">Subsystem Integration</div>
-          <div class="roadmap-desc">Full integration of the DRUNKEAST modular electronics, conformal AESA radar suite, and hybrid loiter powerplant.</div>
-        </div>
-        <div class="conrad-roadmap-item">
-          <div class="roadmap-phase active">PHASE III // Q3 2026 [ACTIVE]</div>
-          <div class="roadmap-title">DoD DIU Prototype Award</div>
-          <div class="roadmap-desc">Live-fire operational demonstration in electronic-warfare contested maritime and land corridors with Defense Innovation Unit partners.</div>
-        </div>
-        <div class="conrad-roadmap-item">
-          <div class="roadmap-phase">PHASE IV // Q1 2027</div>
-          <div class="roadmap-title">Low-Rate Initial Production</div>
-          <div class="roadmap-desc">First 50-unit production run delivered under fixed-price procurement contract for forward-deployed theater evaluations.</div>
-        </div>
-        <div class="conrad-roadmap-item">
-          <div class="roadmap-phase">PHASE V // 2028</div>
-          <div class="roadmap-title">Full-Rate &amp; Allied Export</div>
-          <div class="roadmap-desc">Scaled 500 unit/year factory output with export authorization to NATO, Five Eyes, and Indo-Pacific partner nations.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-  `;
-
-  var diligenceModalHTML = `
-  <section id="conrad-biz-modal-cta" class="conrad-cta-section">
-    <div class="conrad-cta-inner">
-      <div class="conrad-kicker">05 // ACCREDITED INVESTOR RELATIONS</div>
-      <h2 class="conrad-cta-title">Confidential Diligence &amp; Data Room</h2>
-      <p class="conrad-cta-lead">
-        Accredited institutional defense investors, prime contractors, and government acquisition authorities may request encrypted access to the Conrad technical data package, financial models, and full pitch deck.
-      </p>
-      <button id="conrad-open-diligence-btn" class="conrad-diligence-btn">
-        <span>REQUEST PITCH DECK &amp; DATA ROOM</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-      </button>
-    </div>
-  </section>
-
-  <!-- In-Situ Diligence Modal Overlay -->
-  <div id="conrad-diligence-modal" class="conrad-modal-overlay" aria-hidden="true">
-    <div class="conrad-modal-backdrop" id="conrad-modal-backdrop"></div>
-    <div class="conrad-modal-window">
-      <div class="conrad-modal-header">
-        <div>
-          <div class="conrad-kicker">ENCRYPTED DILIGENCE PORTAL</div>
-          <h3 class="conrad-modal-title">Investor Deck &amp; Data Room</h3>
-        </div>
-        <button id="conrad-close-modal-btn" class="conrad-modal-close" aria-label="Close modal">&times;</button>
-      </div>
-      <form id="conrad-diligence-form" class="conrad-modal-form" onsubmit="return false;">
-        <div class="conrad-form-row">
-          <div class="conrad-field">
-            <label for="diligence-name">FULL NAME</label>
-            <input type="text" id="diligence-name" required placeholder="Alex Smith" />
-          </div>
-          <div class="conrad-field">
-            <label for="diligence-firm">INSTITUTION / FUND / AGENCY</label>
-            <input type="text" id="diligence-firm" required placeholder="Founders Fund / US Navy DIU" />
-          </div>
-        </div>
-        <div class="conrad-form-row">
-          <div class="conrad-field">
-            <label for="diligence-email">OFFICIAL WORK EMAIL</label>
-            <input type="email" id="diligence-email" required placeholder="alex@institution.com" />
-          </div>
-          <div class="conrad-field">
-            <label for="diligence-tier">ACCREDITATION TIER</label>
-            <select id="diligence-tier" required>
-              <option value="institutional-fund">Institutional Defense / Venture LP</option>
-              <option value="prime-contractor">Defense Prime Contractor Integration</option>
-              <option value="government-dod">DoD / Allied Acquisition Program</option>
-              <option value="family-office">Accredited Single Family Office</option>
-            </select>
-          </div>
-        </div>
-        <div class="conrad-form-actions">
-          <button type="submit" id="diligence-submit-btn" class="conrad-submit-btn">SUBMIT REQUEST</button>
-        </div>
-        <div id="diligence-success-msg" class="conrad-success-msg" style="display:none;">
-          &check; Request received. Our Investor Relations team will review your credentials and issue encrypted data room credentials within 24 hours.
-        </div>
-      </form>
-    </div>
-  </div>
-  `;
+    return {
+      doctrineHTML: doctrineHTML,
+      economicsHTML: economicsHTML,
+      factoryHTML: factoryHTML,
+      roadmapHTML: roadmapHTML,
+      diligenceModalHTML: diligenceModalHTML
+    };
+  }
 
   function isBizRoute() {
     var p = window.location.pathname.replace(/\/$/, "") || "/";
     return p === "/business" || p.startsWith("/business/");
   }
+
+  var currentMountedEdition = null;
 
   function ensureBizTrack() {
     var onBiz = isBizRoute();
@@ -253,10 +282,7 @@
     var economics = document.getElementById("conrad-biz-economics");
     var factory = document.getElementById("conrad-biz-factory");
     var roadmap = document.getElementById("conrad-biz-roadmap");
-    var ctaModal = document.getElementById("conrad-biz-modal-cta");
-    var contactSec = document.getElementById("conrad-biz-contact");
-
-    if (contactSec) contactSec.remove();
+    var ctaModal = document.getElementById("conrad-biz-diligence");
 
     if (!onBiz) {
       if (doctrine) doctrine.remove();
@@ -264,22 +290,71 @@
       if (factory) factory.remove();
       if (roadmap) roadmap.remove();
       if (ctaModal) ctaModal.remove();
+      currentMountedEdition = null;
       return;
     }
 
     var richText = document.querySelector(".TwoColumnRichText");
     var header = document.querySelector(".ProductHeaderSlice");
-
-    // Must wait for Hydra slices to mount so custom sections never mount at the top of <main>
     var anchor = richText || header;
     if (!anchor) return;
 
+    // Update ProductHeaderSlice titles & details
+    if (header) {
+      var titleEl = header.querySelector("h1.titleWrapper span.title, .title");
+      if (titleEl && !titleEl.dataset.customized) {
+        titleEl.dataset.customized = "true";
+        titleEl.innerText = "Commercial Strategy & Scale";
+      }
+      var para = header.querySelector(".paragraph1");
+      if (para && !para.dataset.customized) {
+        para.dataset.customized = "true";
+        para.innerHTML = `
+          <p class="detail">PACIFIC &amp; GLOBAL SEABED CONCESSIONS</p>
+          <p class="detail">IN-SITU PLUME MITIGATION &amp; SEABED LICENSING</p>
+          <p class="detail">[COMMERCIAL LICENSING ROADMAP]</p>
+        `;
+      }
+    }
+
+    // Update TwoColumnRichText
+    if (richText) {
+      var col1 = richText.querySelector(".column1 p, .column1");
+      if (col1 && !col1.dataset.customized) {
+        col1.dataset.customized = "true";
+        col1.innerHTML = '<p class="detail">THE COMMERCIAL LICENSING MODEL</p>';
+      }
+      var col2 = richText.querySelector(".column2 p, .column2");
+      if (col2 && !col2.dataset.customized) {
+        col2.dataset.customized = "true";
+        col2.innerHTML = '<p>Autonomous In-Situ Sediment Control for Seabed Mining Concessions. Turning environmental compliance into a permitted, bankable commercial asset.</p>';
+      }
+    }
+
+    var activeEdition = (window.Conrad && Conrad.edition) || "global";
+    var needsRebuild = (currentMountedEdition !== activeEdition);
+
+    if (needsRebuild && doctrine) {
+      if (doctrine) doctrine.remove();
+      if (economics) economics.remove();
+      if (factory) factory.remove();
+      if (roadmap) roadmap.remove();
+      if (ctaModal) ctaModal.remove();
+      doctrine = null;
+      economics = null;
+      factory = null;
+      roadmap = null;
+      ctaModal = null;
+    }
+
+    currentMountedEdition = activeEdition;
+    var htmlBlocks = generateBizHTML();
     var newlyMounted = false;
 
     // 1. Mount or reposition Doctrine
     if (!doctrine) {
       var w1 = document.createElement("div");
-      w1.innerHTML = doctrineHTML;
+      w1.innerHTML = htmlBlocks.doctrineHTML;
       doctrine = w1.firstElementChild;
       anchor.parentNode.insertBefore(doctrine, anchor.nextSibling);
       newlyMounted = true;
@@ -290,7 +365,7 @@
     // 2. Mount or reposition Economics
     if (!economics && doctrine) {
       var w2 = document.createElement("div");
-      w2.innerHTML = economicsHTML;
+      w2.innerHTML = htmlBlocks.economicsHTML;
       economics = w2.firstElementChild;
       doctrine.parentNode.insertBefore(economics, doctrine.nextSibling);
       newlyMounted = true;
@@ -298,10 +373,10 @@
       doctrine.parentNode.insertBefore(economics, doctrine.nextSibling);
     }
 
-    // 3. Mount or reposition Factory
+    // 3. Mount or reposition Factory / Concession Pipeline
     if (!factory && economics) {
       var w3 = document.createElement("div");
-      w3.innerHTML = factoryHTML;
+      w3.innerHTML = htmlBlocks.factoryHTML;
       factory = w3.firstElementChild;
       economics.parentNode.insertBefore(factory, economics.nextSibling);
       newlyMounted = true;
@@ -309,10 +384,10 @@
       economics.parentNode.insertBefore(factory, economics.nextSibling);
     }
 
-    // 4. Mount or reposition Roadmap
+    // 4. Mount or reposition Roadmap / PESTLE
     if (!roadmap && factory) {
       var w4 = document.createElement("div");
-      w4.innerHTML = roadmapHTML;
+      w4.innerHTML = htmlBlocks.roadmapHTML;
       roadmap = w4.firstElementChild;
       factory.parentNode.insertBefore(roadmap, factory.nextSibling);
       newlyMounted = true;
@@ -323,7 +398,7 @@
     // 5. Mount or reposition Diligence Modal CTA
     if (!ctaModal && roadmap) {
       var w5 = document.createElement("div");
-      w5.innerHTML = diligenceModalHTML;
+      w5.innerHTML = htmlBlocks.diligenceModalHTML;
       ctaModal = w5.firstElementChild;
       var modalOverlay = w5.lastElementChild;
       roadmap.parentNode.insertBefore(ctaModal, roadmap.nextSibling);
@@ -400,9 +475,24 @@
   window.addEventListener("conrad-locationchange", ensureBizTrack);
   window.addEventListener("popstate", ensureBizTrack);
 
+  var lastBizRoute = null;
+  function checkBizRoute() {
+    var p = window.location.pathname.replace(/\/$/, "") || "/";
+    var richText = document.querySelector(".TwoColumnRichText");
+    var header = document.querySelector(".ProductHeaderSlice");
+    var doctrine = document.getElementById("conrad-biz-doctrine");
+    var activeEdition = (window.Conrad && Conrad.edition) || "global";
+    if (p !== lastBizRoute || ((richText || header) && !doctrine) || (doctrine && currentMountedEdition !== activeEdition)) {
+      lastBizRoute = p;
+      ensureBizTrack();
+    }
+  }
+  setInterval(checkBizRoute, 150);
+
   if (document.readyState === "complete" || document.readyState === "interactive") {
     ensureBizTrack();
   } else {
     document.addEventListener("DOMContentLoaded", ensureBizTrack);
+    window.addEventListener("load", ensureBizTrack);
   }
 })();

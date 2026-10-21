@@ -1,13 +1,46 @@
 /**
  * Conrad Prototype — About Route Walk Alone Conveyor & Contact Section
+ * High-performance diagonal card conveyor with GSAP inspection modal, rolling drum counter,
+ * and dual-edition support (DRUNKEAST vs POSEIDON).
  */
 
-// Shared Contact HTML generator
+// Shared Contact & Mission HTML generator
 window.generateContactHTML = function(kicker, leadText) {
-  var k = kicker || "02 // CONTACT &amp; ENGAGEMENT";
-  var l = leadText || "For defense capabilities, partner integration, commercial deployment, or mission strategy inquiries, our specialized engineering and operations teams are available directly.";
+  var aboutData = (window.Conrad && Conrad.content && Conrad.content.get("about")) || {};
+  var contactData = aboutData.contact || {};
+  var isChina = (window.Conrad && Conrad.isChina);
+  var company = isChina ? "POSEIDON" : "DRUNKEAST";
+  var k = kicker || contactData.kicker || "02 // GET IN TOUCH";
+  var l = leadText || contactData.lead || "Have a question, an idea, or an opportunity to collaborate? We welcome conversations with fellow innovators, ocean researchers, and mining concession operators.";
+  var email = contactData.email || "teamdrunkeast@gmail.com";
+  var mission = aboutData.mission || "";
+  var vision = aboutData.vision || "";
+  var storyParas = aboutData.storyParagraphs || [];
+
+  var storyHTML = "";
+  if (storyParas.length) {
+    storyHTML = `
+      <div class="conrad-about-story-wrap" style="margin-bottom: 3.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div class="conrad-contact-kicker">01 // ORIGIN &amp; INSPIRATION</div>
+        <h2 class="conrad-contact-title" style="margin-bottom: 1.5rem;">${aboutData.storyTitle || "The Story Behind " + company}</h2>
+        ${storyParas.map(function(p) { return `<p class="conrad-contact-lead" style="margin-bottom: 1.25rem; max-width: 900px;">${p}</p>`; }).join("")}
+        ${mission ? `<div style="margin-top: 2rem; padding: 1.5rem 2rem; background: rgba(255,255,255,0.03); border-left: 2px solid #ffffff;"><h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">Our Mission</h3><p style="font-size: 0.95rem; line-height: 1.6; color: rgba(255,255,255,0.7); margin: 0;">${mission}</p></div>` : ""}
+        ${vision ? `<div style="margin-top: 1.25rem; padding: 1.5rem 2rem; background: rgba(255,255,255,0.03); border-left: 2px solid rgba(255,255,255,0.4);"><h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">Our Vision</h3><p style="font-size: 0.95rem; line-height: 1.6; color: rgba(255,255,255,0.7); margin: 0;">${vision}</p></div>` : ""}
+      </div>
+    `;
+  } else if (mission) {
+    storyHTML = `
+      <div class="conrad-about-story-wrap" style="margin-bottom: 3.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div class="conrad-contact-kicker">01 // OUR MISSION</div>
+        <h2 class="conrad-contact-title" style="margin-bottom: 1.5rem;">Responsible Ocean Innovation</h2>
+        <p class="conrad-contact-lead" style="margin-bottom: 1.25rem; max-width: 900px;">${mission}</p>
+      </div>
+    `;
+  }
+
   return `
       <div class="conrad-contact-inner">
+        ${storyHTML}
         <div class="conrad-contact-header">
           <div class="conrad-contact-kicker">${k}</div>
           <h2 class="conrad-contact-title">Direct Inquiries</h2>
@@ -19,37 +52,37 @@ window.generateContactHTML = function(kicker, leadText) {
         <div class="conrad-contact-grid">
           <div class="conrad-contact-card primary-card">
             <div class="conrad-card-badge">PRIMARY DIRECT CHANNEL</div>
-            <div class="conrad-card-label">General Operations &amp; Mission Partnerships</div>
-            <a href="mailto:inquiries@anduril.com" class="conrad-contact-email">
-              <span>inquiries@anduril.com</span>
+            <div class="conrad-card-label">General Operations &amp; Ocean Partnerships</div>
+            <a href="mailto:${email}" class="conrad-contact-email">
+              <span>${email}</span>
               <svg class="conrad-arrow-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
             </a>
-            <p class="conrad-card-note">Monitored 24/7/365 by our mission operations center. Encrypted communication available upon request.</p>
+            <p class="conrad-card-note">Monitored directly by the ${company} engineering and research team.</p>
           </div>
 
           <div class="conrad-contact-card channels-card">
             <div class="conrad-card-badge">SPECIALIZED INQUIRIES</div>
             <div class="conrad-channel-list">
-              <a href="mailto:defense@anduril.com" class="conrad-channel-row">
+              <a href="mailto:${email}?subject=Concession%20EMMP%20Integration" class="conrad-channel-row">
                 <div>
-                  <span class="conrad-channel-name">Defense &amp; Allied Programs</span>
-                  <span class="conrad-channel-sub">DoD, NATO &amp; International Partners</span>
+                  <span class="conrad-channel-name">Concession &amp; Allied EMMP Programs</span>
+                  <span class="conrad-channel-sub">Cook Islands SBMA, ISA Contractors &amp; Survey Vessels</span>
                 </div>
-                <span class="conrad-channel-link">defense@anduril.com →</span>
+                <span class="conrad-channel-link">${email} &rarr;</span>
               </a>
-              <a href="mailto:press@anduril.com" class="conrad-channel-row">
+              <a href="mailto:${email}?subject=Scientific%20Research%20Collaboration" class="conrad-channel-row">
                 <div>
-                  <span class="conrad-channel-name">Media &amp; Communications</span>
-                  <span class="conrad-channel-sub">Press kits, statements &amp; interview requests</span>
+                  <span class="conrad-channel-name">Oceanographic &amp; Benthic Research</span>
+                  <span class="conrad-channel-sub">Turbidity dynamics, flocculation chemistry &amp; sensors</span>
                 </div>
-                <span class="conrad-channel-link">press@anduril.com →</span>
+                <span class="conrad-channel-link">${email} &rarr;</span>
               </a>
-              <a href="mailto:careers@anduril.com" class="conrad-channel-row">
+              <a href="mailto:${email}?subject=Engineering%20Careers" class="conrad-channel-row">
                 <div>
-                  <span class="conrad-channel-name">Engineering &amp; Careers</span>
-                  <span class="conrad-channel-sub">Autonomous systems, hardware, software</span>
+                  <span class="conrad-channel-name">Engineering &amp; Deep-Sea Careers</span>
+                  <span class="conrad-channel-sub">Subsea mechanical, fluid dynamics, marine robotics</span>
                 </div>
-                <span class="conrad-channel-link">careers@anduril.com →</span>
+                <span class="conrad-channel-link">${email} &rarr;</span>
               </a>
             </div>
           </div>
@@ -59,24 +92,21 @@ window.generateContactHTML = function(kicker, leadText) {
           <div class="conrad-socials-group">
             <span class="conrad-socials-label">NETWORK</span>
             <div class="conrad-socials-links">
-              <a href="https://twitter.com/anduriltech" target="_blank" rel="noopener noreferrer" class="conrad-social-link">X / TWITTER ↗</a>
-              <a href="https://www.linkedin.com/company/anduril-industries" target="_blank" rel="noopener noreferrer" class="conrad-social-link">LINKEDIN ↗</a>
-              <a href="https://www.youtube.com/@andurilindustries" target="_blank" rel="noopener noreferrer" class="conrad-social-link">YOUTUBE ↗</a>
-              <a href="https://www.instagram.com/andurilindustries" target="_blank" rel="noopener noreferrer" class="conrad-social-link">INSTAGRAM ↗</a>
+              <a href="mailto:${email}" class="conrad-social-link">EMAIL DIRECT &nearr;</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="conrad-social-link">LINKEDIN &nearr;</a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="conrad-social-link">X / TWITTER &nearr;</a>
             </div>
           </div>
           <div class="conrad-facilities-group">
-            <span class="conrad-socials-label">GLOBAL PRESENCE</span>
+            <span class="conrad-socials-label">OPERATIONAL HUBS</span>
             <div class="conrad-facilities-list">
-              <span>COSTA MESA (HQ)</span>
-              <span class="dot">·</span>
-              <span>SEATTLE</span>
-              <span class="dot">·</span>
-              <span>WASHINGTON D.C.</span>
-              <span class="dot">·</span>
-              <span>LONDON</span>
-              <span class="dot">·</span>
-              <span>SYDNEY</span>
+              <span>RAROTONGA (COOK ISLANDS)</span>
+              <span class="dot">&middot;</span>
+              <span>BEIJING</span>
+              <span class="dot">&middot;</span>
+              <span>SINGAPORE</span>
+              <span class="dot">&middot;</span>
+              <span>HONOLULU</span>
             </div>
           </div>
         </div>
@@ -85,77 +115,77 @@ window.generateContactHTML = function(kicker, leadText) {
 };
 
 (function() {
-  var WALK_DATA = [
+  var DEFAULT_WALK_DATA = [
     {
       letter: "D",
-      stage: "01 // DIRECTED AUTONOMY",
-      title: "Directed Autonomy",
-      subtitle: "Distributed Mission Command & Decision Advantage",
-      desc: "Autonomous mission management executing software-defined tactical directives with microsecond consensus across contested operational envelopes.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/d23c6903421f10c7191873592b8e823362fecbe8-882x878.png"
+      stage: "01 // DECARBONIZATION",
+      title: "Decarbonization",
+      subtitle: "D \u2014 Decarbonization",
+      desc: "Supplying battery-critical minerals from low-carbon seabed deposits while safeguarding pelagic carbon sequestration cycles.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/273b69f85bec5374015642647464223b0501a17f-4000x2660.png"
     },
     {
       letter: "R",
-      stage: "02 // RAPID REACTION",
-      title: "Rapid Reaction",
-      subtitle: "High-Throughput Thermodynamic Cycle & Integrated Powertrain",
-      desc: "Solid rocket and turbojet propulsion engineered for instant readiness, aggressive throttle response, and sustained flight profiles.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/9ea5ae8181d48c78365c6f8d8e3f3f35208e5f55-3000x2000.jpg"
+      stage: "02 // RESTORATION",
+      title: "Restoration",
+      subtitle: "R \u2014 Restoration",
+      desc: "Accelerating natural sedimentation to preserve benthic filter feeders and prevent long-term ecosystem destabilization.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/362212f069102419e04043c85353fc572ead5649-4000x2660.png"
     },
     {
       letter: "U",
-      stage: "03 // UNIFIED ARCHITECTURE",
-      title: "Unified Architecture",
-      subtitle: "Software-Governed Hardware Modularity & Standard Interconnects",
-      desc: "Common bus interfaces across avionics, power distribution, and actuation systems for rapid subsystem field replacement in under 90 seconds.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/c79ccecf787d455420edb440cbc7bf6a114cc680-882x878.png"
+      stage: "03 // UNDERWATER",
+      title: "Underwater",
+      subtitle: "U \u2014 Underwater",
+      desc: "Deploying high-pressure chemical dosing and autonomous acoustic telemetry at extreme depths exceeding 5,000 meters.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/113f1d96997d7375017ad46ebcd24122de1e343f-1404x1080.png"
     },
     {
       letter: "N",
-      stage: "04 // NETWORK RESILIENCE",
-      title: "Network Resilience",
-      subtitle: "Decentralized Ad-Hoc Directional Mesh Telemetry",
-      desc: "Self-healing tactical datalinks operating continuously in contested EW and GPS-denied environments without dependence on central ground stations.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/35c91ba3a0603c99720933d52bad4c73f9fdca5f-3000x1500.jpg"
+      stage: "04 // NAVIGATION",
+      title: "Navigation",
+      subtitle: "N \u2014 Navigation",
+      desc: "Guiding subsea mining extractors along precise bathymetric corridors to minimize hydrodynamic boundary-layer disturbance.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/1ec5966e21866afda6b535cb05350e2af41090d2-1993x1115.png"
     },
     {
       letter: "K",
-      stage: "05 // KINETIC CAPACITY",
-      title: "Kinetic Capacity",
-      subtitle: "Modular Multirole Payload Integration",
-      desc: "Standardized bay geometry accommodating kinetic, sensor, and electronic countermeasures with automated software verification and telemetry lock.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/955e14dfee80e6022b1744580b6996cd435c6153-976x1952.jpg"
+      stage: "05 // KINETIC",
+      title: "Kinetic",
+      subtitle: "K \u2014 Kinetic",
+      desc: "Dissipating slurry discharge kinetic energy through specialized shrouds, dampening turbulent plumes at the seabed.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/07ffa223dc2ddf1ca9d3af7307aa8e5e1a71a3fc-1404x1080.png"
     },
     {
       letter: "E",
-      stage: "06 // EXPEDITIONARY FOOTPRINT",
-      title: "Expeditionary Footprint",
-      subtitle: "Zero Specialized Ground Depot or Runway Requirements",
-      desc: "Containerized deployment packages enabling austere-field launch, retrieval, and turnaround by minimal operator detachments.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/16113e3a588bd30e5c67bf2ee6d7a0847845fb28-3000x3000.jpg"
+      stage: "06 // ECOLOGICAL",
+      title: "Ecological",
+      subtitle: "E \u2014 Ecological",
+      desc: "Utilizing 100% biodegradable organic biopolymers that rapidly degrade without toxicity to deep-ocean megafauna.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/216fe60b438d0b6b0ed8245321fc2c7905f0b45d-2000x1501.jpg"
     },
     {
       letter: "A",
-      stage: "07 // AUTOMATED ASSEMBLY",
-      title: "Automated Assembly",
-      subtitle: "Software-Defined Precision Tooling & Arsenal Production",
-      desc: "Digital-twin simulated manufacturing workcells delivering scalable serial production with automated quality inspection at aerospace tolerances.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/a005eecc853d709de52769704c0a6cc1083ac7c4-1131x630.png"
+      stage: "07 // ABYSSAL",
+      title: "Abyssal",
+      subtitle: "A \u2014 Abyssal",
+      desc: "Pioneering deep-abyssal environmental safeguards tailored for Clarion-Clipperton Zone and Cook Islands seabed conditions.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/05300e9a98ce923d121333250a314b71e01bec76-4000x2659.png"
     },
     {
       letter: "S",
-      stage: "08 // SENSOR SYNTHESIS",
-      title: "Sensor Synthesis",
-      subtitle: "Multimodal Edge Perception & Threat Classification",
-      desc: "Fused onboard electro-optical, radar, and RF intelligence processed in real-time to generate instant operational awareness.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/bf1545878e8ef76600cd522becab5280ba5c9f7f-3456x1588.png"
+      stage: "08 // STEWARDSHIP",
+      title: "Stewardship",
+      subtitle: "S \u2014 Stewardship",
+      desc: "Partnering with Pacific island nations and international regulators to ensure fully transparent, verifiable EMMP compliance.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/add60aa1adc75c31cd2f9a267f589a2d62b81892-4000x2660.png"
     },
     {
       letter: "T",
-      stage: "09 // TOTAL ENVELOPE",
-      title: "Total Envelope",
-      subtitle: "Validated Multi-Domain Operational Reach",
-      desc: "Aerodynamic design and thermal shielding engineered for all-weather survivability and extended mission endurance in high-threat theaters.",
+      stage: "09 // TRANSPARENCY",
+      title: "Transparency",
+      subtitle: "T \u2014 Transparency",
+      desc: "Streaming tamper-proof optical backscatter and ADCP current data directly to regulatory bodies and public monitors.",
       image: "/_external/cdn.sanity.io/images/61nocsj5/production/dddfeebfe9d2f943790ffdbbf2bdbcca1efe6a0d-3840x2160.png"
     }
   ];
@@ -163,7 +193,29 @@ window.generateContactHTML = function(kicker, leadText) {
   var GAP = 350;
   var ANGLE = -22;
 
+  function getWalkData() {
+    var acronym = (window.Conrad && Conrad.content && Conrad.content.get("about.acronym"));
+    if (Array.isArray(acronym) && acronym.length) {
+      return acronym.map(function(item, idx) {
+        var num = idx + 1;
+        var stageStr = (num < 10 ? "0" + num : num) + " // " + item.word.toUpperCase();
+        return {
+          letter: item.letter,
+          stage: stageStr,
+          title: item.word,
+          subtitle: item.letter + " \u2014 " + item.word,
+          desc: item.principle,
+          image: item.image
+        };
+      });
+    }
+    return DEFAULT_WALK_DATA;
+  }
+
   function generateWalkHTML() {
+    var WALK_DATA = getWalkData();
+    var brand = (window.Conrad && Conrad.content && Conrad.content.get("brandName")) || "DRUNKEAST";
+
     var lettersHTML = WALK_DATA.map(function(item, idx) {
       return '<div class="walkalone-letter-item" data-letter-idx="' + idx + '">' + item.letter + '</div>';
     }).join("");
@@ -218,7 +270,7 @@ window.generateContactHTML = function(kicker, leadText) {
         <div class="walkalone-info-panel" id="walkalone-info">
           ${infoHTML}
         </div>
-        <div class="walkalone-steps-indicator" id="walkalone-steps-nav" aria-label="DRUNKEAST navigation">
+        <div class="walkalone-steps-indicator" id="walkalone-steps-nav" aria-label="${brand} navigation">
           ${lettersTrackHTML}
         </div>
       </section>
@@ -227,7 +279,7 @@ window.generateContactHTML = function(kicker, leadText) {
 
   function generateContact() {
     return (typeof window.generateContactHTML === "function") 
-      ? window.generateContactHTML("02 // CONTACT &amp; ENGAGEMENT") 
+      ? window.generateContactHTML("02 // GET IN TOUCH") 
       : "";
   }
 
@@ -245,6 +297,7 @@ window.generateContactHTML = function(kicker, leadText) {
       Global.lenis.stop();
     }
 
+    var WALK_DATA = getWalkData();
     var data = WALK_DATA[index];
     if (!data) return;
 
@@ -363,6 +416,8 @@ window.generateContactHTML = function(kicker, leadText) {
 
     if (strip) strip.classList.remove("inspect-backdrop");
 
+    var WALK_DATA = getWalkData();
+
     if (window.gsap) {
       if (sheet) {
         gsap.to(sheet, {
@@ -410,7 +465,7 @@ window.generateContactHTML = function(kicker, leadText) {
             yPercent: -50,
             x: 0,
             y: y,
-            rotation: 22,
+            rotation: -ANGLE,
             scale: targetScale,
             width: 360,
             height: 225,
@@ -437,7 +492,7 @@ window.generateContactHTML = function(kicker, leadText) {
               yPercent: -50,
               x: 0,
               y: y,
-              rotation: 22,
+              rotation: -ANGLE,
               scale: targetScale,
               opacity: targetOpacity,
               duration: 0.68,
@@ -482,6 +537,7 @@ window.generateContactHTML = function(kicker, leadText) {
     var nav = document.getElementById("walkalone-steps-nav");
     if (!track || !sticky || !strip) return;
 
+    var WALK_DATA = getWalkData();
     var rect = track.getBoundingClientRect();
     var trackHeight = track.offsetHeight;
     var viewportHeight = window.innerHeight;
@@ -559,24 +615,20 @@ window.generateContactHTML = function(kicker, leadText) {
       infoItems.forEach(function(item, idx) {
         if (idx === activeStep && sectionOpacity > 0.1) {
           item.classList.add("active");
-          item.style.opacity = sectionOpacity.toString();
         } else {
           item.classList.remove("active");
-          item.style.opacity = "0";
         }
       });
-    }
 
-    var stepLetters = track.querySelectorAll(".walkalone-step-letter, .walkalone-step-dot");
-    stepLetters.forEach(function(letterEl, idx) {
-      if (idx === activeStep) {
-        letterEl.classList.add("active");
-      } else {
-        letterEl.classList.remove("active");
-      }
-    });
+      var stepLetters = track.querySelectorAll(".walkalone-step-letter");
+      stepLetters.forEach(function(stepEl, idx) {
+        if (idx === activeStep) {
+          stepEl.classList.add("active");
+        } else {
+          stepEl.classList.remove("active");
+        }
+      });
 
-    if (nav) {
       var isPastOrEnd = (rect.bottom <= viewportHeight + 60) || (progress >= 0.985);
       if (isPastOrEnd || isInspectOpen) {
         nav.style.opacity = "0";
@@ -597,7 +649,8 @@ window.generateContactHTML = function(kicker, leadText) {
   function goToWalkStep(targetStep) {
     var track = document.getElementById("conrad-walkalone-track");
     if (!track) return;
-    var targetProgress = targetStep / (WALK_DATA.length - 1);
+    var WALK_DATA = getWalkData();
+    var targetProgress = targetStep / Math.max(1, (WALK_DATA.length - 1));
     var scrollDistance = track.offsetHeight - window.innerHeight;
     var targetScrollTop = track.offsetTop + targetProgress * scrollDistance;
     if (window.Global && Global.lenis) {
@@ -730,6 +783,8 @@ window.generateContactHTML = function(kicker, leadText) {
     return p === "/about" || p.startsWith("/about/");
   }
 
+  var currentMountedEdition = null;
+
   function ensureAboutTrack() {
     var onAbout = isAboutRoute();
     var track = document.getElementById("conrad-walkalone-track");
@@ -738,15 +793,29 @@ window.generateContactHTML = function(kicker, leadText) {
     if (!onAbout) {
       if (track) track.remove();
       if (contact) contact.remove();
+      currentMountedEdition = null;
       return;
     }
 
     var hero = document.querySelector(".PageHero");
     if (!hero) return;
 
+    var activeEdition = (window.Conrad && Conrad.edition) || "global";
+    var needsRebuild = (currentMountedEdition !== activeEdition);
+
+    if (needsRebuild && track) {
+      track.remove();
+      if (contact) contact.remove();
+      track = null;
+      contact = null;
+    }
+
     if (!track) {
+      currentMountedEdition = activeEdition;
+      var WALK_DATA = getWalkData();
       var div = document.createElement("div");
       div.id = "conrad-walkalone-track";
+      div.style.height = (WALK_DATA.length * 68) + "vh";
       div.innerHTML = generateWalkHTML();
       hero.parentNode.insertBefore(div, hero.nextSibling);
 
@@ -778,7 +847,8 @@ window.generateContactHTML = function(kicker, leadText) {
 
     var currentTrack = document.getElementById("conrad-walkalone-track");
     if (currentTrack) {
-      if (!contact) {
+      if (!contact || needsRebuild) {
+        if (contact) contact.remove();
         var contactSec = document.createElement("section");
         contactSec.id = "conrad-contact-block";
         contactSec.className = "conrad-contact-section";
@@ -803,7 +873,8 @@ window.generateContactHTML = function(kicker, leadText) {
     var p = window.location.pathname.replace(/\/$/, "") || "/";
     var hero = document.querySelector(".PageHero");
     var track = document.getElementById("conrad-walkalone-track");
-    if (p !== lastAboutRoute || (hero && !track)) {
+    var activeEdition = (window.Conrad && Conrad.edition) || "global";
+    if (p !== lastAboutRoute || (hero && !track) || (track && currentMountedEdition !== activeEdition)) {
       lastAboutRoute = p;
       ensureAboutTrack();
     }

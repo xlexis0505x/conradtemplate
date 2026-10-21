@@ -221,10 +221,95 @@
     }
   }
 
+  function updateHomeContent() {
+    var p = window.location.pathname.replace(/\/$/, "") || "/";
+    var onHome = (p === "" || p === "/" || p === "/index.html");
+    if (!onHome) {
+      var stats = document.getElementById("conrad-company-stats");
+      if (stats) stats.remove();
+      return;
+    }
+
+    // 1. Mount Stats Section right below FeaturedAnnouncementSlice or HomeHero
+    var videoSlice = document.querySelector(".FeaturedAnnouncementSlice");
+    var homeHero = document.querySelector(".HomeHero");
+    var anchor = videoSlice || homeHero;
+    var statsEl = document.getElementById("conrad-company-stats");
+
+    if (anchor) {
+      if (!statsEl) {
+        var statsList = (window.Conrad && Conrad.content && Conrad.content.get("home.stats")) || [];
+        if (statsList.length) {
+          var sec = document.createElement("section");
+          sec.id = "conrad-company-stats";
+          sec.className = "conrad-stats-section";
+          sec.innerHTML = `
+            <div class="conrad-stats-inner">
+              <div class="conrad-stats-header">
+                <div class="conrad-kicker">01 // CONCESSION BASELINE &amp; IMPACT METRICS</div>
+                <h2 class="conrad-section-title">Deep-Ocean Operational Footprint</h2>
+                <p class="conrad-section-lead">Verified operational metrics across our Pacific exclusive economic zone testbed and global International Seabed Authority exploration tracts.</p>
+              </div>
+              <div class="conrad-stats-grid">
+                ${statsList.map(function(s) {
+                  return `
+                    <div class="conrad-stat-card">
+                      <div>
+                        <div class="conrad-stat-val">${s.value}</div>
+                        <div class="conrad-stat-label">${s.label}</div>
+                      </div>
+                      <div class="conrad-stat-sub">${s.sub}</div>
+                    </div>
+                  `;
+                }).join("")}
+              </div>
+            </div>
+          `;
+          anchor.parentNode.insertBefore(sec, anchor.nextSibling);
+          if (window.Global && Global.lenis) Global.lenis.resize();
+        }
+      } else if (statsEl.previousElementSibling !== anchor) {
+        anchor.parentNode.insertBefore(statsEl, anchor.nextSibling);
+      }
+    }
+
+    // 2. Update FeaturedAnnouncementSlice title & subtitle
+    if (videoSlice) {
+      var title = videoSlice.querySelector("h2, .title");
+      if (title && !title.dataset.customized) {
+        title.dataset.customized = "true";
+        title.innerText = "Autonomous Plume Mitigation System";
+      }
+      var desc = videoSlice.querySelector(".description, p");
+      if (desc && !desc.dataset.customized) {
+        desc.dataset.customized = "true";
+        desc.innerText = "In-Situ Benthic Sediment Control & Turbidity Abatement";
+      }
+    }
+
+    // 3. Update 7 Bento Cards text on Home
+    var cards = document.querySelectorAll(".FeaturedProductsCard");
+    var subData = getSubData();
+    cards.forEach(function(card, idx) {
+      if (idx < subData.length) {
+        var data = subData[idx];
+        var titleEl = card.querySelector("h2.title, .title");
+        var descEl = card.querySelector("h4.description, .description");
+        if (titleEl && titleEl.innerText !== data.title) {
+          titleEl.innerText = data.title;
+        }
+        if (descEl && descEl.innerText !== data.subtitle) {
+          descEl.innerText = data.subtitle;
+        }
+      }
+    });
+  }
+
   function attachCardListeners() {
     var p = window.location.pathname.replace(/\/$/, "") || "/";
     if (p !== "" && p !== "/" && p !== "/index.html") return;
     ensureModalDOM();
+    updateHomeContent();
 
     var cards = document.querySelectorAll(".FeaturedProductsCard");
     cards.forEach(function(card, idx) {

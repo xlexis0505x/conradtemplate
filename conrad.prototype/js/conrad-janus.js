@@ -12,9 +12,9 @@ import { JanusScene } from "/janus-engine.js";
       <div class="janus-inner">
         <div class="janus-head">
           <div>
-            <div class="conrad-kicker">01 // THE JANUS PROGRAM</div>
-            <h2 class="janus-title">The Janus program</h2>
-            <p class="janus-subtitle">Through the Janus program, Radiant and the US military will deploy up to 50 Kaleidos reactors over a 5 year period to power bases and facilities across the country.</p>
+            <div class="conrad-kicker">02 // HYDRODYNAMIC DISSECTION</div>
+            <h2 class="janus-title">Active Sediment Neutralization Cycle</h2>
+            <p class="janus-subtitle">Scroll through real-time internal fluid dynamics, in-situ chemical binding, and accelerated abyssal sedimentation.</p>
           </div>
           <div class="janus-nav">
             <button id="janus-prev" class="janus-btn" aria-label="Previous">&lt;</button>
@@ -24,24 +24,24 @@ import { JanusScene } from "/janus-engine.js";
 
         <div class="janus-captions">
           <div class="janus-step-text active" data-step="0">
-            <div class="janus-step-heading janus-line">From prototype to product:</div>
-            <div class="janus-step-desc janus-line">Janus volume establishes Kaleidos as a repeatable energy product.</div>
+            <div class="janus-step-heading janus-line">01 // Benthic Extraction &amp; Disturbance:</div>
+            <div class="janus-step-desc janus-line">Collector crawler track pick-up creates high-density suspended sediment slurry at the abyssal seafloor interface.</div>
           </div>
           <div class="janus-step-text" data-step="1">
-            <div class="janus-step-heading janus-line">Capacity built for scale:</div>
-            <div class="janus-step-desc janus-line">Janus accelerates the timeline to mass-produce reactors. Kaleidos will be refined through multiple design iterations incorporating inputs from the government’s top experts.</div>
+            <div class="janus-step-heading janus-line">02 // In-Chute Flocculant Dosing:</div>
+            <div class="janus-step-desc janus-line">Titanium electromagnetic nozzles micro-dose eco-compatible biopolymer directly into the turbulent discharge flow under 600 bar hydrostatic pressure.</div>
           </div>
           <div class="janus-step-text" data-step="2">
-            <div class="janus-step-heading janus-line">Real-world operating experience:</div>
-            <div class="janus-step-desc janus-line">A fleet of Kaleidos will be deployed to bases across the US, generating years of combined operating experience each calendar year. This is an exponential accelerant to Radiant’s readiness for deployments at scale.</div>
+            <div class="janus-step-heading janus-line">03 // Rapid Macro-Floc Agglomeration:</div>
+            <div class="janus-step-desc janus-line">Polymer bridging binds sub-micron clay and silt into dense macro-flocs, increasing settling velocity by over 20x.</div>
           </div>
           <div class="janus-step-text" data-step="3">
-            <div class="janus-step-heading janus-line">A proven path to market:</div>
-            <div class="janus-step-desc janus-line">The Janus program shortens the runway to adoption across government, national security, data centers, physical AI, 24/7 critical load, main street businesses and more.</div>
+            <div class="janus-step-heading janus-line">04 // Confined Localized Redeposition:</div>
+            <div class="janus-step-desc janus-line">Sediments drop rapidly within designated extraction swaths, preventing transboundary migration into upper photic layers.</div>
           </div>
           <div class="janus-step-text" data-step="4">
-            <div class="janus-step-heading janus-line">Volume to reduce costs:</div>
-            <div class="janus-step-desc janus-line">The production volume achieved through the Janus program enables the reliability, efficiency and cost reduction required for commercial deployments while reducing costs for government customers.</div>
+            <div class="janus-step-heading janus-line">05 // Certified Telemetry &amp; G09 Proof:</div>
+            <div class="janus-step-desc janus-line">Integrated ADCP and optical backscatter sensors log verified compliance proof directly for Cook Islands SBMA and ISA observers.</div>
           </div>
         </div>
 
