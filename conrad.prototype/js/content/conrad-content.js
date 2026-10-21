@@ -121,6 +121,8 @@ window.Conrad = window.Conrad || {};
   }
 
   Conrad.applyBrand = applyBrand;
+  applyBrand();
+
   setInterval(applyBrand, 200);
 
   if (window.Conrad && Conrad.onReady) {

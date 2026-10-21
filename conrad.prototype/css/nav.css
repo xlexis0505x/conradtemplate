@@ -130,6 +130,15 @@ body.modal-3d-open .HeaderMobile {
   height: 100% !important;
 }
 
+/* Hide default unbranded Anduril SVG before Conrad brand lockup mounts to prevent flash */
+.HeaderDesktop .home > svg:not(.conrad-brand-emblem),
+.HeaderMobile .home > svg:not(.conrad-brand-emblem),
+.left-wrapper .home > svg:not(.conrad-brand-emblem) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
 .conrad-brand-lockup {
   display: inline-flex !important;
   align-items: center !important;

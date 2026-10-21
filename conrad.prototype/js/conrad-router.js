@@ -6,15 +6,20 @@
 (function() {
   var lastObservedPath = null;
   var isRouteSyncing = false;
+  var navHydrated = false;
 
   function syncAllRoutes() {
     if (isRouteSyncing) return;
     isRouteSyncing = true;
     try {
       var p = window.location.pathname.replace(/\/$/, "") || "/";
+      if (p === "/index.html") p = "/";
       var routeChanged = (p !== lastObservedPath);
       if (routeChanged) {
         lastObservedPath = p;
+        navHydrated = false;
+      }
+      if (routeChanged || !navHydrated) {
         updateNav(p);
       }
 
@@ -72,16 +77,32 @@
   }
 
   function updateNav(p) {
+    p = p || window.location.pathname.replace(/\/$/, "") || "/";
+    if (p === "/index.html") p = "/";
     var links = document.querySelectorAll(".center-wrapper .HeaderLink");
+    if (!links || links.length === 0) return false;
+    var foundActive = false;
     links.forEach(function(l) {
-      var href = l.getAttribute("href") ? l.getAttribute("href").replace(/\/$/, "") || "/" : "";
-      var isCurrent = (href === p) || (href !== "/" && p.startsWith(href));
+      var rawHref = l.getAttribute("href") || "";
+      var href = rawHref.replace(/\/$/, "") || "/";
+      if (href === "/index.html") href = "/";
+      var isCurrent = false;
+      if (href === "/") {
+        isCurrent = (p === "" || p === "/");
+      } else {
+        isCurrent = (p === href || p.startsWith(href + "/"));
+      }
       if (isCurrent) {
         l.classList.add("active");
+        foundActive = true;
       } else {
         l.classList.remove("active");
       }
     });
+    if (foundActive) {
+      navHydrated = true;
+    }
+    return foundActive;
   }
 
   // 3D Modal state watcher for smooth header slide
