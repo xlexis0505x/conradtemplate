@@ -295,11 +295,15 @@
         var data = subData[idx];
         var titleEl = card.querySelector("h2.title, .title");
         var descEl = card.querySelector("h4.description, .description");
+        var descHidden = card.querySelector("h4.descriptionHidden, .descriptionHidden");
         if (titleEl && titleEl.innerText !== data.title) {
           titleEl.innerText = data.title;
         }
         if (descEl && descEl.innerText !== data.subtitle) {
           descEl.innerText = data.subtitle;
+        }
+        if (descHidden && descHidden.innerText !== data.subtitle) {
+          descHidden.innerText = data.subtitle;
         }
       }
     });

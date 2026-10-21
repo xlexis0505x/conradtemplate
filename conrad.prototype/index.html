@@ -122,6 +122,20 @@ window.gtag = function(){};
             window.ENABLE_UIL_CMS = false;
             window.Module=function(module){if(!this._q)this._q=[];this._q.push(module)};
             window.requireNative=window.require;window.require=function(module){return window.Module._q.find(m=>m.name===module)};
+
+            // Disable hacker text scrambler loop on bento cards (Option B)
+            var _TA = null;
+            Object.defineProperty(window, 'TextAnimationHelper', {
+                configurable: true,
+                enumerable: true,
+                get: function() { return _TA; },
+                set: function(fn) {
+                    _TA = function() {
+                        fn.apply(this, arguments);
+                        this.animateText = function() {}; // Replaced with smooth CSS editorial rise
+                    };
+                }
+            });
         })();
   </script>
 <link as="image" crossorigin="anonymous" fetchpriority="high" href="/_external/cdn.sanity.io/images/61nocsj5/production/cb21015c90b01ff45e416a1cf8766ec64b1c6851-1920x1080.png" rel="preload"/>

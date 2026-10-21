@@ -102,6 +102,21 @@
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75) !important;
 }
 
+/* === OPTION B: SMOOTH EDITORIAL RISE FOR BENTO TEXT === */
+.FeaturedProductsCard .descriptionWrapper {
+  overflow: hidden !important;
+}
+
+.FeaturedProductsCard .description {
+  transform: translateY(6px);
+  will-change: transform, opacity;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease !important;
+}
+
+.FeaturedProductsCard:hover .description {
+  transform: translateY(0px) !important;
+}
+
 /* Bento Expanding Picture View */
 #conrad-bento-modal {
   position: fixed;
