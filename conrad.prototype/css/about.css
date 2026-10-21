@@ -469,7 +469,7 @@ html, body, .Footer, .Footer * {
 .conrad-arrow-icon {
   width: 24px;
   height: 24px;
-  stroke: rgba(1, 177, 199, 0.65);
+  stroke: rgba(255, 255, 255, 0.6);
   transition: stroke 0.25s ease, transform 0.25s ease;
   flex-shrink: 0;
 }
@@ -509,8 +509,8 @@ html, body, .Footer, .Footer * {
 }
 
 .conrad-channel-row:hover {
-  background: rgba(1, 177, 199, 0.05);
-  border-color: rgba(1, 177, 199, 0.3);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateX(3px);
 }
 
