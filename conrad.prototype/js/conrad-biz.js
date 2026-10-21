@@ -200,15 +200,15 @@
     </section>
 
     <!-- Diligence Request Modal -->
-    <div id="conrad-diligence-modal" class="conrad-modal" aria-hidden="true">
+    <div id="conrad-diligence-modal" class="conrad-modal-overlay" aria-hidden="true">
       <div class="conrad-modal-backdrop" id="conrad-modal-backdrop"></div>
-      <div class="conrad-modal-dialog">
+      <div class="conrad-modal-window conrad-modal-dialog">
         <div class="conrad-modal-header">
           <div>
             <div class="modal-kicker">VERIFIED INSTITUTIONAL ACCESS</div>
             <h3 class="modal-title">Environmental Data Room Dossier</h3>
           </div>
-          <button id="conrad-close-modal-btn" class="modal-close-btn" aria-label="Close dialog">&times;</button>
+          <button id="conrad-close-modal-btn" class="conrad-modal-close modal-close-btn" aria-label="Close dialog">&times;</button>
         </div>
         <div class="conrad-modal-body">
           <p class="modal-desc">Authorized concession operators, marine scientists, and regulatory observers may request the full technical dossier, including:</p>
@@ -290,6 +290,8 @@
       if (factory) factory.remove();
       if (roadmap) roadmap.remove();
       if (ctaModal) ctaModal.remove();
+      var modalEl = document.getElementById("conrad-diligence-modal");
+      if (modalEl) modalEl.remove();
       currentMountedEdition = null;
       return;
     }
@@ -340,6 +342,8 @@
       if (factory) factory.remove();
       if (roadmap) roadmap.remove();
       if (ctaModal) ctaModal.remove();
+      var oldModal = document.getElementById("conrad-diligence-modal");
+      if (oldModal) oldModal.remove();
       doctrine = null;
       economics = null;
       factory = null;

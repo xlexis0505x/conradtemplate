@@ -156,3 +156,15 @@ main {
 .Footer.Footer .wrapper .bottom .contact-container .contact-email:hover::after {
   transform: scaleX(1) !important;
 }
+
+/* Eliminate excessive whitespace at the bottom of the footer */
+.Footer.Footer {
+  min-height: auto !important;
+  padding-bottom: 2.5rem !important;
+}
+
+@media (max-width: 768px) {
+  .Footer.Footer {
+    padding-bottom: 2.5rem !important;
+  }
+}
