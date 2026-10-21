@@ -77,7 +77,11 @@
 }
 
 .conrad-spec-row:hover {
-  background-color: rgba(255, 255, 255, 0.02) !important;
+  background-color: rgba(1, 177, 199, 0.04) !important;
+}
+
+.conrad-spec-row:hover .conrad-spec-param {
+  color: #01B1C7 !important;
 }
 
 .conrad-spec-param {
@@ -87,6 +91,7 @@
   letter-spacing: 0.05em !important;
   text-transform: uppercase !important;
   color: rgba(255, 255, 255, 0.55) !important;
+  transition: color 0.2s ease !important;
 }
 
 .conrad-spec-val {
@@ -179,15 +184,23 @@
 
 .col-conrad .tag {
   display: inline-block !important;
-  padding: 0.2rem 0.55rem !important;
-  background: rgba(1, 177, 199, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
   font-size: 0.65rem !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
   color: #01B1C7 !important;
   vertical-align: middle !important;
+}
+
+/* Active moving underline bar for product quality tabs */
+.TabbedPaneTabsHeader .activeBorder {
+  background: #01B1C7 !important;
+  height: 2px !important;
 }
 
 .col-legacy {

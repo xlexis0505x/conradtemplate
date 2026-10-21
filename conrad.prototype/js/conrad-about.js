@@ -233,7 +233,6 @@ window.generateContactHTML = function(kicker, leadText) {
         <div class="walkalone-info-item ${idx === 0 ? 'active' : ''}" data-step="${idx}">
           <div class="walkalone-info-stage">${item.stage}</div>
           <h2 class="walkalone-info-title">${item.title}</h2>
-          <div class="walkalone-info-subtitle">${item.subtitle}</div>
           <div class="walkalone-info-desc">${item.desc}</div>
         </div>
       `;

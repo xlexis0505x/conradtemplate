@@ -54,6 +54,7 @@
 
 .conrad-stat-card:hover {
   border-color: rgba(255, 255, 255, 0.35) !important;
+  background: radial-gradient(circle at top right, rgba(1, 177, 199, 0.08), #080808 70%) !important;
   transform: translateY(-3px) !important;
 }
 
@@ -568,6 +569,10 @@
   margin-left: -7px !important;
 }
 
+#conrad-radiant-janus-sticky .janus-arrow-indicator svg polygon {
+  fill: #01B1C7 !important;
+}
+
 #conrad-radiant-janus-sticky .janus-cells {
   display: flex !important;
   width: 100% !important;
@@ -679,8 +684,8 @@
   left: 1rem;
   padding: 0.25rem 0.6rem;
   background: rgba(0, 0, 0, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: #ffffff;
+  border: 1px solid rgba(1, 177, 199, 0.35);
+  color: #01B1C7;
   font-family: 'HelveticaNowDisplay', monospace, sans-serif;
   font-size: 0.62rem;
   letter-spacing: 0.14em;
