@@ -3,7 +3,7 @@
  */
 
 (function() {
-  var SUB_DATA = [
+  var DEFAULT_SUB_DATA = [
     {
       title: "01 // Propulsion Core",
       subtitle: "High-Throughput Thermodynamic Cycle & Integrated Powertrain",
@@ -48,6 +48,14 @@
     }
   ];
 
+  function getSubData() {
+    if (window.Conrad && Conrad.content) {
+      var cards = Conrad.content.get("home.bentoCards");
+      if (cards && cards.length) return cards;
+    }
+    return DEFAULT_SUB_DATA;
+  }
+
   var activeCard = null;
   var isClosing = false;
   var isOpen = false;
@@ -90,7 +98,7 @@
     if (isOpen || isClosing) return;
     ensureModalDOM();
 
-    var data = SUB_DATA[index];
+    var data = getSubData()[index];
     if (!data) return;
 
     var modal = document.getElementById("conrad-bento-modal");

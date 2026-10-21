@@ -120,3 +120,38 @@ body.modal-3d-open .HeaderMobile {
 .center-wrapper .HeaderLink.active::after {
   transform: scaleX(1) !important;
 }
+
+/* 4. Brand lockup in top-left header */
+.HeaderDesktop .home,
+.HeaderMobile .home {
+  display: inline-flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
+  height: 100% !important;
+}
+
+.conrad-brand-lockup {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
+  cursor: pointer !important;
+}
+
+.conrad-brand-emblem {
+  height: 19px !important;
+  width: 20px !important;
+  display: block !important;
+  flex-shrink: 0 !important;
+  color: #ffffff !important;
+}
+
+.conrad-brand-name {
+  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.015em !important;
+  color: #ffffff !important;
+  line-height: 1 !important;
+  display: inline-block !important;
+  white-space: nowrap !important;
+}
