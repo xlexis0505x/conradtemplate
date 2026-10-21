@@ -169,14 +169,6 @@
   font-weight: 600 !important;
 }
 
-.conrad-doctrine-card.solution-card {
-  border-color: rgba(255, 255, 255, 0.28) !important;
-  background: rgba(255, 255, 255, 0.035) !important;
-}
-
-.conrad-doctrine-card.solution-card .doctrine-badge {
-  color: #79CBAE !important;
-}
 
 /* Unit Economics Scale Grid */
 .conrad-economics-grid {
