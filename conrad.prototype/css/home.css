@@ -361,6 +361,18 @@
 }
 
 /* === 3. MERGED BOTTOM POSTER: 1 Full-width promotional video card === */
+.MediaLinkSlice,
+.MediaLinkSlice .sticky-wrapper,
+.MediaLinkSlice .sticky-wrapper .carousel,
+.MediaLinkSlice .MediaLinkCard,
+.MediaLinkSlice .MediaLinkCard .content-wrapper,
+.MediaLinkSlice .MediaLinkCard .topWrapper,
+.MediaLinkSlice .MediaLinkCard .bottomWrapper {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
 .MediaLinkSlice .sticky-wrapper .carousel {
   grid-template-columns: 1fr !important;
   display: block !important;
@@ -370,6 +382,42 @@
   width: 100% !important;
   max-width: 100% !important;
   min-height: 70vh !important;
+}
+
+.MediaLinkSlice .border {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Watch on YouTube LinkButton animated underline in brand cyan */
+.MediaLinkSlice .LinkButton:not(.secondary) p:after {
+  background: #01B1C7 !important;
+  background-color: #01B1C7 !important;
+}
+
+/* Subtle dark gradient vignette at the bottom of the video for high contrast & pure white typography */
+.MediaLinkSlice .MediaLinkCard .bottomWrapper {
+  position: relative !important;
+}
+
+.MediaLinkSlice .MediaLinkCard .bottomWrapper::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 45% !important;
+  max-height: 240px !important;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.85) 100%) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+.MediaLinkSlice .MediaLinkCard .bottomWrapper .label {
+  z-index: 2 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: none !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6) !important;
 }
 
 /* === REMOVE NEWS & INSIGHTS BLOCK COMPLETELY === */

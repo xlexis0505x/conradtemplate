@@ -71,6 +71,12 @@ main {
   height: 2px !important;
 }
 
+/* LinkButton (Watch on YouTube, etc.) animated underline in brand cyan */
+.LinkButton:not(.secondary) p:after {
+  background: #01B1C7 !important;
+  background-color: #01B1C7 !important;
+}
+
 /* Animated cyan hover underline for footer links & socials (Coalowl-inspired, matching header) */
 .FooterListLinks .links-wrapper {
   display: flex !important;
