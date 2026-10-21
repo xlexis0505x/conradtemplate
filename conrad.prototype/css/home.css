@@ -53,7 +53,7 @@
 }
 
 .conrad-stat-card:hover {
-  border-color: rgba(255, 255, 255, 0.35) !important;
+  border-color: #01B1C7 !important;
   transform: translateY(-3px) !important;
 }
 
@@ -62,7 +62,7 @@
   font-size: clamp(2rem, 2.8vw, 3rem) !important;
   font-weight: 700 !important;
   letter-spacing: -0.03em !important;
-  color: #ffffff !important;
+  color: #79CBAE !important;
   line-height: 1 !important;
   margin-bottom: 0.75rem !important;
 }
@@ -280,7 +280,7 @@
 }
 
 .ArsenalSlice .ArsenalItem:hover {
-  border-color: rgba(255, 255, 255, 0.4) !important;
+  border-color: #01B1C7 !important;
 }
 
 .ArsenalSlice .ArsenalItem .bg {
@@ -484,9 +484,9 @@
 }
 
 #conrad-radiant-janus-sticky .janus-btn:hover:not(:disabled) {
-  background: #ffffff !important;
+  background: #01B1C7 !important;
   color: #000000 !important;
-  border-color: #ffffff !important;
+  border-color: #01B1C7 !important;
 }
 
 #conrad-radiant-janus-sticky .janus-btn:disabled {
@@ -600,13 +600,13 @@
 
 #conrad-radiant-janus-sticky .janus-cell.active {
   height: 4px !important;
-  background: rgba(255, 255, 255, 0.35) !important;
+  background: rgba(1, 177, 199, 0.45) !important;
 }
 
 #conrad-radiant-janus-sticky .janus-cell-fill {
   position: absolute !important;
   inset: 0 !important;
-  background: #ffffff !important;
+  background: #01B1C7 !important;
   transform-origin: left center !important;
   transform: scaleX(0) !important;
 }

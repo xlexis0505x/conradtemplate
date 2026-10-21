@@ -7,6 +7,8 @@
   --color-text-dim: rgba(255, 255, 255, 0.5);
   --color-border: rgba(255, 255, 255, 0.12);
   --color-border-dim: rgba(255, 255, 255, 0.08);
+  --color-accent: #01B1C7;
+  --color-eco: #79CBAE;
   --font-primary: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif;
   --section-max-width: 1440px;
   --section-padding: 0 4rem;
