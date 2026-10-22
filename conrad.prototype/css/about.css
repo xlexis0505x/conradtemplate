@@ -118,12 +118,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-weight: 700;
   font-size: clamp(80px, 9vw, 130px);
   line-height: 1;
   color: #ffffff;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.015em;
   will-change: transform, opacity;
   text-align: center;
 }
@@ -303,6 +303,7 @@
 }
 
 .walkalone-inspect-badge {
+  font-family: var(--font-kicker) !important;
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   font-weight: 600;
@@ -311,10 +312,11 @@
 }
 
 .walkalone-inspect-title {
+  font-family: var(--font-heading) !important;
   font-size: clamp(1.4rem, 2vw, 1.85rem);
   font-weight: 700;
   color: #ffffff;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
   margin: 0 0 0.4rem 0;
   line-height: 1.15;
 }
@@ -324,6 +326,7 @@
 }
 
 .walkalone-inspect-desc {
+  font-family: var(--font-body) !important;
   font-size: 0.82rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.45);
@@ -331,6 +334,7 @@
 }
 
 .walkalone-inspect-hint {
+  font-family: var(--font-kicker) !important;
   font-size: 0.65rem;
   letter-spacing: 0.16em;
   color: rgba(255, 255, 255, 0.25);
@@ -338,8 +342,8 @@
 }
 
 html, body, .Footer, .Footer * {
-  background-color: #000000 !important;
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  background-color: var(--color-bg) !important;
+  font-family: var(--font-body) !important;
 }
 #Stage, .PageView, .ViewController, .Container, .Product3DSlice {
   background-color: transparent !important;
@@ -349,11 +353,11 @@ html, body, .Footer, .Footer * {
 .conrad-contact-section {
   position: relative;
   width: 100%;
-  background-color: #000000 !important;
+  background-color: var(--color-bg) !important;
   color: #ffffff;
   padding: clamp(2.5rem, 4vw, 3.5rem) clamp(1.5rem, 4vw, 5rem) clamp(5rem, 8vw, 7.5rem);
   box-sizing: border-box;
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-body) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 20;
 }

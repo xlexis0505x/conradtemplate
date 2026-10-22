@@ -50,7 +50,7 @@
   background: rgba(0, 0, 0, 0.85);
   border: 1px solid rgba(1, 177, 199, 0.3);
   color: #01B1C7;
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif;
+  font-family: var(--font-kicker);
   font-size: 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -95,7 +95,7 @@
 /* --- BUSINESS PAGE: DOCTRINE, ECONOMICS, FACTORY, ROADMAP --- */
 .conrad-biz-section {
   width: 100% !important;
-  background-color: #000000 !important;
+  background-color: var(--color-bg) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
   padding: 6.5rem 0 !important;
   box-sizing: border-box !important;
@@ -128,7 +128,7 @@
 }
 
 .doctrine-badge {
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-family: var(--font-kicker) !important;
   font-size: 0.7rem !important;
   letter-spacing: 0.15em !important;
   text-transform: uppercase !important;
@@ -137,9 +137,10 @@
 }
 
 .doctrine-title {
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 1.6rem !important;
   font-weight: 700 !important;
+  letter-spacing: -0.015em !important;
   color: #ffffff !important;
   margin: 0 0 1.5rem !important;
 }
@@ -196,7 +197,7 @@
 }
 
 .econ-stage {
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-family: var(--font-kicker) !important;
   font-size: 0.68rem !important;
   letter-spacing: 0.15em !important;
   text-transform: uppercase !important;
@@ -205,16 +206,16 @@
 }
 
 .econ-cost {
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 2.4rem !important;
   font-weight: 700 !important;
-  letter-spacing: -0.03em !important;
+  letter-spacing: -0.018em !important;
   color: #ffffff !important;
   line-height: 1 !important;
 }
 
 .econ-sub {
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-family: var(--font-kicker) !important;
   font-size: 0.68rem !important;
   letter-spacing: 0.12em !important;
   color: rgba(255, 255, 255, 0.45) !important;
@@ -278,16 +279,16 @@
 }
 
 .factory-num {
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 3.2rem !important;
   font-weight: 700 !important;
-  letter-spacing: -0.04em !important;
+  letter-spacing: -0.018em !important;
   color: #ffffff !important;
   line-height: 1 !important;
 }
 
 .factory-unit {
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-family: var(--font-kicker) !important;
   font-size: 0.68rem !important;
   letter-spacing: 0.15em !important;
   text-transform: uppercase !important;
@@ -296,9 +297,10 @@
 }
 
 .factory-title {
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 1.25rem !important;
   font-weight: 600 !important;
+  letter-spacing: -0.015em !important;
   color: #ffffff !important;
   margin: 0 0 0.75rem !important;
 }
@@ -333,7 +335,7 @@
 }
 
 .roadmap-phase {
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-family: var(--font-kicker) !important;
   font-size: 0.72rem !important;
   letter-spacing: 0.15em !important;
   text-transform: uppercase !important;
@@ -346,9 +348,10 @@
 }
 
 .roadmap-title {
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 1.15rem !important;
   font-weight: 600 !important;
+  letter-spacing: -0.015em !important;
   color: #ffffff !important;
 }
 
@@ -362,7 +365,7 @@
 /* In-Situ Diligence CTA Section */
 .conrad-cta-section {
   width: 100% !important;
-  background-color: #000000 !important;
+  background-color: var(--color-bg) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
   padding: 7rem 0 !important;
   box-sizing: border-box !important;
@@ -401,7 +404,7 @@
   background: #ffffff !important;
   color: #000000 !important;
   border: 1px solid #ffffff !important;
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-family: var(--font-kicker) !important;
   font-size: 0.78rem !important;
   letter-spacing: 0.15em !important;
   font-weight: 700 !important;
@@ -523,7 +526,7 @@
 }
 
 .conrad-field label {
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-family: var(--font-kicker) !important;
   font-size: 0.68rem !important;
   letter-spacing: 0.15em !important;
   text-transform: uppercase !important;
@@ -562,7 +565,7 @@
   background: #ffffff !important;
   color: #000000 !important;
   border: 1px solid #ffffff !important;
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-family: var(--font-kicker) !important;
   font-size: 0.78rem !important;
   letter-spacing: 0.15em !important;
   font-weight: 700 !important;

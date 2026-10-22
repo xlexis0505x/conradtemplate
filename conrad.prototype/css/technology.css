@@ -30,7 +30,7 @@
   border: 1px solid rgba(255, 255, 255, 0.16) !important;
   background: transparent !important;
   color: rgba(255, 255, 255, 0.65) !important;
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-family: var(--font-kicker) !important;
   font-size: 0.68rem !important;
   letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
@@ -85,24 +85,24 @@
 }
 
 .conrad-spec-param {
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 0.8rem !important;
   font-weight: 600 !important;
-  letter-spacing: 0.05em !important;
+  letter-spacing: 0.03em !important;
   text-transform: uppercase !important;
   color: rgba(255, 255, 255, 0.55) !important;
   transition: color 0.2s ease !important;
 }
 
 .conrad-spec-val {
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-body) !important;
   font-size: 0.95rem !important;
   font-weight: 500 !important;
   color: #ffffff !important;
 }
 
 .conrad-spec-meta {
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-family: var(--font-kicker) !important;
   font-size: 0.68rem !important;
   letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
@@ -113,7 +113,7 @@
 /* --- HEAD-TO-HEAD COMPARATIVE ADVANTAGE MATRIX --- */
 .conrad-compare-section {
   width: 100% !important;
-  background-color: #000000 !important;
+  background-color: var(--color-bg) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
   padding: 1.5rem 0 2rem !important;
   margin: 0 !important;
@@ -141,7 +141,7 @@
 
 .conrad-compare-table th {
   padding: 1.25rem 1.75rem !important;
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-family: var(--font-kicker) !important;
   font-size: 0.72rem !important;
   letter-spacing: 0.15em !important;
   text-transform: uppercase !important;
@@ -152,7 +152,7 @@
 
 .conrad-compare-table td {
   padding: 1.5rem 1.75rem !important;
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-body) !important;
   font-size: 0.95rem !important;
   line-height: 1.45 !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -189,7 +189,7 @@
   background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-family: var(--font-kicker) !important;
   font-size: 0.65rem !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;

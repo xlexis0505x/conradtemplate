@@ -59,27 +59,27 @@
 }
 
 .conrad-stat-val {
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: clamp(2rem, 2.8vw, 3rem) !important;
   font-weight: 700 !important;
-  letter-spacing: -0.03em !important;
+  letter-spacing: -0.018em !important;
   color: #ffffff !important;
   line-height: 1 !important;
   margin-bottom: 0.75rem !important;
 }
 
 .conrad-stat-label {
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
-  font-size: 0.72rem !important;
+  font-family: var(--font-kicker) !important;
+  font-size: 0.68rem !important;
   font-weight: 600 !important;
-  letter-spacing: 0.14em !important;
+  letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
   color: rgba(255, 255, 255, 0.6) !important;
   margin-bottom: 0.5rem !important;
 }
 
 .conrad-stat-sub {
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-body) !important;
   font-size: 0.85rem !important;
   line-height: 1.5 !important;
   color: rgba(255, 255, 255, 0.5) !important;
@@ -204,22 +204,22 @@
   padding: 1.75rem 2.25rem 2rem;
   background: #080808;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  font-family: HelveticaNowDisplay, Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
 }
 
 .bento-modal-title {
-  font-family: HelveticaNowDisplay, Helvetica, Arial, sans-serif;
+  font-family: var(--font-heading) !important;
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.15;
   color: #ffffff;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
   text-transform: uppercase;
   margin-bottom: 0.45rem;
 }
 
 .bento-modal-subtitle {
-  font-family: HelveticaNowDisplay, Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 500;
   line-height: 1.4;
@@ -228,7 +228,7 @@
 }
 
 .bento-modal-desc {
-  font-family: HelveticaNowDisplay, Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   font-size: 0.88rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.55);
@@ -320,12 +320,12 @@
   font-size: 3.8rem !important;
   font-weight: 700 !important;
   line-height: 1 !important;
-  letter-spacing: -0.05rem !important;
+  letter-spacing: -0.015em !important;
   color: #ffffff !important;
   margin: 0 !important;
   grid-area: auto !important;
   transition: color 0.3s ease-out !important;
-  font-family: HelveticaNowDisplay, Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-heading) !important;
 }
 
 .ArsenalSlice .ArsenalItem:hover .title,
@@ -496,10 +496,10 @@
   font-size: clamp(1.8rem, 2.5vw, 2.4rem) !important;
   font-weight: 700 !important;
   line-height: 1.15 !important;
-  letter-spacing: -0.025em !important;
+  letter-spacing: -0.015em !important;
   color: #ffffff !important;
   margin: 0 0 0.5rem !important;
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-heading) !important;
 }
 
 #conrad-radiant-janus-sticky .janus-subtitle {
@@ -734,7 +734,7 @@
   background: rgba(0, 0, 0, 0.85);
   border: 1px solid rgba(1, 177, 199, 0.35);
   color: #01B1C7;
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif;
+  font-family: var(--font-kicker);
   font-size: 0.62rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -756,7 +756,7 @@
   padding: 0.5rem 1.25rem;
   background: #0a0a0a;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   opacity: 0;
   transform: translateY(2px);
   transition: opacity 0.35s ease 0.06s, transform 0.35s ease 0.06s;
@@ -768,17 +768,24 @@
 }
 
 .schematic-meta-row .meta-title {
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 0.78rem;
   font-weight: 600;
   color: #ffffff;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 
 .schematic-meta-row .meta-tag {
   font-size: 0.68rem;
-  font-family: 'HelveticaNowDisplay', monospace, sans-serif !important;
+  font-family: var(--font-mono) !important;
   color: rgba(255, 255, 255, 0.55);
   letter-spacing: 0.1em;
 }
+
+/* === Subsea Oceanic Color Grade for Videos === */
+.HomeHero video,
+.FeaturedAnnouncementSlice video {
+  filter: contrast(1.06) brightness(0.9) hue-rotate(185deg) saturate(1.1) !important;
+}
+
