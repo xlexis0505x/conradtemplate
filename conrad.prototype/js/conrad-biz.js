@@ -5,7 +5,18 @@
 
 (function() {
   function getBizData() {
-    return (window.Conrad && Conrad.content && Conrad.content.get("biz")) || {};
+    var globalBiz = (window.Conrad && Conrad.CONTENT_GLOBAL && Conrad.CONTENT_GLOBAL.biz) || {};
+    var biz = (window.Conrad && Conrad.content && Conrad.content.get("biz")) || {};
+
+    return {
+      kicker: biz.kicker || globalBiz.kicker,
+      title: biz.title || globalBiz.title,
+      lead: biz.lead || globalBiz.lead,
+      sizing: (biz.sizing && biz.sizing.cards && biz.sizing.cards.length) ? biz.sizing : (globalBiz.sizing || {}),
+      pipeline: (biz.pipeline && biz.pipeline.regions && biz.pipeline.regions.length) ? biz.pipeline : (globalBiz.pipeline || {}),
+      pestle: (biz.pestle && biz.pestle.factors && biz.pestle.factors.length) ? biz.pestle : (globalBiz.pestle || {}),
+      calculator: biz.calculator || globalBiz.calculator
+    };
   }
 
   function generateBizHTML() {
@@ -56,27 +67,38 @@
     <section id="conrad-biz-economics" class="conrad-biz-section">
       <div class="conrad-biz-inner">
         <div class="conrad-biz-header">
-          <div class="conrad-kicker">02 // MARKET SIZING &amp; VALIDATION ROADMAP</div>
+          <div class="conrad-kicker">02 // MARKET SIZING &amp; EXPANSION RUNWAY</div>
           <h2 class="conrad-section-title">From Island Testbed to Global Abyssal Concessions</h2>
           <p class="conrad-section-lead">A structured beachhead strategy validating in-situ plume mitigation in the Cook Islands before expanding across global International Seabed Authority concessions.</p>
         </div>
 
-        <div class="conrad-economics-grid">
-          ${sizingCards.map(function(card) {
-            return `
-              <div class="conrad-econ-card">
-                <div class="econ-stage">${card.stage}</div>
-                <div class="econ-cost">${card.cost}</div>
-                <div class="econ-sub">${card.sub}</div>
-                <div class="econ-divider"></div>
-                <div class="econ-meta">
-                  ${card.meta.map(function(m) {
-                    return `<div class="econ-row"><span>${m.label}</span><span>${m.value}</span></div>`;
-                  }).join("")}
+        <div class="conrad-runway-container">
+          <div class="conrad-runway-track">
+            ${sizingCards.map(function(card, idx) {
+              var stepNum = "0" + (idx + 1);
+              return `
+                <div class="runway-step">
+                  <div class="step-header">
+                    <span class="step-num">${stepNum}</span>
+                    <span class="step-stage">${card.stage}</span>
+                  </div>
+                  <div class="step-val">${card.cost}</div>
+                  <div class="step-sub">${card.sub}</div>
+                  <div class="step-divider"></div>
+                  <div class="step-specs">
+                    ${card.meta.map(function(m) {
+                      return `
+                        <div class="step-spec-row">
+                          <span class="spec-label">${m.label}</span>
+                          <span class="spec-data">${m.value}</span>
+                        </div>
+                      `;
+                    }).join("")}
+                  </div>
                 </div>
-              </div>
-            `;
-          }).join("")}
+              `;
+            }).join("")}
+          </div>
         </div>
       </div>
     </section>
@@ -91,56 +113,100 @@
           <p class="conrad-section-lead">Identifiable contract opportunities spanning sovereign Pacific exclusive economic zones and International Seabed Authority (ISA) deep-ocean sectors.</p>
         </div>
 
-        <div class="conrad-factory-grid">
-          <div class="conrad-cell-card">
-            <div class="cell-num">01</div>
-            <div class="cell-content">
-              <h3 class="cell-title">Cook Islands Sovereign EEZ</h3>
-              <p class="cell-desc">254,654 km² total exploration area across 3 commercial license holders (CIC Limited, Moana Minerals, CSR Ltd). Immediate launch testbed under national SBMA G09 guidance.</p>
-              <div class="cell-specs">
-                <div class="cell-spec-item"><span class="spec-k">Licences</span><span class="spec-v">3 National</span></div>
-                <div class="cell-spec-item"><span class="spec-k">Target Area</span><span class="spec-v">254,654 km²</span></div>
-                <div class="cell-spec-item"><span class="spec-k">Relevance</span><span class="spec-v">★★★★★ Prime</span></div>
-              </div>
+        <div class="conrad-registry-ledger">
+          <div class="registry-ledger-header">
+            <span class="col-reg-sector">SECTOR</span>
+            <span class="col-reg-region">GEOGRAPHIC REGION</span>
+            <span class="col-reg-operators">OPERATORS &amp; SPONSORS</span>
+            <span class="col-reg-scale">EXPLORATION FOOTPRINT</span>
+            <span class="col-reg-status">STATUS</span>
+          </div>
+
+          <div class="registry-ledger-row">
+            <div class="col-reg-sector">
+              <span class="registry-num">01</span>
+              <span class="registry-tag">SOVEREIGN EEZ</span>
+            </div>
+            <div class="col-reg-region">
+              <h3 class="registry-title">Cook Islands Sovereign EEZ</h3>
+              <p class="registry-desc">254,654 km² total exploration area across 3 commercial license holders. Immediate commercial launch testbed under national SBMA G09 standards.</p>
+            </div>
+            <div class="col-reg-operators">
+              <span class="operator-primary">CIC Limited · Moana Minerals · CSR Ltd</span>
+              <span class="operator-regulator">Regulator: SBMA (National Jurisdiction)</span>
+            </div>
+            <div class="col-reg-scale">
+              <span class="scale-val">254,654 km²</span>
+              <span class="scale-sub">3 Commercial Licences</span>
+            </div>
+            <div class="col-reg-status">
+              <span class="status-text">Prime Launch</span>
             </div>
           </div>
 
-          <div class="conrad-cell-card">
-            <div class="cell-num">02</div>
-            <div class="cell-content">
-              <h3 class="cell-title">Clarion-Clipperton Zone (CCZ)</h3>
-              <p class="cell-desc">The epicenter of global abyssal polymetallic nodule exploration. 17 active contracts sponsored by Nauru (TMC/NORI), Tonga (TOML), Belgium (GSR), UK (UKSR), China Minmetals, and Germany (BGR).</p>
-              <div class="cell-specs">
-                <div class="cell-spec-item"><span class="spec-k">Contracts</span><span class="spec-v">17 Exploration</span></div>
-                <div class="cell-spec-item"><span class="spec-k">Target Mineral</span><span class="spec-v">Ni-Co-Cu Nodules</span></div>
-                <div class="cell-spec-item"><span class="spec-k">Relevance</span><span class="spec-v">★★★★★ Core</span></div>
-              </div>
+          <div class="registry-ledger-row">
+            <div class="col-reg-sector">
+              <span class="registry-num">02</span>
+              <span class="registry-tag">INTERNATIONAL SEABED</span>
+            </div>
+            <div class="col-reg-region">
+              <h3 class="registry-title">Clarion-Clipperton Zone (CCZ)</h3>
+              <p class="registry-desc">The global epicenter of abyssal nodule exploration. 17 active contracts across equatorial Pacific abyssal plains.</p>
+            </div>
+            <div class="col-reg-operators">
+              <span class="operator-primary">TMC/NORI (Nauru) · GSR (Belgium) · UKSR (UK) · China Minmetals · BGR (Germany)</span>
+              <span class="operator-regulator">Regulator: International Seabed Authority</span>
+            </div>
+            <div class="col-reg-scale">
+              <span class="scale-val">17 Active Tracts</span>
+              <span class="scale-sub">Polymetallic Nodules</span>
+            </div>
+            <div class="col-reg-status">
+              <span class="status-text">Core Market</span>
             </div>
           </div>
 
-          <div class="conrad-cell-card">
-            <div class="cell-num">03</div>
-            <div class="cell-content">
-              <h3 class="cell-title">Central Indian &amp; W. Pacific Basins</h3>
-              <p class="cell-desc">Bilateral state-backed polymetallic nodule reserves held by the Government of India and Beijing Pioneer Hi-Tech Development Corporation, facing high baseline turbidity requirements.</p>
-              <div class="cell-specs">
-                <div class="cell-spec-item"><span class="spec-k">Contracts</span><span class="spec-v">2 Exploration</span></div>
-                <div class="cell-spec-item"><span class="spec-k">Jurisdiction</span><span class="spec-v">ISA / Sovereign</span></div>
-                <div class="cell-spec-item"><span class="spec-k">Relevance</span><span class="spec-v">★★★★★ High</span></div>
-              </div>
+          <div class="registry-ledger-row">
+            <div class="col-reg-sector">
+              <span class="registry-num">03</span>
+              <span class="registry-tag">BILATERAL STATE</span>
+            </div>
+            <div class="col-reg-region">
+              <h3 class="registry-title">Central Indian &amp; W. Pacific Basins</h3>
+              <p class="registry-desc">Bilateral state-backed nodule reserves with high baseline sediment sensitivity requiring stringent in-situ turbidity control.</p>
+            </div>
+            <div class="col-reg-operators">
+              <span class="operator-primary">Govt. of India · Beijing Pioneer Hi-Tech Development Corp.</span>
+              <span class="operator-regulator">Regulator: ISA &amp; Sovereign Bilateral</span>
+            </div>
+            <div class="col-reg-scale">
+              <span class="scale-val">2 State Reserves</span>
+              <span class="scale-sub">High-Turbidity Zone</span>
+            </div>
+            <div class="col-reg-status">
+              <span class="status-text">High Priority</span>
             </div>
           </div>
 
-          <div class="conrad-cell-card">
-            <div class="cell-num">04</div>
-            <div class="cell-content">
-              <h3 class="cell-title">Hydrothermal Ridges &amp; Seamounts</h3>
-              <p class="cell-desc">Polymetallic sulfide and cobalt-rich crust tracts along the Mid-Atlantic Ridge and Pacific Seamounts (China COMRA, Japan JOGMEC, South Korea, France Ifremer, Russia).</p>
-              <div class="cell-specs">
-                <div class="cell-spec-item"><span class="spec-k">Contracts</span><span class="spec-v">12 Contracts</span></div>
-                <div class="cell-spec-item"><span class="spec-k">Deposit Type</span><span class="spec-v">Sulfides &amp; Crusts</span></div>
-                <div class="cell-spec-item"><span class="spec-k">Relevance</span><span class="spec-v">★★★ Expansion</span></div>
-              </div>
+          <div class="registry-ledger-row">
+            <div class="col-reg-sector">
+              <span class="registry-num">04</span>
+              <span class="registry-tag">RIDGE &amp; CRUST</span>
+            </div>
+            <div class="col-reg-region">
+              <h3 class="registry-title">Hydrothermal Ridges &amp; Seamounts</h3>
+              <p class="registry-desc">Polymetallic sulfides and cobalt-rich crust tracts along oceanic ridges and Pacific seamount chains.</p>
+            </div>
+            <div class="col-reg-operators">
+              <span class="operator-primary">China COMRA · Japan JOGMEC · Korea KIOST · France Ifremer · Russia</span>
+              <span class="operator-regulator">Regulator: ISA Exploration Contracts</span>
+            </div>
+            <div class="col-reg-scale">
+              <span class="scale-val">12 Regional Tracts</span>
+              <span class="scale-sub">Sulfides &amp; Cobalt Crusts</span>
+            </div>
+            <div class="col-reg-status">
+              <span class="status-text">Expansion</span>
             </div>
           </div>
         </div>
@@ -157,17 +223,21 @@
           <p class="conrad-section-lead">A comprehensive macro-environmental evaluation anchoring our technology in legal frameworks, economic efficiency, and ocean preservation.</p>
         </div>
 
-        <div class="conrad-roadmap-timeline">
-          ${pestleFactors.map(function(item) {
+        <div class="conrad-pestle-grid">
+          ${pestleFactors.map(function(item, idx) {
+            var num = "0" + (idx + 1);
             return `
-              <div class="conrad-milestone-card">
-                <div class="milestone-quarter">${item.letter}</div>
-                <div class="milestone-content">
-                  <div class="milestone-title">${item.name}</div>
-                  <ul style="margin: 0.75rem 0 0; padding-left: 1.25rem; font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.7);">
-                    ${item.points.map(function(pt) { return `<li style="margin-bottom: 0.45rem;">${pt}</li>`; }).join("")}
-                  </ul>
+              <div class="conrad-pestle-card">
+                <div class="pestle-card-header">
+                  <span class="pestle-num">${num} // ${item.letter}</span>
+                  <span class="pestle-factor-tag">${item.name}</span>
                 </div>
+                <div class="pestle-divider"></div>
+                <ul class="pestle-point-list">
+                  ${item.points.map(function(pt) {
+                    return `<li class="pestle-point-item"><span class="pestle-bullet">—</span><span>${pt}</span></li>`;
+                  }).join("")}
+                </ul>
               </div>
             `;
           }).join("")}

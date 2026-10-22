@@ -46,14 +46,16 @@
   position: absolute;
   top: 1.25rem;
   left: 1.25rem;
-  padding: 0.4rem 0.85rem;
-  background: rgba(0, 0, 0, 0.85);
-  border: 1px solid rgba(1, 177, 199, 0.3);
-  color: #01B1C7;
-  font-family: var(--font-kicker);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #01B1C7 !important;
+  font-family: var(--font-kicker) !important;
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
 }
 
 .doctrine-img-wrap {
@@ -171,193 +173,332 @@
 }
 
 
-/* Unit Economics Scale Grid */
-.conrad-economics-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 1.5rem !important;
+/* --- SECTION 02: MARKET SIZING EXPANSION RUNWAY (NO BOXES) --- */
+.conrad-runway-container {
+  width: 100% !important;
   margin-top: 3.5rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+  background: transparent !important;
 }
 
-.conrad-econ-card {
-  padding: 2.5rem 2rem !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  background: rgba(255, 255, 255, 0.015) !important;
-  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease !important;
+.conrad-runway-track {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 
-.conrad-econ-card:hover {
-  border-color: rgba(255, 255, 255, 0.3) !important;
-  background: radial-gradient(circle at top right, rgba(1, 177, 199, 0.08), rgba(255, 255, 255, 0.015) 70%) !important;
+.runway-step {
+  padding: 2.75rem 2.25rem !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: background-color 0.2s ease !important;
 }
 
-.conrad-econ-card.highlight {
-  border-color: rgba(255, 255, 255, 0.35) !important;
-  background: rgba(255, 255, 255, 0.04) !important;
+.runway-step:last-child {
+  border-right: none !important;
 }
 
-.econ-stage {
-  font-family: var(--font-kicker) !important;
-  font-size: 0.68rem !important;
-  letter-spacing: 0.15em !important;
-  text-transform: uppercase !important;
-  color: rgba(255, 255, 255, 0.5) !important;
+.runway-step:hover {
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.step-header {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 0.75rem !important;
   margin-bottom: 1.25rem !important;
 }
 
-.econ-cost {
-  font-family: var(--font-heading) !important;
-  font-size: 2.4rem !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.018em !important;
-  color: #ffffff !important;
-  line-height: 1 !important;
-}
-
-.econ-sub {
+.step-num {
   font-family: var(--font-kicker) !important;
-  font-size: 0.68rem !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
   letter-spacing: 0.12em !important;
-  color: rgba(255, 255, 255, 0.45) !important;
-  margin: 0.5rem 0 1.75rem !important;
+  color: #01B1C7 !important;
 }
 
-.econ-divider {
-  width: 100% !important;
-  height: 1px !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-  margin-bottom: 1.5rem !important;
+.step-stage {
+  font-family: var(--font-kicker) !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.65) !important;
 }
 
-.econ-meta {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0.85rem !important;
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
-}
-
-.econ-row {
-  display: flex !important;
-  justify-content: space-between !important;
-  font-size: 0.85rem !important;
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
-}
-
-.econ-row span {
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
-}
-
-.econ-row span:first-child {
-  color: rgba(255, 255, 255, 0.5) !important;
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
-}
-
-.econ-row span:last-child {
-  color: #ffffff !important;
-  font-weight: 500 !important;
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
-}
-
-/* Factory Footprint Cards */
-.conrad-factory-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 2rem !important;
-  margin-top: 3.5rem !important;
-}
-
-.conrad-factory-card {
-  padding: 3rem 2.25rem !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  background: rgba(255, 255, 255, 0.015) !important;
-  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease !important;
-}
-
-.conrad-factory-card:hover {
-  border-color: rgba(255, 255, 255, 0.25) !important;
-  background: radial-gradient(circle at top right, rgba(1, 177, 199, 0.06), rgba(255, 255, 255, 0.015) 70%) !important;
-}
-
-.factory-num {
+.step-val {
   font-family: var(--font-heading) !important;
-  font-size: 3.2rem !important;
+  font-size: 2.85rem !important;
   font-weight: 700 !important;
-  letter-spacing: -0.018em !important;
+  letter-spacing: -0.025em !important;
   color: #ffffff !important;
   line-height: 1 !important;
-}
-
-.factory-unit {
-  font-family: var(--font-kicker) !important;
-  font-size: 0.68rem !important;
-  letter-spacing: 0.15em !important;
-  text-transform: uppercase !important;
-  color: rgba(255, 255, 255, 0.45) !important;
-  margin: 0.4rem 0 1.75rem !important;
-}
-
-.factory-title {
-  font-family: var(--font-heading) !important;
-  font-size: 1.25rem !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.015em !important;
-  color: #ffffff !important;
-  margin: 0 0 0.75rem !important;
-}
-
-.factory-desc {
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
-  font-size: 0.92rem !important;
-  line-height: 1.55 !important;
-  color: rgba(255, 255, 255, 0.6) !important;
   margin: 0 !important;
 }
 
-/* Stepped Roadmap Track */
-.conrad-roadmap-track {
-  margin-top: 3.5rem !important;
+.step-sub {
+  font-family: var(--font-body) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.4 !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+  margin: 0.65rem 0 1.75rem !important;
+}
+
+.step-divider {
+  width: 100% !important;
+  height: 1px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  margin-bottom: 1.25rem !important;
+}
+
+.step-specs {
   display: flex !important;
   flex-direction: column !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  gap: 0.85rem !important;
+  margin-top: auto !important;
 }
 
-.conrad-roadmap-item {
-  display: grid !important;
-  grid-template-columns: 200px 240px 1fr !important;
-  align-items: baseline !important;
-  padding: 1.75rem 0 !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-  transition: background-color 0.25s ease !important;
+.step-spec-row {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
 }
 
-.conrad-roadmap-item:hover {
-  background-color: rgba(255, 255, 255, 0.02) !important;
-}
-
-.roadmap-phase {
+.step-spec-row .spec-label {
   font-family: var(--font-kicker) !important;
-  font-size: 0.72rem !important;
-  letter-spacing: 0.15em !important;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+.step-spec-row .spec-data {
+  font-family: var(--font-body) !important;
+  font-size: 0.88rem !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  line-height: 1.35 !important;
+}
+
+
+/* --- SECTION 03: MARITIME CONCESSION REGISTRY LEDGER (NO BOXES) --- */
+.conrad-registry-ledger {
+  width: 100% !important;
+  margin-top: 3.5rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-sizing: border-box !important;
+}
+
+.registry-ledger-header {
+  display: grid !important;
+  grid-template-columns: 160px 1.5fr 1.6fr 160px 140px !important;
+  gap: 1.5rem !important;
+  padding: 1.1rem 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  font-family: var(--font-kicker) !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+.registry-ledger-row {
+  display: grid !important;
+  grid-template-columns: 160px 1.5fr 1.6fr 160px 140px !important;
+  gap: 1.5rem !important;
+  padding: 2rem 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  align-items: baseline !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.registry-ledger-row:hover {
+  background-color: rgba(255, 255, 255, 0.015) !important;
+}
+
+.col-reg-sector {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.35rem !important;
+}
+
+.registry-num {
+  font-family: var(--font-heading) !important;
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  color: #01B1C7 !important;
+  line-height: 1 !important;
+}
+
+.registry-tag {
+  font-family: var(--font-kicker) !important;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
   color: rgba(255, 255, 255, 0.5) !important;
 }
 
-.roadmap-phase.active {
+.col-reg-region {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.45rem !important;
+}
+
+.registry-title {
+  font-family: var(--font-heading) !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  color: #ffffff !important;
+  margin: 0 !important;
+  line-height: 1.3 !important;
+}
+
+.registry-desc {
+  font-family: var(--font-body) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  margin: 0 !important;
+}
+
+.col-reg-operators {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.35rem !important;
+}
+
+.operator-primary {
+  font-family: var(--font-body) !important;
+  font-size: 0.88rem !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  line-height: 1.4 !important;
+}
+
+.operator-regulator {
+  font-family: var(--font-kicker) !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.08em !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.col-reg-scale {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+}
+
+.scale-val {
+  font-family: var(--font-body) !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+}
+
+.scale-sub {
+  font-family: var(--font-kicker) !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.06em !important;
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+.col-reg-status {
+  text-align: right !important;
+}
+
+.status-text {
+  font-family: var(--font-kicker) !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
   color: #01B1C7 !important;
   font-weight: 600 !important;
 }
 
-.roadmap-title {
+
+/* --- PESTLE STRATEGIC FRAMEWORK GRID (IMAGE 5 FIX) --- */
+.conrad-pestle-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1.75rem !important;
+  margin-top: 3.5rem !important;
+}
+
+.conrad-pestle-card {
+  padding: 2.25rem 1.85rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.018) !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: border-color 0.25s ease, background-color 0.25s ease !important;
+}
+
+.conrad-pestle-card:hover {
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.pestle-card-header {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.4rem !important;
+}
+
+.pestle-num {
+  font-family: var(--font-kicker) !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #01B1C7 !important;
+  font-weight: 600 !important;
+}
+
+.pestle-factor-tag {
   font-family: var(--font-heading) !important;
   font-size: 1.15rem !important;
   font-weight: 600 !important;
-  letter-spacing: -0.015em !important;
+  letter-spacing: -0.01em !important;
   color: #ffffff !important;
+  line-height: 1.3 !important;
 }
 
-.roadmap-desc {
-  font-family: 'HelveticaNowDisplay', Helvetica, Arial, sans-serif !important;
-  font-size: 0.95rem !important;
+.pestle-divider {
+  width: 100% !important;
+  height: 1px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  margin: 1.25rem 0 !important;
+}
+
+.pestle-point-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+}
+
+.pestle-point-item {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.65rem !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.6 !important;
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+.pestle-bullet {
+  color: rgba(255, 255, 255, 0.4) !important;
+  font-weight: 600 !important;
+  flex-shrink: 0 !important;
+  line-height: 1.6 !important;
+}
   line-height: 1.5 !important;
   color: rgba(255, 255, 255, 0.65) !important;
 }
@@ -599,10 +740,31 @@
   .conrad-cta-inner {
     padding: 0 2rem !important;
   }
-  .conrad-doctrine-grid,
-  .conrad-economics-grid,
-  .conrad-factory-grid {
+  .conrad-doctrine-grid {
     grid-template-columns: 1fr !important;
+  }
+  .conrad-runway-track {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .runway-step:nth-child(2) {
+    border-right: none !important;
+  }
+  .runway-step:nth-child(-n+2) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  .registry-ledger-header {
+    display: none !important;
+  }
+  .registry-ledger-row {
+    grid-template-columns: 1fr !important;
+    gap: 0.85rem !important;
+    padding: 1.75rem 0 !important;
+  }
+  .col-reg-status {
+    text-align: left !important;
+  }
+  .conrad-pestle-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
   .conrad-spec-row {
     grid-template-columns: 180px 1fr 140px !important;
@@ -613,6 +775,19 @@
 }
 
 @media (max-width: 768px) {
+  .conrad-runway-track {
+    grid-template-columns: 1fr !important;
+  }
+  .runway-step {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  .runway-step:last-child {
+    border-bottom: none !important;
+  }
+  .conrad-pestle-grid {
+    grid-template-columns: 1fr !important;
+  }
   .conrad-spec-row {
     grid-template-columns: 1fr !important;
     gap: 0.35rem !important;

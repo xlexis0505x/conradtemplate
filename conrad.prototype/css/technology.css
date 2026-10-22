@@ -90,7 +90,7 @@
   font-weight: 600 !important;
   letter-spacing: 0.03em !important;
   text-transform: uppercase !important;
-  color: rgba(255, 255, 255, 0.55) !important;
+  color: #ffffff !important;
   transition: color 0.2s ease !important;
 }
 
@@ -106,7 +106,7 @@
   font-size: 0.68rem !important;
   letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
-  color: rgba(255, 255, 255, 0.4) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
   text-align: right !important;
 }
 
@@ -145,7 +145,7 @@
   font-size: 0.72rem !important;
   letter-spacing: 0.15em !important;
   text-transform: uppercase !important;
-  color: rgba(255, 255, 255, 0.5) !important;
+  color: #ffffff !important;
   background: rgba(255, 255, 255, 0.03) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
 }
@@ -155,6 +155,7 @@
   font-family: var(--font-body) !important;
   font-size: 0.95rem !important;
   line-height: 1.45 !important;
+  color: #ffffff !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -165,7 +166,7 @@
 .col-metric {
   width: 25% !important;
   font-weight: 600 !important;
-  color: rgba(255, 255, 255, 0.65) !important;
+  color: #ffffff !important;
 }
 
 .col-conrad {
@@ -174,6 +175,10 @@
   background: rgba(255, 255, 255, 0.025) !important;
   border-left: 1px solid rgba(255, 255, 255, 0.12) !important;
   border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.col-legacy {
+  color: #ffffff !important;
 }
 
 .col-conrad strong {

@@ -66,6 +66,25 @@ window.Conrad = window.Conrad || {};
     return curr;
   }
 
+  function deepMerge(target, source) {
+    if (!source || typeof source !== "object" || Array.isArray(source)) return source !== undefined ? source : target;
+    if (!target || typeof target !== "object" || Array.isArray(target)) return source;
+    var output = Object.assign({}, target);
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        var sVal = source[key];
+        var tVal = target[key];
+        if (sVal !== null && typeof sVal === "object" && !Array.isArray(sVal) &&
+            tVal !== null && typeof tVal === "object" && !Array.isArray(tVal)) {
+          output[key] = deepMerge(tVal, sVal);
+        } else if (sVal !== undefined && sVal !== null) {
+          output[key] = sVal;
+        }
+      }
+    }
+    return output;
+  }
+
   // Content Store Object
   Conrad.edition = activeEdition;
   Conrad.isChina = (activeEdition === "china");
@@ -76,23 +95,28 @@ window.Conrad = window.Conrad || {};
     get: function(path, defaultValue) {
       var globalDict = window.Conrad.CONTENT_GLOBAL || {};
       var chinaDict = window.Conrad.CONTENT_CHINA || {};
-      var currentDict = (activeEdition === "china") ? chinaDict : globalDict;
 
-      // 1. Try active edition dictionary
-      var val = deepGet(currentDict, path);
-      if (val !== undefined && val !== null) return val;
+      var globalVal = deepGet(globalDict, path);
+      if (activeEdition === "china") {
+        var chinaVal = deepGet(chinaDict, path);
+        if (chinaVal !== undefined && chinaVal !== null) {
+          if (typeof chinaVal === "object" && !Array.isArray(chinaVal) &&
+              typeof globalVal === "object" && !Array.isArray(globalVal)) {
+            return deepMerge(globalVal, chinaVal);
+          }
+          return chinaVal;
+        }
+        if (globalVal !== undefined && globalVal !== null) return globalVal;
+      } else {
+        if (globalVal !== undefined && globalVal !== null) return globalVal;
+      }
 
-      // 2. Fall back to global baseline dictionary
-      val = deepGet(globalDict, path);
-      if (val !== undefined && val !== null) return val;
-
-      // 3. Fall back to default value
       return defaultValue !== undefined ? defaultValue : "";
     },
     getAll: function() {
       var globalDict = window.Conrad.CONTENT_GLOBAL || {};
       var chinaDict = window.Conrad.CONTENT_CHINA || {};
-      return Object.assign({}, globalDict, (activeEdition === "china") ? chinaDict : {});
+      return deepMerge(globalDict, (activeEdition === "china") ? chinaDict : {});
     }
   };
 
