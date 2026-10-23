@@ -27,35 +27,33 @@ window.addEventListener('load', function() {
   }
 });
 
-// Dynamic Base Path & Route Normalizer for GitHub Pages & Custom Domain Subpaths
+// Base Path & Route Normalizer for Local & GitHub Pages Subpaths
 (function() {
-  var p = window.location.pathname.split('?')[0].split('#')[0];
-  var parts = p.split('/').filter(Boolean);
-  var known = ['technology', 'business', 'about', 'index.html', '404.html'];
-  while (parts.length > 0 && known.indexOf(parts[parts.length - 1]) !== -1) {
-    parts.pop();
-  }
-  var base = parts.length > 0 ? '/' + parts.join('/') + '/' : '/';
-  window.CONRAD_BASE_PATH = base;
-  document.write('<base href="' + base + '"/>');
-
   window.getAppPath = function(pathname) {
-    var cur = (pathname !== undefined ? pathname : window.location.pathname).replace(/\/$/, "") || "/";
-    if (cur === "/index.html") return "/";
-    var b = window.CONRAD_BASE_PATH || "";
-    if (b && b !== "/") {
-      var cleanBase = b.replace(/\/$/, "");
-      if (cur.startsWith(cleanBase)) {
-        cur = cur.substring(cleanBase.length);
-        if (!cur.startsWith("/")) cur = "/" + cur;
-      }
-    } else {
-      cur = cur.replace(/^\/[^\/]+(?=(?:\/technology|\/business|\/about|\/cn|\/index\.html|\/?$))/, "");
+    var p = (pathname !== undefined ? pathname : window.location.pathname).split('?')[0].split('#')[0].replace(/\/$/, "") || "/";
+    if (p === "/index.html") return "/";
+    if (p.startsWith("/conradtemplate")) {
+      p = p.substring(15);
     }
-    cur = cur.replace(/^\/cn(?=\/|$)/, "");
-    cur = cur.replace(/\/index\.html$/, "");
-    return cur.replace(/\/$/, "") || "/";
+    if (p.startsWith("/cn")) {
+      p = p.substring(3);
+    }
+    p = p.replace(/\/$/, "");
+    if (!p.startsWith("/")) p = "/" + p;
+    if (p === "/index.html" || p === "") return "/";
+    return p;
   };
+
+  var p = window.location.pathname.split('?')[0].split('#')[0];
+  if (p.startsWith("/conradtemplate/cn")) {
+    window.CONRAD_BASE_PATH = "/conradtemplate/cn/";
+  } else if (p.startsWith("/conradtemplate")) {
+    window.CONRAD_BASE_PATH = "/conradtemplate/";
+  } else if (p.startsWith("/cn")) {
+    window.CONRAD_BASE_PATH = "/cn/";
+  } else {
+    window.CONRAD_BASE_PATH = "/";
+  }
 })();
 
 // Subpath URL Qualifier helper
@@ -192,6 +190,7 @@ function qualifyUrl(url) {
   });
 })();
 </script>
+<base href="/"/>
 <script src="./assets/js/lib/gsap.min.js"></script>
 <script type="importmap">
 {

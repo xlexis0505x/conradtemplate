@@ -54,9 +54,13 @@ jobs:
           with open(os.path.join(dest, '.nojekyll'), 'w') as f:
             f.write('')
 
-          # Duplicate index.html to 404.html and SPA route folders for Global edition
+          # Bake base href="/conradtemplate/" for GitHub Pages
           with open(os.path.join(dest, 'index.html'), 'r', encoding='utf-8') as f:
             html = f.read()
+
+          html = html.replace('<base href="/"', '<base href="/conradtemplate/"')
+          with open(os.path.join(dest, 'index.html'), 'w', encoding='utf-8') as f:
+            f.write(html)
 
           shutil.copy2(os.path.join(dest, 'index.html'), os.path.join(dest, '404.html'))
 
