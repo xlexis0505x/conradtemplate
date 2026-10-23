@@ -85,6 +85,12 @@ jobs:
             os.makedirs(rdir, exist_ok=True)
             shutil.copy2(os.path.join(cn_dir, 'index.html'), os.path.join(rdir, 'index.html'))
 
+          # Copy JSON data files to cn/ directory as well
+          for jf in ['index.json', 'technology.json', 'business.json', 'about.json']:
+            jpath = os.path.join(dest, jf)
+            if os.path.exists(jpath):
+              shutil.copy2(jpath, os.path.join(cn_dir, jf))
+
           print('Built _site artifact successfully.')
           EOF
 

@@ -126,11 +126,25 @@ function qualifyUrl(url) {
   // Asset fetch & XHR safety rewriter for subpath deployment
   function rewriteAssetUrl(url) {
     if (typeof url !== 'string') return url;
-    var base = window.CONRAD_BASE_PATH;
-    if (!base || base === '/') return url;
-    var cleanBase = base.replace(/\/$/, "");
+    var p = window.location.pathname;
+    var isSubpath = p.startsWith('/conradtemplate');
+    if (!isSubpath) return url;
+
+    // Fix requests directed to domain root on github.io
+    if (url.startsWith('https://xlexis0505x.github.io/assets/') || url.startsWith('http://xlexis0505x.github.io/assets/')) {
+      return url.replace('xlexis0505x.github.io/assets/', 'xlexis0505x.github.io/conradtemplate/assets/');
+    }
+    if (url.startsWith('https://xlexis0505x.github.io/_external/') || url.startsWith('http://xlexis0505x.github.io/_external/')) {
+      return url.replace('xlexis0505x.github.io/_external/', 'xlexis0505x.github.io/conradtemplate/_external/');
+    }
+    if (/^https?:\/\/xlexis0505x\.github\.io\/[^\/]+\.json$/.test(url)) {
+      return url.replace('xlexis0505x.github.io/', 'xlexis0505x.github.io/conradtemplate/');
+    }
     if (/^\/(_external|assets|css|js|textures|draco|models|data)\//.test(url)) {
-      return cleanBase + url;
+      return '/conradtemplate' + url;
+    }
+    if (/^\/[^\/]+\.json$/.test(url)) {
+      return '/conradtemplate' + url;
     }
     return url;
   }
@@ -243,6 +257,11 @@ function qualifyUrl(url) {
             }
 
             window._CONFIG_ = {"USE_CACHED_FILE":true,"ENABLE_UIL_CMS":false,"ENV":"production","PROD":true,"CACHE":"vCKDAhYW","UIL_ID":"anduril-website","USE_PUBLISHED_UIL_FOR_ENVS":["staging-anduril","production-anduril"],"UIL_STATIC_PATH":"assets/data/uil.xxNQBSEHA6.json","SANITY_STUDIO_URL":"https://anduril.sanity.studio","SANITY_DATASET":"production","ALGOLIA_JOBS_INDEX_NAME":"jobs","PROTECTED_CONTENT_AUTH_URL":"/_auth/login"};
+            try {
+                var _baseTag = document.querySelector('base');
+                var _baseHref = _baseTag ? _baseTag.getAttribute('href') : '/';
+                window._CONFIG_.CONTENT_URL = new URL(_baseHref, window.location.origin).href.replace(/\/$/, "");
+            } catch(e) {}
             window.CREATED_WITH_HYDRAX = "1.1.18";
             window.HYDRA_MOBILE_SCROLL = true;
             window._CACHE_ = 'vCKDAhYW';
