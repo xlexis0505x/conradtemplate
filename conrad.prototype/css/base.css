@@ -218,3 +218,23 @@ h1, h2, h3, h4,
     padding-bottom: 2.5rem !important;
   }
 }
+
+/* ── Modern Web Performance Optimizations ────────────────────────────── */
+#conrad-radiant-janus-track,
+.conrad-tech-grid,
+.conrad-biz-sec,
+.conrad-about-container,
+.MediaLinkSlice,
+.ArsenalSlice {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
+}
+
+/* Ensure smooth GPU compositing on canvas and transform layers */
+.janus-canvas,
+.conrad-bento-card,
+.conrad-tech-card,
+.conrad-biz-card {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}

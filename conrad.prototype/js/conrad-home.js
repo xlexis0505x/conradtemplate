@@ -312,6 +312,7 @@
   function attachCardListeners() {
     var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     if (p !== "" && p !== "/" && p !== "/index.html") return;
+    if (window.__dismissPrepaint) window.__dismissPrepaint();
     ensureModalDOM();
     updateHomeContent();
 

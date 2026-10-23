@@ -1,10 +1,9 @@
 /**
- * Conrad Prototype — Home 3D Radiant Janus Scrubber (ES Module)
+ * Conrad Prototype — Home 3D Radiant Janus Scrubber (ES Module, Lazy-Loaded)
  */
 
-import { JanusScene } from "../janus-engine.js";
-
 (function() {
+  var janusSceneLoading = false;
   var trackHTML = `
   <div id="conrad-radiant-janus-track">
     <section id="conrad-radiant-janus-sticky">
@@ -91,6 +90,7 @@ import { JanusScene } from "../janus-engine.js";
         try { janusScene.dispose(); } catch(e){}
         janusScene = null;
       }
+      janusSceneLoading = false;
       if (track) track.remove();
       lastStep = -1;
       return;
@@ -128,13 +128,32 @@ import { JanusScene } from "../janus-engine.js";
     }
 
     var canvas = document.getElementById("janus-canvas");
-    if (canvas && !janusScene) {
-      try {
-        janusScene = new JanusScene(canvas);
-        janusScene.setSize(window.innerWidth, window.innerHeight);
-        janusScene.requestRender();
-      } catch (err) {
-        console.error("[janus home 3D scene init error]", err);
+    if (canvas && !janusScene && !janusSceneLoading) {
+      var init3D = function() {
+        if (janusScene || janusSceneLoading) return;
+        janusSceneLoading = true;
+        import("../janus-engine.js").then(function(mod) {
+          janusScene = new mod.JanusScene(canvas);
+          janusScene.setSize(window.innerWidth, window.innerHeight);
+          janusScene.requestRender();
+          janusSceneLoading = false;
+          updateScroll();
+        }).catch(function(err) {
+          janusSceneLoading = false;
+          console.error("[janus home 3D scene init error]", err);
+        });
+      };
+
+      if ("IntersectionObserver" in window) {
+        var obs = new IntersectionObserver(function(entries) {
+          if (entries[0] && entries[0].isIntersecting) {
+            init3D();
+            obs.disconnect();
+          }
+        }, { rootMargin: "400px 0px" });
+        obs.observe(track);
+      } else {
+        init3D();
       }
     }
 
