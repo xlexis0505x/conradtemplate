@@ -34,23 +34,32 @@ window.Conrad = window.Conrad || {};
       return String(window.CONRAD_EDITION).toLowerCase() === "china" ? "china" : "global";
     }
 
-    // Priority D: Session / localStorage persistence across route navigation
+    // Priority D: Pathname check (e.g. /cn/ or /conradtemplate/cn/)
+    try {
+      var p = (window.location.pathname || "").toLowerCase();
+      if (p.includes("/cn/") || p.endsWith("/cn")) {
+        return "china";
+      }
+    } catch (e) {}
+
+    // Priority E: Session / localStorage persistence across route navigation
     try {
       var saved = localStorage.getItem("conrad_edition");
       if (saved === "china" || saved === "global") return saved;
     } catch (e) {}
 
-    // Priority E: Default to global
+    // Priority F: Default to global
     return "global";
   }
 
   var activeEdition = resolveEdition();
 
-  // If set via URL query, persist to localStorage so route clicks in the SPA preserve the active edition
+  // If set via URL query or pathname, persist to localStorage so route clicks in the SPA preserve active edition
   try {
     var params = new URLSearchParams(window.location.search);
     var q = params.get("edition") || params.get("region");
-    if (q) {
+    var isCnPath = (window.location.pathname || "").toLowerCase().includes("/cn");
+    if (q || isCnPath) {
       localStorage.setItem("conrad_edition", activeEdition);
     }
   } catch (e) {}

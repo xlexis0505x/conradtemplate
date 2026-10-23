@@ -1,0 +1,94 @@
+name: Deploy Conrad Prototype to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build site artifact
+        run: |
+          python3 - << 'EOF'
+          import os, shutil
+
+          src = 'conrad.prototype'
+          dest = '_site'
+
+          if os.path.exists(dest):
+            shutil.rmtree(dest)
+
+          os.makedirs(dest, exist_ok=True)
+
+          # Copy prototype assets and pages
+          for item in os.listdir(src):
+            s = os.path.join(src, item)
+            d = os.path.join(dest, item)
+            if os.path.isdir(s):
+              shutil.copytree(s, d, symlinks=True)
+            else:
+              shutil.copy2(s, d)
+
+          # Ensure .nojekyll is present so GitHub Pages serves _external without filtering
+          with open(os.path.join(dest, '.nojekyll'), 'w') as f:
+            f.write('')
+
+          # Duplicate index.html to 404.html and SPA route folders for Global edition
+          with open(os.path.join(dest, 'index.html'), 'r', encoding='utf-8') as f:
+            html = f.read()
+
+          shutil.copy2(os.path.join(dest, 'index.html'), os.path.join(dest, '404.html'))
+
+          for route in ['technology', 'business', 'about']:
+            rdir = os.path.join(dest, route)
+            os.makedirs(rdir, exist_ok=True)
+            shutil.copy2(os.path.join(dest, 'index.html'), os.path.join(rdir, 'index.html'))
+
+          # Create China round version in cn/ directory
+          cn_dir = os.path.join(dest, 'cn')
+          os.makedirs(cn_dir, exist_ok=True)
+
+          # Pre-inject window.CONRAD_EDITION = 'china' into cn/index.html
+          cn_html = html.replace('<head>', '<head><script>window.CONRAD_EDITION="china";</script>', 1)
+          with open(os.path.join(cn_dir, 'index.html'), 'w', encoding='utf-8') as f:
+            f.write(cn_html)
+
+          shutil.copy2(os.path.join(cn_dir, 'index.html'), os.path.join(cn_dir, '404.html'))
+
+          for route in ['technology', 'business', 'about']:
+            rdir = os.path.join(cn_dir, route)
+            os.makedirs(rdir, exist_ok=True)
+            shutil.copy2(os.path.join(cn_dir, 'index.html'), os.path.join(rdir, 'index.html'))
+
+          print('Built _site artifact successfully.')
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

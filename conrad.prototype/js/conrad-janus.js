@@ -2,7 +2,7 @@
  * Conrad Prototype — Home 3D Radiant Janus Scrubber (ES Module)
  */
 
-import { JanusScene } from "/janus-engine.js";
+import { JanusScene } from "../janus-engine.js";
 
 (function() {
   var trackHTML = `
@@ -72,7 +72,7 @@ import { JanusScene } from "/janus-engine.js";
   var eventsBound = false;
 
   function isHomeRoute() {
-    var p = window.location.pathname.replace(/\/$/, "") || "/";
+    var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     return p === "" || p === "/" || p === "/index.html";
   }
 

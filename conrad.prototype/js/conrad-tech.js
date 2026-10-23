@@ -252,7 +252,7 @@
   `;
 
   function isTechRoute() {
-    var p = window.location.pathname.replace(/\/$/, "") || "/";
+    var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     return p === "/technology" || p.startsWith("/technology/");
   }
 

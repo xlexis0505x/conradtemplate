@@ -222,7 +222,7 @@
   }
 
   function updateHomeContent() {
-    var p = window.location.pathname.replace(/\/$/, "") || "/";
+    var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     var onHome = (p === "" || p === "/" || p === "/index.html");
     if (!onHome) {
       var stats = document.getElementById("conrad-company-stats");
@@ -310,7 +310,7 @@
   }
 
   function attachCardListeners() {
-    var p = window.location.pathname.replace(/\/$/, "") || "/";
+    var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     if (p !== "" && p !== "/" && p !== "/index.html") return;
     ensureModalDOM();
     updateHomeContent();

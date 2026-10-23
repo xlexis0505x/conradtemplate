@@ -12,7 +12,7 @@
     if (isRouteSyncing) return;
     isRouteSyncing = true;
     try {
-      var p = window.location.pathname.replace(/\/$/, "") || "/";
+      var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
       if (p === "/index.html") p = "/";
       var routeChanged = (p !== lastObservedPath);
       if (routeChanged) {
@@ -77,14 +77,14 @@
   }
 
   function updateNav(p) {
-    p = p || window.location.pathname.replace(/\/$/, "") || "/";
+    p = p || (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     if (p === "/index.html") p = "/";
     var links = document.querySelectorAll(".center-wrapper .HeaderLink");
     if (!links || links.length === 0) return false;
     var foundActive = false;
     links.forEach(function(l) {
       var rawHref = l.getAttribute("href") || "";
-      var href = rawHref.replace(/\/$/, "") || "/";
+      var href = (window.getAppPath ? window.getAppPath(rawHref) : rawHref.replace(/\/$/, "")) || "/";
       if (href === "/index.html") href = "/";
       var isCurrent = false;
       if (href === "/") {

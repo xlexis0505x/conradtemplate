@@ -778,7 +778,7 @@ window.generateContactHTML = function(kicker, leadText) {
   }
 
   function isAboutRoute() {
-    var p = window.location.pathname.replace(/\/$/, "") || "/";
+    var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     return p === "/about" || p.startsWith("/about/");
   }
 
@@ -869,7 +869,7 @@ window.generateContactHTML = function(kicker, leadText) {
 
   var lastAboutRoute = null;
   function checkAboutRoute() {
-    var p = window.location.pathname.replace(/\/$/, "") || "/";
+    var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     var hero = document.querySelector(".PageHero");
     var track = document.getElementById("conrad-walkalone-track");
     var activeEdition = (window.Conrad && Conrad.edition) || "global";

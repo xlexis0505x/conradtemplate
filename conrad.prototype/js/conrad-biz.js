@@ -340,7 +340,7 @@
   }
 
   function isBizRoute() {
-    var p = window.location.pathname.replace(/\/$/, "") || "/";
+    var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     return p === "/business" || p.startsWith("/business/");
   }
 
@@ -551,7 +551,7 @@
 
   var lastBizRoute = null;
   function checkBizRoute() {
-    var p = window.location.pathname.replace(/\/$/, "") || "/";
+    var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     var richText = document.querySelector(".TwoColumnRichText");
     var header = document.querySelector(".ProductHeaderSlice");
     var doctrine = document.getElementById("conrad-biz-doctrine");
