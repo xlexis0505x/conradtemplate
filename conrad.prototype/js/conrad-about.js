@@ -4,26 +4,41 @@
  * and dual-edition support (DRUNKEAST vs POSEIDON).
  */
 
+function escapeHTML(str) {
+  if (str == null) return "";
+  return String(str).replace(/[&<>'"]/g, function(tag) {
+    var charsToReplace = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "'": "&#39;",
+      "\"": "&quot;"
+    };
+    return charsToReplace[tag] || tag;
+  });
+}
+
 // Shared Contact & Mission HTML generator
 window.generateContactHTML = function(kicker, leadText) {
   var aboutData = (window.Conrad && Conrad.content && Conrad.content.get("about")) || {};
   var contactData = aboutData.contact || {};
   var isChina = (window.Conrad && Conrad.isChina);
   var company = isChina ? "POSEIDON" : "DRUNKEAST";
-  var k = kicker || contactData.kicker || "02 // GET IN TOUCH";
-  var l = leadText || contactData.lead || "Have a question, an idea, or an opportunity to collaborate? We welcome conversations with fellow innovators, ocean researchers, and mining concession operators.";
-  var email = contactData.email || "teamdrunkeast@gmail.com";
-  var mission = aboutData.mission || "";
-  var vision = aboutData.vision || "";
+  var k = escapeHTML(kicker || contactData.kicker || "02 // GET IN TOUCH");
+  var l = escapeHTML(leadText || contactData.lead || "Have a question, an idea, or an opportunity to collaborate? We welcome conversations with fellow innovators, ocean researchers, and mining concession operators.");
+  var email = escapeHTML(contactData.email || "teamdrunkeast@gmail.com");
+  var mission = escapeHTML(aboutData.mission || "");
+  var vision = escapeHTML(aboutData.vision || "");
   var storyParas = aboutData.storyParagraphs || [];
+  var storyTitle = escapeHTML(aboutData.storyTitle || "The Story Behind " + company);
 
   var storyHTML = "";
   if (storyParas.length) {
     storyHTML = `
       <div class="conrad-about-story-wrap" style="margin-bottom: 3.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
         <div class="conrad-contact-kicker">01 // ORIGIN &amp; INSPIRATION</div>
-        <h2 class="conrad-contact-title" style="margin-bottom: 1.5rem;">${aboutData.storyTitle || "The Story Behind " + company}</h2>
-        ${storyParas.map(function(p) { return `<p class="conrad-contact-lead" style="margin-bottom: 1.25rem; max-width: 900px;">${p}</p>`; }).join("")}
+        <h2 class="conrad-contact-title" style="margin-bottom: 1.5rem;">${storyTitle}</h2>
+        ${storyParas.map(function(p) { return `<p class="conrad-contact-lead" style="margin-bottom: 1.25rem; max-width: 900px;">${escapeHTML(p)}</p>`; }).join("")}
         ${mission ? `<div style="margin-top: 2rem; padding: 1.5rem 2rem; background: rgba(255,255,255,0.03); border-left: 2px solid #ffffff;"><h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">Our Mission</h3><p style="font-size: 0.95rem; line-height: 1.6; color: rgba(255,255,255,0.7); margin: 0;">${mission}</p></div>` : ""}
         ${vision ? `<div style="margin-top: 1.25rem; padding: 1.5rem 2rem; background: rgba(255,255,255,0.03); border-left: 2px solid rgba(255,255,255,0.4);"><h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">Our Vision</h3><p style="font-size: 0.95rem; line-height: 1.6; color: rgba(255,255,255,0.7); margin: 0;">${vision}</p></div>` : ""}
       </div>
@@ -198,15 +213,17 @@ window.generateContactHTML = function(kicker, leadText) {
     if (Array.isArray(acronym) && acronym.length) {
       return acronym.map(function(item, idx) {
         var num = idx + 1;
-        var stageStr = (num < 10 ? "0" + num : num) + " // " + item.word.toUpperCase();
+        var word = item.word || "";
+        var letter = item.letter || "";
+        var stageStr = (num < 10 ? "0" + num : num) + " // " + word.toUpperCase();
         var imgPath = (typeof window.qualifyUrl === "function") ? window.qualifyUrl(item.image) : item.image;
         return {
-          letter: item.letter,
-          stage: stageStr,
-          title: item.word,
-          subtitle: item.letter + " \u2014 " + item.word,
-          desc: item.principle,
-          image: imgPath
+          letter: escapeHTML(letter),
+          stage: escapeHTML(stageStr),
+          title: escapeHTML(word),
+          subtitle: escapeHTML(letter + " \u2014 " + word),
+          desc: escapeHTML(item.principle),
+          image: escapeHTML(imgPath)
         };
       });
     }
@@ -215,7 +232,7 @@ window.generateContactHTML = function(kicker, leadText) {
 
   function generateWalkHTML() {
     var WALK_DATA = getWalkData();
-    var brand = (window.Conrad && Conrad.content && Conrad.content.get("brandName")) || "DRUNKEAST";
+    var brand = escapeHTML((window.Conrad && Conrad.content && Conrad.content.get("brandName")) || "DRUNKEAST");
 
     var lettersHTML = WALK_DATA.map(function(item, idx) {
       return '<div class="walkalone-letter-item" data-letter-idx="' + idx + '">' + item.letter + '</div>';
