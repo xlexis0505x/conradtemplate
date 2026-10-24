@@ -8,6 +8,12 @@
   var isRouteSyncing = false;
   var navHydrated = false;
 
+  // Element caches to prevent repeated expensive DOM queries
+  var cachedHomeTrack = null;
+  var cachedTechSpec = null;
+  var cachedBizDoctrine = null;
+  var cachedAboutTrack = null;
+
   function syncAllRoutes() {
     if (isRouteSyncing) return;
     isRouteSyncing = true;
@@ -29,7 +35,7 @@
       var isAbout = (p === "/about" || p.startsWith("/about/"));
 
       // 1. Home Route Sync (Radiant Nuclear 3D reactor)
-      var homeTrack = document.getElementById("conrad-radiant-janus-track");
+      var homeTrack = (cachedHomeTrack && cachedHomeTrack.isConnected) ? cachedHomeTrack : (cachedHomeTrack = document.getElementById("conrad-radiant-janus-track"));
       var ensureHome = (window.Conrad && window.Conrad.ensureHomeJanus) || window.ensureHomeJanus;
       if (isHome) {
         if (!homeTrack && typeof ensureHome === "function") {
@@ -40,7 +46,7 @@
       }
 
       // 2. Technology Route Sync (3D Submarine, Spec Matrix & Comparison)
-      var techSpec = document.getElementById("conrad-tech-spec-matrix");
+      var techSpec = (cachedTechSpec && cachedTechSpec.isConnected) ? cachedTechSpec : (cachedTechSpec = document.getElementById("conrad-tech-spec-matrix"));
       var ensureTech = (window.Conrad && window.Conrad.ensureTechSections) || window.ensureTechSections;
       if (isTech) {
         if (!techSpec && typeof ensureTech === "function") {
@@ -51,7 +57,7 @@
       }
 
       // 3. Business Route Sync (Doctrine, Unit Economics, Factory Cells, Roadmap, Diligence)
-      var bizDoctrine = document.getElementById("conrad-biz-doctrine");
+      var bizDoctrine = (cachedBizDoctrine && cachedBizDoctrine.isConnected) ? cachedBizDoctrine : (cachedBizDoctrine = document.getElementById("conrad-biz-doctrine"));
       var ensureBiz = (window.Conrad && window.Conrad.ensureBizTrack) || window.ensureBizTrack;
       if (isBiz) {
         if (!bizDoctrine && typeof ensureBiz === "function") {
@@ -62,7 +68,7 @@
       }
 
       // 4. About Route Sync (Walk Alone conveyor & Contact Us block)
-      var aboutTrack = document.getElementById("conrad-walkalone-track");
+      var aboutTrack = (cachedAboutTrack && cachedAboutTrack.isConnected) ? cachedAboutTrack : (cachedAboutTrack = document.getElementById("conrad-walkalone-track"));
       var ensureAbout = (window.Conrad && window.Conrad.ensureAboutTrack) || window.ensureAboutTrack;
       if (isAbout) {
         if (!aboutTrack && typeof ensureAbout === "function") {
