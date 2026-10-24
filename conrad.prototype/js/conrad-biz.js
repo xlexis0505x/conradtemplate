@@ -289,10 +289,7 @@
           <!-- APA References Section -->
           <div class="conrad-references-block" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
             <h4 style="font-size: 0.95rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">References (APA 7th Edition)</h4>
-            <div style="max-height: 180px; overflow-y: auto; font-size: 0.78rem; line-height: 1.55; color: rgba(255,255,255,0.7); display: flex; flex-direction: column; gap: 0.45rem;">
-              ${biz.references.map(function(ref) {
-                return `<div>${ref}</div>`;
-              }).join("")}
+            <div id="diligence-references-container" style="max-height: 180px; overflow-y: auto; font-size: 0.78rem; line-height: 1.55; color: rgba(255,255,255,0.7); display: flex; flex-direction: column; gap: 0.45rem;">
             </div>
           </div>
 
@@ -325,7 +322,8 @@
       economicsHTML: economicsHTML,
       factoryHTML: factoryHTML,
       roadmapHTML: roadmapHTML,
-      diligenceModalHTML: diligenceModalHTML
+      diligenceModalHTML: diligenceModalHTML,
+      references: biz.references || []
     };
   }
 
@@ -484,6 +482,16 @@
       w5.innerHTML = htmlBlocks.diligenceModalHTML;
       ctaModal = w5.firstElementChild;
       var modalOverlay = w5.lastElementChild;
+
+      var referencesContainer = w5.querySelector("#diligence-references-container");
+      if (referencesContainer && htmlBlocks.references) {
+        htmlBlocks.references.forEach(function(ref) {
+          var refDiv = document.createElement("div");
+          refDiv.textContent = ref;
+          referencesContainer.appendChild(refDiv);
+        });
+      }
+
       roadmap.parentNode.insertBefore(ctaModal, roadmap.nextSibling);
       if (!document.getElementById("conrad-diligence-modal")) {
         document.body.appendChild(modalOverlay);
