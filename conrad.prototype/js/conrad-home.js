@@ -88,6 +88,7 @@
     document.body.appendChild(modal);
 
     modal.addEventListener("click", function(e) {
+      if (e.target.closest('.bento-modal-info')) return;
       e.preventDefault();
       e.stopPropagation();
       zoomBack();

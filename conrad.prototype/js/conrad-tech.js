@@ -12,18 +12,18 @@
         <p class="conrad-section-lead">High-density physical metrics, structural tolerances, and interface protocols built to military standards with commercial manufacturing agility.</p>
         
         <div class="conrad-spec-tabs" role="tablist">
-          <button class="conrad-spec-tab active" data-filter="all">ALL</button>
-          <button class="conrad-spec-tab" data-filter="airframe">AIRFRAME</button>
-          <button class="conrad-spec-tab" data-filter="propulsion">PROPULSION</button>
-          <button class="conrad-spec-tab" data-filter="avionics">AVIONICS</button>
-          <button class="conrad-spec-tab" data-filter="materials">MATERIALS</button>
-          <button class="conrad-spec-tab" data-filter="interfaces">INTERFACES</button>
+          <button class="conrad-spec-tab active" data-filter="all" role="tab" aria-selected="true" aria-controls="panel-all">ALL</button>
+          <button class="conrad-spec-tab" data-filter="airframe" role="tab" aria-selected="false" aria-controls="panel-airframe">AIRFRAME</button>
+          <button class="conrad-spec-tab" data-filter="propulsion" role="tab" aria-selected="false" aria-controls="panel-propulsion">PROPULSION</button>
+          <button class="conrad-spec-tab" data-filter="avionics" role="tab" aria-selected="false" aria-controls="panel-avionics">AVIONICS</button>
+          <button class="conrad-spec-tab" data-filter="materials" role="tab" aria-selected="false" aria-controls="panel-materials">MATERIALS</button>
+          <button class="conrad-spec-tab" data-filter="interfaces" role="tab" aria-selected="false" aria-controls="panel-interfaces">INTERFACES</button>
         </div>
       </div>
 
       <div class="conrad-spec-preview-panel">
         <!-- Schematic Card for ALL -->
-        <div class="conrad-schematic-card active" data-schematic="all">
+        <div class="conrad-schematic-card active" data-schematic="all" id="panel-all">
           <div class="schematic-media-wrap">
             <img src="/_external/cdn.sanity.io/images/61nocsj5/production/273b69f85bec5374015642647464223b0501a17f-4000x2660.png" alt="Platform Overview CAD Blueprint" />
             <div class="schematic-badge">SYSTEM CAD // OVERVIEW</div>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <!-- Schematic Card for AIRFRAME -->
-        <div class="conrad-schematic-card" data-schematic="airframe">
+        <div class="conrad-schematic-card" data-schematic="airframe" id="panel-airframe">
           <div class="schematic-media-wrap">
             <img src="/_external/cdn.sanity.io/images/61nocsj5/production/c79ccecf787d455420edb440cbc7bf6a114cc680-882x878.png" alt="Airframe Composite Monocoque" />
             <div class="schematic-badge">STRUCTURAL CAD // MONOCOQUE</div>
@@ -45,7 +45,7 @@
           </div>
         </div>
         <!-- Schematic Card for PROPULSION -->
-        <div class="conrad-schematic-card" data-schematic="propulsion">
+        <div class="conrad-schematic-card" data-schematic="propulsion" id="panel-propulsion">
           <div class="schematic-media-wrap">
             <img src="/_external/cdn.sanity.io/images/61nocsj5/production/9ea5ae8181d48c78365c6f8d8e3f3f35208e5f55-3000x2000.jpg" alt="Turbofan Propulsion Cycle" />
             <div class="schematic-badge">THERMAL CAD // MICRO-TURBOFAN</div>
@@ -56,7 +56,7 @@
           </div>
         </div>
         <!-- Schematic Card for AVIONICS -->
-        <div class="conrad-schematic-card" data-schematic="avionics">
+        <div class="conrad-schematic-card" data-schematic="avionics" id="panel-avionics">
           <div class="schematic-media-wrap">
             <img src="/_external/cdn.sanity.io/images/61nocsj5/production/d23c6903421f10c7191873592b8e823362fecbe8-882x878.png" alt="Avionics Sensor Fusion Bay" />
             <div class="schematic-badge">SENSOR CAD // TACTICAL EDGE</div>
@@ -67,7 +67,7 @@
           </div>
         </div>
         <!-- Schematic Card for MATERIALS -->
-        <div class="conrad-schematic-card" data-schematic="materials">
+        <div class="conrad-schematic-card" data-schematic="materials" id="panel-materials">
           <div class="schematic-media-wrap">
             <img src="/_external/cdn.sanity.io/images/61nocsj5/production/a005eecc853d709de52769704c0a6cc1083ac7c4-1131x630.png" alt="Precision Composite Tooling" />
             <div class="schematic-badge">MATERIALS CAD // RADAR ABSORBENT</div>
@@ -78,7 +78,7 @@
           </div>
         </div>
         <!-- Schematic Card for INTERFACES -->
-        <div class="conrad-schematic-card" data-schematic="interfaces">
+        <div class="conrad-schematic-card" data-schematic="interfaces" id="panel-interfaces">
           <div class="schematic-media-wrap">
             <img src="/_external/cdn.sanity.io/images/61nocsj5/production/955e14dfee80e6022b1744580b6996cd435c6153-976x1952.jpg" alt="Payload Rail Interface" />
             <div class="schematic-badge">PAYLOAD CAD // NATO STD RAIL</div>
@@ -328,8 +328,12 @@
       tab.addEventListener("click", function() {
         if (tab.classList.contains("active")) return;
 
-        tabs.forEach(function(t) { t.classList.remove("active"); });
+        tabs.forEach(function(t) {
+          t.classList.remove("active");
+          t.setAttribute("aria-selected", "false");
+        });
         tab.classList.add("active");
+        tab.setAttribute("aria-selected", "true");
         var filter = tab.getAttribute("data-filter");
 
         // 1. Crossfade schematic preview cards
