@@ -45,7 +45,17 @@ class DevHandler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(DOC_ROOT), **kwargs)
 
     def end_headers(self):
-        self.send_header("Access-Control-Allow-Origin", "*")
+        origin = self.headers.get("Origin")
+        if origin:
+            try:
+                parsed = urllib.parse.urlparse(origin)
+                port = self.server.server_address[1]
+                if parsed.hostname in ("localhost", "127.0.0.1", "0.0.0.0") and parsed.port == port:
+                    self.send_header("Access-Control-Allow-Origin", origin)
+                elif parsed.hostname in ("walkal.one", "www.walkal.one") and parsed.scheme == "https":
+                    self.send_header("Access-Control-Allow-Origin", origin)
+            except Exception:
+                pass
         self.send_header("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "*")
         self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
