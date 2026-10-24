@@ -530,12 +530,21 @@ window.generateContactHTML = function(kicker, leadText) {
     }
   }
 
+  var _cachedTrack = null;
+  var _cachedSticky = null;
+  var _cachedStrip = null;
+  var _cachedNav = null;
+
   function updateWalkScroll() {
-    var track = document.getElementById("conrad-walkalone-track");
-    var sticky = document.getElementById("conrad-walkalone-sticky");
-    var strip = document.getElementById("walkalone-strip");
-    var nav = document.getElementById("walkalone-steps-nav");
-    if (!track || !sticky || !strip) return;
+    var track = _cachedTrack || (_cachedTrack = document.getElementById("conrad-walkalone-track"));
+    var sticky = _cachedSticky || (_cachedSticky = document.getElementById("conrad-walkalone-sticky"));
+    var strip = _cachedStrip || (_cachedStrip = document.getElementById("walkalone-strip"));
+    var nav = _cachedNav || (_cachedNav = document.getElementById("walkalone-steps-nav"));
+
+    if (!track || !sticky || !strip || !track.isConnected) {
+      _cachedTrack = _cachedSticky = _cachedStrip = _cachedNav = null;
+      return;
+    }
 
     var WALK_DATA = getWalkData();
     var rect = track.getBoundingClientRect();
