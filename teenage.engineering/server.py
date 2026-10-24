@@ -45,7 +45,12 @@ class DevHandler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(DOC_ROOT), **kwargs)
 
     def end_headers(self):
-        self.send_header("Access-Control-Allow-Origin", "*")
+        from urllib.parse import urlparse
+        origin = self.headers.get("Origin")
+        if origin:
+            parsed = urlparse(origin)
+            if parsed.hostname in ('localhost', '127.0.0.1', 'teenage.engineering', 'xlexis0505x.github.io'):
+                self.send_header("Access-Control-Allow-Origin", origin)
         self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
         super().end_headers()
 
@@ -53,7 +58,6 @@ class DevHandler(SimpleHTTPRequestHandler):
         # Gracefully absorb client telemetry & error logging (e.g. /_api/err)
         if self.path.startswith("/_api/"):
             self.send_response(204)
-            self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             return
         self.send_error(501, "Unsupported method")
