@@ -530,11 +530,30 @@ window.generateContactHTML = function(kicker, leadText) {
     }
   }
 
+
+  var cachedTrack = null;
+  var cachedSticky = null;
+  var cachedStrip = null;
+  var cachedNav = null;
+  var cachedCards = null;
+  var cachedLetters = null;
+  var cachedInfoItems = null;
+  var cachedStepLetters = null;
+
   function updateWalkScroll() {
-    var track = document.getElementById("conrad-walkalone-track");
-    var sticky = document.getElementById("conrad-walkalone-sticky");
-    var strip = document.getElementById("walkalone-strip");
-    var nav = document.getElementById("walkalone-steps-nav");
+    if (!cachedTrack || !cachedTrack.isConnected) {
+      cachedTrack = document.getElementById("conrad-walkalone-track");
+      cachedSticky = document.getElementById("conrad-walkalone-sticky");
+      cachedStrip = document.getElementById("walkalone-strip");
+      cachedNav = document.getElementById("walkalone-steps-nav");
+      if (cachedTrack) {
+        cachedCards = cachedTrack.querySelectorAll(".walkalone-card-item");
+        cachedLetters = cachedTrack.querySelectorAll(".walkalone-letter-item");
+        cachedInfoItems = cachedTrack.querySelectorAll(".walkalone-info-item");
+        cachedStepLetters = cachedTrack.querySelectorAll(".walkalone-step-letter");
+      }
+    }
+    var track = cachedTrack, sticky = cachedSticky, strip = cachedStrip, nav = cachedNav;
     if (!track || !sticky || !strip) return;
 
     var WALK_DATA = getWalkData();
@@ -570,8 +589,7 @@ window.generateContactHTML = function(kicker, leadText) {
       strip.style.width = stripW + "px";
       strip.style.opacity = sectionOpacity.toString();
 
-      var cards = track.querySelectorAll(".walkalone-card-item");
-      cards.forEach(function(card, idx) {
+      if (cachedCards) { cachedCards.forEach(function(card, idx) {
         var d = idx - floatIndex;
         var y = d * GAP;
         var isNearby = Math.abs(d) <= 2.8;
@@ -587,10 +605,9 @@ window.generateContactHTML = function(kicker, leadText) {
           card.style.display = "none";
           card.style.opacity = "0";
         }
-      });
+      }); }
 
-      var letters = track.querySelectorAll(".walkalone-letter-item");
-      letters.forEach(function(letterEl, idx) {
+      if (cachedLetters) { cachedLetters.forEach(function(letterEl, idx) {
         var offset = idx - floatIndex;
         if (Math.abs(offset) <= 1.4 && sectionOpacity > 0.01) {
           letterEl.style.display = "flex";
@@ -609,25 +626,23 @@ window.generateContactHTML = function(kicker, leadText) {
           letterEl.style.display = "none";
           letterEl.style.opacity = "0";
         }
-      });
+      }); }
 
-      var infoItems = track.querySelectorAll(".walkalone-info-item");
-      infoItems.forEach(function(item, idx) {
+      if (cachedInfoItems) { cachedInfoItems.forEach(function(item, idx) {
         if (idx === activeStep && sectionOpacity > 0.1) {
           item.classList.add("active");
         } else {
           item.classList.remove("active");
         }
-      });
+      }); }
 
-      var stepLetters = track.querySelectorAll(".walkalone-step-letter");
-      stepLetters.forEach(function(stepEl, idx) {
+      if (cachedStepLetters) { cachedStepLetters.forEach(function(stepEl, idx) {
         if (idx === activeStep) {
           stepEl.classList.add("active");
         } else {
           stepEl.classList.remove("active");
         }
-      });
+      }); }
 
       var isPastOrEnd = (rect.bottom <= viewportHeight + 60) || (progress >= 0.985);
       if (isPastOrEnd || isInspectOpen) {
