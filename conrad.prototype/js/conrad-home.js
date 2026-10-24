@@ -224,6 +224,37 @@
     }
   }
 
+
+  var domCache = {
+    videoSlice: undefined,
+    homeHero: undefined,
+    cards: undefined,
+    arsenalItems: undefined,
+    videoTitle: undefined,
+    videoDesc: undefined
+  };
+
+  function getCached(key, selector, isAll, parent) {
+    var root = parent || document;
+    if (domCache[key] !== undefined) {
+      var val = domCache[key];
+      if (val === null || (isAll && val.length === 0)) {
+         return val; // It was queried before and found nothing.
+      }
+      if (isAll) {
+        if (val.length > 0 && document.body.contains(val[0])) {
+          return val;
+        }
+      } else {
+        if (document.body.contains(val)) {
+          return val;
+        }
+      }
+    }
+    domCache[key] = isAll ? root.querySelectorAll(selector) : root.querySelector(selector);
+    return domCache[key];
+  }
+
   function updateHomeContent() {
     var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     var onHome = (p === "" || p === "/" || p === "/index.html");
@@ -234,8 +265,8 @@
     }
 
     // 1. Mount Stats Section right below FeaturedAnnouncementSlice or HomeHero
-    var videoSlice = document.querySelector(".FeaturedAnnouncementSlice");
-    var homeHero = document.querySelector(".HomeHero");
+    var videoSlice = getCached("videoSlice", ".FeaturedAnnouncementSlice", false);
+    var homeHero = getCached("homeHero", ".HomeHero", false);
     var anchor = videoSlice || homeHero;
     var statsEl = document.getElementById("conrad-company-stats");
 
@@ -278,12 +309,12 @@
 
     // 2. Update FeaturedAnnouncementSlice title & subtitle
     if (videoSlice) {
-      var title = videoSlice.querySelector("h2, .title");
+      var title = getCached("videoTitle", "h2, .title", false, videoSlice);
       if (title && !title.dataset.customized) {
         title.dataset.customized = "true";
         title.innerText = "Autonomous Plume Mitigation System";
       }
-      var desc = videoSlice.querySelector(".description, p");
+      var desc = getCached("videoDesc", ".description, p", false, videoSlice);
       if (desc && !desc.dataset.customized) {
         desc.dataset.customized = "true";
         desc.innerText = "In-Situ Benthic Sediment Control & Turbidity Abatement";
@@ -291,7 +322,7 @@
     }
 
     // 3. Update 7 Bento Cards text on Home
-    var cards = document.querySelectorAll(".FeaturedProductsCard");
+    var cards = getCached("cards", ".FeaturedProductsCard", true);
     var subData = getSubData();
     cards.forEach(function(card, idx) {
       if (idx < subData.length) {
@@ -317,7 +348,7 @@
     });
 
     // 4. Update 4 ArsenalSlice metric cards images on Home
-    var arsenalItems = document.querySelectorAll(".ArsenalSlice .ArsenalItem");
+    var arsenalItems = getCached("arsenalItems", ".ArsenalSlice .ArsenalItem", true);
     var arsenalImages = [
       "/assets/images/subsea/bento-01-flocculation.jpg",
       "/assets/images/subsea/bento-06-offshore-skid.jpg",
