@@ -312,7 +312,7 @@
   function attachCardListeners() {
     var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     if (p !== "" && p !== "/" && p !== "/index.html") return;
-    if (window.__dismissPrepaint) window.__dismissPrepaint();
+    if (window.Conrad = window.Conrad || {}; window.Conrad.ui = window.Conrad.ui || {}; if (window.Conrad.ui.__dismissPrepaint) window.Conrad.ui.__dismissPrepaint) window.Conrad = window.Conrad || {}; window.Conrad.ui = window.Conrad.ui || {}; if (window.Conrad.ui.__dismissPrepaint) window.Conrad.ui.__dismissPrepaint();
     ensureModalDOM();
     updateHomeContent();
 
@@ -347,7 +347,7 @@
     }
   });
 
-  setInterval(attachCardListeners, 250);
+  window.addEventListener("conrad-locationchange", attachCardListeners); window.addEventListener("conrad-routechange", attachCardListeners); window.addEventListener("popstate", attachCardListeners);
 
   if (window.Conrad && Conrad.onReady) {
     Conrad.onReady(attachCardListeners);

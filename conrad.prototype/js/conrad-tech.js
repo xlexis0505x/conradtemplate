@@ -392,11 +392,11 @@
     });
   }
 
-  window.ensureTechSections = ensureTechSections;
+  window.Conrad = window.Conrad || {}; window.Conrad.ensureTechSections = ensureTechSections;
   if (window.Conrad) window.Conrad.ensureTechSections = ensureTechSections;
 
   window.addEventListener("conrad-locationchange", ensureTechSections);
-  window.addEventListener("popstate", ensureTechSections);
+  window.addEventListener("popstate", ensureTechSections); window.addEventListener("conrad-routechange", ensureTechSections);
 
   if (document.readyState === "complete" || document.readyState === "interactive") {
     ensureTechSections();

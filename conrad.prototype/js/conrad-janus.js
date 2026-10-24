@@ -322,11 +322,11 @@
     }, { passive: true });
   }
 
-  window.ensureHomeJanus = ensureHomeJanus;
+  window.Conrad = window.Conrad || {}; window.Conrad.ensureHomeJanus = ensureHomeJanus;
   if (window.Conrad) window.Conrad.ensureHomeJanus = ensureHomeJanus;
 
   window.addEventListener("conrad-locationchange", ensureHomeJanus);
-  window.addEventListener("popstate", ensureHomeJanus);
+  window.addEventListener("popstate", ensureHomeJanus); window.addEventListener("conrad-routechange", ensureHomeJanus);
 
   if (document.readyState === "complete" || document.readyState === "interactive") {
     ensureHomeJanus();

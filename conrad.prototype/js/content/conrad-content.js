@@ -59,7 +59,7 @@ window.Conrad = window.Conrad || {};
     var params = new URLSearchParams(window.location.search);
     var q = params.get("edition") || params.get("region");
     var isCnPath = (window.location.pathname || "").toLowerCase().includes("/cn");
-    if (q || isCnPath) {
+    if (q) {
       localStorage.setItem("conrad_edition", activeEdition);
     }
   } catch (e) {}
@@ -156,11 +156,59 @@ window.Conrad = window.Conrad || {};
   Conrad.applyBrand = applyBrand;
   applyBrand();
 
-  setInterval(applyBrand, 200);
+  window.addEventListener("conrad-locationchange", applyBrand); window.addEventListener("conrad-routechange", applyBrand); window.addEventListener("popstate", applyBrand);
 
   if (window.Conrad && Conrad.onReady) {
     Conrad.onReady(applyBrand);
   } else {
     document.addEventListener("DOMContentLoaded", applyBrand);
+  }
+})();
+
+// 6. Visual Edition Switcher
+(function() {
+  function createSwitcher() {
+    if (document.getElementById('conrad-edition-switcher')) return;
+
+    var rightWrapper = document.querySelector('.right-wrapper');
+    if (!rightWrapper) {
+      setTimeout(createSwitcher, 100);
+      return;
+    }
+
+    var switcher = document.createElement('div');
+    switcher.id = 'conrad-edition-switcher';
+    switcher.className = 'edition-switcher';
+
+    var globalPill = document.createElement('div');
+    globalPill.className = 'edition-pill ' + (Conrad.isGlobal ? 'active' : '');
+    globalPill.textContent = 'GLOBAL';
+    globalPill.onclick = function() {
+      localStorage.setItem('conrad_edition', 'global');
+      window.location.search = '?edition=global';
+    };
+
+    var cnPill = document.createElement('div');
+    cnPill.className = 'edition-pill ' + (Conrad.isChina ? 'active' : '');
+    cnPill.textContent = 'CN';
+    cnPill.onclick = function() {
+      localStorage.setItem('conrad_edition', 'china');
+      window.location.search = '?edition=china';
+    };
+
+    switcher.appendChild(globalPill);
+    switcher.appendChild(cnPill);
+
+    if (rightWrapper.firstChild) {
+      rightWrapper.insertBefore(switcher, rightWrapper.firstChild);
+    } else {
+      rightWrapper.appendChild(switcher);
+    }
+  }
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    createSwitcher();
+  } else {
+    document.addEventListener('DOMContentLoaded', createSwitcher);
   }
 })();

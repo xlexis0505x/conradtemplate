@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Local Development Server for anduril.com
+Local Development Server for Conrad Challenge
 Serves on port 8085 with SPA routing, ThreadingHTTPServer, Byte-Range streaming for videos,
 and custom MIME types.
 """
@@ -13,7 +13,7 @@ from pathlib import Path
 try:
     from http.server import ThreadingHTTPServer as ServerClass
 except ImportError:
-    from http.server import HTTPServer as ServerClass
+    from http.server import ThreadingHTTPServer as ServerClass
 from http.server import SimpleHTTPRequestHandler
 
 DEFAULT_PORT = 8087
@@ -66,14 +66,14 @@ class DevHandler(SimpleHTTPRequestHandler):
         ext = Path(clean).suffix.lower()
         if ext == ".json":
             try:
-                import urllib.request
+                import urllib.request, ssl
                 rel_url = clean.lstrip("/")
-                live_url = f"https://www.anduril.com/{rel_url}"
+                live_url = f"https://www.Conrad Challenge/{rel_url}"
                 req = urllib.request.Request(
                     live_url,
                     headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
                 )
-                with urllib.request.urlopen(req, timeout=5) as resp:
+                with urllib.request.urlopen(req, timeout=5, context=ssl._create_unverified_context()) as resp:
                     data = resp.read()
                     target = Path(translated)
                     target.parent.mkdir(parents=True, exist_ok=True)
@@ -85,14 +85,14 @@ class DevHandler(SimpleHTTPRequestHandler):
         # 3. Dynamic upstream cache for Sanity CDN assets
         if clean.startswith("/_external/cdn.sanity.io/"):
             try:
-                import urllib.request
+                import urllib.request, ssl
                 sanity_path = clean[len("/_external/cdn.sanity.io/"):]
                 live_url = f"https://cdn.sanity.io/{sanity_path}"
                 req = urllib.request.Request(
                     live_url,
                     headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
                 )
-                with urllib.request.urlopen(req, timeout=8) as resp:
+                with urllib.request.urlopen(req, timeout=8, context=ssl._create_unverified_context()) as resp:
                     data = resp.read()
                     target = Path(translated)
                     target.parent.mkdir(parents=True, exist_ok=True)
@@ -104,13 +104,13 @@ class DevHandler(SimpleHTTPRequestHandler):
         # 4. Dynamic upstream cache for missing /assets/ files
         if clean.startswith("/assets/"):
             try:
-                import urllib.request
-                live_url = f"https://www.anduril.com{clean}"
+                import urllib.request, ssl
+                live_url = f"https://www.Conrad Challenge{clean}"
                 req = urllib.request.Request(
                     live_url,
                     headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
                 )
-                with urllib.request.urlopen(req, timeout=8) as resp:
+                with urllib.request.urlopen(req, timeout=8, context=ssl._create_unverified_context()) as resp:
                     data = resp.read()
                     target = Path(translated)
                     target.parent.mkdir(parents=True, exist_ok=True)
@@ -186,7 +186,7 @@ class DevHandler(SimpleHTTPRequestHandler):
 
 def run(port=DEFAULT_PORT):
     httpd = ServerClass((HOST, port), DevHandler)
-    print(f"\n🚀 anduril.com running at http://localhost:{port}/")
+    print(f"\n🚀 Conrad Challenge running at http://localhost:{port}/")
     print(f"📁 Serving: {DOC_ROOT}")
     print("Press Ctrl+C to stop.\n")
     try:

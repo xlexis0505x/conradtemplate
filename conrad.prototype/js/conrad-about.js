@@ -5,7 +5,7 @@
  */
 
 // Shared Contact & Mission HTML generator
-window.generateContactHTML = function(kicker, leadText) {
+window.Conrad = window.Conrad || {}; window.Conrad.content = window.Conrad.content || {}; window.Conrad.content.generateContactHTML = function(kicker, leadText) {
   var aboutData = (window.Conrad && Conrad.content && Conrad.content.get("about")) || {};
   var contactData = aboutData.contact || {};
   var isChina = (window.Conrad && Conrad.isChina);
@@ -277,8 +277,8 @@ window.generateContactHTML = function(kicker, leadText) {
   }
 
   function generateContact() {
-    return (typeof window.generateContactHTML === "function") 
-      ? window.generateContactHTML("02 // GET IN TOUCH") 
+    return (typeof (window.Conrad&&window.Conrad.content&&window.Conrad.content.generateContactHTML) === "function")
+      ? window.Conrad.content.generateContactHTML("02 // GET IN TOUCH")
       : "";
   }
 
@@ -658,7 +658,7 @@ window.generateContactHTML = function(kicker, leadText) {
       window.scrollTo({ top: targetScrollTop, behavior: "smooth" });
     }
   }
-  window.goToWalkStep = goToWalkStep;
+  window.Conrad = window.Conrad || {}; window.Conrad.goToWalkStep = goToWalkStep;
   if (window.Conrad) window.Conrad.goToWalkStep = goToWalkStep;
 
   var eventsBound = false;
@@ -862,10 +862,10 @@ window.generateContactHTML = function(kicker, leadText) {
     }
   }
 
-  window.ensureAboutTrack = ensureAboutTrack;
+  window.Conrad = window.Conrad || {}; window.Conrad.ensureAboutTrack = ensureAboutTrack;
   if (window.Conrad) window.Conrad.ensureAboutTrack = ensureAboutTrack;
 
-  window.addEventListener("conrad-locationchange", ensureAboutTrack);
+  window.addEventListener("conrad-locationchange", ensureAboutTrack); window.addEventListener("conrad-routechange", ensureAboutTrack); window.addEventListener("popstate", ensureAboutTrack); window.addEventListener("conrad-routechange", checkAboutRoute); window.addEventListener("conrad-locationchange", checkAboutRoute);
 
   var lastAboutRoute = null;
   function checkAboutRoute() {
@@ -879,7 +879,7 @@ window.generateContactHTML = function(kicker, leadText) {
     }
   }
   window.addEventListener("popstate", checkAboutRoute);
-  setInterval(checkAboutRoute, 150);
+  // setInterval(checkAboutRoute, 150);
 
   if (document.readyState === "complete" || document.readyState === "interactive") {
     ensureAboutTrack();

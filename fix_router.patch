@@ -1,0 +1,32 @@
+--- conrad.prototype/js/conrad-router.js.orig
++++ conrad.prototype/js/conrad-router.js
+@@ -113,16 +113,24 @@
+     }
+     return foundActive;
+   }
+
+   // 3D Modal state watcher for smooth header slide
+   function sync3DModal() {
+     var dialog = document.querySelector('.Product3DSlice dialog');
+     var isOpen = !!(dialog && (dialog.open || dialog.hasAttribute('open')));
+     if (document.body.classList.contains('modal-3d-open') !== isOpen) {
+       document.body.classList.toggle('modal-3d-open', isOpen);
+     }
+   }
+-  setInterval(sync3DModal, 50);
++
++  var observer = new MutationObserver(sync3DModal);
++  document.addEventListener("DOMContentLoaded", function() {
++    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['open'] });
++  });
++  window.sync3DModal = sync3DModal;
+
+-  window.syncAllRoutes = syncAllRoutes;
++  window.Conrad = window.Conrad || {};
++  window.Conrad.syncAllRoutes = syncAllRoutes;
++
++  var _pushState = history.pushState; history.pushState = function(state, title, url) { _pushState.apply(this, arguments); window.dispatchEvent(new Event("conrad-routechange")); }; var _replaceState = history.replaceState; history.replaceState = function(state, title, url) { _replaceState.apply(this, arguments); window.dispatchEvent(new Event("conrad-routechange")); }; window.addEventListener("conrad-routechange", syncAllRoutes);
++
++  window.addEventListener("conrad-locationchange", syncAllRoutes);
+   window.addEventListener("popstate", syncAllRoutes);
+-  setInterval(syncAllRoutes, 100);

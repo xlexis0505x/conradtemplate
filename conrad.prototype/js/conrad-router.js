@@ -113,14 +113,14 @@
       document.body.classList.toggle('modal-3d-open', isOpen);
     }
   }
-  setInterval(sync3DModal, 50);
+  var observer = new MutationObserver(sync3DModal); document.addEventListener("DOMContentLoaded", function() { observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["open"] }); }); window.sync3DModal = sync3DModal;
 
-  window.syncAllRoutes = syncAllRoutes;
+  window.Conrad = window.Conrad || {}; window.Conrad.syncAllRoutes = syncAllRoutes;
   if (window.Conrad) window.Conrad.syncAllRoutes = syncAllRoutes;
 
-  window.addEventListener("conrad-locationchange", syncAllRoutes);
+  var _pushState = history.pushState; history.pushState = function(state, title, url) { _pushState.apply(this, arguments); window.dispatchEvent(new Event("conrad-routechange")); }; var _replaceState = history.replaceState; history.replaceState = function(state, title, url) { _replaceState.apply(this, arguments); window.dispatchEvent(new Event("conrad-routechange")); }; window.addEventListener("conrad-locationchange", syncAllRoutes);
   window.addEventListener("popstate", syncAllRoutes);
-  setInterval(syncAllRoutes, 100);
+  window.addEventListener("conrad-routechange", syncAllRoutes);
 
   if (window.Conrad && Conrad.onReady) {
     Conrad.onReady(syncAllRoutes);

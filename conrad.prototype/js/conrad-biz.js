@@ -543,11 +543,11 @@
     }
   }
 
-  window.ensureBizTrack = ensureBizTrack;
+  window.Conrad = window.Conrad || {}; window.Conrad.ensureBizTrack = ensureBizTrack;
   if (window.Conrad) window.Conrad.ensureBizTrack = ensureBizTrack;
 
   window.addEventListener("conrad-locationchange", ensureBizTrack);
-  window.addEventListener("popstate", ensureBizTrack);
+  window.addEventListener("popstate", ensureBizTrack); window.addEventListener("conrad-routechange", ensureBizTrack); window.addEventListener("conrad-routechange", checkBizRoute); window.addEventListener("popstate", checkBizRoute); window.addEventListener("conrad-locationchange", checkBizRoute);
 
   var lastBizRoute = null;
   function checkBizRoute() {
@@ -561,7 +561,7 @@
       ensureBizTrack();
     }
   }
-  setInterval(checkBizRoute, 150);
+  // setInterval(checkBizRoute, 150);
 
   if (document.readyState === "complete" || document.readyState === "interactive") {
     ensureBizTrack();
