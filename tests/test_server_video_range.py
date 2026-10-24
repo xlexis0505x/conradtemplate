@@ -6,11 +6,11 @@ import importlib.util
 from pathlib import Path
 import pytest
 
-server_path = Path(__file__).resolve().parent.parent / "anduril.com" / "server.py"
-spec = importlib.util.spec_from_file_location("anduril_server", server_path)
-anduril_server = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(anduril_server)
-DevHandler = anduril_server.DevHandler
+server_path = Path(__file__).resolve().parent.parent / "conrad.prototype" / "server.py"
+spec = importlib.util.spec_from_file_location("conrad_server", server_path)
+conrad_server = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(conrad_server)
+DevHandler = conrad_server.DevHandler
 
 def test_invalid_range_header():
     server = HTTPServer(('127.0.0.1', 0), DevHandler)
