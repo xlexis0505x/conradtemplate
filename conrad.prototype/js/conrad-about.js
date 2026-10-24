@@ -570,7 +570,7 @@ window.generateContactHTML = function(kicker, leadText) {
       strip.style.width = stripW + "px";
       strip.style.opacity = sectionOpacity.toString();
 
-      var cards = track.querySelectorAll(".walkalone-card-item");
+      var cards = track._cachedCards || (track._cachedCards = track.querySelectorAll(".walkalone-card-item"));
       cards.forEach(function(card, idx) {
         var d = idx - floatIndex;
         var y = d * GAP;
@@ -589,7 +589,7 @@ window.generateContactHTML = function(kicker, leadText) {
         }
       });
 
-      var letters = track.querySelectorAll(".walkalone-letter-item");
+      var letters = track._cachedLetters || (track._cachedLetters = track.querySelectorAll(".walkalone-letter-item"));
       letters.forEach(function(letterEl, idx) {
         var offset = idx - floatIndex;
         if (Math.abs(offset) <= 1.4 && sectionOpacity > 0.01) {
@@ -611,7 +611,7 @@ window.generateContactHTML = function(kicker, leadText) {
         }
       });
 
-      var infoItems = track.querySelectorAll(".walkalone-info-item");
+      var infoItems = track._cachedInfo || (track._cachedInfo = track.querySelectorAll(".walkalone-info-item"));
       infoItems.forEach(function(item, idx) {
         if (idx === activeStep && sectionOpacity > 0.1) {
           item.classList.add("active");
@@ -620,7 +620,7 @@ window.generateContactHTML = function(kicker, leadText) {
         }
       });
 
-      var stepLetters = track.querySelectorAll(".walkalone-step-letter");
+      var stepLetters = track._cachedSteps || (track._cachedSteps = track.querySelectorAll(".walkalone-step-letter"));
       stepLetters.forEach(function(stepEl, idx) {
         if (idx === activeStep) {
           stepEl.classList.add("active");
