@@ -33,7 +33,7 @@ def test_bento_card_modal_open_and_close(page, base_url):
 
 @pytest.mark.interactive
 def test_janus_3d_lazy_loading(page, base_url):
-    """Verifies that the 3D Radiant Janus scene canvas initializes when scrolled into view."""
+    """Verifies that the 3D Radiant Janus scene canvas initializes and loads assets when scrolled into view."""
     page.goto(f"{base_url}/", wait_until="domcontentloaded")
     page.wait_for_selector("#Stage", timeout=10000)
 
@@ -47,7 +47,7 @@ def test_janus_3d_lazy_loading(page, base_url):
 
     # Scroll the 3D track into view to trigger IntersectionObserver lazy-loading
     track.scroll_into_view_if_needed()
-    page.wait_for_timeout(1000)
+    page.wait_for_timeout(2000)
 
     # Verify canvas element is created and attached
     canvas = page.locator("#janus-canvas")
@@ -56,6 +56,33 @@ def test_janus_3d_lazy_loading(page, base_url):
     width = canvas.evaluate("(el) => el.clientWidth || el.width")
     height = canvas.evaluate("(el) => el.clientHeight || el.height")
     assert width > 0 and height > 0, f"Janus canvas must have non-zero dimensions, got {width}x{height}"
+
+    # Verify that the 3D model assets actually loaded (not caught in error fallback)
+    failed_janus_assets = [
+        msg["text"] for msg in page.console_messages
+        if "[janus]" in msg["text"] and "failed to load" in msg["text"]
+    ]
+    assert len(failed_janus_assets) == 0, f"Janus 3D engine failed to load assets: {failed_janus_assets}"
+
+
+@pytest.mark.interactive
+def test_tech_3d_model_interactive(page, base_url):
+    """Verifies that the 3D model on /technology loads, dismisses the loading overlay, and mounts the 3D scene."""
+    page.goto(f"{base_url}/technology", wait_until="domcontentloaded")
+    page.wait_for_selector(".Product3DSlice", timeout=12000)
+
+    slice_el = page.locator(".Product3DSlice")
+    slice_el.scroll_into_view_if_needed()
+
+    # Wait for the loader overlay to dismiss (opacity 0 / display none)
+    page.wait_for_function(
+        "() => { const l = document.querySelector('.Product3DSlice .glOverlay'); return !l || l.style.display === 'none' || l.style.opacity === '0'; }",
+        timeout=12000
+    )
+
+    # Verify the Launch Interactive View CTA is available
+    cta = page.locator(".Product3DSlice button:has-text('Launch Interactive View'), .Product3DSlice .cta").first
+    assert cta.is_visible(), "Launch Interactive View CTA should be visible once 3D assets are ready"
 
 
 @pytest.mark.interactive
