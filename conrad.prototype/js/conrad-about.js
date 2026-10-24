@@ -841,6 +841,7 @@ window.generateContactHTML = function(kicker, leadText) {
       div.style.height = (WALK_DATA.length * 68) + "vh";
       div.innerHTML = generateWalkHTML();
       hero.parentNode.insertBefore(div, hero.nextSibling);
+      track = div;
 
       var nextBtn = hero.querySelector(".scrollToNext");
       if (nextBtn && !nextBtn._walkBound) {
@@ -868,20 +869,19 @@ window.generateContactHTML = function(kicker, leadText) {
       hero.parentNode.insertBefore(track, hero.nextSibling);
     }
 
-    var currentTrack = document.getElementById("conrad-walkalone-track");
-    if (currentTrack) {
+    if (track) {
       if (!contact || needsRebuild) {
         if (contact) contact.remove();
         var contactSec = document.createElement("section");
         contactSec.id = "conrad-contact-block";
         contactSec.className = "conrad-contact-section";
         contactSec.innerHTML = generateContact();
-        currentTrack.parentNode.insertBefore(contactSec, currentTrack.nextSibling);
+        track.parentNode.insertBefore(contactSec, track.nextSibling);
         if (window.Global && Global.lenis) {
           Global.lenis.resize();
         }
-      } else if (currentTrack.nextSibling !== contact) {
-        currentTrack.parentNode.insertBefore(contact, currentTrack.nextSibling);
+      } else if (track.nextSibling !== contact) {
+        track.parentNode.insertBefore(contact, track.nextSibling);
       }
     }
   }
