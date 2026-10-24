@@ -224,6 +224,22 @@
     }
   }
 
+  var cachedDOM = null;
+  function getCachedDOM() {
+    if (cachedDOM === null) {
+      var videoSlice = document.querySelector(".FeaturedAnnouncementSlice");
+      cachedDOM = {
+        videoSlice: videoSlice,
+        homeHero: document.querySelector(".HomeHero"),
+        title: videoSlice ? videoSlice.querySelector("h2, .title") : null,
+        desc: videoSlice ? videoSlice.querySelector(".description, p") : null,
+        cards: document.querySelectorAll(".FeaturedProductsCard"),
+        arsenalItems: document.querySelectorAll(".ArsenalSlice .ArsenalItem")
+      };
+    }
+    return cachedDOM;
+  }
+
   function updateHomeContent() {
     var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     var onHome = (p === "" || p === "/" || p === "/index.html");
@@ -233,9 +249,11 @@
       return;
     }
 
+    var dom = getCachedDOM();
+
     // 1. Mount Stats Section right below FeaturedAnnouncementSlice or HomeHero
-    var videoSlice = document.querySelector(".FeaturedAnnouncementSlice");
-    var homeHero = document.querySelector(".HomeHero");
+    var videoSlice = dom.videoSlice;
+    var homeHero = dom.homeHero;
     var anchor = videoSlice || homeHero;
     var statsEl = document.getElementById("conrad-company-stats");
 
@@ -278,12 +296,12 @@
 
     // 2. Update FeaturedAnnouncementSlice title & subtitle
     if (videoSlice) {
-      var title = videoSlice.querySelector("h2, .title");
+      var title = dom.title;
       if (title && !title.dataset.customized) {
         title.dataset.customized = "true";
         title.innerText = "Autonomous Plume Mitigation System";
       }
-      var desc = videoSlice.querySelector(".description, p");
+      var desc = dom.desc;
       if (desc && !desc.dataset.customized) {
         desc.dataset.customized = "true";
         desc.innerText = "In-Situ Benthic Sediment Control & Turbidity Abatement";
@@ -291,7 +309,7 @@
     }
 
     // 3. Update 7 Bento Cards text on Home
-    var cards = document.querySelectorAll(".FeaturedProductsCard");
+    var cards = dom.cards;
     var subData = getSubData();
     cards.forEach(function(card, idx) {
       if (idx < subData.length) {
@@ -317,7 +335,7 @@
     });
 
     // 4. Update 4 ArsenalSlice metric cards images on Home
-    var arsenalItems = document.querySelectorAll(".ArsenalSlice .ArsenalItem");
+    var arsenalItems = dom.arsenalItems;
     var arsenalImages = [
       "/assets/images/subsea/bento-01-flocculation.jpg",
       "/assets/images/subsea/bento-06-offshore-skid.jpg",
