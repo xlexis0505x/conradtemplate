@@ -368,11 +368,11 @@ function qualifyUrl(url) {
       setTimeout(dismissPrepaint, 150);
     }
   }, 40);
-  // Fail-safe timeout increased to 8000ms so users on slower CDN edges see the prepaint hero instead of a black screen
+  // Fail-safe timeout of 60s so users on slower mobile/CDN edges never see a premature black screen
   setTimeout(function() {
     clearInterval(checkTimer);
     dismissPrepaint();
-  }, 8000);
+  }, 60000);
 })();
 </script>
 <noscript>
