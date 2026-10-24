@@ -8,25 +8,30 @@
   - **Technology**: Engineering specs and comparative benchmarks
   - **Business**: Commercial model, value proposition & ROI, and deployment strategy
   - **About Us**: Mission, about team, contact directory
-- **Theme**: TBD, darker to reflect deep ocean
+- **Theme**: Darker theme reflecting the deep ocean.
 
 ---
 
 ## Structure & Content
 
 ### Home
-- Concise overview highlighting the system’s primary strengths and innovations
+- Concise overview highlighting the system’s primary strengths and innovations.
+- Interactive 3D Hardware Model: Real-time orbit controls, exploded view scrubber, and "TAKE CONTROL" inspection mode.
 
 ### Technology
-- Ideally add a 3D interactive showcase of how product works. Since it’s a chemical solution and not a larger physical prototype (or a dispenser unit), explore viability (e.g. dispersion visualization or dispenser model).
-- Subsystems (if applicable) can be characterized, and numerical metrics covering operational limits, dimensions, etc. can be displayed.
-- Comparison against existing legacy solutions across operational efficacy, time till effect, effective duration, reliability, and modularity (if applicable).
+- Interactive 3D dissection scrubber.
+- Technical specification matrix.
+- Hydrodynamic acoustic mitigation breakdown.
 
 ### Business
-- Clear explanation of the product value proposition and commercial philosophy from a buyer's perspective.
-- Show commercial procurement models, production scaling & delivery capacity, and deployment integration frameworks (excluding internal manufacturing costs and BOM).
+- Defense-grade unit economics table.
+- Financial scaling model.
+- Factory footprint cards.
+- Roadmap milestones.
+- Interactive diligence data-room modal.
 
 ### About Us
-- Contact card for core partnerships, general inquiries, technical integration, etc.
-- Distinct routes for technical integration, media inquiries, and recruitment/team participation.
-- Mission statement / business philosophy, what company name stands for.
+- Narrative scroll showcase.
+- Walkalone horizontal conveyor mechanics.
+- Leadership & doctrine cards.
+- Contact block.
