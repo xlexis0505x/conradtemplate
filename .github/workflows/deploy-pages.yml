@@ -95,7 +95,7 @@ jobs:
                     for f in filenames:
                       if f.endswith('.mp4') and f not in active_videos:
                         ignored.add(f)
-                  if 'images' in dir_path:
+                  if dir_path.endswith('production'):
                     for f in filenames:
                       if f not in active_images:
                         ignored.add(f)
