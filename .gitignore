@@ -31,3 +31,11 @@ env/
 # Dependencies & Generated Artifacts
 node_modules/
 .system_generated/
+
+# Additional ignores
+.pytest_cache/
+_site/
+.agents/teamwork/
+test-artifacts/
+conrad website info/
+.DS_Store

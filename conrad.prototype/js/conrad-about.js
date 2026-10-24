@@ -93,8 +93,6 @@ window.generateContactHTML = function(kicker, leadText) {
             <span class="conrad-socials-label">NETWORK</span>
             <div class="conrad-socials-links">
               <a href="mailto:${email}" class="conrad-social-link">EMAIL DIRECT &nearr;</a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="conrad-social-link">LINKEDIN &nearr;</a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="conrad-social-link">X / TWITTER &nearr;</a>
             </div>
           </div>
           <div class="conrad-facilities-group">
