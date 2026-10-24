@@ -5,46 +5,46 @@
 (function() {
   var DEFAULT_SUB_DATA = [
     {
-      title: "01 // Propulsion Core",
-      subtitle: "High-Throughput Thermodynamic Cycle & Integrated Powertrain",
-      desc: "Engineered for maximum reliability and responsive thrust modulation in contested flight profiles, eliminating single-point mechanical valves in favor of software-governed electromagnetic pintle actuation.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/9ea5ae8181d48c78365c6f8d8e3f3f35208e5f55-3000x2000.jpg"
+      title: "01 // Eco-Flocculation Chemistry",
+      subtitle: "High-Efficiency Bio-Compatible Aggregate Binding",
+      desc: "Proprietary non-toxic natural biopolymer designed to agglomerate sub-micron abyssal sediment particles into heavy macro-flocs, increasing settling velocity by over an order of magnitude.",
+      image: "/assets/images/subsea/bento-01-flocculation.jpg"
     },
     {
-      title: "02 // Autonomous Guidance",
-      subtitle: "Real-Time Sensor Fusion & Edge Tactical Processing",
-      desc: "Fully autonomous navigation and edge computing architecture operating independently of GPS, fusing optical, thermal, and inertial streams to calculate dynamic evasion vectors in real time.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/d23c6903421f10c7191873592b8e823362fecbe8-882x878.png"
+      title: "02 // Subsea Active Dispenser Manifold",
+      subtitle: "6,000-Meter Depth-Rated Injection Architecture",
+      desc: "Autonomous benthic manifold skid mounted directly to mining collector discharge chutes, delivering closed-loop micro-dosed chemical dispersion under 600 bar hydrostatic pressure.",
+      image: "/assets/images/subsea/bento-02-manifold.jpg"
     },
     {
-      title: "03 // Composite Airframe",
-      subtitle: "Advanced Lightweight Metallurgy & Aerodynamic Envelope",
-      desc: "Monocoque carbon-fiber composite architecture designed for high dynamic pressures and thermal gradients encountered during rapid supersonic transition and terminal maneuvering.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/c79ccecf787d455420edb440cbc7bf6a114cc680-882x878.png"
+      title: "03 // Acoustic & Turbidity Sensing",
+      subtitle: "Real-Time Sensor Fusion & Edge Hydrodynamic Processing",
+      desc: "Integrated dual 600 kHz Acoustic Doppler Current Profilers (ADCP) and 850nm optical backscatter sensors providing closed-loop environmental feedback to modulate dosing.",
+      image: "/assets/images/subsea/bento-03-adcp.jpg"
     },
     {
-      title: "04 // Modular Payload Bay",
-      subtitle: "Rapid Turnaround & Standard Mechanical Interface",
-      desc: "Software-defined reconfigurable architecture supporting kinetic, electronic warfare, and sensor packages with automated interface handshake and sub-90-second mechanical swap times.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/955e14dfee80e6022b1744580b6996cd435c6153-976x1952.jpg"
+      title: "04 // Plume Dispersion Digital Twin",
+      subtitle: "Predictive Numerical Modeling & Ocean Current Calibration",
+      desc: "Real-time spatial plume migration simulation calibrated against abyssal benthic currents, predicting settling footprints and preventing transboundary particle drift.",
+      image: "/assets/images/subsea/bento-04-digital-twin.jpg"
     },
     {
-      title: "05 // Swarm & Mesh Network",
-      subtitle: "Resilient Distributed Telemetry Across Operating Theaters",
-      desc: "Decentralized ad-hoc directional communication protocol immune to single-node degradation, enabling autonomous consensus and distributed cooperative mission execution.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/35c91ba3a0603c99720933d52bad4c73f9fdca5f-3000x1500.jpg"
+      title: "05 // G09 & ISA Regulatory Compliance",
+      subtitle: "Automated Environmental Management & Monitoring Telemetry",
+      desc: "Real-time compliance data stream designed to satisfy Cook Islands SBMA G09 standards and International Seabed Authority (ISA) benthic discharge monitoring regulations.",
+      image: "/assets/images/subsea/bento-05-telemetry.jpg"
     },
     {
-      title: "06 // Expeditionary Logistics",
-      subtitle: "Zero Specialized Ground Infrastructure Required",
-      desc: "Austere-field deployment capability containerized in standard military pallet footprints, enabling launch and operation without specialized runways or depot tooling.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/16113e3a588bd30e5c67bf2ee6d7a0847845fb28-3000x3000.jpg"
+      title: "06 // Modular Offshore Skid",
+      subtitle: "Containerized Research Vessel & Mining Barge Integration",
+      desc: "Standardized subsea modular footprint compatible with commercial nodule collector trials and environmental survey vessels without requiring bespoke deck reconstructions.",
+      image: "/assets/images/subsea/bento-06-offshore-skid.jpg"
     },
     {
-      title: "07 // Sovereign Tooling",
-      subtitle: "Software-Defined Precision Assembly & Mass Production",
-      desc: "Arsenal-scale automated manufacturing workcells guided by digital twin simulations, delivering rapid aerospace-grade serial production at a fraction of traditional lead times.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/a005eecc853d709de52769704c0a6cc1083ac7c4-1131x630.png"
+      title: "07 // 600-Bar Pressure Vessel & Valving",
+      subtitle: "Titanium Subsea Valving & Zero-Failure Solenoid Actuation",
+      desc: "Deep-ocean pressure-balanced electromagnetic valves eliminating mechanical pinch points, delivering uninterrupted operation under abyssal temperature and salinity extremes.",
+      image: "/assets/images/subsea/bento-07-pressure-vessel.jpg"
     }
   ];
 
@@ -111,6 +111,9 @@
 
     var cardImg = card.querySelector("img");
     var imgSrc = (cardImg && (cardImg.currentSrc || cardImg.src)) || data.image;
+    if (typeof window.qualifyUrl === "function" && imgSrc) {
+      imgSrc = window.qualifyUrl(imgSrc);
+    }
 
     imgEl.src = imgSrc;
     titleEl.textContent = data.title;
@@ -304,6 +307,29 @@
         }
         if (descHidden && descHidden.innerText !== data.subtitle) {
           descHidden.innerText = data.subtitle;
+        }
+        var imgEl = card.querySelector("img");
+        if (imgEl && data.image && !imgEl.src.endsWith(data.image)) {
+          imgEl.src = data.image;
+          imgEl.removeAttribute("srcset");
+        }
+      }
+    });
+
+    // 4. Update 4 ArsenalSlice metric cards images on Home
+    var arsenalItems = document.querySelectorAll(".ArsenalSlice .ArsenalItem");
+    var arsenalImages = [
+      "/assets/images/subsea/bento-01-flocculation.jpg",
+      "/assets/images/subsea/bento-06-offshore-skid.jpg",
+      "/assets/images/subsea/bento-02-manifold.jpg",
+      "/assets/images/subsea/bento-05-telemetry.jpg"
+    ];
+    arsenalItems.forEach(function(item, idx) {
+      if (idx < arsenalImages.length) {
+        var img = item.querySelector("img");
+        if (img && (!img.src || !img.src.includes(arsenalImages[idx]))) {
+          img.src = arsenalImages[idx];
+          img.removeAttribute("srcset");
         }
       }
     });

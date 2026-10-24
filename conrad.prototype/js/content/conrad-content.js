@@ -104,9 +104,10 @@ window.Conrad = window.Conrad || {};
     get: function(path, defaultValue) {
       var globalDict = window.Conrad.CONTENT_GLOBAL || {};
       var chinaDict = window.Conrad.CONTENT_CHINA || {};
+      var isCn = (Conrad.edition === "china");
 
       var globalVal = deepGet(globalDict, path);
-      if (activeEdition === "china") {
+      if (isCn) {
         var chinaVal = deepGet(chinaDict, path);
         if (chinaVal !== undefined && chinaVal !== null) {
           if (typeof chinaVal === "object" && !Array.isArray(chinaVal) &&
@@ -125,38 +126,132 @@ window.Conrad = window.Conrad || {};
     getAll: function() {
       var globalDict = window.Conrad.CONTENT_GLOBAL || {};
       var chinaDict = window.Conrad.CONTENT_CHINA || {};
-      return deepMerge(globalDict, (activeEdition === "china") ? chinaDict : {});
+      return deepMerge(globalDict, (Conrad.edition === "china") ? chinaDict : {});
     }
   };
 
   // Synchronize company brand name in top-left header & document title
   function applyBrand() {
-    var companyName = Conrad.content.get("companyName", activeEdition === "china" ? "Poseidon" : "DrunkEast");
+    var isCn = (Conrad.edition === "china");
+    var companyName = Conrad.content.get("companyName", isCn ? "Poseidon" : "DrunkEast");
     var metaTitle = Conrad.content.get("metaTitle");
 
     if (metaTitle && (!document.title || document.title.includes("Anduril") || !document.title.includes(companyName))) {
       document.title = metaTitle;
     }
 
-    var homeLinks = document.querySelectorAll(".left-wrapper .home");
+    var rawEmblem = isCn ? "/assets/images/brand/poseidon-trident.png" : "/assets/images/brand/drunkeast-swirl.png";
+    var emblemSrc = (typeof window.qualifyUrl === "function") ? window.qualifyUrl(rawEmblem) : rawEmblem;
+
+    var homeLinks = document.querySelectorAll(".left-wrapper .home, .HeaderDesktop .home, .HeaderMobile .home, .top-nav .home, .nav-bg .home, a.home");
     homeLinks.forEach(function(link) {
-      if (link.getAttribute("data-branded") !== companyName) {
+      var lockup = link.querySelector(".conrad-brand-lockup");
+      var currentBrand = link.getAttribute("data-branded");
+      if (!lockup || currentBrand !== companyName) {
         link.setAttribute("data-branded", companyName);
         link.setAttribute("aria-label", companyName + " Homepage");
-        link.innerHTML = '<div class="conrad-brand-lockup">' +
-          '<svg class="conrad-brand-emblem" viewBox="0 0 20 20" fill="currentColor">' +
-            '<path d="' + EMBLEM_SVG_PATH + '" fill="#ffffff"></path>' +
-          '</svg>' +
-          '<span class="conrad-brand-name">' + companyName + '</span>' +
+        link.innerHTML = '<div class="conrad-brand-lockup" style="display:inline-flex!important;align-items:center!important;gap:8px!important;opacity:1!important;visibility:visible!important;">' +
+          '<img class="conrad-brand-emblem" src="' + emblemSrc + '" alt="' + companyName + ' Logo" style="height:24px!important;width:auto!important;max-width:32px!important;object-fit:contain!important;display:inline-block!important;opacity:1!important;visibility:visible!important;" />' +
+          '<span class="conrad-brand-name" style="font-size:1.15rem!important;font-weight:700!important;letter-spacing:0.04em!important;text-transform:uppercase!important;color:#ffffff!important;line-height:1!important;display:inline-block!important;opacity:1!important;visibility:visible!important;">' + companyName + '</span>' +
         '</div>';
       }
     });
   }
 
+  function cleanUiArtifacts() {
+    // 1. Remove Search link / button
+    var searchLinks = document.querySelectorAll(".searchLink, .search-button, .SearchDomainWrapper, .Header [aria-label*='Search' i]");
+    searchLinks.forEach(function(el) {
+      el.style.setProperty("display", "none", "important");
+      el.style.setProperty("visibility", "hidden", "important");
+      el.style.setProperty("opacity", "0", "important");
+      el.style.setProperty("pointer-events", "none", "important");
+    });
+
+    // 2. Remove Anduril logo in Footer
+    var footerLogos = document.querySelectorAll(".Footer .logo, .Footer svg[aria-label*='Anduril' i]");
+    footerLogos.forEach(function(el) {
+      el.style.setProperty("display", "none", "important");
+      el.style.setProperty("visibility", "hidden", "important");
+    });
+
+    // 3. Remove terms of service, anti-slavery, and other filler links below copyright
+    var fillerLinks = document.querySelectorAll(
+      ".Footer .small-links a[href*='terms-of-use'], " +
+      ".Footer .small-links a[href*='modern-anti-slavery'], " +
+      ".Footer .small-links a[href*='investor-relations'], " +
+      ".Footer .small-links a[href*='supplier-relations'], " +
+      ".Footer .small-links a[href*='uk-carbon-reduction'], " +
+      ".FooterListSmallLink[data-path='terms-of-use'], " +
+      ".FooterListSmallLink[data-path='modern-anti-slavery-policy'], " +
+      ".FooterListSmallLink[data-path='investor-relations'], " +
+      ".FooterListSmallLink[data-path='supplier-relations'], " +
+      ".FooterListSmallLink[data-path='uk-carbon-reduction-plan'], " +
+      ".FooterListSmallLink[data-path='privacy-policy']"
+    );
+    fillerLinks.forEach(function(el) {
+      el.remove();
+    });
+
+    var copyright = document.querySelector(".Footer .copyright");
+    if (copyright) {
+      var brandName = (Conrad && Conrad.isChina) ? "POSEIDON" : "DRUNKEAST";
+      copyright.textContent = "COPYRIGHT © 2026 " + brandName;
+    }
+
+    // 4. Handle 404 / 400 error page background animation
+    var fourOhFour = document.querySelector(".FourOhFourSlice");
+    var canvas = document.querySelector(".Container > canvas");
+    if (fourOhFour) {
+      document.body.classList.add("has-404");
+      fourOhFour.style.setProperty("background-image", "linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.7)), url('/assets/images/subsea/error-404-subsea-bg.jpg')", "important");
+      fourOhFour.style.setProperty("background-size", "cover", "important");
+      fourOhFour.style.setProperty("background-position", "center", "important");
+      fourOhFour.style.setProperty("background-repeat", "no-repeat", "important");
+      fourOhFour.style.setProperty("background-attachment", "fixed", "important");
+      if (canvas) {
+        canvas.style.setProperty("display", "none", "important");
+        canvas.style.setProperty("opacity", "0", "important");
+      }
+    } else {
+      if (document.body.classList.contains("has-404")) {
+        document.body.classList.remove("has-404");
+        if (canvas) {
+          canvas.style.removeProperty("display");
+          canvas.style.removeProperty("opacity");
+        }
+      }
+    }
+  }
+
+  function syncEdition() {
+    var resolved = resolveEdition();
+    if (resolved !== Conrad.edition) {
+      Conrad.edition = resolved;
+      Conrad.isChina = (resolved === "china");
+      Conrad.isGlobal = (resolved === "global");
+      if (Conrad.content) Conrad.content.edition = resolved;
+      try {
+        localStorage.setItem("conrad_edition", resolved);
+      } catch (e) {}
+      applyBrand();
+      cleanUiArtifacts();
+      if (window.syncAllRoutes) window.syncAllRoutes();
+    } else {
+      applyBrand();
+      cleanUiArtifacts();
+    }
+    return resolved;
+  }
+
+  Conrad.resolveEdition = resolveEdition;
+  Conrad.syncEdition = syncEdition;
   Conrad.applyBrand = applyBrand;
   applyBrand();
 
-  setInterval(applyBrand, 200);
+  window.addEventListener("conrad-locationchange", syncEdition);
+  window.addEventListener("popstate", syncEdition);
+  setInterval(syncEdition, 100);
 
   if (window.Conrad && Conrad.onReady) {
     Conrad.onReady(applyBrand);

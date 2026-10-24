@@ -43,7 +43,7 @@
               "_key": "7c9c3d84e24a",
               "_type": "span",
               "marks": [],
-              "text": "COMMERCIAL DEFENSE DOCTRINE"
+              "text": "PACIFIC & GLOBAL SEABED CONCESSIONS"
             }
           ],
           "markDefs": [],
@@ -57,7 +57,7 @@
               "_key": "7c9c3d84e24a",
               "_type": "span",
               "marks": [],
-              "text": "HYPERSCALE PRODUCTION & CAPITAL EFFICIENCY"
+              "text": "IN-SITU PLUME MITIGATION & SEABED LICENSING"
             }
           ],
           "markDefs": [],
@@ -71,7 +71,7 @@
               "_key": "7c9c3d84e24a",
               "_type": "span",
               "marks": [],
-              "text": "[SCALE // DEFENSE DOCTRINE]"
+              "text": "[COMMERCIAL LICENSING ROADMAP]"
             }
           ],
           "markDefs": [],
@@ -189,7 +189,7 @@
           }
         }
       ],
-      "title": "Arsenal & Scale"
+      "title": "Commercial Strategy & Scale"
     },
     {
       "_key": "ccd99a7c498d",
@@ -221,7 +221,7 @@
               "_key": "df3e92942f91",
               "_type": "span",
               "marks": [],
-              "text": "The Commercial Defense Model"
+              "text": "The Commercial Licensing Model"
             }
           ],
           "markDefs": [],
@@ -237,7 +237,7 @@
               "_key": "9c3ecfcedc19",
               "_type": "span",
               "marks": [],
-              "text": "Advanced Defense Capabilities. Delivered at Fixed-Price Scale."
+              "text": "Unlocking the Environmental License to Operate"
             }
           ],
           "markDefs": [],
@@ -251,91 +251,11 @@
               "_key": "377f5d3c029d",
               "_type": "span",
               "marks": [],
-              "text": "The traditional defense acquisition system is structurally broken: cost-plus contracting incentivizes multi-decade delays and exponential cost overruns. Conrad inverts this paradigm through private capital R&D, commercial off-the-shelf automotive and aerospace supply chains, and fixed-price defense deliveries."
+              "text": "Autonomous In-Situ Sediment Control for Seabed Mining Concessions. Turning environmental compliance into a permitted, bankable commercial asset across the Cook Islands and International Seabed Authority concessions."
             }
           ],
           "markDefs": [],
           "style": "normal"
-        },
-        {
-          "_key": "b55cb9bd6c01",
-          "_type": "block",
-          "children": [
-            {
-              "_key": "5ffd4792df4e",
-              "_type": "span",
-              "marks": [],
-              "text": "We need orders of magnitude more weapons. This requires a new product, and we are making an even larger investment to deliver it. This product is not a weapon itself, but a maker of weapons. We call it Arsenal."
-            }
-          ],
-          "markDefs": [],
-          "style": "normal"
-        },
-        {
-          "_key": "2babaf7bc6d0",
-          "_type": "block",
-          "children": [
-            {
-              "_key": "6abd51f73934",
-              "_type": "span",
-              "marks": [],
-              "text": ""
-            }
-          ],
-          "markDefs": [],
-          "style": "normal"
-        },
-        {
-          "_key": "792b55437015",
-          "_type": "internalLinkButton",
-          "internalLink": {
-            "_type": "internalLink",
-            "reference": {
-              "_id": "fb6bc49e-5988-46e6-ae9d-501e30ca0db3",
-              "_type": "page",
-              "language": null,
-              "parent": {
-                "_id": "764c8f3e-6104-4a7e-be94-59adc647c513",
-                "parent": null,
-                "slug": {
-                  "_type": "slug",
-                  "current": "arsenal"
-                }
-              },
-              "slug": {
-                "_type": "slug",
-                "current": "arsenal-1"
-              },
-              "title": "Arsenal-1"
-            }
-          },
-          "text": "Arsenal-1"
-        },
-        {
-          "_key": "9bb3c12f0231",
-          "_type": "internalLinkButton",
-          "internalLink": {
-            "_type": "internalLink",
-            "reference": {
-              "_id": "3dbedbc5-dc42-4792-a7b1-afb99f3a234e",
-              "_type": "page",
-              "language": null,
-              "parent": {
-                "_id": "764c8f3e-6104-4a7e-be94-59adc647c513",
-                "parent": null,
-                "slug": {
-                  "_type": "slug",
-                  "current": "arsenal"
-                }
-              },
-              "slug": {
-                "_type": "slug",
-                "current": "arsenalos"
-              },
-              "title": "ArsenalOS\u2122"
-            }
-          },
-          "text": "ArsenalOS\u2122"
         }
       ],
       "columnRatio": "ratio-6-6",
@@ -366,7 +286,7 @@
   "title": "Business",
   "path": "business",
   "meta": {
-    "title": "Commercial Defense Doctrine | Business",
-    "description": "Rebuilding the defense industrial base through software-first hardware, commercial supply chains, and private capital efficiency."
+    "title": "Commercial Strategy & Concession Pipeline | DRUNKEAST",
+    "description": "Autonomous in-situ sediment plume mitigation for seabed mining concessions. 22 identifiable global contracts and Cook Islands beachhead market validation."
   }
 }

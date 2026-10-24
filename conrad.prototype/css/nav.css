@@ -144,13 +144,16 @@ body.modal-3d-open .HeaderMobile {
   align-items: center !important;
   gap: 0.65rem !important;
   cursor: pointer !important;
+  height: 100% !important;
 }
 
 .conrad-brand-emblem {
-  height: 19px !important;
-  width: 20px !important;
-  display: block !important;
+  height: 24px !important;
+  width: auto !important;
+  max-width: 32px !important;
+  display: inline-block !important;
   flex-shrink: 0 !important;
+  object-fit: contain !important;
   color: #ffffff !important;
 }
 
@@ -164,4 +167,75 @@ body.modal-3d-open .HeaderMobile {
   line-height: 1 !important;
   display: inline-block !important;
   white-space: nowrap !important;
+}
+
+/* 5. Suppress Search button in header desktop, mobile, and drawer */
+.HeaderDesktop .searchLink,
+.Header .searchLink,
+.HeaderMobile .search-button,
+.Header .search-button,
+.Header .right-wrapper-inner .searchLink,
+.SearchDomainWrapper,
+.Header button[aria-label*="Search" i],
+.Header [data-label*="Search" i],
+.Header .search-icon {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 6. Suppress Anduril Logo and Legal Filler Links in Footer */
+.Footer .logo,
+.Footer a.logo,
+.Footer svg[aria-label*="Anduril" i],
+#sprite-anduril-logo {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.Footer .small-links a[href*="terms-of-use"],
+.Footer .small-links a[href*="modern-anti-slavery"],
+.Footer .small-links a[href*="investor-relations"],
+.Footer .small-links a[href*="supplier-relations"],
+.Footer .small-links a[href*="uk-carbon-reduction"],
+.FooterListSmallLink[data-path="terms-of-use"],
+.FooterListSmallLink[data-path="modern-anti-slavery-policy"],
+.FooterListSmallLink[data-path="investor-relations"],
+.FooterListSmallLink[data-path="supplier-relations"],
+.FooterListSmallLink[data-path="uk-carbon-reduction-plan"],
+.FooterListSmallLink[data-path="privacy-policy"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* 7. 404 / Error Page Background Photo */
+.FourOhFourSlice {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.7)), url('/assets/images/subsea/error-404-subsea-bg.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+body:has(.FourOhFourSlice) .Container > canvas,
+body.has-404 .Container > canvas,
+body.has-404 canvas,
+.FourOhFourSlice ~ canvas {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.FourOhFourSlice .ResponsiveVideo {
+  display: none !important;
 }

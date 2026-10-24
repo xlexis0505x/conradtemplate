@@ -14,48 +14,52 @@
       lead: biz.lead || globalBiz.lead,
       sizing: (biz.sizing && biz.sizing.cards && biz.sizing.cards.length) ? biz.sizing : (globalBiz.sizing || {}),
       pipeline: (biz.pipeline && biz.pipeline.regions && biz.pipeline.regions.length) ? biz.pipeline : (globalBiz.pipeline || {}),
+      contractors: (biz.contractors && biz.contractors.length) ? biz.contractors : (globalBiz.contractors || []),
       pestle: (biz.pestle && biz.pestle.factors && biz.pestle.factors.length) ? biz.pestle : (globalBiz.pestle || {}),
-      calculator: biz.calculator || globalBiz.calculator
+      entryStrategy: biz.entryStrategy || globalBiz.entryStrategy,
+      references: (biz.references && biz.references.length) ? biz.references : (globalBiz.references || [])
     };
   }
 
   function generateBizHTML() {
     var biz = getBizData();
     var brand = (window.Conrad && Conrad.content && Conrad.content.get("brandName")) || "DRUNKEAST";
+    var isChina = (window.Conrad && Conrad.isChina);
     var sizingCards = (biz.sizing && biz.sizing.cards) || [];
     var pestleFactors = (biz.pestle && biz.pestle.factors) || [];
     var pipelineRegions = (biz.pipeline && biz.pipeline.regions) || [];
+    var contractors = biz.contractors || [];
 
     var doctrineHTML = `
     <section id="conrad-biz-doctrine" class="conrad-biz-section">
       <div class="conrad-biz-inner">
         <div class="conrad-biz-header">
-          <div class="conrad-kicker">${biz.kicker || "01 // COMMERCIAL STRATEGY &amp; VALUE PROPOSITION"}</div>
-          <h2 class="conrad-section-title">${biz.title || "Unlocking the Environmental License to Operate"}</h2>
-          <p class="conrad-section-lead">${biz.lead || "Seabed mineral developers face an existential hurdle: without verifiable sediment plume control, regulatory bodies cannot grant commercial exploitation contracts. " + brand + " turns environmental compliance into a permitted, defensible asset."}</p>
+          <div class="conrad-kicker">${biz.kicker || ("01 // COMMERCIAL STRATEGY &amp; VALUE PROPOSITION")}</div>
+          <h2 class="conrad-section-title">${biz.title || ("Unlocking the Environmental License to Operate")}</h2>
+          <p class="conrad-section-lead">${biz.lead || ("Seabed mineral developers face an existential hurdle: without verifiable sediment plume control, regulatory bodies cannot grant commercial exploitation contracts. " + brand + " turns environmental compliance into a permitted, defensible asset.")}</p>
         </div>
 
         <div class="conrad-doctrine-grid">
           <div class="conrad-doctrine-card broken-card">
-            <div class="doctrine-badge">THE UNMITIGATED PLUME DILEMMA</div>
-            <h3 class="doctrine-title">Uncontrolled Sediment Dispersion</h3>
+            <div class="doctrine-badge">${"THE UNMITIGATED PLUME DILEMMA"}</div>
+            <h3 class="doctrine-title">${"Uncontrolled Sediment Dispersion"}</h3>
             <ul class="doctrine-list">
-              <li><strong>Existential Permitting Barrier:</strong> Commercial exploitation licences cannot be granted under ISA or Cook Islands regulations without demonstrated, verifiable plume containment.</li>
-              <li><strong>Transboundary Drift Liability:</strong> Sub-micron clay plumes drift 50–100+ km in the oceanic water column, causing severe ecological damage and catastrophic reputational risk.</li>
-              <li><strong>Post-Hoc Monitoring Deadlock:</strong> Passive sensor buoys merely observe damage without preventing it, risking sudden shut-down orders and stranded multimillion-dollar mining capex.</li>
+              <li><strong>${"Existential Permitting Barrier:"}</strong> ${"Commercial exploitation licences cannot be granted under ISA or Cook Islands regulations without demonstrated, verifiable plume containment."}</li>
+              <li><strong>${"Transboundary Drift Liability:"}</strong> ${"Sub-micron clay plumes drift 50–100+ km in the oceanic water column, causing severe ecological damage and catastrophic reputational risk."}</li>
+              <li><strong>${"Post-Hoc Monitoring Deadlock:"}</strong> ${"Passive sensor buoys merely observe damage without preventing it, risking sudden shut-down orders and stranded multimillion-dollar mining capex."}</li>
             </ul>
           </div>
 
           <div class="conrad-doctrine-card solution-card">
-            <div class="doctrine-badge">THE ${brand} PERMITTING MODEL</div>
-            <h3 class="doctrine-title">In-Situ Chemical Flocculation</h3>
+            <div class="doctrine-badge">${"THE " + brand + " PERMITTING MODEL"}</div>
+            <h3 class="doctrine-title">${"In-Situ Chemical Flocculation"}</h3>
             <ul class="doctrine-list">
-              <li><strong>Unlocking the License to Operate:</strong> We de-risk environmental approval by providing concession holders with certified, auditable sedimentation control data.</li>
-              <li><strong>Accelerated Benthic Deposition:</strong> Non-toxic biodegradable biopolymer binds micro-particles into dense flocs, confining redeposition strictly to primary mining swaths.</li>
-              <li><strong>Automated G09 &amp; ISA Telemetry:</strong> In-situ ADCP and optical backscatter sensors stream real-time compliance proof directly to maritime authorities and stakeholders.</li>
+              <li><strong>${"Unlocking the License to Operate:"}</strong> ${"We de-risk environmental approval by providing concession holders with certified, auditable sedimentation control data."}</li>
+              <li><strong>${"Accelerated Benthic Deposition:"}</strong> ${"Non-toxic biodegradable biopolymer binds micro-particles into dense flocs, confining redeposition strictly to primary mining swaths."}</li>
+              <li><strong>${"Automated G09 &amp; ISA Telemetry:"}</strong> ${"In-situ ADCP and optical backscatter sensors stream real-time compliance proof directly to maritime authorities and stakeholders."}</li>
             </ul>
             <div class="doctrine-img-wrap">
-              <img src="/_external/cdn.sanity.io/images/61nocsj5/production/53ca8797832d67af5425ab4abdebd6233cbd441c-4000x2660.png" alt="Deep-Sea Sediment Mitigation Operation" />
+              <img src="${(typeof window.qualifyUrl === 'function') ? window.qualifyUrl('/assets/images/subsea/benthic-collector.jpg') : '/assets/images/subsea/benthic-collector.jpg'}" alt="Deep-Sea Sediment Mitigation Operation" />
             </div>
           </div>
         </div>
@@ -67,9 +71,9 @@
     <section id="conrad-biz-economics" class="conrad-biz-section">
       <div class="conrad-biz-inner">
         <div class="conrad-biz-header">
-          <div class="conrad-kicker">02 // MARKET SIZING &amp; EXPANSION RUNWAY</div>
-          <h2 class="conrad-section-title">From Island Testbed to Global Abyssal Concessions</h2>
-          <p class="conrad-section-lead">A structured beachhead strategy validating in-situ plume mitigation in the Cook Islands before expanding across global International Seabed Authority concessions.</p>
+          <div class="conrad-kicker">${biz.sizing.kicker || ("02 // MARKET SIZING &amp; EXPANSION RUNWAY")}</div>
+          <h2 class="conrad-section-title">${biz.sizing.title || ("From Island Testbed to Global Abyssal Concessions")}</h2>
+          <p class="conrad-section-lead">${biz.sizing.lead || ("A structured beachhead strategy validating in-situ plume mitigation in the Cook Islands before expanding across global International Seabed Authority concessions.")}</p>
         </div>
 
         <div class="conrad-runway-container">
@@ -108,106 +112,82 @@
     <section id="conrad-biz-factory" class="conrad-biz-section">
       <div class="conrad-biz-inner">
         <div class="conrad-biz-header">
-          <div class="conrad-kicker">03 // ADDRESSABLE CONCESSION PIPELINE</div>
-          <h2 class="conrad-section-title">22 Global Seabed Concession Opportunities</h2>
-          <p class="conrad-section-lead">Identifiable contract opportunities spanning sovereign Pacific exclusive economic zones and International Seabed Authority (ISA) deep-ocean sectors.</p>
+          <div class="conrad-kicker">${biz.pipeline.kicker || ("03 // ADDRESSABLE CONCESSION PIPELINE")}</div>
+          <h2 class="conrad-section-title">${biz.pipeline.title || ("22 Global Seabed Concession Opportunities")}</h2>
+          <p class="conrad-section-lead">${biz.pipeline.lead || ("Identifiable contract opportunities spanning sovereign Pacific exclusive economic zones and International Seabed Authority (ISA) deep-ocean sectors.")}</p>
         </div>
 
         <div class="conrad-registry-ledger">
           <div class="registry-ledger-header">
-            <span class="col-reg-sector">SECTOR</span>
-            <span class="col-reg-region">GEOGRAPHIC REGION</span>
-            <span class="col-reg-operators">OPERATORS &amp; SPONSORS</span>
-            <span class="col-reg-scale">EXPLORATION FOOTPRINT</span>
-            <span class="col-reg-status">STATUS</span>
+            <span class="col-reg-sector">${"SECTOR"}</span>
+            <span class="col-reg-region">${"GEOGRAPHIC REGION"}</span>
+            <span class="col-reg-operators">${"OPERATORS &amp; SPONSORS"}</span>
+            <span class="col-reg-scale">${"EXPLORATION FOOTPRINT"}</span>
+            <span class="col-reg-status">${"STATUS"}</span>
           </div>
 
-          <div class="registry-ledger-row">
-            <div class="col-reg-sector">
-              <span class="registry-num">01</span>
-              <span class="registry-tag">SOVEREIGN EEZ</span>
-            </div>
-            <div class="col-reg-region">
-              <h3 class="registry-title">Cook Islands Sovereign EEZ</h3>
-              <p class="registry-desc">254,654 km² total exploration area across 3 commercial license holders. Immediate commercial launch testbed under national SBMA G09 standards.</p>
-            </div>
-            <div class="col-reg-operators">
-              <span class="operator-primary">CIC Limited · Moana Minerals · CSR Ltd</span>
-              <span class="operator-regulator">Regulator: SBMA (National Jurisdiction)</span>
-            </div>
-            <div class="col-reg-scale">
-              <span class="scale-val">254,654 km²</span>
-              <span class="scale-sub">3 Commercial Licences</span>
-            </div>
-            <div class="col-reg-status">
-              <span class="status-text">Prime Launch</span>
-            </div>
-          </div>
+          ${pipelineRegions.map(function(r, idx) {
+            var num = "0" + (idx + 1);
+            return `
+              <div class="registry-ledger-row">
+                <div class="col-reg-sector">
+                  <span class="registry-num">${num}</span>
+                  <span class="registry-tag">${r.match}</span>
+                </div>
+                <div class="col-reg-region">
+                  <h3 class="registry-title">${r.name}</h3>
+                  <p class="registry-desc">${r.count}</p>
+                </div>
+                <div class="col-reg-operators">
+                  <span class="operator-primary">${r.actors}</span>
+                </div>
+                <div class="col-reg-scale">
+                  <span class="scale-val">${r.count}</span>
+                </div>
+                <div class="col-reg-status">
+                  <span class="status-text">${r.match}</span>
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
 
-          <div class="registry-ledger-row">
-            <div class="col-reg-sector">
-              <span class="registry-num">02</span>
-              <span class="registry-tag">INTERNATIONAL SEABED</span>
-            </div>
-            <div class="col-reg-region">
-              <h3 class="registry-title">Clarion-Clipperton Zone (CCZ)</h3>
-              <p class="registry-desc">The global epicenter of abyssal nodule exploration. 17 active contracts across equatorial Pacific abyssal plains.</p>
-            </div>
-            <div class="col-reg-operators">
-              <span class="operator-primary">TMC/NORI (Nauru) · GSR (Belgium) · UKSR (UK) · China Minmetals · BGR (Germany)</span>
-              <span class="operator-regulator">Regulator: International Seabed Authority</span>
-            </div>
-            <div class="col-reg-scale">
-              <span class="scale-val">17 Active Tracts</span>
-              <span class="scale-sub">Polymetallic Nodules</span>
-            </div>
-            <div class="col-reg-status">
-              <span class="status-text">Core Market</span>
-            </div>
-          </div>
-
-          <div class="registry-ledger-row">
-            <div class="col-reg-sector">
-              <span class="registry-num">03</span>
-              <span class="registry-tag">BILATERAL STATE</span>
-            </div>
-            <div class="col-reg-region">
-              <h3 class="registry-title">Central Indian &amp; W. Pacific Basins</h3>
-              <p class="registry-desc">Bilateral state-backed nodule reserves with high baseline sediment sensitivity requiring stringent in-situ turbidity control.</p>
-            </div>
-            <div class="col-reg-operators">
-              <span class="operator-primary">Govt. of India · Beijing Pioneer Hi-Tech Development Corp.</span>
-              <span class="operator-regulator">Regulator: ISA &amp; Sovereign Bilateral</span>
-            </div>
-            <div class="col-reg-scale">
-              <span class="scale-val">2 State Reserves</span>
-              <span class="scale-sub">High-Turbidity Zone</span>
-            </div>
-            <div class="col-reg-status">
-              <span class="status-text">High Priority</span>
-            </div>
-          </div>
-
-          <div class="registry-ledger-row">
-            <div class="col-reg-sector">
-              <span class="registry-num">04</span>
-              <span class="registry-tag">RIDGE &amp; CRUST</span>
-            </div>
-            <div class="col-reg-region">
-              <h3 class="registry-title">Hydrothermal Ridges &amp; Seamounts</h3>
-              <p class="registry-desc">Polymetallic sulfides and cobalt-rich crust tracts along oceanic ridges and Pacific seamount chains.</p>
-            </div>
-            <div class="col-reg-operators">
-              <span class="operator-primary">China COMRA · Japan JOGMEC · Korea KIOST · France Ifremer · Russia</span>
-              <span class="operator-regulator">Regulator: ISA Exploration Contracts</span>
-            </div>
-            <div class="col-reg-scale">
-              <span class="scale-val">12 Regional Tracts</span>
-              <span class="scale-sub">Sulfides &amp; Cobalt Crusts</span>
-            </div>
-            <div class="col-reg-status">
-              <span class="status-text">Expansion</span>
-            </div>
+        <div class="conrad-contractors-section" style="margin-top: 2.5rem;">
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">
+            ${"16 Priority International Seabed Authority (ISA) Exploration Contractors"}
+          </h3>
+          <p style="font-size: 0.85rem; color: #8E9291; margin-bottom: 1.25rem;">
+            ${"Strategic partner prospects evaluated by tract location, sponsor nation regulatory frameworks, and plume abatement demand."}
+          </p>
+          <div class="conrad-contractor-table-wrap" style="overflow-x: auto;">
+            <table class="conrad-compare-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+              <thead>
+                <tr>
+                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"ID"}</th>
+                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"SPONSORING STATE"}</th>
+                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"CONTRACTOR ENTITY"}</th>
+                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"ENTITY TYPE"}</th>
+                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"CONTRACT AREA"}</th>
+                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"MINERAL TYPE"}</th>
+                  <th style="padding: 10px 14px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"MATCH"}</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${contractors.map(function(c) {
+                  return `
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                      <td style="padding: 10px 14px; font-family: monospace; color: #8E9291;">${c.id}</td>
+                      <td style="padding: 10px 14px; font-weight: 600; color: #ffffff;">${c.country}</td>
+                      <td style="padding: 10px 14px; color: rgba(255,255,255,0.9);">${c.entity}</td>
+                      <td style="padding: 10px 14px; color: #8E9291;">${c.type}</td>
+                      <td style="padding: 10px 14px; color: #8E9291;">${c.area}</td>
+                      <td style="padding: 10px 14px; color: #8E9291;">${c.mineral}</td>
+                      <td style="padding: 10px 14px; text-align: center; color: #f59e0b;">${c.match}</td>
+                    </tr>
+                  `;
+                }).join("")}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -218,9 +198,9 @@
     <section id="conrad-biz-roadmap" class="conrad-biz-section">
       <div class="conrad-biz-inner">
         <div class="conrad-biz-header">
-          <div class="conrad-kicker">04 // PESTLE STRATEGIC FRAMEWORK</div>
-          <h2 class="conrad-section-title">Sovereign, Ecological &amp; Regulatory Drivers</h2>
-          <p class="conrad-section-lead">A comprehensive macro-environmental evaluation anchoring our technology in legal frameworks, economic efficiency, and ocean preservation.</p>
+          <div class="conrad-kicker">${biz.pestle.kicker || ("04 // PESTLE STRATEGIC FRAMEWORK")}</div>
+          <h2 class="conrad-section-title">${biz.pestle.title || ("Sovereign, Ecological &amp; Regulatory Drivers")}</h2>
+          <p class="conrad-section-lead">${biz.pestle.lead || ("A comprehensive macro-environmental evaluation anchoring our technology in legal frameworks, economic efficiency, and ocean preservation.")}</p>
         </div>
 
         <div class="conrad-pestle-grid">
@@ -251,18 +231,18 @@
       <div class="conrad-biz-inner">
         <div class="conrad-diligence-banner">
           <div class="diligence-text-block">
-            <div class="conrad-kicker">05 // ENVIRONMENTAL DATA ROOM</div>
-            <h2 class="conrad-section-title">Access Technical Diligence &amp; G09 Dossier</h2>
-            <p class="conrad-section-lead">Download certified G09 EMMP compliance dossiers, Nature Communications (2025) benthic sediment benchmarks, and OECD 202/203 flocculant ecotoxicity laboratory certifications.</p>
+            <div class="conrad-kicker">${"05 // ENVIRONMENTAL DATA ROOM &amp; REFERENCES"}</div>
+            <h2 class="conrad-section-title">${"Access Technical Diligence &amp; G09 Dossier"}</h2>
+            <p class="conrad-section-lead">${"Download certified G09 EMMP compliance dossiers, Nature Communications (2025) benthic sediment benchmarks, and OECD 202/203 flocculant ecotoxicity laboratory certifications."}</p>
           </div>
           <div class="diligence-cta-block">
             <button id="conrad-open-diligence-btn" class="conrad-diligence-btn">
-              <span>REQUEST DATA ROOM ACCESS</span>
+              <span>${"REQUEST DATA ROOM ACCESS"}</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
             </button>
             <div class="diligence-secure-badge">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <span>AUDITABLE COMPLIANCE DOSSIER</span>
+              <span>${"AUDITABLE COMPLIANCE DOSSIER"}</span>
             </div>
           </div>
         </div>
@@ -275,54 +255,64 @@
       <div class="conrad-modal-window conrad-modal-dialog">
         <div class="conrad-modal-header">
           <div>
-            <div class="modal-kicker">VERIFIED INSTITUTIONAL ACCESS</div>
-            <h3 class="modal-title">Environmental Data Room Dossier</h3>
+            <div class="modal-kicker">${"VERIFIED INSTITUTIONAL ACCESS"}</div>
+            <h3 class="modal-title">${"Environmental Data Room Dossier"}</h3>
           </div>
           <button id="conrad-close-modal-btn" class="conrad-modal-close modal-close-btn" aria-label="Close dialog">&times;</button>
         </div>
         <div class="conrad-modal-body">
-          <p class="modal-desc">Authorized concession operators, marine scientists, and regulatory observers may request the full technical dossier, including:</p>
+          <p class="modal-desc">${"Authorized concession operators, marine scientists, and regulatory observers may request the full technical dossier, including:"}</p>
           <div class="modal-files-list">
             <div class="modal-file-item">
-              <div class="file-icon">PDF</div>
+              <div class="file-icon">DOC</div>
               <div class="file-info">
-                <span class="file-name">Cook Islands SBMA G09 EMMP Technical Compliance Architecture</span>
-                <span class="file-size">Environmental Management &amp; Monitoring Plan Guide · 4.8 MB</span>
+                <span class="file-name">${"Cook Islands SBMA G09 EMMP Technical Compliance Architecture"}</span>
+                <span class="file-size">${"Environmental Management & Monitoring Plan Guide · 4.8 MB"}</span>
               </div>
             </div>
             <div class="modal-file-item">
-              <div class="file-icon">PDF</div>
+              <div class="file-icon">SCI</div>
               <div class="file-info">
-                <span class="file-name">Benthic Plume Dispersion &amp; Redeposition Dynamics (Nature Comm. 2025)</span>
-                <span class="file-size">Empirical Seafloor Nodule Disturbance Analysis · 8.2 MB</span>
+                <span class="file-name">${"Benthic Plume Dispersion & Redeposition Dynamics (Nature Comm. 2025)"}</span>
+                <span class="file-size">${"Empirical Seafloor Nodule Disturbance Analysis · 8.2 MB"}</span>
               </div>
             </div>
             <div class="modal-file-item">
-              <div class="file-icon">PDF</div>
+              <div class="file-icon">LAB</div>
               <div class="file-info">
-                <span class="file-name">Eco-Compatible Flocculant Ecotoxicity &amp; Biodegradation Report</span>
-                <span class="file-size">OECD 202/203 Standard Laboratory Certification · 3.1 MB</span>
+                <span class="file-name">${"Eco-Compatible Flocculant Ecotoxicity & Biodegradation Report"}</span>
+                <span class="file-size">${"OECD 202/203 Standard Laboratory Certification · 3.1 MB"}</span>
               </div>
             </div>
           </div>
 
-          <form id="conrad-diligence-form" class="modal-form">
+          <!-- APA References Section -->
+          <div class="conrad-references-block" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <h4 style="font-size: 0.95rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">References (APA 7th Edition)</h4>
+            <div style="max-height: 180px; overflow-y: auto; font-size: 0.78rem; line-height: 1.55; color: rgba(255,255,255,0.7); display: flex; flex-direction: column; gap: 0.45rem;">
+              ${biz.references.map(function(ref) {
+                return `<div>${ref}</div>`;
+              }).join("")}
+            </div>
+          </div>
+
+          <form id="conrad-diligence-form" class="modal-form" style="margin-top: 1.5rem;">
             <div class="form-row">
-              <input type="text" class="modal-input" placeholder="Organization / Concession Entity *" required />
-              <input type="email" class="modal-input" placeholder="Official Institutional Email *" required />
+              <input type="text" class="modal-input" placeholder="${'Organization / Concession Entity *'}" required />
+              <input type="email" class="modal-input" placeholder="${'Official Institutional Email *'}" required />
             </div>
             <div class="form-row">
               <select class="modal-input" required>
-                <option value="" disabled selected>Primary Area of Interest *</option>
-                <option value="cook-islands">Cook Islands Concession Baseline</option>
-                <option value="ccz">Clarion-Clipperton Zone (CCZ) Integration</option>
-                <option value="regulatory">Regulatory &amp; ISA Observer Inquiries</option>
-                <option value="scientific">Academic / Oceanographic Collaboration</option>
+                <option value="" disabled selected>${'Primary Area of Interest *'}</option>
+                <option value="cook-islands">${'Cook Islands Concession Baseline'}</option>
+                <option value="ccz">${'Clarion-Clipperton Zone (CCZ) Integration'}</option>
+                <option value="regulatory">${'Regulatory & ISA Observer Inquiries'}</option>
+                <option value="scientific">${'Academic / Oceanographic Collaboration'}</option>
               </select>
             </div>
-            <button type="submit" id="diligence-submit-btn" class="modal-submit-btn">REQUEST ACCESS CREDENTIALS</button>
+            <button type="submit" id="diligence-submit-btn" class="modal-submit-btn">${'REQUEST ACCESS CREDENTIALS'}</button>
             <div id="diligence-success-msg" class="modal-success-msg" style="display: none;">
-              ✓ Request submitted. Our team will deliver credentials to your institutional address within 24 hours.
+              ✓ ${'Request submitted. Our team will deliver credentials to your institutional address within 24 hours.'}
             </div>
           </form>
         </div>
@@ -371,20 +361,40 @@
     var anchor = richText || header;
     if (!anchor) return;
 
+    var activeEdition = (window.Conrad && Conrad.edition) || "global";
+    var isChina = (activeEdition === "china");
+
     // Update ProductHeaderSlice titles & details
     if (header) {
       var titleEl = header.querySelector("h1.titleWrapper span.title, .title");
-      if (titleEl && !titleEl.dataset.customized) {
-        titleEl.dataset.customized = "true";
+      if (titleEl && titleEl.dataset.customizedEdition !== activeEdition) {
+        titleEl.dataset.customizedEdition = activeEdition;
         titleEl.innerText = "Commercial Strategy & Scale";
       }
       var para = header.querySelector(".paragraph1");
-      if (para && !para.dataset.customized) {
-        para.dataset.customized = "true";
-        para.innerHTML = `
+      if (para && para.dataset.customizedEdition !== activeEdition) {
+        para.dataset.customizedEdition = activeEdition;
+        para.innerHTML = isChina ? `
+          <p class="detail">Global Seabed Concessions Pipeline</p>
+          <p class="detail">In-Situ Plume Mitigation & Permitting</p>
+          <p class="detail">[Commercialization & Market Strategy]</p>
+        ` : `
           <p class="detail">PACIFIC &amp; GLOBAL SEABED CONCESSIONS</p>
           <p class="detail">IN-SITU PLUME MITIGATION &amp; SEABED LICENSING</p>
           <p class="detail">[COMMERCIAL LICENSING ROADMAP]</p>
+        `;
+      }
+      var paraHidden = header.querySelector(".paragraph1Hidden");
+      if (paraHidden && paraHidden.dataset.customizedEdition !== activeEdition) {
+        paraHidden.dataset.customizedEdition = activeEdition;
+        paraHidden.innerHTML = isChina ? `
+          <p class="detail" aria-hidden="true">Global Seabed Concessions Pipeline</p>
+          <p class="detail" aria-hidden="true">In-Situ Plume Mitigation & Permitting</p>
+          <p class="detail" aria-hidden="true">[Commercialization & Market Strategy]</p>
+        ` : `
+          <p class="detail" aria-hidden="true">PACIFIC &amp; GLOBAL SEABED CONCESSIONS</p>
+          <p class="detail" aria-hidden="true">IN-SITU PLUME MITIGATION &amp; SEABED LICENSING</p>
+          <p class="detail" aria-hidden="true">[COMMERCIAL LICENSING ROADMAP]</p>
         `;
       }
     }
@@ -392,18 +402,17 @@
     // Update TwoColumnRichText
     if (richText) {
       var col1 = richText.querySelector(".column1 p, .column1");
-      if (col1 && !col1.dataset.customized) {
-        col1.dataset.customized = "true";
+      if (col1 && col1.dataset.customizedEdition !== activeEdition) {
+        col1.dataset.customizedEdition = activeEdition;
         col1.innerHTML = '<p class="detail">THE COMMERCIAL LICENSING MODEL</p>';
       }
       var col2 = richText.querySelector(".column2 p, .column2");
-      if (col2 && !col2.dataset.customized) {
-        col2.dataset.customized = "true";
+      if (col2 && col2.dataset.customizedEdition !== activeEdition) {
+        col2.dataset.customizedEdition = activeEdition;
         col2.innerHTML = '<p>Autonomous In-Situ Sediment Control for Seabed Mining Concessions. Turning environmental compliance into a permitted, bankable commercial asset.</p>';
       }
     }
 
-    var activeEdition = (window.Conrad && Conrad.edition) || "global";
     var needsRebuild = (currentMountedEdition !== activeEdition);
 
     if (needsRebuild && doctrine) {
@@ -528,6 +537,7 @@
       form.addEventListener("submit", function(e) {
         e.preventDefault();
         var submitBtn = document.getElementById("diligence-submit-btn");
+        var isChina = (window.Conrad && Conrad.isChina);
         if (submitBtn) {
           submitBtn.disabled = true;
           submitBtn.innerText = "VERIFYING CREDENTIALS...";

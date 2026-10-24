@@ -118,75 +118,75 @@ window.generateContactHTML = function(kicker, leadText) {
   var DEFAULT_WALK_DATA = [
     {
       letter: "D",
-      stage: "01 // DECARBONIZATION",
-      title: "Decarbonization",
-      subtitle: "D \u2014 Decarbonization",
-      desc: "Supplying battery-critical minerals from low-carbon seabed deposits while safeguarding pelagic carbon sequestration cycles.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/273b69f85bec5374015642647464223b0501a17f-4000x2660.png"
+      stage: "01 // DEEP-SEA EXPLORATION",
+      title: "Deep-Sea Exploration",
+      subtitle: "D — Deep-Sea Exploration",
+      desc: "Investigating the mysteries, extreme pressures, and environmental dynamics of the abyssal plain.",
+      image: "/assets/images/subsea/benthic-collector.jpg"
     },
     {
       letter: "R",
       stage: "02 // RESTORATION",
       title: "Restoration",
-      subtitle: "R \u2014 Restoration",
-      desc: "Accelerating natural sedimentation to preserve benthic filter feeders and prevent long-term ecosystem destabilization.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/362212f069102419e04043c85353fc572ead5649-4000x2660.png"
+      subtitle: "R — Restoration",
+      desc: "Developing solutions that support the recovery of marine environments.",
+      image: "/assets/images/subsea/bento-01-flocculation.jpg"
     },
     {
       letter: "U",
-      stage: "03 // UNDERWATER",
-      title: "Underwater",
-      subtitle: "U \u2014 Underwater",
-      desc: "Deploying high-pressure chemical dosing and autonomous acoustic telemetry at extreme depths exceeding 5,000 meters.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/113f1d96997d7375017ad46ebcd24122de1e343f-1404x1080.png"
+      stage: "03 // UNCERTAINTY",
+      title: "Uncertainty",
+      subtitle: "U — Uncertainty",
+      desc: "Embracing the unknown through research, experimentation, and critical thinking.",
+      image: "/assets/images/subsea/bento-04-digital-twin.jpg"
     },
     {
       letter: "N",
       stage: "04 // NAVIGATION",
       title: "Navigation",
-      subtitle: "N \u2014 Navigation",
-      desc: "Guiding subsea mining extractors along precise bathymetric corridors to minimize hydrodynamic boundary-layer disturbance.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/1ec5966e21866afda6b535cb05350e2af41090d2-1993x1115.png"
+      subtitle: "N — Navigation",
+      desc: "Finding pathways through complex scientific and environmental challenges.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/0126fc76978b2fedd63aeeacd2e3b1f55f5c617f-952x952.png"
     },
     {
       letter: "K",
-      stage: "05 // KINETIC",
-      title: "Kinetic",
-      subtitle: "K \u2014 Kinetic",
-      desc: "Dissipating slurry discharge kinetic energy through specialized shrouds, dampening turbulent plumes at the seabed.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/07ffa223dc2ddf1ca9d3af7307aa8e5e1a71a3fc-1404x1080.png"
+      stage: "05 // KNOWLEDGE",
+      title: "Knowledge",
+      subtitle: "K — Knowledge",
+      desc: "Turning research and evidence into informed decisions.",
+      image: "/assets/images/subsea/bento-05-telemetry.jpg"
     },
     {
       letter: "E",
-      stage: "06 // ECOLOGICAL",
-      title: "Ecological",
-      subtitle: "E \u2014 Ecological",
-      desc: "Utilizing 100% biodegradable organic biopolymers that rapidly degrade without toxicity to deep-ocean megafauna.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/216fe60b438d0b6b0ed8245321fc2c7905f0b45d-2000x1501.jpg"
+      stage: "06 // ENVIRONMENTAL PROTECTION",
+      title: "Environmental Protection",
+      subtitle: "E — Environmental Protection",
+      desc: "Prioritising the health and resilience of marine ecosystems.",
+      image: "/_external/cdn.sanity.io/images/61nocsj5/production/b95abc74192ac5ae36f6076031bb09dc0e09d318-1920x1080.png"
     },
     {
       letter: "A",
-      stage: "07 // ABYSSAL",
-      title: "Abyssal",
-      subtitle: "A \u2014 Abyssal",
-      desc: "Pioneering deep-abyssal environmental safeguards tailored for Clarion-Clipperton Zone and Cook Islands seabed conditions.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/05300e9a98ce923d121333250a314b71e01bec76-4000x2659.png"
+      stage: "07 // ADAPTATION",
+      title: "Adaptation",
+      subtitle: "A — Adaptation",
+      desc: "Responding to changing conditions with flexible, innovative solutions.",
+      image: "/assets/images/subsea/bento-02-manifold.jpg"
     },
     {
       letter: "S",
-      stage: "08 // STEWARDSHIP",
-      title: "Stewardship",
-      subtitle: "S \u2014 Stewardship",
-      desc: "Partnering with Pacific island nations and international regulators to ensure fully transparent, verifiable EMMP compliance.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/add60aa1adc75c31cd2f9a267f589a2d62b81892-4000x2660.png"
+      stage: "08 // SUSTAINABILITY",
+      title: "Sustainability",
+      subtitle: "S — Sustainability",
+      desc: "Balancing technological progress with long-term environmental responsibility.",
+      image: "/assets/images/subsea/bento-03-adcp.jpg"
     },
     {
       letter: "T",
-      stage: "09 // TRANSPARENCY",
-      title: "Transparency",
-      subtitle: "T \u2014 Transparency",
-      desc: "Streaming tamper-proof optical backscatter and ADCP current data directly to regulatory bodies and public monitors.",
-      image: "/_external/cdn.sanity.io/images/61nocsj5/production/dddfeebfe9d2f943790ffdbbf2bdbcca1efe6a0d-3840x2160.png"
+      stage: "09 // TECHNOLOGY",
+      title: "Technology",
+      subtitle: "T — Technology",
+      desc: "Applying science and engineering to tackle real-world problems.",
+      image: "/assets/images/subsea/bento-07-pressure-vessel.jpg"
     }
   ];
 
@@ -199,13 +199,14 @@ window.generateContactHTML = function(kicker, leadText) {
       return acronym.map(function(item, idx) {
         var num = idx + 1;
         var stageStr = (num < 10 ? "0" + num : num) + " // " + item.word.toUpperCase();
+        var imgPath = (typeof window.qualifyUrl === "function") ? window.qualifyUrl(item.image) : item.image;
         return {
           letter: item.letter,
           stage: stageStr,
           title: item.word,
           subtitle: item.letter + " \u2014 " + item.word,
           desc: item.principle,
-          image: item.image
+          image: imgPath
         };
       });
     }
@@ -800,6 +801,29 @@ window.generateContactHTML = function(kicker, leadText) {
     if (!hero) return;
 
     var activeEdition = (window.Conrad && Conrad.edition) || "global";
+    var isChina = (activeEdition === "china");
+    var aboutData = (window.Conrad && Conrad.content && Conrad.content.get("about")) || {};
+    var heroKicker = aboutData.heroKicker || (isChina ? "ABOUT US // POSEIDON" : "WHO WE ARE // DRUNKEAST");
+    var heroTitle = aboutData.heroTitle || (isChina ? "Inspired by the Sea. Driven by Innovation." : "Driven by Curiosity. Dedicated to Marine Restoration.");
+    
+    var h1 = hero.querySelector(".titleWrapper h1");
+    if (h1 && h1.innerText !== heroKicker) {
+      h1.innerText = heroKicker;
+    }
+    var h2 = hero.querySelector(".titleWrapper h2");
+    if (h2 && h2.innerText !== heroTitle) {
+      h2.innerText = heroTitle;
+    }
+    var heroImg = hero.querySelector("img.ResponsiveImage, img");
+    var subseaCollectorPath = (typeof window.qualifyUrl === "function") 
+      ? window.qualifyUrl("/assets/images/subsea/benthic-collector.jpg") 
+      : "/assets/images/subsea/benthic-collector.jpg";
+    if (heroImg && (!heroImg.src.includes("benthic-collector") || heroImg.hasAttribute("srcset"))) {
+      heroImg.src = subseaCollectorPath;
+      heroImg.removeAttribute("srcset");
+      heroImg.alt = "Autonomous Deep-Sea Plume Mitigation Platform";
+    }
+
     var needsRebuild = (currentMountedEdition !== activeEdition);
 
     if (needsRebuild && track) {

@@ -31,3 +31,4 @@ env/
 # Dependencies & Generated Artifacts
 node_modules/
 .system_generated/
+.agents/

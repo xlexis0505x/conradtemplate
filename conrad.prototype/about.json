@@ -12,8 +12,8 @@
   "_updatedAt": "2026-06-05T02:46:34Z",
   "category": "company",
   "meta": {
-    "description": "Anduril transforms defense capabilities with advanced autonomy, AI, computer vision, sensor fusion, and networking technology \u2014 delivering cutting-edge systems to the warfighter in months, not years.",
-    "title": "Mission"
+    "description": "We are DRUNKEAST, working at the intersection of deep-sea research, environmental restoration, and innovative technology for autonomous sediment plume mitigation.",
+    "title": "Who We Are & Core Principles | DRUNKEAST"
   },
   "parent": null,
   "slices": [
@@ -44,26 +44,26 @@
       },
       "image": {
         "_type": "imageWithMeta",
-        "alt": "Close-up of the fuselage panel on Anduril Industries vehicle, featuring the U.S. flag insignia and jet inlet danger warning markings on a bold red and black airframe, representing American-made next-generation autonomous combat aircraft built for the U.S. military.",
+        "alt": "Autonomous benthic sediment plume mitigation platform operating in abyssal ocean waters",
         "asset": {
-          "_id": "image-3aff877c6d001e505038e538594661772a6e9c34-2160x1350-jpg",
+          "_id": "image-b95abc74192ac5ae36f6076031bb09dc0e09d318-1920x1080-png",
           "_type": "sanity.imageAsset",
-          "mimeType": "image/jpeg",
+          "mimeType": "image/png",
           "metadata": {
             "_type": "sanity.imageMetadata",
             "dimensions": {
               "_type": "sanity.imageDimensions",
-              "aspectRatio": 1.6,
-              "height": 1350,
-              "width": 2160
+              "aspectRatio": 1.7777777777777777,
+              "height": 1080,
+              "width": 1920
             },
             "hasAlpha": false,
             "isOpaque": true
           }
         }
       },
-      "shortTitle": "Mission",
-      "title": "Transforming Defense Capabilities with Advanced Technology."
+      "shortTitle": "Who We Are",
+      "title": "Driven by Curiosity. Dedicated to Marine Restoration."
     }
   ]
 }

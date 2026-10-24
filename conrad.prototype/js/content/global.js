@@ -47,43 +47,43 @@ window.Conrad.CONTENT_GLOBAL = {
         title: "01 // Eco-Flocculation Chemistry",
         subtitle: "High-Efficiency Bio-Compatible Aggregate Binding",
         desc: "Proprietary non-toxic natural biopolymer designed to agglomerate sub-micron abyssal sediment particles into heavy macro-flocs, increasing settling velocity by over an order of magnitude.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/9ea5ae8181d48c78365c6f8d8e3f3f35208e5f55-3000x2000.jpg"
+        image: "/assets/images/subsea/bento-01-flocculation.jpg"
       },
       {
         title: "02 // Subsea Active Dispenser Manifold",
         subtitle: "6,000-Meter Depth-Rated Injection Architecture",
         desc: "Autonomous benthic manifold skid mounted directly to mining collector discharge chutes, delivering closed-loop micro-dosed chemical dispersion under 600 bar hydrostatic pressure.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/d23c6903421f10c7191873592b8e823362fecbe8-882x878.png"
+        image: "/assets/images/subsea/bento-02-manifold.jpg"
       },
       {
         title: "03 // Acoustic & Turbidity Sensing",
         subtitle: "Real-Time Sensor Fusion & Edge Hydrodynamic Processing",
         desc: "Integrated dual 600 kHz Acoustic Doppler Current Profilers (ADCP) and 850nm optical backscatter sensors providing closed-loop environmental feedback to modulate dosing.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/c79ccecf787d455420edb440cbc7bf6a114cc680-882x878.png"
+        image: "/assets/images/subsea/bento-03-adcp.jpg"
       },
       {
         title: "04 // Plume Dispersion Digital Twin",
         subtitle: "Predictive Numerical Modeling & Ocean Current Calibration",
         desc: "Real-time spatial plume migration simulation calibrated against abyssal benthic currents, predicting settling footprints and preventing transboundary particle drift.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/955e14dfee80e6022b1744580b6996cd435c6153-976x1952.jpg"
+        image: "/assets/images/subsea/bento-04-digital-twin.jpg"
       },
       {
         title: "05 // G09 & ISA Regulatory Compliance",
         subtitle: "Automated Environmental Management & Monitoring Telemetry",
         desc: "Real-time compliance data stream designed to satisfy Cook Islands SBMA G09 standards and International Seabed Authority (ISA) benthic discharge monitoring regulations.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/35c91ba3a0603c99720933d52bad4c73f9fdca5f-3000x1500.jpg"
+        image: "/assets/images/subsea/bento-05-telemetry.jpg"
       },
       {
         title: "06 // Modular Offshore Skid",
         subtitle: "Containerized Research Vessel & Mining Barge Integration",
         desc: "Standardized subsea modular footprint compatible with commercial nodule collector trials and environmental survey vessels without requiring bespoke deck reconstructions.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/16113e3a588bd30e5c67bf2ee6d7a0847845fb28-3000x3000.jpg"
+        image: "/assets/images/subsea/bento-06-offshore-skid.jpg"
       },
       {
         title: "07 // 600-Bar Pressure Vessel & Valving",
         subtitle: "Titanium Subsea Valving & Zero-Failure Solenoid Actuation",
         desc: "Deep-ocean pressure-balanced electromagnetic valves eliminating mechanical pinch points, delivering uninterrupted operation under abyssal temperature and salinity extremes.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/a005eecc853d709de52769704c0a6cc1083ac7c4-1131x630.png"
+        image: "/assets/images/subsea/bento-07-pressure-vessel.jpg"
       }
     ],
 
@@ -113,6 +113,128 @@ window.Conrad.CONTENT_GLOBAL = {
     }
   },
 
+  // ── Tech Route Content ────────────────────────────────────
+  tech: {
+    kicker: "02 // INDUSTRIAL SPECIFICATIONS",
+    title: "Subsea Technical Envelope & Tolerances",
+    lead: "High-density physical metrics, 600-bar hydrostatic pressure ratings, and acoustic telemetry built to marine engineering standards with commercial agile deployment.",
+    tabs: [
+      { filter: "all", label: "ALL" },
+      { filter: "chassis", label: "CHASSIS & SLED" },
+      { filter: "dosing", label: "DISPENSER MANIFOLD" },
+      { filter: "sensing", label: "ACOUSTIC SENSORS" },
+      { filter: "materials", label: "MATERIALS & PRESSURE" },
+      { filter: "interfaces", label: "SUBSEA INTERFACES" }
+    ],
+    schematics: [
+      {
+        schematic: "all",
+        image: "/assets/images/subsea/benthic-collector.jpg",
+        badge: "SYSTEM SCHEMATIC // OVERVIEW",
+        title: "AUTONOMOUS SUBSEA PLUME MITIGATION PLATFORM",
+        tag: "6,000M DEPTH RATED // SBMA G09 COMPLIANT"
+      },
+      {
+        schematic: "chassis",
+        image: "/assets/images/subsea/bento-06-offshore-skid.jpg",
+        badge: "STRUCTURAL SCHEMATIC // CHASSIS",
+        title: "TITANIUM BENTHIC MONOCOQUE FRAME",
+        tag: "600-BAR HYDROSTATIC RATING"
+      },
+      {
+        schematic: "dosing",
+        image: "/assets/images/subsea/bento-02-manifold.jpg",
+        badge: "DISPENSER SCHEMATIC // FLUIDICS",
+        title: "ACTIVE CLOSED-LOOP INJECTION MANIFOLD",
+        tag: "MICRO-DOSED BIO-POLYMER"
+      },
+      {
+        schematic: "sensing",
+        image: "/assets/images/subsea/bento-03-adcp.jpg",
+        badge: "SENSOR SCHEMATIC // TELEMETRY",
+        title: "DUAL 600 KHZ ADCP & OPTICAL TURBIDITY ARRAY",
+        tag: "REAL-TIME HYDRODYNAMIC PROCESSING"
+      },
+      {
+        schematic: "materials",
+        image: "/assets/images/subsea/bento-07-pressure-vessel.jpg",
+        badge: "MATERIALS SCHEMATIC // CORROSION PROOF",
+        title: "GRADE 5 TITANIUM ENCLOSURES & RESIN MATRIX",
+        tag: "PRESSURE-BALANCED OIL-FILLED (PBOF)"
+      },
+      {
+        schematic: "interfaces",
+        image: "/assets/images/subsea/bento-05-telemetry.jpg",
+        badge: "PAYLOAD SCHEMATIC // UMBILICAL",
+        title: "ISO 13628-8 SUBSEA UMBILICAL INTERFACE",
+        tag: "HOT-SWAPPABLE 10 GBPS LINK"
+      }
+    ],
+    specs: [
+      { category: "chassis", param: "OPERATIONAL DEPTH", val: "6,000 m / 19,685 ft", meta: "[ 600 BAR HYDROSTATIC ]" },
+      { category: "chassis", param: "FRAME DIMENSIONS", val: "3.80 m × 2.40 m × 1.85 m", meta: "[ MODULAR BENTHIC SLED ]" },
+      { category: "chassis", param: "DRY WEIGHT", val: "1,850 kg / 4,078 lbs", meta: "[ CRANE DEPLOYABLE ]" },
+      { category: "chassis", param: "IN-WATER WEIGHT", val: "Neutrally Buoyant", meta: "[ SYNTACTIC FOAM BALANCED ]" },
+      { category: "chassis", param: "MAX PAYLOAD RATING", val: "2,500 kg / 5,510 lbs", meta: "[ COLLECTOR INTERFACE ]" },
+      { category: "dosing", param: "SLURRY FLOW CAPACITY", val: "12,000 m³/h Throughput", meta: "[ CONTINUOUS PROCESSING ]" },
+      { category: "dosing", param: "FLOCCULANT DOSING RANGE", val: "0.5 – 5.0 ppm Active Dosing", meta: "[ CLOSED-LOOP ADAPTIVE ]" },
+      { category: "dosing", param: "SETTLING VELOCITY MULTIPLIER", val: ">20x Acceleration", meta: "[ RAPID BENTHIC DROP ]" },
+      { category: "dosing", param: "INJECTION VALVE RATING", val: "600 Bar Pressure-Balanced", meta: "[ ZERO-LEAK SOLENOIDS ]" },
+      { category: "sensing", param: "ACOUSTIC CURRENT PROFILER", val: "Dual 600 kHz Teledyne ADCP", meta: "[ 3D WATER COLUMN VECTORS ]" },
+      { category: "sensing", param: "OPTICAL BACKSCATTER", val: "Dual 850 nm Nephelometric OBS", meta: "[ 0 – 4,000 NTU RANGE ]" },
+      { category: "sensing", param: "SEDIMENT REDEPOSITION FACTOR", val: ">90% within 15 Minutes", meta: "[ NATURE COMM. 2025 BENCHMARK ]" },
+      { category: "sensing", param: "TELEMETRY UPLINK", val: "Acoustic & Subsea Optical Fiber", meta: "[ AUDITABLE G09 LOG ]" },
+      { category: "materials", param: "PRIMARY METALLURGY", val: "Titanium Grade 5 (Ti-6Al-4V)", meta: "[ DEEP-ABYSS CORROSION IMMUNE ]" },
+      { category: "materials", param: "BUOYANCY COMPOSITE", val: "6,000m Rated Syntactic Glass Foam", meta: "[ ZERO WATER ABSORPTION ]" },
+      { category: "materials", param: "CHEMICAL BIO-COMPATIBILITY", val: "100% Non-Toxic Natural Biopolymer", meta: "[ OECD 202/203 COMPLIANT ]" },
+      { category: "interfaces", param: "POWER & DATA UMBILICAL", val: "48V DC Bus / 10 Gbps Ethernet Fiber", meta: "[ ISO 13628-8 COMPLIANT ]" },
+      { category: "interfaces", param: "MOBILIZATION FOOTPRINT", val: "Standard 20-Foot ISO Container Skid", meta: "[ NO SHIP RECONSTRUCTION ]" },
+      { category: "interfaces", param: "DECK INTEGRATION", val: "Compatible with Commercial Vessels", meta: "[ 24-HOUR RAPID MOBILIZATION ]" }
+    ],
+    comparison: {
+      kicker: "03 // STRATEGIC ADVANTAGE",
+      title: "In-Situ Active Mitigation vs. Legacy Unmitigated Operations",
+      lead: "A direct operational and environmental comparison of active chemical sediment flocculation against unmitigated mining discharge and passive post-hoc monitoring.",
+      headers: {
+        metric: "PERFORMANCE DIMENSION",
+        conrad: "DRUNKEAST SYSTEM",
+        legacy: "LEGACY UNMITIGATED / PASSIVE"
+      },
+      rows: [
+        {
+          metric: "Sediment Settling Velocity",
+          conrad: "<strong>Accelerated >20x</strong> <span class=\"tag\">&lt;15 MIN SETTLING</span>",
+          legacy: "3–6 Months (Uncontrolled 100+ km midwater drift)"
+        },
+        {
+          metric: "Environmental Permitting",
+          conrad: "<strong>Pre-Clearance Proof</strong> <span class=\"tag\">G09 &amp; ISA EMMP</span>",
+          legacy: "Moratorium Risk / Suspended Exploitation Licences"
+        },
+        {
+          metric: "Real-Time Feedback Control",
+          conrad: "<strong>Autonomous Closed-Loop</strong> <span class=\"tag\">ADCP &amp; OBS TELEMETRY</span>",
+          legacy: "Delayed Post-Hoc Retrieval (Zero active mitigation)"
+        },
+        {
+          metric: "Marine Ecological Safety",
+          conrad: "<strong>100% Biodegradable</strong> <span class=\"tag\">OECD 202/203 NON-TOXIC</span>",
+          legacy: "Heavy Metal Re-suspension & Toxic Chemical Additives"
+        },
+        {
+          metric: "Deployment Logistics",
+          conrad: "<strong>20-Foot ISO Container Skid</strong> <span class=\"tag\">EXPEDITIONARY</span>",
+          legacy: "Bespoke Multi-Million Offshore Vessel Retrofits"
+        },
+        {
+          metric: "Commercial Cost Profile",
+          conrad: "<strong>$100k–$300k Pilot Contract</strong> <span class=\"tag\">LIGHT ASSET LEASE</span>",
+          legacy: "Tens of Millions in Stranded Vessel Downtime & Fines"
+        }
+      ]
+    }
+  },
+
   // ── Business Route Content ────────────────────────────────
   biz: {
     kicker: "01 // COMMERCIAL STRATEGY & VALUE PROPOSITION",
@@ -123,36 +245,36 @@ window.Conrad.CONTENT_GLOBAL = {
     sizing: {
       kicker: "02 // MARKET SIZING & VALIDATION ROADMAP",
       title: "From Initial Island Concessions to Global Seabed Scale",
-      lead: "A structured beachhead strategy focused on the Cook Islands regulatory testbed before expanding across international Clarion-Clipperton Zone concessions.",
+      lead: "A structured beachhead strategy validating in-situ plume mitigation in the Cook Islands regulatory testbed before expanding across international Clarion-Clipperton Zone concessions.",
       cards: [
         {
           stage: "INITIAL SOM // 3-YEAR PILOT CONTRACT",
           cost: "$100k – $300k",
           sub: "1 PILOT RESEARCH & MONITORING CONTRACT",
           meta: [
-            { label: "Target Client", value: "Cook Islands Operator (e.g. CSR / CIC)" },
+            { label: "Target Client", value: "Cook Islands Operator (CIC / Moana / CSR)" },
             { label: "Deliverable", value: "In-situ plume simulation & test skid" },
-            { label: "Objective", value: "Validate G09 baseline compliance" }
+            { label: "Objective", value: "Validate SBMA G09 baseline compliance" }
           ]
         },
         {
           stage: "INITIAL SAM // COOK ISLANDS BEACHHEAD",
-          cost: "$450k – $1.5M",
+          cost: "$600k – $1.8M",
           sub: "3 LICENSED EXPLORATION HOLDERS",
           meta: [
             { label: "Market Base", value: "CIC Ltd, Moana Minerals, CSR Ltd" },
             { label: "Monitored Area", value: "254,654 km² Exploration Licences" },
-            { label: "Scope", value: "Monitoring, modeling & baseline trials" }
+            { label: "Scope", value: "Monitoring, modeling & baseline trials ($200k–$600k/operator)" }
           ]
         },
         {
-          stage: "LOCAL TAM // COOK ISLANDS SEABED",
-          cost: "$1.5M – $4.5M",
-          sub: "OVER 3 YEARS ACROSS ALL 3 CONCESSIONS",
+          stage: "PRELIMINARY TAM // 22 GLOBAL CONTRACTS",
+          cost: "$4.4M – $13.2M",
+          sub: "22 CONTRACT-LEVEL OPPORTUNITIES (3-YEAR EXPENDITURE)",
           meta: [
-            { label: "Average Concession", value: "$500k – $1.5M per operator" },
-            { label: "Services", value: "Hardware lease + chemical supply" },
-            { label: "Driver", value: "Environment Regulations 2023" }
+            { label: "Contract Base", value: "19 ISA Nodule Contracts + 3 Cook Islands Licences" },
+            { label: "Unit Expenditure", value: "$200,000 – $600,000 per 3-year project" },
+            { label: "Primary Mandate", value: "ISA Draft Exploitation Regulations & G09" }
           ]
         },
         {
@@ -161,8 +283,8 @@ window.Conrad.CONTENT_GLOBAL = {
           sub: "34.3% CAGR DRIVEN BY CLEAN ENERGY TRANSITION",
           meta: [
             { label: "Key Critical Metals", value: "Nickel, Cobalt, Copper, Manganese" },
-            { label: "Contract Base", value: "22 ISA & national nodule contracts" },
-            { label: "Primary Mandate", value: "ISA Draft Exploitation Regulations" }
+            { label: "Target Sectors", value: "Offshore mining operators, dredging & environmental consultancies" },
+            { label: "Primary Driver", value: "Global battery demand & net-zero standards" }
           ]
         }
       ]
@@ -170,7 +292,7 @@ window.Conrad.CONTENT_GLOBAL = {
 
     // PESTLE Matrix
     pestle: {
-      kicker: "03 // PESTLE STRATEGIC FRAMEWORK",
+      kicker: "04 // PESTLE STRATEGIC FRAMEWORK",
       title: "Regulatory & Environmental Operating Environment",
       lead: "A multi-dimensional analysis grounding our technology within sovereign jurisdiction, global seabed treaties, and environmental imperatives.",
       factors: [
@@ -233,19 +355,49 @@ window.Conrad.CONTENT_GLOBAL = {
 
     // 22 Contract Concession Pipeline
     pipeline: {
-      kicker: "04 // ADDRESSABLE CONCESSION PIPELINE",
-      title: "Global Seabed Contract Opportunities",
+      kicker: "03 // ADDRESSABLE CONCESSION PIPELINE",
+      title: "22 Global Seabed Contract Opportunities",
       lead: "22 identifiable contract-level opportunities across the International Seabed Authority and sovereign Pacific exclusive economic zones.",
       regions: [
         { name: "Clarion-Clipperton Zone (CCZ)", count: "17 Contracts", match: "★★★★★", actors: "TMC/NORI (Nauru), TOML (Tonga), GSR (Belgium), UKSR (UK), China Minmetals, DORD (Japan), BGR (Germany)" },
-        { name: "Cook Islands EEZ", count: "3 Licences", match: "★★★★★", actors: "CIC Limited (211,545 km²), Moana Minerals (23,630 km²), Cobalt Seabed Resources (19,479 km²)" },
+        { name: "Cook Islands Sovereign EEZ", count: "3 Licences", match: "★★★★★", actors: "CIC Limited (211,545 km²), Moana Minerals (23,630 km²), Cobalt Seabed Resources (19,479 km²)" },
         { name: "Central Indian Ocean Basin", count: "1 Contract", match: "★★★★★", actors: "Government of India (Polymetallic Nodules)" },
         { name: "Western Pacific Basin", count: "1 Contract", match: "★★★★★", actors: "Beijing Pioneer Hi-Tech Development Corporation (China)" },
         { name: "Indian Ocean Ridges", count: "5 Contracts", match: "★★★", actors: "China (COMRA), South Korea, Germany (BGR), India (Polymetallic Sulfides)" },
         { name: "Mid-Atlantic Ridge", count: "3 Contracts", match: "★★★", actors: "Russia (Yuzhmorgeologiya), France (Ifremer), Poland (Polymetallic Sulfides)" },
         { name: "Western Pacific Seamounts", count: "4 Contracts", match: "★★★", actors: "Japan (JOGMEC), China (COMRA), Russia, South Korea (Cobalt-Rich Crusts)" }
       ]
-    }
+    },
+
+    // 16 ISA Contractors
+    contractors: [
+      { id: "01", country: "Nauru", entity: "Nauru Ocean Resources Inc. (NORI)", type: "Commercial (TMC)", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "02", country: "Tonga", entity: "Tonga Offshore Mining Ltd. (TOML)", type: "Commercial (TMC)", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "03", country: "Belgium", entity: "Global Sea Mineral Resources (GSR)", type: "Commercial (DEME)", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "04", country: "United Kingdom", entity: "UK Seabed Resources (UKSR)", type: "Commercial", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "05", country: "China", entity: "China Minmetals Corporation", type: "State-Owned Enterprise", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "06", country: "Japan", entity: "Deep Ocean Resources Development (DORD)", type: "Commercial Consortium", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "07", country: "Singapore", entity: "Ocean Mineral Singapore (OMS)", type: "Commercial", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "08", country: "Kiribati", entity: "Marawa Research and Exploration", type: "State-Sponsored Entity", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "09", country: "Jamaica", entity: "Blue Minerals Jamaica", type: "Commercial", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "10", country: "Cook Islands", entity: "Cook Islands Investment Corp. (CIIC)", type: "State Investment Agency", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "11", country: "China", entity: "China Ocean Mineral Resources R&D (COMRA)", type: "National Association", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "12", country: "Germany", entity: "Federal Institute for Geosciences (BGR)", type: "Government Research", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "13", country: "France", entity: "Ifremer", type: "National Ocean Institute", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "14", country: "South Korea", entity: "Government of the Republic of Korea", type: "Sovereign State", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "15", country: "Russia", entity: "JSC Yuzhmorgeologiya", type: "State Enterprise", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" },
+      { id: "16", country: "Multi-State", entity: "Interoceanmetal Joint Org. (IOM)", type: "Intergovernmental Consortium", area: "Clarion-Clipperton Zone", mineral: "Polymetallic Nodules", match: "★★★★★" }
+    ],
+
+    // References (APA 7th Edition)
+    references: [
+      "[1] Cook Islands Seabed Minerals Authority. (n.d.). Exploration licence holders. https://www.sbma.gov.ck/",
+      "[2] Cook Islands Seabed Minerals Authority, & National Environment Service. (2024). G09: Environmental management and monitoring plans. https://www.sbma.gov.ck/standards-guidelines",
+      "[3] International Seabed Authority. (n.d.). Exploration contracts. https://isa.org.jm/exploration-contracts/",
+      "[4] Gazis, I.-Z., de Stigter, H., Mohrmann, J., et al. (2025). Monitoring benthic plumes, sediment redeposition and seafloor imprints caused by deep-sea polymetallic nodule mining. Nature Communications, 16, Article 1229. https://doi.org/10.1038/s41467-025-56311-0",
+      "[5] Adams, E. E., et al. (2021). Extent of impact of deep-sea nodule mining midwater plumes is influenced by sediment loading, turbulence and thresholds. Communications Earth & Environment, 2, Article 148. https://doi.org/10.1038/s43247-021-00213-8",
+      "[6] Nature. (2025). Long-term impact and biological recovery in a deep-sea mining track. https://www.nature.com/articles/s41586-025-08921-3"
+    ]
   },
 
   // ── About Route Content ───────────────────────────────────
@@ -261,56 +413,56 @@ window.Conrad.CONTENT_GLOBAL = {
       {
         letter: "D",
         word: "Deep-Sea Exploration",
-        principle: "Investigating the mysteries, extreme pressures, and environmental dynamics of the abyssal plain.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/273b69f85bec5374015642647464223b0501a17f-4000x2660.png"
+        principle: "Investigating the mysteries and challenges of the deep ocean.",
+        image: "/assets/images/subsea/benthic-collector.jpg"
       },
       {
         letter: "R",
         word: "Restoration",
-        principle: "Developing pragmatic engineering solutions that support the rapid recovery of disturbed marine habitats.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/362212f069102419e04043c85353fc572ead5649-4000x2660.png"
+        principle: "Developing solutions that support the recovery of marine environments.",
+        image: "/assets/images/subsea/bento-01-flocculation.jpg"
       },
       {
         letter: "U",
         word: "Uncertainty",
-        principle: "Embracing the complex unknown through rigorous research, controlled experimentation, and critical thinking.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/113f1d96997d7375017ad46ebcd24122de1e343f-1404x1080.png"
+        principle: "Embracing the unknown through research, experimentation, and critical thinking.",
+        image: "/assets/images/subsea/bento-04-digital-twin.jpg"
       },
       {
         letter: "N",
         word: "Navigation",
-        principle: "Charting viable pathways through intricate scientific, oceanic, and regulatory compliance frameworks.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/1ec5966e21866afda6b535cb05350e2af41090d2-1993x1115.png"
+        principle: "Finding pathways through complex scientific and environmental challenges.",
+        image: "/_external/cdn.sanity.io/images/61nocsj5/production/0126fc76978b2fedd63aeeacd2e3b1f55f5c617f-952x952.png"
       },
       {
         letter: "K",
         word: "Knowledge",
-        principle: "Transforming empirical oceanographic research and sensor telemetry into actionable, auditable decisions.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/07ffa223dc2ddf1ca9d3af7307aa8e5e1a71a3fc-1404x1080.png"
+        principle: "Turning research and evidence into informed decisions.",
+        image: "/assets/images/subsea/bento-05-telemetry.jpg"
       },
       {
         letter: "E",
         word: "Environmental Protection",
-        principle: "Prioritising the long-term health, trophic integrity, and resilience of fragile deep-ocean ecosystems.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/216fe60b438d0b6b0ed8245321fc2c7905f0b45d-2000x1501.jpg"
+        principle: "Prioritising the health and resilience of marine ecosystems.",
+        image: "/_external/cdn.sanity.io/images/61nocsj5/production/b95abc74192ac5ae36f6076031bb09dc0e09d318-1920x1080.png"
       },
       {
         letter: "A",
         word: "Adaptation",
-        principle: "Responding dynamically to changing benthic currents and plume densities with flexible in-situ dosing.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/05300e9a98ce923d121333250a314b71e01bec76-4000x2659.png"
+        principle: "Responding to changing conditions with flexible, innovative solutions.",
+        image: "/assets/images/subsea/bento-02-manifold.jpg"
       },
       {
         letter: "S",
         word: "Sustainability",
-        principle: "Balancing the clean energy transition's mineral demands with uncompromising environmental responsibility.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/8a8448ff1a911087594846b35c0f58edb645cf46-4000x2660.png"
+        principle: "Balancing technological progress with long-term environmental responsibility.",
+        image: "/assets/images/subsea/bento-03-adcp.jpg"
       },
       {
         letter: "T",
         word: "Technology",
-        principle: "Applying advanced chemical engineering, acoustic physics, and robotics to solve real-world ocean challenges.",
-        image: "/_external/cdn.sanity.io/images/61nocsj5/production/add60aa1adc75c31cd2f9a267f589a2d62b81892-4000x2660.png"
+        principle: "Applying science and engineering to tackle real-world problems.",
+        image: "/assets/images/subsea/bento-07-pressure-vessel.jpg"
       }
     ],
 
@@ -321,7 +473,7 @@ window.Conrad.CONTENT_GLOBAL = {
     contact: {
       kicker: "02 // GET IN TOUCH",
       title: "Direct Inquiries",
-      lead: "Have a question, an idea, or an opportunity to collaborate? We welcome conversations with fellow innovators, ocean researchers, and mining concession operators.",
+      lead: "Have a question, an idea, or an opportunity to collaborate? We would love to hear from you. We welcome conversations with fellow innovators, ocean researchers, and mining concession operators.",
       email: "teamdrunkeast@gmail.com",
       company: "DRUNKEAST"
     }
