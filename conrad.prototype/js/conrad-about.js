@@ -193,6 +193,34 @@ window.generateContactHTML = function(kicker, leadText) {
   var GAP = 350;
   var ANGLE = -22;
 
+  var _cachedWalkEls = null;
+
+  function getWalkElements() {
+    if (_cachedWalkEls && document.contains(_cachedWalkEls.track)) {
+      return _cachedWalkEls;
+    }
+
+    var track = document.getElementById("conrad-walkalone-track");
+    if (!track) return null;
+
+    _cachedWalkEls = {
+      track: track,
+      sticky: document.getElementById("conrad-walkalone-sticky"),
+      strip: document.getElementById("walkalone-strip"),
+      cardsWrap: document.getElementById("walkalone-cards-wrap"),
+      sheet: document.getElementById("walkalone-inspect-sheet"),
+      counter: document.getElementById("walkalone-counter"),
+      info: document.getElementById("walkalone-info"),
+      nav: document.getElementById("walkalone-steps-nav"),
+      badgeEl: document.getElementById("walkalone-inspect-badge"),
+      titleEl: document.getElementById("walkalone-inspect-title"),
+      subEl: document.getElementById("walkalone-inspect-subtitle"),
+      descEl: document.getElementById("walkalone-inspect-desc")
+    };
+
+    return _cachedWalkEls;
+  }
+
   function getWalkData() {
     var acronym = (window.Conrad && Conrad.content && Conrad.content.get("about.acronym"));
     if (Array.isArray(acronym) && acronym.length) {
@@ -301,18 +329,20 @@ window.generateContactHTML = function(kicker, leadText) {
     var data = WALK_DATA[index];
     if (!data) return;
 
-    var track = document.getElementById("conrad-walkalone-track");
-    var strip = document.getElementById("walkalone-strip");
-    var cardsWrap = document.getElementById("walkalone-cards-wrap");
-    var sheet = document.getElementById("walkalone-inspect-sheet");
-    var counter = document.getElementById("walkalone-counter");
-    var info = document.getElementById("walkalone-info");
-    var nav = document.getElementById("walkalone-steps-nav");
+    var els = getWalkElements();
+    if (!els) return;
+    var track = els.track;
+    var strip = els.strip;
+    var cardsWrap = els.cardsWrap;
+    var sheet = els.sheet;
+    var counter = els.counter;
+    var info = els.info;
+    var nav = els.nav;
 
-    var badgeEl = document.getElementById("walkalone-inspect-badge");
-    var titleEl = document.getElementById("walkalone-inspect-title");
-    var subEl = document.getElementById("walkalone-inspect-subtitle");
-    var descEl = document.getElementById("walkalone-inspect-desc");
+    var badgeEl = els.badgeEl;
+    var titleEl = els.titleEl;
+    var subEl = els.subEl;
+    var descEl = els.descEl;
 
     if (badgeEl) badgeEl.textContent = data.stage;
     if (titleEl) titleEl.textContent = data.title;
@@ -406,13 +436,15 @@ window.generateContactHTML = function(kicker, leadText) {
     if (!isInspectOpen || isInspectAnimating) return;
     isInspectAnimating = true;
 
-    var track = document.getElementById("conrad-walkalone-track");
-    var strip = document.getElementById("walkalone-strip");
-    var cardsWrap = document.getElementById("walkalone-cards-wrap");
-    var sheet = document.getElementById("walkalone-inspect-sheet");
-    var counter = document.getElementById("walkalone-counter");
-    var info = document.getElementById("walkalone-info");
-    var nav = document.getElementById("walkalone-steps-nav");
+    var els = getWalkElements();
+    if (!els) return;
+    var track = els.track;
+    var strip = els.strip;
+    var cardsWrap = els.cardsWrap;
+    var sheet = els.sheet;
+    var counter = els.counter;
+    var info = els.info;
+    var nav = els.nav;
 
     if (strip) strip.classList.remove("inspect-backdrop");
 
@@ -531,11 +563,12 @@ window.generateContactHTML = function(kicker, leadText) {
   }
 
   function updateWalkScroll() {
-    var track = document.getElementById("conrad-walkalone-track");
-    var sticky = document.getElementById("conrad-walkalone-sticky");
-    var strip = document.getElementById("walkalone-strip");
-    var nav = document.getElementById("walkalone-steps-nav");
-    if (!track || !sticky || !strip) return;
+    var els = getWalkElements();
+    if (!els) return;
+    var track = els.track;
+    var sticky = els.sticky;
+    var strip = els.strip;
+    var nav = els.nav;
 
     var WALK_DATA = getWalkData();
     var rect = track.getBoundingClientRect();
@@ -647,8 +680,9 @@ window.generateContactHTML = function(kicker, leadText) {
   }
 
   function goToWalkStep(targetStep) {
-    var track = document.getElementById("conrad-walkalone-track");
-    if (!track) return;
+    var els = getWalkElements();
+    if (!els) return;
+    var track = els.track;
     var WALK_DATA = getWalkData();
     var targetProgress = targetStep / Math.max(1, (WALK_DATA.length - 1));
     var scrollDistance = track.offsetHeight - window.innerHeight;
@@ -664,8 +698,9 @@ window.generateContactHTML = function(kicker, leadText) {
 
   var eventsBound = false;
   function bindWalkEvents() {
-    var track = document.getElementById("conrad-walkalone-track");
-    if (!track) return;
+    var els = getWalkElements();
+    if (!els) return;
+    var track = els.track;
 
     var cards = track.querySelectorAll(".walkalone-card-item");
     cards.forEach(function(card, idx) {
@@ -787,7 +822,7 @@ window.generateContactHTML = function(kicker, leadText) {
 
   function ensureAboutTrack() {
     var onAbout = isAboutRoute();
-    var track = document.getElementById("conrad-walkalone-track");
+    var track = document.getElementById("conrad-walkalone-track"); // leave this one as is, since we are setting it up or destroying it
     var contact = document.getElementById("conrad-contact-block");
 
     if (!onAbout) {
@@ -848,7 +883,8 @@ window.generateContactHTML = function(kicker, leadText) {
         nextBtn.addEventListener("click", function(e) {
           e.preventDefault();
           e.stopPropagation();
-          var t = document.getElementById("conrad-walkalone-track");
+          var els = getWalkElements();
+          var t = els ? els.track : document.getElementById("conrad-walkalone-track");
           if (t) {
             var topPos = t.getBoundingClientRect().top + window.pageYOffset;
             if (window.Global && Global.lenis) {
@@ -868,7 +904,7 @@ window.generateContactHTML = function(kicker, leadText) {
       hero.parentNode.insertBefore(track, hero.nextSibling);
     }
 
-    var currentTrack = document.getElementById("conrad-walkalone-track");
+    var currentTrack = document.getElementById("conrad-walkalone-track"); // getting the fresh one
     if (currentTrack) {
       if (!contact || needsRebuild) {
         if (contact) contact.remove();
@@ -895,7 +931,8 @@ window.generateContactHTML = function(kicker, leadText) {
   function checkAboutRoute() {
     var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     var hero = document.querySelector(".PageHero");
-    var track = document.getElementById("conrad-walkalone-track");
+    var els = getWalkElements();
+    var track = els ? els.track : document.getElementById("conrad-walkalone-track");
     var activeEdition = (window.Conrad && Conrad.edition) || "global";
     if (p !== lastAboutRoute || (hero && !track) || (track && currentMountedEdition !== activeEdition)) {
       lastAboutRoute = p;
