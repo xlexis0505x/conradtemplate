@@ -63,66 +63,10 @@ class DevHandler(SimpleHTTPRequestHandler):
         if os.path.exists(translated) and not os.path.isdir(translated):
             return translated
 
-        # 2. Dynamic upstream cache for route .json files
-        ext = Path(clean).suffix.lower()
-        if ext == ".json":
-            try:
-                import urllib.request
-                rel_url = clean.lstrip("/")
-                live_url = f"https://www.anduril.com/{rel_url}"
-                req = urllib.request.Request(
-                    live_url,
-                    headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
-                )
-                with urllib.request.urlopen(req, timeout=5) as resp:
-                    data = resp.read()
-                    target = Path(translated)
-                    target.parent.mkdir(parents=True, exist_ok=True)
-                    target.write_bytes(data)
-                    return str(target)
-            except Exception:
-                pass
-
-        # 3. Dynamic upstream cache for Sanity CDN assets
-        if clean.startswith("/_external/cdn.sanity.io/"):
-            try:
-                import urllib.request
-                sanity_path = clean[len("/_external/cdn.sanity.io/"):]
-                live_url = f"https://cdn.sanity.io/{sanity_path}"
-                req = urllib.request.Request(
-                    live_url,
-                    headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
-                )
-                with urllib.request.urlopen(req, timeout=8) as resp:
-                    data = resp.read()
-                    target = Path(translated)
-                    target.parent.mkdir(parents=True, exist_ok=True)
-                    target.write_bytes(data)
-                    return str(target)
-            except Exception:
-                pass
-
-        # 4. Dynamic upstream cache for missing /assets/ files
-        if clean.startswith("/assets/"):
-            try:
-                import urllib.request
-                live_url = f"https://www.anduril.com{clean}"
-                req = urllib.request.Request(
-                    live_url,
-                    headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
-                )
-                with urllib.request.urlopen(req, timeout=8) as resp:
-                    data = resp.read()
-                    target = Path(translated)
-                    target.parent.mkdir(parents=True, exist_ok=True)
-                    target.write_bytes(data)
-                    return str(target)
-            except Exception:
-                pass
-
-        # 5. SPA Fallback: if the file/dir does not exist and has no extension, serve index.html
+        # 2. SPA Fallback: if the file/dir does not exist and has no extension, serve index.html
         if not os.path.exists(translated) and not Path(clean).suffix:
             return str(DOC_ROOT / "index.html")
+
         return translated
 
     def guess_type(self, path):
@@ -187,7 +131,7 @@ class DevHandler(SimpleHTTPRequestHandler):
 
 def run(port=DEFAULT_PORT):
     httpd = ServerClass((HOST, port), DevHandler)
-    print(f"\n🚀 anduril.com running at http://localhost:{port}/")
+    print(f"\n🚀 Conrad Prototype running at http://localhost:{port}/")
     print(f"📁 Serving: {DOC_ROOT}")
     print("Press Ctrl+C to stop.\n")
     try:

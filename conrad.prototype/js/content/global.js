@@ -391,12 +391,12 @@ window.Conrad.CONTENT_GLOBAL = {
 
     // References (APA 7th Edition)
     references: [
-      "[1] Cook Islands Seabed Minerals Authority. (n.d.). Exploration licence holders. https://www.sbma.gov.ck/",
-      "[2] Cook Islands Seabed Minerals Authority, & National Environment Service. (2024). G09: Environmental management and monitoring plans. https://www.sbma.gov.ck/standards-guidelines",
-      "[3] International Seabed Authority. (n.d.). Exploration contracts. https://isa.org.jm/exploration-contracts/",
-      "[4] Gazis, I.-Z., de Stigter, H., Mohrmann, J., et al. (2025). Monitoring benthic plumes, sediment redeposition and seafloor imprints caused by deep-sea polymetallic nodule mining. Nature Communications, 16, Article 1229. https://doi.org/10.1038/s41467-025-56311-0",
-      "[5] Adams, E. E., et al. (2021). Extent of impact of deep-sea nodule mining midwater plumes is influenced by sediment loading, turbulence and thresholds. Communications Earth & Environment, 2, Article 148. https://doi.org/10.1038/s43247-021-00213-8",
-      "[6] Nature. (2025). Long-term impact and biological recovery in a deep-sea mining track. https://www.nature.com/articles/s41586-025-08921-3"
+      "[1] Cook Islands Seabed Minerals Authority. (n.d.). Exploration licence holders. SBMA Registry.",
+      "[2] Cook Islands Seabed Minerals Authority, & National Environment Service. (2024). G09: Environmental management and monitoring plans. SBMA Guidelines.",
+      "[3] International Seabed Authority. (n.d.). Exploration contracts. ISA Official Registry.",
+      "[4] Gazis, I.-Z., de Stigter, H., Mohrmann, J., et al. (2025). Monitoring benthic plumes, sediment redeposition and seafloor imprints caused by deep-sea polymetallic nodule mining. Nature Communications, 16, Article 1229. DOI: 10.1038/s41467-025-56311-0.",
+      "[5] Adams, E. E., et al. (2021). Extent of impact of deep-sea nodule mining midwater plumes is influenced by sediment loading, turbulence and thresholds. Communications Earth & Environment, 2, Article 148. DOI: 10.1038/s43247-021-00213-8.",
+      "[6] Nature. (2025). Long-term impact and biological recovery in a deep-sea mining track. Nature Publishing Group."
     ]
   },
 
