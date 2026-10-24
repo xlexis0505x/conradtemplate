@@ -30,7 +30,7 @@ jobs:
 
       - name: Install Dependencies for Tests
         run: |
-          pip install pytest pytest-playwright
+          pip install pytest pytest-playwright pillow
           playwright install chromium
 
       - name: Run Tests
@@ -50,8 +50,9 @@ jobs:
 
           os.makedirs(dest, exist_ok=True)
 
-          # Collect actively referenced video assets from Conrad route definitions
+          # Collect actively referenced video & image assets from Conrad route definitions
           active_videos = set()
+          active_images = set()
           for j in ['index.json', 'cn.json', 'about.json', 'business.json', 'technology.json']:
             jp = os.path.join(src, j)
             if os.path.exists(jp):
@@ -59,6 +60,21 @@ jobs:
                 content = f.read()
               for m in re.finditer(r'file-([a-f0-9]+)-mp4', content):
                 active_videos.add(m.group(1) + '.mp4')
+              for m in re.finditer(r'image-([a-f0-9]+-[0-9]+x[0-9]+)-([a-z]+)', content):
+                active_images.add(f"{m.group(1)}.{m.group(2)}")
+
+          for root, _, files in os.walk(os.path.join(src, 'js')):
+            for file in files:
+              if file.endswith('.js'):
+                with open(os.path.join(root, file), 'r', encoding='utf-8') as f:
+                  content = f.read()
+                  for m in re.finditer(r'([a-f0-9]{40}-[0-9]+x[0-9]+\.(?:png|jpg|jpeg|webp))', content):
+                    active_images.add(m.group(1))
+
+          with open(os.path.join(src, 'index.html'), 'r', encoding='utf-8') as f:
+            content = f.read()
+            for m in re.finditer(r'([a-f0-9]{40}-[0-9]+x[0-9]+\.(?:png|jpg|jpeg|webp))', content):
+              active_images.add(m.group(1))
 
           # Copy prototype assets and pages with payload optimization filter
           for item in os.listdir(src):
@@ -79,6 +95,10 @@ jobs:
                     for f in filenames:
                       if f.endswith('.mp4') and f not in active_videos:
                         ignored.add(f)
+                  if 'images' in dir_path:
+                    for f in filenames:
+                      if f not in active_images:
+                        ignored.add(f)
                   return ignored
                 shutil.copytree(s, d, symlinks=True, ignore=filter_external)
               elif item == 'assets':
@@ -93,6 +113,33 @@ jobs:
                 shutil.copytree(s, d, symlinks=True)
             else:
               shutil.copy2(s, d)
+
+          # Compress active sanity images in _site to reduce network transfer payload
+          img_site_dir = os.path.join(dest, '_external', 'cdn.sanity.io', 'images', '61nocsj5', 'production')
+          if os.path.exists(img_site_dir):
+            try:
+              from PIL import Image
+              for fname in os.listdir(img_site_dir):
+                fpath = os.path.join(img_site_dir, fname)
+                tmp_out = fpath + '.tmp'
+                try:
+                  with Image.open(fpath) as im:
+                    if fname.endswith('.png'):
+                      if im.mode in ('RGBA', 'LA') or (im.mode == 'P' and 'transparency' in im.info):
+                        im.quantize(colors=256).save(tmp_out, 'PNG', optimize=True)
+                      else:
+                        im.convert('RGB').quantize(colors=256).save(tmp_out, 'PNG', optimize=True)
+                    elif fname.endswith(('.jpg', '.jpeg')):
+                      im.convert('RGB').save(tmp_out, 'JPEG', quality=82, optimize=True)
+                  if os.path.exists(tmp_out) and os.path.getsize(tmp_out) < os.path.getsize(fpath):
+                    os.replace(tmp_out, fpath)
+                  elif os.path.exists(tmp_out):
+                    os.remove(tmp_out)
+                except Exception:
+                  if os.path.exists(tmp_out):
+                    os.remove(tmp_out)
+            except Exception as e:
+              print(f'Image compression step skipped: {e}')
 
           # Ensure .nojekyll is present so GitHub Pages serves _external without filtering
           with open(os.path.join(dest, '.nojekyll'), 'w') as f:
