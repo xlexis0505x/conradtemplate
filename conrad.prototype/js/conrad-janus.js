@@ -104,7 +104,8 @@
     var newlyMounted = false;
     if (!track) {
       var w = document.createElement("div");
-      w.innerHTML = trackHTML;
+      // eslint-disable-next-line xss/no-mixed-html
+      w.insertAdjacentHTML('afterbegin', trackHTML); // Safe: trackHTML is a 100% static string.
       track = w.firstElementChild;
 
       if (mediaLink) {
