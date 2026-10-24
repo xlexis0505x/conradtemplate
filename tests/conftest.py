@@ -4,7 +4,7 @@ from playwright.sync_api import sync_playwright
 
 DEFAULT_LOCAL_URL = "http://localhost:8087"
 DEFAULT_LIVE_URL = "https://xlexis0505x.github.io/conradtemplate"
-ARTIFACT_DIR = "/Users/williamy./.gemini/antigravity/brain/33f4a274-61b1-4323-b7e9-62410692d9e7"
+ARTIFACT_DIR = "/tmp/playwright-artifacts"
 
 
 def pytest_addoption(parser):

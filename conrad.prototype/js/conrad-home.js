@@ -3,6 +3,16 @@
  */
 
 (function() {
+  function escapeHTML(str) {
+    if (str == null) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
   var DEFAULT_SUB_DATA = [
     {
       title: "01 // Eco-Flocculation Chemistry",
@@ -258,10 +268,10 @@
                   return `
                     <div class="conrad-stat-card">
                       <div>
-                        <div class="conrad-stat-val">${s.value}</div>
-                        <div class="conrad-stat-label">${s.label}</div>
+                        <div class="conrad-stat-val">${escapeHTML(s.value)}</div>
+                        <div class="conrad-stat-label">${escapeHTML(s.label)}</div>
                       </div>
-                      <div class="conrad-stat-sub">${s.sub}</div>
+                      <div class="conrad-stat-sub">${escapeHTML(s.sub)}</div>
                     </div>
                   `;
                 }).join("")}
