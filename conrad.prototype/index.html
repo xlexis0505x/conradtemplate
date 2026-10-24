@@ -259,7 +259,7 @@ function qualifyUrl(url) {
 <script>
    (function() {
             try {
-                eval('let obj = {}; obj?.prop');
+                new Function('let obj = {}; obj?.prop')();
             } catch (e) {
                 window.location.replace('unsupported.xxvQ-RQjAT.html');
                 return;

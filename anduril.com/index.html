@@ -45,7 +45,7 @@ window.gtag = function(){};
 <script>
    (function() {
             try {
-                eval('let obj = {}; obj?.prop');
+                new Function('let obj = {}; obj?.prop')();
             } catch (e) {
                 window.location.replace('unsupported.xxvQ-RQjAT.html');
                 return;
