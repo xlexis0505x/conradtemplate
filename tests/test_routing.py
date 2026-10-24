@@ -106,3 +106,76 @@ def test_history_back_forward(page, base_url):
     page.go_forward()
     page.wait_for_function("() => window.location.pathname.includes('technology')", timeout=5000)
     assert "technology" in page.url.lower()
+
+@pytest.mark.routing
+def test_conrad_router_sync_logic(page, base_url):
+    """Verifies that the syncAllRoutes logic correctly triggers mock functions based on mocked paths."""
+    page.goto(f"{base_url}/", wait_until="domcontentloaded")
+    page.wait_for_selector("#Stage", timeout=10000)
+
+    result = page.evaluate("""() => {
+
+        // Remove existing tracks to guarantee the functions are called
+        ['conrad-radiant-janus-track', 'conrad-tech-spec-matrix', 'conrad-biz-doctrine', 'conrad-walkalone-track'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        });
+
+        // Setup mock counters
+
+        window.__mockCounters = {
+            ensureHomeJanus: 0,
+            ensureTechSections: 0,
+            ensureBizTrack: 0,
+            ensureAboutTrack: 0
+        };
+
+        // Mock the ensure functions
+        window.ensureHomeJanus = () => { window.__mockCounters.ensureHomeJanus++; };
+        window.ensureTechSections = () => { window.__mockCounters.ensureTechSections++; };
+        window.ensureBizTrack = () => { window.__mockCounters.ensureBizTrack++; };
+        window.ensureAboutTrack = () => { window.__mockCounters.ensureAboutTrack++; };
+
+        // Expose them on window.Conrad if it exists
+        if (!window.Conrad) window.Conrad = {};
+        window.Conrad.ensureHomeJanus = window.ensureHomeJanus;
+        window.Conrad.ensureTechSections = window.ensureTechSections;
+        window.Conrad.ensureBizTrack = window.ensureBizTrack;
+        window.Conrad.ensureAboutTrack = window.ensureAboutTrack;
+
+        let mockedPath = "/";
+        window.getAppPath = () => mockedPath;
+
+        // Reset the lastObservedPath by reloading route logic essentially or explicitly calling syncAllRoutes
+        // Test Home route
+        mockedPath = "/";
+        window.syncAllRoutes();
+        const homeCalls = window.__mockCounters.ensureHomeJanus;
+
+        // Test Tech route
+        mockedPath = "/technology";
+        window.syncAllRoutes();
+        const techCalls = window.__mockCounters.ensureTechSections;
+
+        // Test Biz route
+        mockedPath = "/business";
+        window.syncAllRoutes();
+        const bizCalls = window.__mockCounters.ensureBizTrack;
+
+        // Test About route
+        mockedPath = "/about";
+        window.syncAllRoutes();
+        const aboutCalls = window.__mockCounters.ensureAboutTrack;
+
+        return {
+            homeCalls: homeCalls,
+            techCalls: techCalls,
+            bizCalls: bizCalls,
+            aboutCalls: aboutCalls
+        };
+    }""")
+
+    assert result["homeCalls"] > 0, "ensureHomeJanus should be called for '/'"
+    assert result["techCalls"] > 0, "ensureTechSections should be called for '/technology'"
+    assert result["bizCalls"] > 0, "ensureBizTrack should be called for '/business'"
+    assert result["aboutCalls"] > 0, "ensureAboutTrack should be called for '/about'"
