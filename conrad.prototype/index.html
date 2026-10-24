@@ -134,11 +134,18 @@ function qualifyUrl(url) {
     if (/^https?:\/\/xlexis0505x\.github\.io\/(?!conradtemplate\/)/.test(url)) {
       return url.replace('xlexis0505x.github.io/', 'xlexis0505x.github.io/conradtemplate/');
     }
+    // Route JSON mappings for cn and root routes
+    if (url === 'cn.json' || url === '/cn.json' || url.endsWith('/cn.json')) {
+      return '/conradtemplate/cn.json';
+    }
     if (/^\/(_external|assets|css|js|textures|draco|models|data)\//.test(url)) {
       return '/conradtemplate' + url;
     }
     if (/^\/[^\/]+\.json$/.test(url)) {
       return '/conradtemplate' + url;
+    }
+    if (/^[^\/]+\.json$/.test(url)) {
+      return '/conradtemplate/' + url;
     }
     return url;
   }
@@ -305,7 +312,6 @@ function qualifyUrl(url) {
 <link as="font" crossorigin="anonymous" href="assets/fonts/HelveticaNowDisplay-Regular.xxKomsIKdj.woff2" rel="preload"/>
 <link as="font" crossorigin="anonymous" href="assets/fonts/HelveticaNowDisplay-Bold.xxk3ETk4bz.woff2" rel="preload"/>
 <link href="_external/cdn.sanity.io/" rel="preconnect"/>
-<link href="https://www.google-analytics.com" rel="preconnect"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
@@ -324,6 +330,11 @@ function qualifyUrl(url) {
 <script defer src="js/conrad-tech.js"></script>
 <script defer src="js/conrad-biz.js"></script>
 <script defer src="js/conrad-about.js"></script>
+<script id="ga-script">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
 </head>
 <body>
 <div id="conrad-prepaint-hero" style="position:fixed;inset:0;background:#050505;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.4s cubic-bezier(0.16,1,0.3,1);pointer-events:none;">
@@ -350,15 +361,18 @@ function qualifyUrl(url) {
   }
   window.__dismissPrepaint = dismissPrepaint;
   var checkTimer = setInterval(function() {
-    if (document.querySelector('.home-hero') || document.querySelector('#Stage .Container') || document.querySelector('#Stage')) {
+    var stage = document.getElementById('Stage');
+    var hasStageContent = stage && stage.children.length > 0;
+    if (document.querySelector('.home-hero') || document.querySelector('#conrad-radiant-janus-sticky') || hasStageContent) {
       clearInterval(checkTimer);
       setTimeout(dismissPrepaint, 150);
     }
   }, 40);
+  // Fail-safe timeout increased to 8000ms so users on slower CDN edges see the prepaint hero instead of a black screen
   setTimeout(function() {
     clearInterval(checkTimer);
     dismissPrepaint();
-  }, 1400);
+  }, 8000);
 })();
 </script>
 <noscript>

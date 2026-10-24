@@ -40,7 +40,7 @@ jobs:
       - name: Build site artifact
         run: |
           python3 - << 'EOF'
-          import os, shutil
+          import os, shutil, re
 
           src = 'conrad.prototype'
           dest = '_site'
@@ -50,12 +50,47 @@ jobs:
 
           os.makedirs(dest, exist_ok=True)
 
-          # Copy prototype assets and pages
+          # Collect actively referenced video assets from Conrad route definitions
+          active_videos = set()
+          for j in ['index.json', 'cn.json', 'about.json', 'business.json', 'technology.json']:
+            jp = os.path.join(src, j)
+            if os.path.exists(jp):
+              with open(jp, 'r', encoding='utf-8') as f:
+                content = f.read()
+              for m in re.finditer(r'file-([a-f0-9]+)-mp4', content):
+                active_videos.add(m.group(1) + '.mp4')
+
+          # Copy prototype assets and pages with payload optimization filter
           for item in os.listdir(src):
+            if item in ['air', 'arsenal', 'land', 'lattice', 'models', 'news', 'sea', 'space', 'subterranean', 'infographic-fallback', 'draco', '__pycache__']:
+              continue
+            if item.endswith('.json') and item not in ['index.json', 'cn.json', 'technology.json', 'business.json', 'about.json', '404.json', '400.json']:
+              continue
+            if item.endswith(('.py', '.md', '.orig')):
+              continue
+
             s = os.path.join(src, item)
             d = os.path.join(dest, item)
             if os.path.isdir(s):
-              shutil.copytree(s, d, symlinks=True)
+              if item == '_external':
+                def filter_external(dir_path, filenames):
+                  ignored = set()
+                  if 'files' in dir_path:
+                    for f in filenames:
+                      if f.endswith('.mp4') and f not in active_videos:
+                        ignored.add(f)
+                  return ignored
+                shutil.copytree(s, d, symlinks=True, ignore=filter_external)
+              elif item == 'assets':
+                def filter_assets(dir_path, filenames):
+                  ignored = set()
+                  if 'products' in dir_path or 'geometry' in dir_path:
+                    for f in filenames:
+                      ignored.add(f)
+                  return ignored
+                shutil.copytree(s, d, symlinks=True, ignore=filter_assets)
+              else:
+                shutil.copytree(s, d, symlinks=True)
             else:
               shutil.copy2(s, d)
 
@@ -99,6 +134,10 @@ jobs:
             jpath = os.path.join(dest, jf)
             if os.path.exists(jpath):
               shutil.copy2(jpath, os.path.join(cn_dir, jf))
+
+          # Ensure cn.json exists at root of dest so Hydrax route loader resolves cleanly
+          if os.path.exists(os.path.join(dest, 'index.json')):
+            shutil.copy2(os.path.join(dest, 'index.json'), os.path.join(dest, 'cn.json'))
 
           print('Built _site artifact successfully.')
           EOF
