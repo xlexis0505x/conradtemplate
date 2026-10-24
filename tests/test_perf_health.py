@@ -78,3 +78,43 @@ def test_zero_failed_requests(page, base_url):
         if not any(ign in r["url"] for ign in ["favicon", "google-analytics", "mixpanel"])
     ]
     assert len(critical_failures) == 0, f"Critical network requests failed: {critical_failures}"
+
+
+@pytest.mark.health
+def test_asset_integrity():
+    """Automated test verifying that all images referenced in global.js, china.js, and component scripts exist on disk without 404s."""
+    import os
+    import re
+
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "conrad.prototype"))
+
+    js_files_to_check = [
+        "js/content/global.js",
+        "js/content/china.js",
+    ]
+
+    missing_assets = []
+
+    # Regex to extract images from /_external/... pattern used in content dictionaries
+    pattern = re.compile(r'(/_external/cdn\.sanity\.io/(?:images|files)/[^"\s\'\?]+)')
+
+    for js_file in js_files_to_check:
+        filepath = os.path.join(base_dir, js_file)
+        if not os.path.exists(filepath):
+            continue
+
+        with open(filepath, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        matches = pattern.findall(content)
+        for match in matches:
+            # The files exist physically at base_dir + match
+            # Match looks like '/_external/cdn.sanity.io/images/61nocsj5/production/...'
+            # We strip the leading slash for os.path.join
+            rel_path = match.lstrip("/")
+            full_path = os.path.join(base_dir, rel_path)
+
+            if not os.path.exists(full_path):
+                missing_assets.append(rel_path)
+
+    assert len(missing_assets) == 0, f"Found {len(missing_assets)} missing referenced assets on disk: {missing_assets[:10]}"

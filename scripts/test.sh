@@ -9,8 +9,9 @@ echo "=== Conrad Automated Test Runner ==="
 # Check if local server is listening on port 8087
 if ! lsof -i :8087 > /dev/null 2>&1; then
     echo "Starting local dev server on port 8087..."
-    python3 -m http.server 8087 --directory conrad.prototype > /dev/null 2>&1 &
+    python3 conrad.prototype/server.py 8087 > /dev/null 2>&1 &
     SERVER_PID=$!
+    trap 'kill $SERVER_PID' EXIT
     sleep 1
     echo "Started local server (PID: $SERVER_PID)"
 else

@@ -28,6 +28,15 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Install Dependencies for Tests
+        run: |
+          pip install pytest pytest-playwright
+          playwright install chromium
+
+      - name: Run Tests
+        run: |
+          bash ./scripts/test.sh
+
       - name: Build site artifact
         run: |
           python3 - << 'EOF'

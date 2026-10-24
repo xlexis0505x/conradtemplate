@@ -1,10 +1,11 @@
 import os
 import pytest
+from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 DEFAULT_LOCAL_URL = "http://localhost:8087"
 DEFAULT_LIVE_URL = "https://xlexis0505x.github.io/conradtemplate"
-ARTIFACT_DIR = "/Users/williamy./.gemini/antigravity/brain/33f4a274-61b1-4323-b7e9-62410692d9e7"
+ARTIFACT_DIR = os.environ.get("ARTIFACT_DIR", str(Path(__file__).resolve().parent / "artifacts"))
 
 
 def pytest_addoption(parser):
