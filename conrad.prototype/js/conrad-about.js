@@ -530,11 +530,35 @@ window.generateContactHTML = function(kicker, leadText) {
     }
   }
 
+  var cachedWalkElements = null;
+
   function updateWalkScroll() {
-    var track = document.getElementById("conrad-walkalone-track");
-    var sticky = document.getElementById("conrad-walkalone-sticky");
-    var strip = document.getElementById("walkalone-strip");
-    var nav = document.getElementById("walkalone-steps-nav");
+    if (!cachedWalkElements || !cachedWalkElements.track.isConnected) {
+      var _track = document.getElementById("conrad-walkalone-track");
+      var _sticky = document.getElementById("conrad-walkalone-sticky");
+      var _strip = document.getElementById("walkalone-strip");
+      var _nav = document.getElementById("walkalone-steps-nav");
+      if (!_track || !_sticky || !_strip) {
+        cachedWalkElements = null;
+        return;
+      }
+      cachedWalkElements = {
+        track: _track,
+        sticky: _sticky,
+        strip: _strip,
+        nav: _nav,
+        cards: _track.querySelectorAll(".walkalone-card-item"),
+        letters: _track.querySelectorAll(".walkalone-letter-item"),
+        infoItems: _track.querySelectorAll(".walkalone-info-item"),
+        stepLetters: _track.querySelectorAll(".walkalone-step-letter")
+      };
+    }
+
+    var els = cachedWalkElements;
+    var track = els.track;
+    var sticky = els.sticky;
+    var strip = els.strip;
+    var nav = els.nav;
     if (!track || !sticky || !strip) return;
 
     var WALK_DATA = getWalkData();
@@ -570,7 +594,7 @@ window.generateContactHTML = function(kicker, leadText) {
       strip.style.width = stripW + "px";
       strip.style.opacity = sectionOpacity.toString();
 
-      var cards = track.querySelectorAll(".walkalone-card-item");
+      var cards = els.cards;
       cards.forEach(function(card, idx) {
         var d = idx - floatIndex;
         var y = d * GAP;
@@ -589,7 +613,7 @@ window.generateContactHTML = function(kicker, leadText) {
         }
       });
 
-      var letters = track.querySelectorAll(".walkalone-letter-item");
+      var letters = els.letters;
       letters.forEach(function(letterEl, idx) {
         var offset = idx - floatIndex;
         if (Math.abs(offset) <= 1.4 && sectionOpacity > 0.01) {
@@ -611,7 +635,7 @@ window.generateContactHTML = function(kicker, leadText) {
         }
       });
 
-      var infoItems = track.querySelectorAll(".walkalone-info-item");
+      var infoItems = els.infoItems;
       infoItems.forEach(function(item, idx) {
         if (idx === activeStep && sectionOpacity > 0.1) {
           item.classList.add("active");
@@ -620,7 +644,7 @@ window.generateContactHTML = function(kicker, leadText) {
         }
       });
 
-      var stepLetters = track.querySelectorAll(".walkalone-step-letter");
+      var stepLetters = els.stepLetters;
       stepLetters.forEach(function(stepEl, idx) {
         if (idx === activeStep) {
           stepEl.classList.add("active");
