@@ -224,20 +224,36 @@
     }
   }
 
+  var cachedVideoSlice = null;
+  var cachedHomeHero = null;
+  var cachedStatsEl = null;
+
   function updateHomeContent() {
     var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     var onHome = (p === "" || p === "/" || p === "/index.html");
     if (!onHome) {
-      var stats = document.getElementById("conrad-company-stats");
-      if (stats) stats.remove();
+      if (cachedStatsEl && cachedStatsEl.isConnected) {
+        cachedStatsEl.remove();
+      } else {
+        var stats = document.getElementById("conrad-company-stats");
+        if (stats) stats.remove();
+      }
+      cachedVideoSlice = null;
+      cachedHomeHero = null;
+      cachedStatsEl = null;
       return;
     }
 
     // 1. Mount Stats Section right below FeaturedAnnouncementSlice or HomeHero
-    var videoSlice = document.querySelector(".FeaturedAnnouncementSlice");
-    var homeHero = document.querySelector(".HomeHero");
+    if (!cachedVideoSlice || !cachedVideoSlice.isConnected) cachedVideoSlice = document.querySelector(".FeaturedAnnouncementSlice");
+    if (!cachedHomeHero || !cachedHomeHero.isConnected) cachedHomeHero = document.querySelector(".HomeHero");
+
+    var videoSlice = cachedVideoSlice;
+    var homeHero = cachedHomeHero;
     var anchor = videoSlice || homeHero;
-    var statsEl = document.getElementById("conrad-company-stats");
+
+    if (!cachedStatsEl || !cachedStatsEl.isConnected) cachedStatsEl = document.getElementById("conrad-company-stats");
+    var statsEl = cachedStatsEl;
 
     if (anchor) {
       if (!statsEl) {
@@ -269,6 +285,7 @@
             </div>
           `;
           anchor.parentNode.insertBefore(sec, anchor.nextSibling);
+          cachedStatsEl = sec;
           if (window.Global && Global.lenis) Global.lenis.resize();
         }
       } else if (statsEl.previousElementSibling !== anchor) {
