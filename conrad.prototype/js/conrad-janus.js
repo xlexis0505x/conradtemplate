@@ -69,6 +69,7 @@
   var numSections = 5;
   var captionTimeline = null;
   var eventsBound = false;
+  var janusDomCache = {};
 
   function isHomeRoute() {
     var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
@@ -76,7 +77,10 @@
   }
 
   function getArrowX(stepIndex) {
-    var container = document.querySelector("#conrad-radiant-janus-sticky .janus-progress-container");
+    if (!janusDomCache.progressContainer) {
+      janusDomCache.progressContainer = document.querySelector("#conrad-radiant-janus-sticky .janus-progress-container");
+    }
+    var container = janusDomCache.progressContainer;
     if (!container) return 0;
     return ((stepIndex + 0.5) / numSections) * container.clientWidth;
   }
@@ -93,6 +97,8 @@
       janusSceneLoading = false;
       if (track) track.remove();
       lastStep = -1;
+      janusDomCache = {};
+      eventsBound = false;
       return;
     }
 
@@ -103,8 +109,11 @@
 
     var newlyMounted = false;
     if (!track) {
+      janusDomCache = {};
+      eventsBound = false;
       var w = document.createElement("div");
-      w.innerHTML = trackHTML;
+      // eslint-disable-next-line xss/no-mixed-html
+      w.insertAdjacentHTML('afterbegin', trackHTML); // Safe: trackHTML is a 100% static string.
       track = w.firstElementChild;
 
       if (mediaLink) {
@@ -167,7 +176,10 @@
 
   function updateScroll() {
     if (!isHomeRoute()) return;
-    var track = document.getElementById("conrad-radiant-janus-track");
+    if (!janusDomCache.track) {
+      janusDomCache.track = document.getElementById("conrad-radiant-janus-track");
+    }
+    var track = janusDomCache.track;
     if (!track) return;
 
     var rect = track.getBoundingClientRect();
@@ -194,9 +206,16 @@
       janusScene.setProgress(progress, uArr);
     }
 
-    var cells = document.querySelectorAll("#conrad-radiant-janus-sticky .janus-cell");
+    if (!janusDomCache.cells) {
+      janusDomCache.cells = document.querySelectorAll("#conrad-radiant-janus-sticky .janus-cell");
+      janusDomCache.cellFills = [];
+      janusDomCache.cells.forEach(function(cell, idx) {
+        janusDomCache.cellFills[idx] = cell.querySelector(".janus-cell-fill");
+      });
+    }
+    var cells = janusDomCache.cells;
     cells.forEach(function(cell, idx) {
-      var cellFill = cell.querySelector(".janus-cell-fill");
+      var cellFill = janusDomCache.cellFills[idx];
       if (cellFill) {
         var scale = (idx === step) ? uArr[idx] : 0;
         if (window.gsap) {
@@ -211,7 +230,10 @@
       var isInitial = (lastStep === -1);
       lastStep = step;
 
-      var arrow = document.getElementById("janus-arrow");
+      if (!janusDomCache.arrow) {
+        janusDomCache.arrow = document.getElementById("janus-arrow");
+      }
+      var arrow = janusDomCache.arrow;
       if (arrow) {
         var targetX = getArrowX(step);
         if (window.gsap) {
@@ -233,13 +255,20 @@
         }
       });
 
-      var allStepTexts = document.querySelectorAll("#conrad-radiant-janus-sticky .janus-step-text");
+      if (!janusDomCache.allStepTexts) {
+        janusDomCache.allStepTexts = document.querySelectorAll("#conrad-radiant-janus-sticky .janus-step-text");
+        janusDomCache.allStepLines = [];
+        janusDomCache.allStepTexts.forEach(function(el, idx) {
+          janusDomCache.allStepLines[idx] = el.querySelectorAll(".janus-line");
+        });
+      }
+      var allStepTexts = janusDomCache.allStepTexts;
       if (window.gsap) {
         if (captionTimeline) captionTimeline.kill();
         captionTimeline = gsap.timeline();
 
         allStepTexts.forEach(function(el, idx) {
-          var lines = el.querySelectorAll(".janus-line");
+          var lines = janusDomCache.allStepLines[idx];
           if (idx === step) {
             el.classList.add("active");
             if (isInitial) {
@@ -266,8 +295,10 @@
         });
       }
 
-      var prevBtn = document.getElementById("janus-prev");
-      var nextBtn = document.getElementById("janus-next");
+      if (!janusDomCache.prevBtn) janusDomCache.prevBtn = document.getElementById("janus-prev");
+      if (!janusDomCache.nextBtn) janusDomCache.nextBtn = document.getElementById("janus-next");
+      var prevBtn = janusDomCache.prevBtn;
+      var nextBtn = janusDomCache.nextBtn;
       if (prevBtn) prevBtn.disabled = (step === 0);
       if (nextBtn) nextBtn.disabled = (step === c - 1);
     }
@@ -276,7 +307,10 @@
   function goToStep(targetStep) {
     if (targetStep < 0) targetStep = 0;
     if (targetStep > 4) targetStep = 4;
-    var track = document.getElementById("conrad-radiant-janus-track");
+    if (!janusDomCache.track) {
+      janusDomCache.track = document.getElementById("conrad-radiant-janus-track");
+    }
+    var track = janusDomCache.track;
     if (!track) return;
 
     var trackHeight = track.offsetHeight;
@@ -297,12 +331,21 @@
     if (eventsBound) return;
     eventsBound = true;
 
-    var prevBtn = document.getElementById("janus-prev");
-    var nextBtn = document.getElementById("janus-next");
+    if (!janusDomCache.prevBtn) janusDomCache.prevBtn = document.getElementById("janus-prev");
+    if (!janusDomCache.nextBtn) janusDomCache.nextBtn = document.getElementById("janus-next");
+    var prevBtn = janusDomCache.prevBtn;
+    var nextBtn = janusDomCache.nextBtn;
     if (prevBtn) prevBtn.addEventListener("click", function() { goToStep(currentStep - 1); });
     if (nextBtn) nextBtn.addEventListener("click", function() { goToStep(currentStep + 1); });
 
-    var cells = document.querySelectorAll("#conrad-radiant-janus-sticky .janus-cell");
+    if (!janusDomCache.cells) {
+      janusDomCache.cells = document.querySelectorAll("#conrad-radiant-janus-sticky .janus-cell");
+      janusDomCache.cellFills = [];
+      janusDomCache.cells.forEach(function(cell, idx) {
+        janusDomCache.cellFills[idx] = cell.querySelector(".janus-cell-fill");
+      });
+    }
+    var cells = janusDomCache.cells;
     cells.forEach(function(c) {
       c.addEventListener("click", function() {
         var s = parseInt(c.getAttribute("data-step"), 10);
