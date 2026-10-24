@@ -131,13 +131,7 @@ function qualifyUrl(url) {
     if (!isSubpath) return url;
 
     // Fix requests directed to domain root on github.io
-    if (url.startsWith('https://xlexis0505x.github.io/assets/') || url.startsWith('http://xlexis0505x.github.io/assets/')) {
-      return url.replace('xlexis0505x.github.io/assets/', 'xlexis0505x.github.io/conradtemplate/assets/');
-    }
-    if (url.startsWith('https://xlexis0505x.github.io/_external/') || url.startsWith('http://xlexis0505x.github.io/_external/')) {
-      return url.replace('xlexis0505x.github.io/_external/', 'xlexis0505x.github.io/conradtemplate/_external/');
-    }
-    if (/^https?:\/\/xlexis0505x\.github\.io\/[^\/]+\.json$/.test(url)) {
+    if (/^https?:\/\/xlexis0505x\.github\.io\/(?!conradtemplate\/)/.test(url)) {
       return url.replace('xlexis0505x.github.io/', 'xlexis0505x.github.io/conradtemplate/');
     }
     if (/^\/(_external|assets|css|js|textures|draco|models|data)\//.test(url)) {
