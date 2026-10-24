@@ -150,10 +150,26 @@ window.Conrad = window.Conrad || {};
       if (!lockup || currentBrand !== companyName) {
         link.setAttribute("data-branded", companyName);
         link.setAttribute("aria-label", companyName + " Homepage");
-        link.innerHTML = '<div class="conrad-brand-lockup" style="display:inline-flex!important;align-items:center!important;gap:8px!important;opacity:1!important;visibility:visible!important;">' +
-          '<img class="conrad-brand-emblem" src="' + emblemSrc + '" alt="' + companyName + ' Logo" style="height:24px!important;width:auto!important;max-width:32px!important;object-fit:contain!important;display:inline-block!important;opacity:1!important;visibility:visible!important;" />' +
-          '<span class="conrad-brand-name" style="font-size:1.15rem!important;font-weight:700!important;letter-spacing:0.04em!important;text-transform:uppercase!important;color:#ffffff!important;line-height:1!important;display:inline-block!important;opacity:1!important;visibility:visible!important;">' + companyName + '</span>' +
-        '</div>';
+        link.innerHTML = ""; // Clear existing content
+
+        var lockupDiv = document.createElement("div");
+        lockupDiv.className = "conrad-brand-lockup";
+        lockupDiv.setAttribute("style", "display:inline-flex!important;align-items:center!important;gap:8px!important;opacity:1!important;visibility:visible!important;");
+
+        var emblemImg = document.createElement("img");
+        emblemImg.className = "conrad-brand-emblem";
+        emblemImg.setAttribute("src", emblemSrc);
+        emblemImg.setAttribute("alt", companyName + " Logo");
+        emblemImg.setAttribute("style", "height:24px!important;width:auto!important;max-width:32px!important;object-fit:contain!important;display:inline-block!important;opacity:1!important;visibility:visible!important;");
+
+        var brandNameSpan = document.createElement("span");
+        brandNameSpan.className = "conrad-brand-name";
+        brandNameSpan.setAttribute("style", "font-size:1.15rem!important;font-weight:700!important;letter-spacing:0.04em!important;text-transform:uppercase!important;color:#ffffff!important;line-height:1!important;display:inline-block!important;opacity:1!important;visibility:visible!important;");
+        brandNameSpan.textContent = companyName;
+
+        lockupDiv.appendChild(emblemImg);
+        lockupDiv.appendChild(brandNameSpan);
+        link.appendChild(lockupDiv);
       }
     });
   }
