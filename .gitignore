@@ -32,3 +32,8 @@ env/
 node_modules/
 .system_generated/
 .agents/
+.pytest_cache/
+_site/
+test-artifacts/
+test-results/
+

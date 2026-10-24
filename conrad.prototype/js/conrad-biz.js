@@ -4,6 +4,17 @@
  */
 
 (function() {
+
+  function esc(str) {
+    if (str == null) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   function getBizData() {
     var globalBiz = (window.Conrad && Conrad.CONTENT_GLOBAL && Conrad.CONTENT_GLOBAL.biz) || {};
     var biz = (window.Conrad && Conrad.content && Conrad.content.get("biz")) || {};
@@ -34,29 +45,29 @@
     <section id="conrad-biz-doctrine" class="conrad-biz-section">
       <div class="conrad-biz-inner">
         <div class="conrad-biz-header">
-          <div class="conrad-kicker">${biz.kicker || ("01 // COMMERCIAL STRATEGY &amp; VALUE PROPOSITION")}</div>
-          <h2 class="conrad-section-title">${biz.title || ("Unlocking the Environmental License to Operate")}</h2>
-          <p class="conrad-section-lead">${biz.lead || ("Seabed mineral developers face an existential hurdle: without verifiable sediment plume control, regulatory bodies cannot grant commercial exploitation contracts. " + brand + " turns environmental compliance into a permitted, defensible asset.")}</p>
+          <div class="conrad-kicker">${biz.kicker ? esc(biz.kicker) : "01 // COMMERCIAL STRATEGY &amp; VALUE PROPOSITION"}</div>
+          <h2 class="conrad-section-title">${biz.title ? esc(biz.title) : "Unlocking the Environmental License to Operate"}</h2>
+          <p class="conrad-section-lead">${biz.lead ? esc(biz.lead) : "Seabed mineral developers face an existential hurdle: without verifiable sediment plume control, regulatory bodies cannot grant commercial exploitation contracts. " + esc(brand) + " turns environmental compliance into a permitted, defensible asset."}</p>
         </div>
 
         <div class="conrad-doctrine-grid">
           <div class="conrad-doctrine-card broken-card">
-            <div class="doctrine-badge">${"THE UNMITIGATED PLUME DILEMMA"}</div>
-            <h3 class="doctrine-title">${"Uncontrolled Sediment Dispersion"}</h3>
+            <div class="doctrine-badge">THE UNMITIGATED PLUME DILEMMA</div>
+            <h3 class="doctrine-title">Uncontrolled Sediment Dispersion</h3>
             <ul class="doctrine-list">
-              <li><strong>${"Existential Permitting Barrier:"}</strong> ${"Commercial exploitation licences cannot be granted under ISA or Cook Islands regulations without demonstrated, verifiable plume containment."}</li>
-              <li><strong>${"Transboundary Drift Liability:"}</strong> ${"Sub-micron clay plumes drift 50–100+ km in the oceanic water column, causing severe ecological damage and catastrophic reputational risk."}</li>
-              <li><strong>${"Post-Hoc Monitoring Deadlock:"}</strong> ${"Passive sensor buoys merely observe damage without preventing it, risking sudden shut-down orders and stranded multimillion-dollar mining capex."}</li>
+              <li><strong>Existential Permitting Barrier:</strong> Commercial exploitation licences cannot be granted under ISA or Cook Islands regulations without demonstrated, verifiable plume containment.</li>
+              <li><strong>Transboundary Drift Liability:</strong> Sub-micron clay plumes drift 50–100+ km in the oceanic water column, causing severe ecological damage and catastrophic reputational risk.</li>
+              <li><strong>Post-Hoc Monitoring Deadlock:</strong> Passive sensor buoys merely observe damage without preventing it, risking sudden shut-down orders and stranded multimillion-dollar mining capex.</li>
             </ul>
           </div>
 
           <div class="conrad-doctrine-card solution-card">
-            <div class="doctrine-badge">${"THE " + brand + " PERMITTING MODEL"}</div>
-            <h3 class="doctrine-title">${"In-Situ Chemical Flocculation"}</h3>
+            <div class="doctrine-badge">THE ${esc(brand)} PERMITTING MODEL</div>
+            <h3 class="doctrine-title">In-Situ Chemical Flocculation</h3>
             <ul class="doctrine-list">
-              <li><strong>${"Unlocking the License to Operate:"}</strong> ${"We de-risk environmental approval by providing concession holders with certified, auditable sedimentation control data."}</li>
-              <li><strong>${"Accelerated Benthic Deposition:"}</strong> ${"Non-toxic biodegradable biopolymer binds micro-particles into dense flocs, confining redeposition strictly to primary mining swaths."}</li>
-              <li><strong>${"Automated G09 &amp; ISA Telemetry:"}</strong> ${"In-situ ADCP and optical backscatter sensors stream real-time compliance proof directly to maritime authorities and stakeholders."}</li>
+              <li><strong>Unlocking the License to Operate:</strong> We de-risk environmental approval by providing concession holders with certified, auditable sedimentation control data.</li>
+              <li><strong>Accelerated Benthic Deposition:</strong> Non-toxic biodegradable biopolymer binds micro-particles into dense flocs, confining redeposition strictly to primary mining swaths.</li>
+              <li><strong>Automated G09 &amp; ISA Telemetry:</strong> In-situ ADCP and optical backscatter sensors stream real-time compliance proof directly to maritime authorities and stakeholders.</li>
             </ul>
             <div class="doctrine-img-wrap">
               <img src="${(typeof window.qualifyUrl === 'function') ? window.qualifyUrl('/assets/images/subsea/benthic-collector.jpg') : '/assets/images/subsea/benthic-collector.jpg'}" alt="Deep-Sea Sediment Mitigation Operation" />
@@ -71,9 +82,9 @@
     <section id="conrad-biz-economics" class="conrad-biz-section">
       <div class="conrad-biz-inner">
         <div class="conrad-biz-header">
-          <div class="conrad-kicker">${biz.sizing.kicker || ("02 // MARKET SIZING &amp; EXPANSION RUNWAY")}</div>
-          <h2 class="conrad-section-title">${biz.sizing.title || ("From Island Testbed to Global Abyssal Concessions")}</h2>
-          <p class="conrad-section-lead">${biz.sizing.lead || ("A structured beachhead strategy validating in-situ plume mitigation in the Cook Islands before expanding across global International Seabed Authority concessions.")}</p>
+          <div class="conrad-kicker">${biz.sizing.kicker ? esc(biz.sizing.kicker) : "02 // MARKET SIZING &amp; EXPANSION RUNWAY"}</div>
+          <h2 class="conrad-section-title">${biz.sizing.title ? esc(biz.sizing.title) : "From Island Testbed to Global Abyssal Concessions"}</h2>
+          <p class="conrad-section-lead">${biz.sizing.lead ? esc(biz.sizing.lead) : "A structured beachhead strategy validating in-situ plume mitigation in the Cook Islands before expanding across global International Seabed Authority concessions."}</p>
         </div>
 
         <div class="conrad-runway-container">
@@ -83,18 +94,18 @@
               return `
                 <div class="runway-step">
                   <div class="step-header">
-                    <span class="step-num">${stepNum}</span>
-                    <span class="step-stage">${card.stage}</span>
+                    <span class="step-num">${esc(stepNum)}</span>
+                    <span class="step-stage">${esc(card.stage)}</span>
                   </div>
-                  <div class="step-val">${card.cost}</div>
-                  <div class="step-sub">${card.sub}</div>
+                  <div class="step-val">${esc(card.cost)}</div>
+                  <div class="step-sub">${esc(card.sub)}</div>
                   <div class="step-divider"></div>
                   <div class="step-specs">
                     ${card.meta.map(function(m) {
                       return `
                         <div class="step-spec-row">
-                          <span class="spec-label">${m.label}</span>
-                          <span class="spec-data">${m.value}</span>
+                          <span class="spec-label">${esc(m.label)}</span>
+                          <span class="spec-data">${esc(m.value)}</span>
                         </div>
                       `;
                     }).join("")}
@@ -112,18 +123,18 @@
     <section id="conrad-biz-factory" class="conrad-biz-section">
       <div class="conrad-biz-inner">
         <div class="conrad-biz-header">
-          <div class="conrad-kicker">${biz.pipeline.kicker || ("03 // ADDRESSABLE CONCESSION PIPELINE")}</div>
-          <h2 class="conrad-section-title">${biz.pipeline.title || ("22 Global Seabed Concession Opportunities")}</h2>
-          <p class="conrad-section-lead">${biz.pipeline.lead || ("Identifiable contract opportunities spanning sovereign Pacific exclusive economic zones and International Seabed Authority (ISA) deep-ocean sectors.")}</p>
+          <div class="conrad-kicker">${biz.pipeline.kicker ? esc(biz.pipeline.kicker) : "03 // ADDRESSABLE CONCESSION PIPELINE"}</div>
+          <h2 class="conrad-section-title">${biz.pipeline.title ? esc(biz.pipeline.title) : "22 Global Seabed Concession Opportunities"}</h2>
+          <p class="conrad-section-lead">${biz.pipeline.lead ? esc(biz.pipeline.lead) : "Identifiable contract opportunities spanning sovereign Pacific exclusive economic zones and International Seabed Authority (ISA) deep-ocean sectors."}</p>
         </div>
 
         <div class="conrad-registry-ledger">
           <div class="registry-ledger-header">
-            <span class="col-reg-sector">${"SECTOR"}</span>
-            <span class="col-reg-region">${"GEOGRAPHIC REGION"}</span>
-            <span class="col-reg-operators">${"OPERATORS &amp; SPONSORS"}</span>
-            <span class="col-reg-scale">${"EXPLORATION FOOTPRINT"}</span>
-            <span class="col-reg-status">${"STATUS"}</span>
+            <span class="col-reg-sector">SECTOR</span>
+            <span class="col-reg-region">GEOGRAPHIC REGION</span>
+            <span class="col-reg-operators">OPERATORS &amp; SPONSORS</span>
+            <span class="col-reg-scale">EXPLORATION FOOTPRINT</span>
+            <span class="col-reg-status">STATUS</span>
           </div>
 
           ${pipelineRegions.map(function(r, idx) {
@@ -131,21 +142,21 @@
             return `
               <div class="registry-ledger-row">
                 <div class="col-reg-sector">
-                  <span class="registry-num">${num}</span>
-                  <span class="registry-tag">${r.match}</span>
+                  <span class="registry-num">${esc(num)}</span>
+                  <span class="registry-tag">${esc(r.match)}</span>
                 </div>
                 <div class="col-reg-region">
-                  <h3 class="registry-title">${r.name}</h3>
-                  <p class="registry-desc">${r.count}</p>
+                  <h3 class="registry-title">${esc(r.name)}</h3>
+                  <p class="registry-desc">${esc(r.count)}</p>
                 </div>
                 <div class="col-reg-operators">
-                  <span class="operator-primary">${r.actors}</span>
+                  <span class="operator-primary">${esc(r.actors)}</span>
                 </div>
                 <div class="col-reg-scale">
-                  <span class="scale-val">${r.count}</span>
+                  <span class="scale-val">${esc(r.count)}</span>
                 </div>
                 <div class="col-reg-status">
-                  <span class="status-text">${r.match}</span>
+                  <span class="status-text">${esc(r.match)}</span>
                 </div>
               </div>
             `;
@@ -154,35 +165,35 @@
 
         <div class="conrad-contractors-section" style="margin-top: 2.5rem;">
           <h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">
-            ${"16 Priority International Seabed Authority (ISA) Exploration Contractors"}
+            16 Priority International Seabed Authority (ISA) Exploration Contractors
           </h3>
           <p style="font-size: 0.85rem; color: #8E9291; margin-bottom: 1.25rem;">
-            ${"Strategic partner prospects evaluated by tract location, sponsor nation regulatory frameworks, and plume abatement demand."}
+            Strategic partner prospects evaluated by tract location, sponsor nation regulatory frameworks, and plume abatement demand.
           </p>
           <div class="conrad-contractor-table-wrap" style="overflow-x: auto;">
             <table class="conrad-compare-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
               <thead>
                 <tr>
-                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"ID"}</th>
-                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"SPONSORING STATE"}</th>
-                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"CONTRACTOR ENTITY"}</th>
-                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"ENTITY TYPE"}</th>
-                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"CONTRACT AREA"}</th>
-                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"MINERAL TYPE"}</th>
-                  <th style="padding: 10px 14px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">${"MATCH"}</th>
+                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">ID</th>
+                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">SPONSORING STATE</th>
+                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">CONTRACTOR ENTITY</th>
+                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">ENTITY TYPE</th>
+                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">CONTRACT AREA</th>
+                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">MINERAL TYPE</th>
+                  <th style="padding: 10px 14px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">MATCH</th>
                 </tr>
               </thead>
               <tbody>
                 ${contractors.map(function(c) {
                   return `
                     <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-                      <td style="padding: 10px 14px; font-family: monospace; color: #8E9291;">${c.id}</td>
-                      <td style="padding: 10px 14px; font-weight: 600; color: #ffffff;">${c.country}</td>
-                      <td style="padding: 10px 14px; color: rgba(255,255,255,0.9);">${c.entity}</td>
-                      <td style="padding: 10px 14px; color: #8E9291;">${c.type}</td>
-                      <td style="padding: 10px 14px; color: #8E9291;">${c.area}</td>
-                      <td style="padding: 10px 14px; color: #8E9291;">${c.mineral}</td>
-                      <td style="padding: 10px 14px; text-align: center; color: #f59e0b;">${c.match}</td>
+                      <td style="padding: 10px 14px; font-family: monospace; color: #8E9291;">${esc(c.id)}</td>
+                      <td style="padding: 10px 14px; font-weight: 600; color: #ffffff;">${esc(c.country)}</td>
+                      <td style="padding: 10px 14px; color: rgba(255,255,255,0.9);">${esc(c.entity)}</td>
+                      <td style="padding: 10px 14px; color: #8E9291;">${esc(c.type)}</td>
+                      <td style="padding: 10px 14px; color: #8E9291;">${esc(c.area)}</td>
+                      <td style="padding: 10px 14px; color: #8E9291;">${esc(c.mineral)}</td>
+                      <td style="padding: 10px 14px; text-align: center; color: #f59e0b;">${esc(c.match)}</td>
                     </tr>
                   `;
                 }).join("")}
@@ -198,9 +209,9 @@
     <section id="conrad-biz-roadmap" class="conrad-biz-section">
       <div class="conrad-biz-inner">
         <div class="conrad-biz-header">
-          <div class="conrad-kicker">${biz.pestle.kicker || ("04 // PESTLE STRATEGIC FRAMEWORK")}</div>
-          <h2 class="conrad-section-title">${biz.pestle.title || ("Sovereign, Ecological &amp; Regulatory Drivers")}</h2>
-          <p class="conrad-section-lead">${biz.pestle.lead || ("A comprehensive macro-environmental evaluation anchoring our technology in legal frameworks, economic efficiency, and ocean preservation.")}</p>
+          <div class="conrad-kicker">${biz.pestle.kicker ? esc(biz.pestle.kicker) : "04 // PESTLE STRATEGIC FRAMEWORK"}</div>
+          <h2 class="conrad-section-title">${biz.pestle.title ? esc(biz.pestle.title) : "Sovereign, Ecological &amp; Regulatory Drivers"}</h2>
+          <p class="conrad-section-lead">${biz.pestle.lead ? esc(biz.pestle.lead) : "A comprehensive macro-environmental evaluation anchoring our technology in legal frameworks, economic efficiency, and ocean preservation."}</p>
         </div>
 
         <div class="conrad-pestle-grid">
@@ -209,13 +220,13 @@
             return `
               <div class="conrad-pestle-card">
                 <div class="pestle-card-header">
-                  <span class="pestle-num">${num} // ${item.letter}</span>
-                  <span class="pestle-factor-tag">${item.name}</span>
+                  <span class="pestle-num">${esc(num)} // ${esc(item.letter)}</span>
+                  <span class="pestle-factor-tag">${esc(item.name)}</span>
                 </div>
                 <div class="pestle-divider"></div>
                 <ul class="pestle-point-list">
                   ${item.points.map(function(pt) {
-                    return `<li class="pestle-point-item"><span class="pestle-bullet">—</span><span>${pt}</span></li>`;
+                    return `<li class="pestle-point-item"><span class="pestle-bullet">—</span><span>${esc(pt)}</span></li>`;
                   }).join("")}
                 </ul>
               </div>
@@ -231,18 +242,18 @@
       <div class="conrad-biz-inner">
         <div class="conrad-diligence-banner">
           <div class="diligence-text-block">
-            <div class="conrad-kicker">${"05 // ENVIRONMENTAL DATA ROOM &amp; REFERENCES"}</div>
-            <h2 class="conrad-section-title">${"Access Technical Diligence &amp; G09 Dossier"}</h2>
-            <p class="conrad-section-lead">${"Download certified G09 EMMP compliance dossiers, Nature Communications (2025) benthic sediment benchmarks, and OECD 202/203 flocculant ecotoxicity laboratory certifications."}</p>
+            <div class="conrad-kicker">05 // ENVIRONMENTAL DATA ROOM &amp; REFERENCES</div>
+            <h2 class="conrad-section-title">Access Technical Diligence &amp; G09 Dossier</h2>
+            <p class="conrad-section-lead">Download certified G09 EMMP compliance dossiers, Nature Communications (2025) benthic sediment benchmarks, and OECD 202/203 flocculant ecotoxicity laboratory certifications.</p>
           </div>
           <div class="diligence-cta-block">
             <button id="conrad-open-diligence-btn" class="conrad-diligence-btn">
-              <span>${"REQUEST DATA ROOM ACCESS"}</span>
+              <span>REQUEST DATA ROOM ACCESS</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
             </button>
             <div class="diligence-secure-badge">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <span>${"AUDITABLE COMPLIANCE DOSSIER"}</span>
+              <span>AUDITABLE COMPLIANCE DOSSIER</span>
             </div>
           </div>
         </div>
@@ -255,33 +266,33 @@
       <div class="conrad-modal-window conrad-modal-dialog">
         <div class="conrad-modal-header">
           <div>
-            <div class="modal-kicker">${"VERIFIED INSTITUTIONAL ACCESS"}</div>
-            <h3 class="modal-title">${"Environmental Data Room Dossier"}</h3>
+            <div class="modal-kicker">VERIFIED INSTITUTIONAL ACCESS</div>
+            <h3 class="modal-title">Environmental Data Room Dossier</h3>
           </div>
           <button id="conrad-close-modal-btn" class="conrad-modal-close modal-close-btn" aria-label="Close dialog">&times;</button>
         </div>
         <div class="conrad-modal-body">
-          <p class="modal-desc">${"Authorized concession operators, marine scientists, and regulatory observers may request the full technical dossier, including:"}</p>
+          <p class="modal-desc">Authorized concession operators, marine scientists, and regulatory observers may request the full technical dossier, including:</p>
           <div class="modal-files-list">
             <div class="modal-file-item">
               <div class="file-icon">DOC</div>
               <div class="file-info">
-                <span class="file-name">${"Cook Islands SBMA G09 EMMP Technical Compliance Architecture"}</span>
-                <span class="file-size">${"Environmental Management & Monitoring Plan Guide · 4.8 MB"}</span>
+                <span class="file-name">Cook Islands SBMA G09 EMMP Technical Compliance Architecture</span>
+                <span class="file-size">Environmental Management & Monitoring Plan Guide · 4.8 MB</span>
               </div>
             </div>
             <div class="modal-file-item">
               <div class="file-icon">SCI</div>
               <div class="file-info">
-                <span class="file-name">${"Benthic Plume Dispersion & Redeposition Dynamics (Nature Comm. 2025)"}</span>
-                <span class="file-size">${"Empirical Seafloor Nodule Disturbance Analysis · 8.2 MB"}</span>
+                <span class="file-name">Benthic Plume Dispersion & Redeposition Dynamics (Nature Comm. 2025)</span>
+                <span class="file-size">Empirical Seafloor Nodule Disturbance Analysis · 8.2 MB</span>
               </div>
             </div>
             <div class="modal-file-item">
               <div class="file-icon">LAB</div>
               <div class="file-info">
-                <span class="file-name">${"Eco-Compatible Flocculant Ecotoxicity & Biodegradation Report"}</span>
-                <span class="file-size">${"OECD 202/203 Standard Laboratory Certification · 3.1 MB"}</span>
+                <span class="file-name">Eco-Compatible Flocculant Ecotoxicity & Biodegradation Report</span>
+                <span class="file-size">OECD 202/203 Standard Laboratory Certification · 3.1 MB</span>
               </div>
             </div>
           </div>
@@ -291,28 +302,28 @@
             <h4 style="font-size: 0.95rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">References (APA 7th Edition)</h4>
             <div style="max-height: 180px; overflow-y: auto; font-size: 0.78rem; line-height: 1.55; color: rgba(255,255,255,0.7); display: flex; flex-direction: column; gap: 0.45rem;">
               ${biz.references.map(function(ref) {
-                return `<div>${ref}</div>`;
+                return `<div>${esc(ref)}</div>`;
               }).join("")}
             </div>
           </div>
 
           <form id="conrad-diligence-form" class="modal-form" style="margin-top: 1.5rem;">
             <div class="form-row">
-              <input type="text" class="modal-input" placeholder="${'Organization / Concession Entity *'}" required />
-              <input type="email" class="modal-input" placeholder="${'Official Institutional Email *'}" required />
+              <input type="text" class="modal-input" placeholder="Organization / Concession Entity *" required />
+              <input type="email" class="modal-input" placeholder="Official Institutional Email *" required />
             </div>
             <div class="form-row">
               <select class="modal-input" required>
-                <option value="" disabled selected>${'Primary Area of Interest *'}</option>
-                <option value="cook-islands">${'Cook Islands Concession Baseline'}</option>
-                <option value="ccz">${'Clarion-Clipperton Zone (CCZ) Integration'}</option>
-                <option value="regulatory">${'Regulatory & ISA Observer Inquiries'}</option>
-                <option value="scientific">${'Academic / Oceanographic Collaboration'}</option>
+                <option value="" disabled selected>Primary Area of Interest *</option>
+                <option value="cook-islands">Cook Islands Concession Baseline</option>
+                <option value="ccz">Clarion-Clipperton Zone (CCZ) Integration</option>
+                <option value="regulatory">Regulatory &amp; ISA Observer Inquiries</option>
+                <option value="scientific">Academic / Oceanographic Collaboration</option>
               </select>
             </div>
-            <button type="submit" id="diligence-submit-btn" class="modal-submit-btn">${'REQUEST ACCESS CREDENTIALS'}</button>
+            <button type="submit" id="diligence-submit-btn" class="modal-submit-btn">REQUEST ACCESS CREDENTIALS</button>
             <div id="diligence-success-msg" class="modal-success-msg" style="display: none;">
-              ✓ ${'Request submitted. Our team will deliver credentials to your institutional address within 24 hours.'}
+              ✓ Request submitted. Our team will deliver credentials to your institutional address within 24 hours.
             </div>
           </form>
         </div>

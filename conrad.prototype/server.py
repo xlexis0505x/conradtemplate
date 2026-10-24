@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """
-Local Development Server for anduril.com
-Serves on port 8085 with SPA routing, ThreadingHTTPServer, Byte-Range streaming for videos,
+Local Development Server for Conrad Challenge Prototype
+Serves on port 8087 with SPA routing, ThreadingHTTPServer, Byte-Range streaming for videos,
 and custom MIME types.
 """
 
 import os
-import re
 import sys
 from pathlib import Path
 
@@ -44,7 +43,9 @@ class DevHandler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(DOC_ROOT), **kwargs)
 
     def end_headers(self):
-        self.send_header("Access-Control-Allow-Origin", "*")
+        origin = self.headers.get("Origin")
+        if origin and (origin.startswith("http://localhost:") or origin.startswith("http://127.0.0.1:")):
+            self.send_header("Access-Control-Allow-Origin", origin)
         self.send_header("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "*")
         self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")

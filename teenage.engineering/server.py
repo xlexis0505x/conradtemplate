@@ -5,7 +5,6 @@ Serves on port 8084 with multi-page Remix support, .data hydration endpoint,
 automatic dynamic live proxying/caching for uncached pages, and ThreadingHTTPServer concurrency.
 """
 
-import os
 import sys
 import urllib.request
 from pathlib import Path

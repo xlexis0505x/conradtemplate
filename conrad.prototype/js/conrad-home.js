@@ -3,6 +3,16 @@
  */
 
 (function() {
+  function escapeHTML(str) {
+    if (str == null) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
   var DEFAULT_SUB_DATA = [
     {
       title: "01 // Eco-Flocculation Chemistry",
@@ -224,9 +234,34 @@
     }
   }
 
+  var cachedDOM = {
+    path: null,
+    videoSlice: null,
+    homeHero: null,
+    cards: null,
+    arsenalItems: null
+  };
+
+  function isNodeValid(nodeOrList) {
+    if (!nodeOrList) return false;
+    if (nodeOrList instanceof NodeList || Array.isArray(nodeOrList)) {
+      return nodeOrList.length > 0 && document.contains(nodeOrList[0]);
+    }
+    return document.contains(nodeOrList);
+  }
+
   function updateHomeContent() {
     var p = (window.getAppPath ? window.getAppPath() : window.location.pathname.replace(/\/$/, "")) || "/";
     var onHome = (p === "" || p === "/" || p === "/index.html");
+
+    if (cachedDOM.path !== p) {
+      cachedDOM.path = p;
+      cachedDOM.videoSlice = null;
+      cachedDOM.homeHero = null;
+      cachedDOM.cards = null;
+      cachedDOM.arsenalItems = null;
+    }
+
     if (!onHome) {
       var stats = document.getElementById("conrad-company-stats");
       if (stats) stats.remove();
@@ -234,8 +269,11 @@
     }
 
     // 1. Mount Stats Section right below FeaturedAnnouncementSlice or HomeHero
-    var videoSlice = document.querySelector(".FeaturedAnnouncementSlice");
-    var homeHero = document.querySelector(".HomeHero");
+    if (!isNodeValid(cachedDOM.videoSlice)) cachedDOM.videoSlice = document.querySelector(".FeaturedAnnouncementSlice");
+    if (!isNodeValid(cachedDOM.homeHero)) cachedDOM.homeHero = document.querySelector(".HomeHero");
+
+    var videoSlice = cachedDOM.videoSlice;
+    var homeHero = cachedDOM.homeHero;
     var anchor = videoSlice || homeHero;
     var statsEl = document.getElementById("conrad-company-stats");
 
@@ -258,10 +296,10 @@
                   return `
                     <div class="conrad-stat-card">
                       <div>
-                        <div class="conrad-stat-val">${s.value}</div>
-                        <div class="conrad-stat-label">${s.label}</div>
+                        <div class="conrad-stat-val">${escapeHTML(s.value)}</div>
+                        <div class="conrad-stat-label">${escapeHTML(s.label)}</div>
                       </div>
-                      <div class="conrad-stat-sub">${s.sub}</div>
+                      <div class="conrad-stat-sub">${escapeHTML(s.sub)}</div>
                     </div>
                   `;
                 }).join("")}
@@ -291,7 +329,8 @@
     }
 
     // 3. Update 7 Bento Cards text on Home
-    var cards = document.querySelectorAll(".FeaturedProductsCard");
+    if (!isNodeValid(cachedDOM.cards)) cachedDOM.cards = document.querySelectorAll(".FeaturedProductsCard");
+    var cards = cachedDOM.cards;
     var subData = getSubData();
     cards.forEach(function(card, idx) {
       if (idx < subData.length) {
@@ -317,7 +356,8 @@
     });
 
     // 4. Update 4 ArsenalSlice metric cards images on Home
-    var arsenalItems = document.querySelectorAll(".ArsenalSlice .ArsenalItem");
+    if (!isNodeValid(cachedDOM.arsenalItems)) cachedDOM.arsenalItems = document.querySelectorAll(".ArsenalSlice .ArsenalItem");
+    var arsenalItems = cachedDOM.arsenalItems;
     var arsenalImages = [
       "/assets/images/subsea/bento-01-flocculation.jpg",
       "/assets/images/subsea/bento-06-offshore-skid.jpg",
@@ -342,7 +382,8 @@
     ensureModalDOM();
     updateHomeContent();
 
-    var cards = document.querySelectorAll(".FeaturedProductsCard");
+    if (!isNodeValid(cachedDOM.cards)) cachedDOM.cards = document.querySelectorAll(".FeaturedProductsCard");
+    var cards = cachedDOM.cards;
     cards.forEach(function(card, idx) {
       var pill = card.querySelector(".inspect-pill");
       if (pill) pill.remove();

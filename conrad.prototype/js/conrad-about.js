@@ -93,8 +93,6 @@ window.generateContactHTML = function(kicker, leadText) {
             <span class="conrad-socials-label">NETWORK</span>
             <div class="conrad-socials-links">
               <a href="mailto:${email}" class="conrad-social-link">EMAIL DIRECT &nearr;</a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="conrad-social-link">LINKEDIN &nearr;</a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="conrad-social-link">X / TWITTER &nearr;</a>
             </div>
           </div>
           <div class="conrad-facilities-group">
@@ -530,11 +528,37 @@ window.generateContactHTML = function(kicker, leadText) {
     }
   }
 
+  var _cachedWalkTrack = null;
+  var _cachedWalkSticky = null;
+  var _cachedWalkStrip = null;
+  var _cachedWalkNav = null;
+  var _cachedWalkCards = null;
+  var _cachedWalkLetters = null;
+  var _cachedWalkInfoItems = null;
+  var _cachedWalkStepLetters = null;
+
   function updateWalkScroll() {
-    var track = document.getElementById("conrad-walkalone-track");
-    var sticky = document.getElementById("conrad-walkalone-sticky");
-    var strip = document.getElementById("walkalone-strip");
-    var nav = document.getElementById("walkalone-steps-nav");
+    var track = _cachedWalkTrack;
+    if (!track || !document.contains(track)) {
+      track = document.getElementById("conrad-walkalone-track");
+      if (!track) {
+        _cachedWalkTrack = null;
+        return;
+      }
+      _cachedWalkTrack = track;
+      _cachedWalkSticky = document.getElementById("conrad-walkalone-sticky");
+      _cachedWalkStrip = document.getElementById("walkalone-strip");
+      _cachedWalkNav = document.getElementById("walkalone-steps-nav");
+
+      _cachedWalkCards = Array.prototype.slice.call(track.querySelectorAll(".walkalone-card-item"));
+      _cachedWalkLetters = Array.prototype.slice.call(track.querySelectorAll(".walkalone-letter-item"));
+      _cachedWalkInfoItems = Array.prototype.slice.call(track.querySelectorAll(".walkalone-info-item"));
+      _cachedWalkStepLetters = Array.prototype.slice.call(track.querySelectorAll(".walkalone-step-letter"));
+    }
+
+    var sticky = _cachedWalkSticky;
+    var strip = _cachedWalkStrip;
+    var nav = _cachedWalkNav;
     if (!track || !sticky || !strip) return;
 
     var WALK_DATA = getWalkData();
@@ -570,9 +594,10 @@ window.generateContactHTML = function(kicker, leadText) {
       strip.style.width = stripW + "px";
       strip.style.opacity = sectionOpacity.toString();
 
-      var cards = track.querySelectorAll(".walkalone-card-item");
-      cards.forEach(function(card, idx) {
-        var d = idx - floatIndex;
+      var cardsLen = _cachedWalkCards ? _cachedWalkCards.length : 0;
+      for (var i = 0; i < cardsLen; i++) {
+        var card = _cachedWalkCards[i];
+        var d = i - floatIndex;
         var y = d * GAP;
         var isNearby = Math.abs(d) <= 2.8;
         if (isNearby && sectionOpacity > 0.01) {
@@ -587,19 +612,20 @@ window.generateContactHTML = function(kicker, leadText) {
           card.style.display = "none";
           card.style.opacity = "0";
         }
-      });
+      }
 
-      var letters = track.querySelectorAll(".walkalone-letter-item");
-      letters.forEach(function(letterEl, idx) {
-        var offset = idx - floatIndex;
+      var lettersLen = _cachedWalkLetters ? _cachedWalkLetters.length : 0;
+      for (var j = 0; j < lettersLen; j++) {
+        var letterEl = _cachedWalkLetters[j];
+        var offset = j - floatIndex;
         if (Math.abs(offset) <= 1.4 && sectionOpacity > 0.01) {
           letterEl.style.display = "flex";
           var dist = Math.abs(offset);
-          var opacity = Math.max(0, 1 - dist * 0.72) * sectionOpacity;
-          var scale = Math.max(0.72, 1 - dist * 0.2);
+          var opacityL = Math.max(0, 1 - dist * 0.72) * sectionOpacity;
+          var scaleL = Math.max(0.72, 1 - dist * 0.2);
           var yPct = offset * 115;
-          letterEl.style.transform = "translateY(" + yPct + "%) scale(" + scale + ")";
-          letterEl.style.opacity = opacity;
+          letterEl.style.transform = "translateY(" + yPct + "%) scale(" + scaleL + ")";
+          letterEl.style.opacity = opacityL;
           if (dist < 0.38) {
             letterEl.style.color = "#ffffff";
           } else {
@@ -609,39 +635,47 @@ window.generateContactHTML = function(kicker, leadText) {
           letterEl.style.display = "none";
           letterEl.style.opacity = "0";
         }
-      });
+      }
 
-      var infoItems = track.querySelectorAll(".walkalone-info-item");
-      infoItems.forEach(function(item, idx) {
-        if (idx === activeStep && sectionOpacity > 0.1) {
+      var infoItemsLen = _cachedWalkInfoItems ? _cachedWalkInfoItems.length : 0;
+      for (var k = 0; k < infoItemsLen; k++) {
+        var item = _cachedWalkInfoItems[k];
+        if (k === activeStep && sectionOpacity > 0.1) {
           item.classList.add("active");
         } else {
           item.classList.remove("active");
         }
-      });
+      }
 
-      var stepLetters = track.querySelectorAll(".walkalone-step-letter");
-      stepLetters.forEach(function(stepEl, idx) {
-        if (idx === activeStep) {
+      var stepLettersLen = _cachedWalkStepLetters ? _cachedWalkStepLetters.length : 0;
+      for (var l = 0; l < stepLettersLen; l++) {
+        var stepEl = _cachedWalkStepLetters[l];
+        if (l === activeStep) {
           stepEl.classList.add("active");
         } else {
           stepEl.classList.remove("active");
         }
-      });
+      }
 
       var isPastOrEnd = (rect.bottom <= viewportHeight + 60) || (progress >= 0.985);
       if (isPastOrEnd || isInspectOpen) {
-        nav.style.opacity = "0";
-        nav.style.pointerEvents = "none";
-        nav.style.transform = "translateX(-50%) translateY(14px)";
+        if (nav) {
+          nav.style.opacity = "0";
+          nav.style.pointerEvents = "none";
+          nav.style.transform = "translateX(-50%) translateY(14px)";
+        }
       } else if (rect.top > 0) {
-        nav.style.opacity = (Math.max(0, 1 - rect.top / 160) * sectionOpacity).toString();
-        nav.style.pointerEvents = "auto";
-        nav.style.transform = "translateX(-50%) translateY(0)";
+        if (nav) {
+          nav.style.opacity = (Math.max(0, 1 - rect.top / 160) * sectionOpacity).toString();
+          nav.style.pointerEvents = "auto";
+          nav.style.transform = "translateX(-50%) translateY(0)";
+        }
       } else if (!isInspectAnimating) {
-        nav.style.opacity = sectionOpacity.toString();
-        nav.style.pointerEvents = "auto";
-        nav.style.transform = "translateX(-50%) translateY(0)";
+        if (nav) {
+          nav.style.opacity = sectionOpacity.toString();
+          nav.style.pointerEvents = "auto";
+          nav.style.transform = "translateX(-50%) translateY(0)";
+        }
       }
     }
   }

@@ -37,7 +37,12 @@ class DevHandler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(DOC_ROOT), **kwargs)
 
     def end_headers(self):
-        self.send_header("Access-Control-Allow-Origin", "*")
+        origin = self.headers.get("Origin")
+        if origin:
+            port = self.server.server_port
+            allowed_origins = [f"http://localhost:{port}", f"http://127.0.0.1:{port}"]
+            if origin in allowed_origins:
+                self.send_header("Access-Control-Allow-Origin", origin)
         self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
         super().end_headers()
 

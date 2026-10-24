@@ -131,13 +131,7 @@ function qualifyUrl(url) {
     if (!isSubpath) return url;
 
     // Fix requests directed to domain root on github.io
-    if (url.startsWith('https://xlexis0505x.github.io/assets/') || url.startsWith('http://xlexis0505x.github.io/assets/')) {
-      return url.replace('xlexis0505x.github.io/assets/', 'xlexis0505x.github.io/conradtemplate/assets/');
-    }
-    if (url.startsWith('https://xlexis0505x.github.io/_external/') || url.startsWith('http://xlexis0505x.github.io/_external/')) {
-      return url.replace('xlexis0505x.github.io/_external/', 'xlexis0505x.github.io/conradtemplate/_external/');
-    }
-    if (/^https?:\/\/xlexis0505x\.github\.io\/[^\/]+\.json$/.test(url)) {
+    if (/^https?:\/\/xlexis0505x\.github\.io\/(?!conradtemplate\/)/.test(url)) {
       return url.replace('xlexis0505x.github.io/', 'xlexis0505x.github.io/conradtemplate/');
     }
     if (/^\/(_external|assets|css|js|textures|draco|models|data)\//.test(url)) {
@@ -234,14 +228,14 @@ function qualifyUrl(url) {
 <meta content="website" property="og:type"/>
 <meta content="Deep-Sea Plume Mitigation &amp; Environmental Safeguards | DRUNKEAST" property="og:title"/>
 <meta content="DRUNKEAST develops deep-sea environmental safeguards and closed-loop subsea operations for marine preservation." property="og:description"/>
-<meta content="/_external/cdn.sanity.io/images/61nocsj5/production/f7d0f077c398e8e24666e9430611395186d347bd-1200x630.png?w=1200&amp;h=630&amp;fit=min&amp;auto=format" property="og:image"/>
+<meta content="/_external/cdn.sanity.io/images/61nocsj5/production/b95abc74192ac5ae36f6076031bb09dc0e09d318-1920x1080.png?w=1200&amp;h=630&amp;fit=min&amp;auto=format" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="/" name="twitter:url"/>
 <meta content="Deep-Sea Plume Mitigation &amp; Environmental Safeguards | DRUNKEAST" name="twitter:title"/>
 <meta content="DRUNKEAST develops deep-sea environmental safeguards and closed-loop subsea operations for marine preservation." name="twitter:description"/>
-<meta content="/_external/cdn.sanity.io/images/61nocsj5/production/f7d0f077c398e8e24666e9430611395186d347bd-1200x630.png?w=1200&amp;h=630&amp;fit=min&amp;auto=format" name="twitter:image"/>
+<meta content="/_external/cdn.sanity.io/images/61nocsj5/production/b95abc74192ac5ae36f6076031bb09dc0e09d318-1920x1080.png?w=1200&amp;h=630&amp;fit=min&amp;auto=format" name="twitter:image"/>
 <meta content="8C6FA41E627D43CDF562929F4FB48843" name="msvalidate.01"/>
 <link href="https://www.anduril.com/feed.xml" rel="alternate" title="DRUNKEAST RSS Feed" type="application/rss+xml"/>
 <link href="assets/favicon/favicon.xxWKiVhdqu.ico" rel="icon" sizes="32x32"/>
@@ -259,7 +253,7 @@ function qualifyUrl(url) {
 <script>
    (function() {
             try {
-                eval('let obj = {}; obj?.prop');
+                new Function('let obj = {}; obj?.prop')();
             } catch (e) {
                 window.location.replace('unsupported.xxvQ-RQjAT.html');
                 return;
@@ -332,7 +326,6 @@ function qualifyUrl(url) {
 <script defer src="js/conrad-about.js"></script>
 </head>
 <body>
-<div id="ga-script" style="display:none" aria-hidden="true"></div>
 <div id="conrad-prepaint-hero" style="position:fixed;inset:0;background:#050505;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.4s cubic-bezier(0.16,1,0.3,1);pointer-events:none;">
   <img src="_external/cdn.sanity.io/images/61nocsj5/production/b95abc74192ac5ae36f6076031bb09dc0e09d318-1920x1080.png?w=1280&amp;fit=min&amp;auto=format"
        alt="Deep-Sea Plume Abatement"

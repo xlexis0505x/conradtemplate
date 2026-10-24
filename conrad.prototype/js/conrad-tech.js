@@ -4,6 +4,21 @@
  */
 
 (function() {
+  const charsToReplace = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    "'": '&#39;',
+    '"': '&quot;'
+  };
+
+  function escapeHTML(str) {
+    if (str == null) return '';
+    return String(str).replace(/[&<>'"]/g, function(tag) {
+      return charsToReplace[tag] || tag;
+    });
+  }
+
   function getTechData() {
     var globalTech = (window.Conrad && Conrad.CONTENT_GLOBAL && Conrad.CONTENT_GLOBAL.tech) || {};
     var tech = (window.Conrad && Conrad.content && Conrad.content.get("tech")) || {};
@@ -41,13 +56,13 @@
     <section id="conrad-tech-spec-matrix" class="conrad-spec-section">
       <div class="conrad-spec-inner">
         <div class="conrad-spec-header">
-          <div class="conrad-kicker">${data.kicker}</div>
-          <h2 class="conrad-section-title">${data.title}</h2>
-          <p class="conrad-section-lead">${data.lead}</p>
+          <div class="conrad-kicker">${escapeHTML(data.kicker)}</div>
+          <h2 class="conrad-section-title">${escapeHTML(data.title)}</h2>
+          <p class="conrad-section-lead">${escapeHTML(data.lead)}</p>
           
           <div class="conrad-spec-tabs" role="tablist">
             ${data.tabs.map(function(t, idx) {
-              return `<button class="conrad-spec-tab ${idx === 0 ? 'active' : ''}" data-filter="${t.filter}">${t.label}</button>`;
+              return `<button class="conrad-spec-tab ${idx === 0 ? 'active' : ''}" data-filter="${escapeHTML(t.filter)}" role="tab" aria-selected="${idx === 0 ? 'true' : 'false'}">${escapeHTML(t.label)}</button>`;
             }).join("")}
           </div>
         </div>
@@ -55,14 +70,14 @@
         <div class="conrad-spec-preview-panel">
           ${data.schematics.map(function(s, idx) {
             return `
-              <div class="conrad-schematic-card ${idx === 0 ? 'active' : ''}" data-schematic="${s.schematic}">
+              <div class="conrad-schematic-card ${idx === 0 ? 'active' : ''}" data-schematic="${escapeHTML(s.schematic)}">
                 <div class="schematic-media-wrap">
-                  <img src="${s.image}" alt="${s.title}" />
-                  <div class="schematic-badge">${s.badge}</div>
+                  <img src="${escapeHTML(s.image)}" alt="${escapeHTML(s.title)}" />
+                  <div class="schematic-badge">${escapeHTML(s.badge)}</div>
                 </div>
                 <div class="schematic-meta-row">
-                  <span class="meta-title">${s.title}</span>
-                  <span class="meta-tag">${s.tag}</span>
+                  <span class="meta-title">${escapeHTML(s.title)}</span>
+                  <span class="meta-tag">${escapeHTML(s.tag)}</span>
                 </div>
               </div>
             `;
@@ -72,10 +87,10 @@
         <div class="conrad-spec-table" id="conrad-spec-table">
           ${data.specs.map(function(sp) {
             return `
-              <div class="conrad-spec-row" data-category="${sp.category}">
-                <span class="conrad-spec-param">${sp.param}</span>
-                <span class="conrad-spec-val">${sp.val}</span>
-                <span class="conrad-spec-meta">${sp.meta}</span>
+              <div class="conrad-spec-row" data-category="${escapeHTML(sp.category)}">
+                <span class="conrad-spec-param">${escapeHTML(sp.param)}</span>
+                <span class="conrad-spec-val">${escapeHTML(sp.val)}</span>
+                <span class="conrad-spec-meta">${escapeHTML(sp.meta)}</span>
               </div>
             `;
           }).join("")}
@@ -88,27 +103,27 @@
     <section id="conrad-tech-comparison" class="conrad-compare-section">
       <div class="conrad-compare-inner">
         <div class="conrad-compare-header">
-          <div class="conrad-kicker">${comp.kicker || "03 // STRATEGIC ADVANTAGE"}</div>
-          <h2 class="conrad-section-title">${comp.title || "In-Situ Active Mitigation vs. Legacy Operations"}</h2>
-          <p class="conrad-section-lead">${comp.lead || "A direct operational and environmental comparison of active chemical sediment flocculation against unmitigated mining discharge and passive post-hoc monitoring."}</p>
+          <div class="conrad-kicker">${escapeHTML(comp.kicker || "03 // STRATEGIC ADVANTAGE")}</div>
+          <h2 class="conrad-section-title">${escapeHTML(comp.title || "In-Situ Active Mitigation vs. Legacy Operations")}</h2>
+          <p class="conrad-section-lead">${escapeHTML(comp.lead || "A direct operational and environmental comparison of active chemical sediment flocculation against unmitigated mining discharge and passive post-hoc monitoring.")}</p>
         </div>
 
         <div class="conrad-compare-table-wrap">
           <table class="conrad-compare-table">
             <thead>
               <tr>
-                <th class="col-metric">${compHeaders.metric || "PERFORMANCE DIMENSION"}</th>
-                <th class="col-conrad">${compHeaders.conrad || brand + " SYSTEM"}</th>
-                <th class="col-legacy">${compHeaders.legacy || "LEGACY UNMITIGATED / PASSIVE"}</th>
+                <th class="col-metric">${escapeHTML(compHeaders.metric || "PERFORMANCE DIMENSION")}</th>
+                <th class="col-conrad">${escapeHTML(compHeaders.conrad || brand + " SYSTEM")}</th>
+                <th class="col-legacy">${escapeHTML(compHeaders.legacy || "LEGACY UNMITIGATED / PASSIVE")}</th>
               </tr>
             </thead>
             <tbody>
               ${compRows.map(function(r) {
                 return `
                   <tr>
-                    <td class="col-metric">${r.metric}</td>
-                    <td class="col-conrad">${r.conrad}</td>
-                    <td class="col-legacy">${r.legacy}</td>
+                    <td class="col-metric">${escapeHTML(r.metric)}</td>
+                    <td class="col-conrad">${escapeHTML(r.conrad)}</td>
+                    <td class="col-legacy">${escapeHTML(r.legacy)}</td>
                   </tr>
                 `;
               }).join("")}
@@ -217,8 +232,12 @@
       tab.addEventListener("click", function() {
         if (tab.classList.contains("active")) return;
 
-        tabs.forEach(function(t) { t.classList.remove("active"); });
+        tabs.forEach(function(t) {
+          t.classList.remove("active");
+          t.setAttribute("aria-selected", "false");
+        });
         tab.classList.add("active");
+        tab.setAttribute("aria-selected", "true");
         var filter = tab.getAttribute("data-filter");
 
         // 1. Crossfade schematic preview cards
