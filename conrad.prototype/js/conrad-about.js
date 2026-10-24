@@ -283,6 +283,26 @@ window.generateContactHTML = function(kicker, leadText) {
       : "";
   }
 
+  var _cachedTrack = null;
+  var _cachedContact = null;
+  var _cachedSticky = null;
+  var _cachedStrip = null;
+  var _cachedCardsWrap = null;
+  var _cachedSheet = null;
+  var _cachedCounter = null;
+  var _cachedInfo = null;
+  var _cachedNav = null;
+
+  var _cachedBadgeEl = null;
+  var _cachedTitleEl = null;
+  var _cachedSubEl = null;
+  var _cachedDescEl = null;
+
+  var _cachedCards = null;
+  var _cachedLetters = null;
+  var _cachedInfoItems = null;
+  var _cachedStepLetters = null;
+
   var isInspectOpen = false;
   var isInspectAnimating = false;
   var activeInspectIndex = -1;
@@ -301,18 +321,18 @@ window.generateContactHTML = function(kicker, leadText) {
     var data = WALK_DATA[index];
     if (!data) return;
 
-    var track = document.getElementById("conrad-walkalone-track");
-    var strip = document.getElementById("walkalone-strip");
-    var cardsWrap = document.getElementById("walkalone-cards-wrap");
-    var sheet = document.getElementById("walkalone-inspect-sheet");
-    var counter = document.getElementById("walkalone-counter");
-    var info = document.getElementById("walkalone-info");
-    var nav = document.getElementById("walkalone-steps-nav");
+    var track = _cachedTrack;
+    var strip = _cachedStrip;
+    var cardsWrap = _cachedCardsWrap;
+    var sheet = _cachedSheet;
+    var counter = _cachedCounter;
+    var info = _cachedInfo;
+    var nav = _cachedNav;
 
-    var badgeEl = document.getElementById("walkalone-inspect-badge");
-    var titleEl = document.getElementById("walkalone-inspect-title");
-    var subEl = document.getElementById("walkalone-inspect-subtitle");
-    var descEl = document.getElementById("walkalone-inspect-desc");
+    var badgeEl = _cachedBadgeEl;
+    var titleEl = _cachedTitleEl;
+    var subEl = _cachedSubEl;
+    var descEl = _cachedDescEl;
 
     if (badgeEl) badgeEl.textContent = data.stage;
     if (titleEl) titleEl.textContent = data.title;
@@ -336,7 +356,7 @@ window.generateContactHTML = function(kicker, leadText) {
         ease: "power3.inOut"
       });
 
-      var allCards = track.querySelectorAll(".walkalone-card-item");
+      var allCards = _cachedCards;
       var heroW = Math.min(window.innerWidth * 0.58, 860);
       var heroH = Math.min(window.innerHeight * 0.42, 460);
       var cardY = -70;
@@ -406,13 +426,13 @@ window.generateContactHTML = function(kicker, leadText) {
     if (!isInspectOpen || isInspectAnimating) return;
     isInspectAnimating = true;
 
-    var track = document.getElementById("conrad-walkalone-track");
-    var strip = document.getElementById("walkalone-strip");
-    var cardsWrap = document.getElementById("walkalone-cards-wrap");
-    var sheet = document.getElementById("walkalone-inspect-sheet");
-    var counter = document.getElementById("walkalone-counter");
-    var info = document.getElementById("walkalone-info");
-    var nav = document.getElementById("walkalone-steps-nav");
+    var track = _cachedTrack;
+    var strip = _cachedStrip;
+    var cardsWrap = _cachedCardsWrap;
+    var sheet = _cachedSheet;
+    var counter = _cachedCounter;
+    var info = _cachedInfo;
+    var nav = _cachedNav;
 
     if (strip) strip.classList.remove("inspect-backdrop");
 
@@ -450,7 +470,7 @@ window.generateContactHTML = function(kicker, leadText) {
       var progress = Math.max(0, Math.min(1, -rect.top / Math.max(1, scrollDistance)));
       var floatIndex = progress * (WALK_DATA.length - 1);
 
-      var allCards = track.querySelectorAll(".walkalone-card-item");
+      var allCards = _cachedCards;
       allCards.forEach(function(card, idx) {
         var d = idx - floatIndex;
         var y = d * GAP;
@@ -531,10 +551,10 @@ window.generateContactHTML = function(kicker, leadText) {
   }
 
   function updateWalkScroll() {
-    var track = document.getElementById("conrad-walkalone-track");
-    var sticky = document.getElementById("conrad-walkalone-sticky");
-    var strip = document.getElementById("walkalone-strip");
-    var nav = document.getElementById("walkalone-steps-nav");
+    var track = _cachedTrack;
+    var sticky = _cachedSticky;
+    var strip = _cachedStrip;
+    var nav = _cachedNav;
     if (!track || !sticky || !strip) return;
 
     var WALK_DATA = getWalkData();
@@ -570,7 +590,7 @@ window.generateContactHTML = function(kicker, leadText) {
       strip.style.width = stripW + "px";
       strip.style.opacity = sectionOpacity.toString();
 
-      var cards = track.querySelectorAll(".walkalone-card-item");
+      var cards = _cachedCards;
       cards.forEach(function(card, idx) {
         var d = idx - floatIndex;
         var y = d * GAP;
@@ -589,7 +609,7 @@ window.generateContactHTML = function(kicker, leadText) {
         }
       });
 
-      var letters = track.querySelectorAll(".walkalone-letter-item");
+      var letters = _cachedLetters;
       letters.forEach(function(letterEl, idx) {
         var offset = idx - floatIndex;
         if (Math.abs(offset) <= 1.4 && sectionOpacity > 0.01) {
@@ -611,7 +631,7 @@ window.generateContactHTML = function(kicker, leadText) {
         }
       });
 
-      var infoItems = track.querySelectorAll(".walkalone-info-item");
+      var infoItems = _cachedInfoItems;
       infoItems.forEach(function(item, idx) {
         if (idx === activeStep && sectionOpacity > 0.1) {
           item.classList.add("active");
@@ -620,7 +640,7 @@ window.generateContactHTML = function(kicker, leadText) {
         }
       });
 
-      var stepLetters = track.querySelectorAll(".walkalone-step-letter");
+      var stepLetters = _cachedStepLetters;
       stepLetters.forEach(function(stepEl, idx) {
         if (idx === activeStep) {
           stepEl.classList.add("active");
@@ -647,7 +667,7 @@ window.generateContactHTML = function(kicker, leadText) {
   }
 
   function goToWalkStep(targetStep) {
-    var track = document.getElementById("conrad-walkalone-track");
+    var track = _cachedTrack;
     if (!track) return;
     var WALK_DATA = getWalkData();
     var targetProgress = targetStep / Math.max(1, (WALK_DATA.length - 1));
@@ -664,10 +684,10 @@ window.generateContactHTML = function(kicker, leadText) {
 
   var eventsBound = false;
   function bindWalkEvents() {
-    var track = document.getElementById("conrad-walkalone-track");
+    var track = _cachedTrack;
     if (!track) return;
 
-    var cards = track.querySelectorAll(".walkalone-card-item");
+    var cards = _cachedCards;
     cards.forEach(function(card, idx) {
       card.addEventListener("click", function(e) {
         e.preventDefault();
@@ -681,7 +701,7 @@ window.generateContactHTML = function(kicker, leadText) {
       });
     });
 
-    var sheet = document.getElementById("walkalone-inspect-sheet");
+    var sheet = _cachedSheet;
     if (sheet) {
       sheet.addEventListener("click", function(e) {
         if (isInspectOpen && !isInspectAnimating) {
@@ -692,7 +712,7 @@ window.generateContactHTML = function(kicker, leadText) {
       });
     }
 
-    var strip = document.getElementById("walkalone-strip");
+    var strip = _cachedStrip;
     if (strip) {
       strip.addEventListener("click", function(e) {
         if (isInspectOpen && !isInspectAnimating) {
@@ -703,7 +723,7 @@ window.generateContactHTML = function(kicker, leadText) {
       });
     }
 
-    var sticky = document.getElementById("conrad-walkalone-sticky");
+    var sticky = _cachedSticky;
     if (sticky) {
       sticky.addEventListener("click", function(e) {
         if (isInspectOpen && !isInspectAnimating) {
@@ -712,7 +732,7 @@ window.generateContactHTML = function(kicker, leadText) {
       });
     }
 
-    var stepLetters = track.querySelectorAll(".walkalone-step-letter, .walkalone-step-dot");
+    var stepLetters = _cachedStepLetters;
     stepLetters.forEach(function(letterEl) {
       letterEl.addEventListener("click", function(e) {
         e.preventDefault();
@@ -787,13 +807,30 @@ window.generateContactHTML = function(kicker, leadText) {
 
   function ensureAboutTrack() {
     var onAbout = isAboutRoute();
-    var track = document.getElementById("conrad-walkalone-track");
-    var contact = document.getElementById("conrad-contact-block");
+    var track = _cachedTrack || document.getElementById("conrad-walkalone-track");
+    var contact = _cachedContact || document.getElementById("conrad-contact-block");
 
     if (!onAbout) {
       if (track) track.remove();
       if (contact) contact.remove();
       currentMountedEdition = null;
+      _cachedTrack = null;
+      _cachedContact = null;
+      _cachedSticky = null;
+      _cachedStrip = null;
+      _cachedCardsWrap = null;
+      _cachedSheet = null;
+      _cachedCounter = null;
+      _cachedInfo = null;
+      _cachedNav = null;
+      _cachedBadgeEl = null;
+      _cachedTitleEl = null;
+      _cachedSubEl = null;
+      _cachedDescEl = null;
+      _cachedCards = null;
+      _cachedLetters = null;
+      _cachedInfoItems = null;
+      _cachedStepLetters = null;
       return;
     }
 
@@ -831,6 +868,23 @@ window.generateContactHTML = function(kicker, leadText) {
       if (contact) contact.remove();
       track = null;
       contact = null;
+      _cachedTrack = null;
+      _cachedContact = null;
+      _cachedSticky = null;
+      _cachedStrip = null;
+      _cachedCardsWrap = null;
+      _cachedSheet = null;
+      _cachedCounter = null;
+      _cachedInfo = null;
+      _cachedNav = null;
+      _cachedBadgeEl = null;
+      _cachedTitleEl = null;
+      _cachedSubEl = null;
+      _cachedDescEl = null;
+      _cachedCards = null;
+      _cachedLetters = null;
+      _cachedInfoItems = null;
+      _cachedStepLetters = null;
     }
 
     if (!track) {
@@ -841,6 +895,28 @@ window.generateContactHTML = function(kicker, leadText) {
       div.style.height = (WALK_DATA.length * 68) + "vh";
       div.innerHTML = generateWalkHTML();
       hero.parentNode.insertBefore(div, hero.nextSibling);
+      track = div;
+    } else if (hero.nextSibling !== track) {
+      hero.parentNode.insertBefore(track, hero.nextSibling);
+    }
+
+    if (!_cachedTrack) {
+      _cachedTrack = track;
+      _cachedSticky = document.getElementById("conrad-walkalone-sticky");
+      _cachedStrip = document.getElementById("walkalone-strip");
+      _cachedCardsWrap = document.getElementById("walkalone-cards-wrap");
+      _cachedSheet = document.getElementById("walkalone-inspect-sheet");
+      _cachedCounter = document.getElementById("walkalone-counter");
+      _cachedInfo = document.getElementById("walkalone-info");
+      _cachedNav = document.getElementById("walkalone-steps-nav");
+      _cachedBadgeEl = document.getElementById("walkalone-inspect-badge");
+      _cachedTitleEl = document.getElementById("walkalone-inspect-title");
+      _cachedSubEl = document.getElementById("walkalone-inspect-subtitle");
+      _cachedDescEl = document.getElementById("walkalone-inspect-desc");
+      _cachedCards = _cachedTrack.querySelectorAll(".walkalone-card-item");
+      _cachedLetters = _cachedTrack.querySelectorAll(".walkalone-letter-item");
+      _cachedInfoItems = _cachedTrack.querySelectorAll(".walkalone-info-item");
+      _cachedStepLetters = _cachedTrack.querySelectorAll(".walkalone-step-letter, .walkalone-step-dot");
 
       var nextBtn = hero.querySelector(".scrollToNext");
       if (nextBtn && !nextBtn._walkBound) {
@@ -848,7 +924,7 @@ window.generateContactHTML = function(kicker, leadText) {
         nextBtn.addEventListener("click", function(e) {
           e.preventDefault();
           e.stopPropagation();
-          var t = document.getElementById("conrad-walkalone-track");
+          var t = _cachedTrack;
           if (t) {
             var topPos = t.getBoundingClientRect().top + window.pageYOffset;
             if (window.Global && Global.lenis) {
@@ -864,11 +940,9 @@ window.generateContactHTML = function(kicker, leadText) {
       if (window.Global && Global.lenis) {
         Global.lenis.resize();
       }
-    } else if (hero.nextSibling !== track) {
-      hero.parentNode.insertBefore(track, hero.nextSibling);
     }
 
-    var currentTrack = document.getElementById("conrad-walkalone-track");
+    var currentTrack = _cachedTrack || document.getElementById("conrad-walkalone-track");
     if (currentTrack) {
       if (!contact || needsRebuild) {
         if (contact) contact.remove();
@@ -877,6 +951,7 @@ window.generateContactHTML = function(kicker, leadText) {
         contactSec.className = "conrad-contact-section";
         contactSec.innerHTML = generateContact();
         currentTrack.parentNode.insertBefore(contactSec, currentTrack.nextSibling);
+        _cachedContact = contactSec;
         if (window.Global && Global.lenis) {
           Global.lenis.resize();
         }
