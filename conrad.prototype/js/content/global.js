@@ -131,7 +131,7 @@ window.Conrad.CONTENT_GLOBAL = {
         schematic: "all",
         image: "/assets/images/subsea/benthic-collector.jpg",
         badge: "SYSTEM SCHEMATIC // OVERVIEW",
-        title: "AUTONOMOUS SUBSEA PLUME MITIGATION PLATFORM",
+        title: "Autonomous Subsea Plume Mitigation Platform",
         tag: "6,000M DEPTH RATED // SBMA G09 COMPLIANT"
       },
       {

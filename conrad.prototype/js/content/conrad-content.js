@@ -215,6 +215,8 @@ window.Conrad = window.Conrad || {};
       copyright.textContent = "COPYRIGHT © 2026 " + brandName;
     }
 
+    updateCompanyDropdownAndContact();
+
     // 4. Handle 404 / 400 error page background animation
     var fourOhFour = document.querySelector(".FourOhFourSlice");
     var canvas = document.querySelector(".Container > canvas");
@@ -237,6 +239,117 @@ window.Conrad = window.Conrad || {};
           canvas.style.removeProperty("opacity");
         }
       }
+    }
+  }
+
+  function updateCompanyDropdownAndContact() {
+    var isCn = (Conrad && Conrad.isChina);
+    var targetEmail = isCn ? "teamposeidon@gmail.com" : "teamdrunkeast@gmail.com";
+    var brand = isCn ? "POSEIDON" : "DRUNKEAST";
+
+    // 1. Sync contact email links across footer, header desktop & mobile
+    var contactLinks = document.querySelectorAll(
+      "a.contact-email, " +
+      ".Footer a[href*='@'], " +
+      ".Header a[href*='@'], " +
+      ".menuScreen a[href*='@'], " +
+      ".company a[href*='@']"
+    );
+    contactLinks.forEach(function(link) {
+      if (link.getAttribute("href") !== "mailto:" + targetEmail) {
+        link.setAttribute("href", "mailto:" + targetEmail);
+      }
+      if (link.getAttribute("data-label") !== targetEmail) {
+        link.setAttribute("data-label", targetEmail);
+      }
+      var labelSpan = link.querySelector(".link-label, span");
+      if (labelSpan && labelSpan.textContent !== targetEmail) {
+        labelSpan.textContent = targetEmail;
+      } else if (!labelSpan && link.textContent !== targetEmail) {
+        link.textContent = targetEmail;
+      }
+    });
+
+    // 2. Enrich the Company Dropdown (.CompanyDomainWrapper)
+    var compWrapper = document.querySelector(".CompanyDomainWrapper");
+    if (compWrapper) {
+      var editionKey = isCn ? "cn" : "en";
+      var c1Label = compWrapper.querySelector(".column-1 > h3.label");
+      if (c1Label && c1Label.dataset.edition !== editionKey) {
+        c1Label.dataset.edition = editionKey;
+        c1Label.textContent = "MISSION // OCEAN SAFEGUARDS";
+        c1Label.style.setProperty("font-size", "0.75rem", "important");
+        c1Label.style.setProperty("letter-spacing", "0.12em", "important");
+        c1Label.style.setProperty("text-transform", "uppercase", "important");
+        c1Label.style.setProperty("color", "rgba(255,255,255,0.5)", "important");
+      }
+
+      var c1Desc = compWrapper.querySelector(".column-1 .description");
+      if (c1Desc && c1Desc.dataset.edition !== editionKey) {
+        c1Desc.dataset.edition = editionKey;
+        c1Desc.innerHTML = isCn ? `
+          <p style="margin: 0; font-size: 0.95rem; line-height: 1.5; color: rgba(255,255,255,0.85);">
+            Developing next-generation subsea sediment flocculation and closed-loop turbidity control systems to harmonize marine mineral extraction with ecological sustainability.
+          </p>
+        ` : `
+          <p style="margin: 0; font-size: 0.95rem; line-height: 1.5; color: rgba(255,255,255,0.85);">
+            Developing closed-loop acoustic telemetry and bio-flocculant dispersion systems to mitigate benthic sediment plumes and protect abyssal marine ecosystems.
+          </p>
+        `;
+      }
+
+      var bottomWrapper = compWrapper.querySelector(".column-1 .bottom-wrapper");
+      if (bottomWrapper) {
+        var secondBottom = bottomWrapper.children[1];
+        if (secondBottom && secondBottom.dataset.edition !== editionKey) {
+          secondBottom.dataset.edition = editionKey;
+          secondBottom.innerHTML = `
+            <h3 class="label" role="heading" aria-level="3" style="font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 4px;">
+              INITIATIVE
+            </h3>
+            <div style="font-size: 0.88rem; color: #ffffff; font-weight: 500;">
+              Conrad Challenge 2026 // Energy & Environment
+            </div>
+          `;
+        }
+      }
+
+      var c2 = compWrapper.querySelector(".column-2");
+      if (c2 && c2.dataset.edition !== editionKey) {
+        c2.dataset.edition = editionKey;
+        c2.innerHTML = `
+          <div style="padding-top: 2px;">
+            <h3 class="label" role="heading" aria-level="3" style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 14px;">
+              EXPLORATION & ARCHITECTURE
+            </h3>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <a href="/about" class="conrad-menu-link">
+                <span class="menu-text">About Us — Mission & Story</span>
+                <span class="menu-arrow">&rarr;</span>
+              </a>
+              <a href="/technology" class="conrad-menu-link">
+                <span class="menu-text">Technology — Subsea Specifications</span>
+                <span class="menu-arrow">&rarr;</span>
+              </a>
+              <a href="/business" class="conrad-menu-link">
+                <span class="menu-text">Business — Commercial Permitting Model</span>
+                <span class="menu-arrow">&rarr;</span>
+              </a>
+            </div>
+          </div>
+        `;
+      }
+
+      var currentPath = (window.location.pathname || "/").replace(/\/$/, "");
+      var menuLinks = compWrapper.querySelectorAll(".conrad-menu-link");
+      menuLinks.forEach(function(l) {
+        var href = (l.getAttribute("href") || "").replace(/\/$/, "");
+        if (href === currentPath) {
+          l.classList.add("active");
+        } else {
+          l.classList.remove("active");
+        }
+      });
     }
   }
 
@@ -264,6 +377,13 @@ window.Conrad = window.Conrad || {};
   Conrad.syncEdition = syncEdition;
   Conrad.applyBrand = applyBrand;
   applyBrand();
+
+  document.addEventListener("click", function(e) {
+    if (e.target && e.target.closest(".company-wrapper")) {
+      setTimeout(updateCompanyDropdownAndContact, 50);
+      setTimeout(updateCompanyDropdownAndContact, 200);
+    }
+  });
 
   window.addEventListener("conrad-locationchange", syncEdition);
   window.addEventListener("popstate", syncEdition);

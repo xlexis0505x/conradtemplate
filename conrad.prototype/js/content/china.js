@@ -339,7 +339,7 @@ window.Conrad.CONTENT_CHINA = {
       kicker: "02 // CONNECT WITH US",
       title: "Direct Inquiries",
       lead: "Have a question, an idea, or an opportunity to collaborate? We welcome conversations with fellow innovators, ocean researchers, and state/private engineering partners.",
-      email: "teamdrunkeast@gmail.com",
+      email: "teamposeidon@gmail.com",
       company: "POSEIDON"
     }
   }

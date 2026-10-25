@@ -73,7 +73,6 @@
               <div class="conrad-schematic-card ${idx === 0 ? 'active' : ''}" data-schematic="${escapeHTML(s.schematic)}">
                 <div class="schematic-media-wrap">
                   <img src="${escapeHTML(s.image)}" alt="${escapeHTML(s.title)}" />
-                  <div class="schematic-badge">${escapeHTML(s.badge)}</div>
                 </div>
                 <div class="schematic-meta-row">
                   <span class="meta-title">${escapeHTML(s.title)}</span>
@@ -122,7 +121,7 @@
                 return `
                   <tr>
                     <td class="col-metric">${escapeHTML(r.metric)}</td>
-                    <td class="col-conrad">${escapeHTML(r.conrad)}</td>
+                    <td class="col-conrad">${r.conrad}</td>
                     <td class="col-legacy">${escapeHTML(r.legacy)}</td>
                   </tr>
                 `;
@@ -166,6 +165,17 @@
 
     var anchor = qualities || p3d || variations || header;
     if (!anchor) return;
+
+    if (header) {
+      var titleEl = header.querySelector("h1.titleWrapper span.title, h1.titleWrapper, .title");
+      if (titleEl && titleEl.textContent !== "Autonomous Benthic Plume Mitigation Architecture") {
+        titleEl.textContent = "Autonomous Benthic Plume Mitigation Architecture";
+      }
+      var para = header.querySelector(".paragraph1 .detail, .paragraph1 p");
+      if (para && para.textContent.includes("AUTONOMOUS SUBSEA")) {
+        para.textContent = "Autonomous Subsea Plume Mitigation Architecture";
+      }
+    }
 
     var activeEdition = (window.Conrad && Conrad.edition) || "global";
     var needsRebuild = (currentMountedEdition !== activeEdition);

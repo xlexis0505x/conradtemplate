@@ -733,28 +733,17 @@
 }
 
 .schematic-badge {
-  position: absolute;
-  top: 1rem;
-  left: 1.25rem;
-  padding: 0 !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  color: #01B1C7 !important;
-  font-family: var(--font-kicker) !important;
-  font-size: 0.7rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.14em !important;
-  text-transform: uppercase !important;
-  z-index: 2;
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.05s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
-.conrad-schematic-card.active .schematic-badge {
-  opacity: 1 !important;
-  transform: translateX(0) !important;
+.ProductHeaderSlice h1.titleWrapper,
+.ProductHeaderSlice h1,
+.ProductHeaderSlice .title {
+  font-family: var(--font-headline, "Space Grotesk", sans-serif) !important;
+  text-transform: none !important;
+  letter-spacing: -0.02em !important;
 }
 
 .schematic-meta-row {

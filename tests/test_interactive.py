@@ -239,3 +239,73 @@ def test_subsea_images_integrity_and_zero_flash(page, base_url):
     hero_loaded = page.evaluate("(el) => el.complete && el.naturalWidth > 0", hero_img.element_handle())
     assert hero_loaded, f"About hero image failed to load: {hero_src}"
 
+
+@pytest.mark.interactive
+def test_company_dropdown_and_edition_emails(page, base_url):
+    """Verifies that the Company dropdown displays enriched mission & links, and contact emails respect edition toggles."""
+    # 1. Global Edition
+    page.goto(f"{base_url}/", wait_until="domcontentloaded")
+    page.wait_for_selector(".company-wrapper", timeout=12000)
+
+    # Click company wrapper to reveal dropdown
+    comp_btn = page.locator(".company-wrapper")
+    comp_btn.click()
+    page.wait_for_timeout(300)
+
+    # Verify dropdown contains enriched content and global email
+    dropdown_text = page.evaluate("() => document.querySelector('.CompanyDomainWrapper')?.innerText || ''")
+    assert "teamdrunkeast@gmail.com" in dropdown_text, "Dropdown should have teamdrunkeast@gmail.com in global edition"
+    assert "Conrad Challenge 2026" in dropdown_text, "Dropdown should feature Conrad Challenge 2026 badge"
+    assert "About Us — Mission & Story" in dropdown_text, "Dropdown should include quick link to /about"
+
+    # Verify footer email in global edition
+    footer_email = page.evaluate("() => document.querySelector('footer')?.innerText || ''")
+    assert "teamdrunkeast@gmail.com" in footer_email, "Footer should display teamdrunkeast@gmail.com in global edition"
+
+    # 2. China / Poseidon Edition
+    page.goto(f"{base_url}/?edition=china", wait_until="domcontentloaded")
+    page.wait_for_selector(".company-wrapper", timeout=12000)
+
+    comp_btn = page.locator(".company-wrapper")
+    comp_btn.click()
+    page.wait_for_timeout(300)
+
+    dropdown_cn = page.evaluate("() => document.querySelector('.CompanyDomainWrapper')?.innerText || ''")
+    assert "teamposeidon@gmail.com" in dropdown_cn, "Dropdown should have teamposeidon@gmail.com in China edition"
+    assert "Conrad Challenge 2026" in dropdown_cn, "Dropdown should feature Conrad Challenge 2026 badge in English"
+    assert "About Us — Mission & Story" in dropdown_cn, "Dropdown links should be in English"
+
+    footer_cn = page.evaluate("() => document.querySelector('footer')?.innerText || ''")
+    assert "teamposeidon@gmail.com" in footer_cn, "Footer should display teamposeidon@gmail.com in China edition"
+
+    # 3. Verify blue line hover animation on the 3 dropdown links
+    link = page.locator('.conrad-menu-link[href="/technology"]')
+    link.hover()
+    page.wait_for_timeout(300)
+    bg_color = page.evaluate("() => window.getComputedStyle(document.querySelector('.conrad-menu-link[href=\"/technology\"]'), '::after').backgroundColor")
+    assert "rgb(1, 177, 199)" in bg_color, f"Dropdown link ::after should have cyan background, got {bg_color}"
+
+
+@pytest.mark.interactive
+def test_tech_page_styling_and_table_html(page, base_url):
+    """Verifies tech page title casing, suppression of schematic badges, and unescaped HTML in comparison table."""
+    page.goto(f"{base_url}/technology", wait_until="domcontentloaded")
+    page.wait_for_selector(".ProductHeaderSlice", timeout=12000)
+
+    # Verify title casing
+    title_text = page.locator(".ProductHeaderSlice h1.titleWrapper, .ProductHeaderSlice .title").first.inner_text().strip()
+    assert "Autonomous Benthic Plume Mitigation Architecture" in title_text or "Autonomous Subsea Plume Mitigation Architecture" in title_text, (
+        f"Title should be Title Case, got: {title_text}"
+    )
+
+    # Verify schematic badge suppression
+    visible_badges = page.evaluate("() => Array.from(document.querySelectorAll('.schematic-badge')).filter(el => el.offsetParent !== null && window.getComputedStyle(el).display !== 'none' && window.getComputedStyle(el).visibility !== 'hidden').length")
+    assert visible_badges == 0, f"Expected 0 visible schematic badges, found {visible_badges}"
+
+    # Verify comparison table unescaped HTML tags
+    page.wait_for_selector(".conrad-compare-table", timeout=12000)
+    table_html = page.evaluate("() => document.querySelector('.conrad-compare-table')?.innerHTML || ''")
+    assert "&lt;strong&gt;" not in table_html, "Comparison table should render HTML tags rather than escaped &lt;strong&gt;"
+    assert "<strong>Accelerated" in table_html, "Comparison table should contain unescaped <strong> tags"
+
+
