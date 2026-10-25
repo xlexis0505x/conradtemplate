@@ -385,9 +385,41 @@ window.Conrad = window.Conrad || {};
     }
   });
 
+  function tuneLenisScroll() {
+    var l = window.Global && window.Global.lenis;
+    if (l) {
+      if (l.virtualScroll && l.virtualScroll.options) {
+        if (l.virtualScroll.options.wheelMultiplier !== 1.35) {
+          l.virtualScroll.options.wheelMultiplier = 1.35;
+        }
+        if (l.virtualScroll.options.touchMultiplier !== 1.3) {
+          l.virtualScroll.options.touchMultiplier = 1.3;
+        }
+      }
+      if (l.options) {
+        if (l.options.wheelMultiplier !== 1.35) {
+          l.options.wheelMultiplier = 1.35;
+        }
+        if (l.options.touchMultiplier !== 1.3) {
+          l.options.touchMultiplier = 1.3;
+        }
+        if (l.options.lerp !== 0.1) {
+          l.options.lerp = 0.1;
+        }
+        if (l.options.duration !== undefined) {
+          l.options.duration = undefined;
+        }
+      }
+    }
+  }
+
   window.addEventListener("conrad-locationchange", syncEdition);
   window.addEventListener("popstate", syncEdition);
+  window.addEventListener("conrad-locationchange", tuneLenisScroll);
+  window.addEventListener("popstate", tuneLenisScroll);
   setInterval(syncEdition, 100);
+  setInterval(tuneLenisScroll, 100);
+  tuneLenisScroll();
 
   if (window.Conrad && Conrad.onReady) {
     Conrad.onReady(applyBrand);

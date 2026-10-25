@@ -710,7 +710,7 @@ h1, h2, h3, h4,
 /* --- RADIANT NUCLEAR-INSPIRED 3D HARDWARE SCRUBBER (DARK MODE) --- */
 #conrad-radiant-janus-track {
   width: 100% !important;
-  height: 450vh !important;
+  height: 300vh !important;
   position: relative !important;
   background-color: #000000 !important;
   margin: 0 !important;
@@ -2092,7 +2092,7 @@ h1, h2, h3, h4,
 #conrad-walkalone-track {
   position: relative;
   width: 100%;
-  height: 620vh;
+  height: 420vh;
   background-color: #000000;
   z-index: 10;
 }

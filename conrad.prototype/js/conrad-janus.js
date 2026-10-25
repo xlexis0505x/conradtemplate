@@ -170,8 +170,25 @@
     updateScroll();
 
     if (newlyMounted && window.Global && Global.lenis) {
+      measureJanusTrack();
       Global.lenis.resize();
     }
+  }
+
+  var cachedTrackHeight = 0;
+  var cachedTrackTop = 0;
+  var cachedViewportHeight = window.innerHeight;
+
+  function measureJanusTrack() {
+    if (!janusDomCache.track) {
+      janusDomCache.track = document.getElementById("conrad-radiant-janus-track");
+    }
+    if (janusDomCache.track) {
+      cachedTrackHeight = janusDomCache.track.offsetHeight;
+      var r = janusDomCache.track.getBoundingClientRect();
+      cachedTrackTop = r.top + (window.pageYOffset || document.documentElement.scrollTop);
+    }
+    cachedViewportHeight = window.innerHeight || 800;
   }
 
   function updateScroll() {
@@ -182,14 +199,16 @@
     var track = janusDomCache.track;
     if (!track) return;
 
-    var rect = track.getBoundingClientRect();
-    var trackHeight = track.offsetHeight;
-    var viewportHeight = window.innerHeight;
-    var scrollableDistance = trackHeight - viewportHeight;
+    if (!cachedTrackHeight) {
+      measureJanusTrack();
+    }
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    var rectTop = cachedTrackTop - scrollY;
+    var scrollableDistance = cachedTrackHeight - cachedViewportHeight;
 
     if (scrollableDistance <= 0) return;
 
-    var scrolled = -rect.top;
+    var scrolled = -rectTop;
     var progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
 
     var c = numSections;
@@ -299,8 +318,14 @@
       if (!janusDomCache.nextBtn) janusDomCache.nextBtn = document.getElementById("janus-next");
       var prevBtn = janusDomCache.prevBtn;
       var nextBtn = janusDomCache.nextBtn;
-      if (prevBtn) prevBtn.disabled = (step === 0);
-      if (nextBtn) nextBtn.disabled = (step === c - 1);
+      if (prevBtn) {
+        prevBtn.disabled = false;
+        prevBtn.style.opacity = (step === 0) ? "0.6" : "1";
+      }
+      if (nextBtn) {
+        nextBtn.disabled = false;
+        nextBtn.style.opacity = (step === c - 1) ? "0.6" : "1";
+      }
     }
   }
 
@@ -335,8 +360,8 @@
     if (!janusDomCache.nextBtn) janusDomCache.nextBtn = document.getElementById("janus-next");
     var prevBtn = janusDomCache.prevBtn;
     var nextBtn = janusDomCache.nextBtn;
-    if (prevBtn) prevBtn.addEventListener("click", function() { goToStep(currentStep - 1); });
-    if (nextBtn) nextBtn.addEventListener("click", function() { goToStep(currentStep + 1); });
+    if (prevBtn) prevBtn.addEventListener("click", function() { goToStep((currentStep <= 0) ? (numSections - 1) : (currentStep - 1)); });
+    if (nextBtn) nextBtn.addEventListener("click", function() { goToStep((currentStep >= numSections - 1) ? 0 : (currentStep + 1)); });
 
     if (!janusDomCache.cells) {
       janusDomCache.cells = document.querySelectorAll("#conrad-radiant-janus-sticky .janus-cell");
@@ -360,6 +385,7 @@
     }
 
     window.addEventListener("resize", function() {
+      measureJanusTrack();
       if (janusScene) janusScene.setSize(window.innerWidth, window.innerHeight);
       updateScroll();
     }, { passive: true });
