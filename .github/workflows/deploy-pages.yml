@@ -78,7 +78,7 @@ jobs:
 
           # Copy prototype assets and pages with payload optimization filter
           for item in os.listdir(src):
-            if item in ['air', 'arsenal', 'land', 'lattice', 'models', 'news', 'sea', 'space', 'subterranean', 'infographic-fallback', 'draco', '__pycache__']:
+            if item in ['air', 'arsenal', 'land', 'lattice', 'news', 'sea', 'space', 'subterranean', 'infographic-fallback', '__pycache__']:
               continue
             if item.endswith('.json') and item not in ['index.json', 'cn.json', 'technology.json', 'business.json', 'about.json', '404.json', '400.json']:
               continue
@@ -101,14 +101,6 @@ jobs:
                         ignored.add(f)
                   return ignored
                 shutil.copytree(s, d, symlinks=True, ignore=filter_external)
-              elif item == 'assets':
-                def filter_assets(dir_path, filenames):
-                  ignored = set()
-                  if 'products' in dir_path or 'geometry' in dir_path:
-                    for f in filenames:
-                      ignored.add(f)
-                  return ignored
-                shutil.copytree(s, d, symlinks=True, ignore=filter_assets)
               else:
                 shutil.copytree(s, d, symlinks=True)
             else:

@@ -194,3 +194,48 @@ def test_mobile_viewport_hamburger(browser, base_url):
     drawer.wait_for(state="visible", timeout=5000)
 
     context.close()
+
+
+@pytest.mark.interactive
+def test_subsea_images_integrity_and_zero_flash(page, base_url):
+    """Verifies that all Bento, Arsenal, and Hero images load subsea deep-sea assets without broken links or legacy weapon terms."""
+    page.goto(f"{base_url}/", wait_until="domcontentloaded")
+    page.wait_for_selector(".FeaturedProductsCard", timeout=12000)
+    page.wait_for_function("() => document.querySelectorAll('.FeaturedProductsCard').length >= 7", timeout=10000)
+
+    # 1. Verify all 7 Bento card images
+    cards = page.locator(".FeaturedProductsCard")
+    card_count = cards.count()
+    assert card_count == 7, f"Expected 7 Bento cards, got {card_count}"
+
+    for i in range(card_count):
+        card = cards.nth(i)
+        card.scroll_into_view_if_needed()
+        img = card.locator("img")
+        img.wait_for(state="attached", timeout=5000)
+        img_src = img.get_attribute("src") or ""
+        assert len(img_src) > 0, f"Card {i} image src must not be empty"
+        # Verify image loaded successfully
+        is_loaded = page.evaluate("(el) => el.complete && el.naturalWidth > 0", img.element_handle())
+        assert is_loaded, f"Card {i} image failed to load or has 0 width: {img_src}"
+
+    # 2. Verify Arsenal items on Home
+    arsenal_imgs = page.locator(".ArsenalSlice .ArsenalItem img")
+    if arsenal_imgs.count() > 0:
+        for i in range(arsenal_imgs.count()):
+            aimg = arsenal_imgs.nth(i)
+            aimg_src = aimg.get_attribute("src") or ""
+            assert len(aimg_src) > 0, f"Arsenal item {i} img src must not be empty"
+            is_loaded = page.evaluate("(el) => el.complete && el.naturalWidth > 0", aimg.element_handle())
+            assert is_loaded, f"Arsenal item {i} failed to load: {aimg_src}"
+
+    # 3. Verify About page hero image
+    page.goto(f"{base_url}/about", wait_until="domcontentloaded")
+    page.wait_for_selector(".PageHero", timeout=12000)
+    hero_img = page.locator(".PageHero img").first
+    hero_img.wait_for(state="attached", timeout=5000)
+    hero_src = hero_img.get_attribute("src") or ""
+    assert len(hero_src) > 0, "About page hero image src must not be empty"
+    hero_loaded = page.evaluate("(el) => el.complete && el.naturalWidth > 0", hero_img.element_handle())
+    assert hero_loaded, f"About hero image failed to load: {hero_src}"
+

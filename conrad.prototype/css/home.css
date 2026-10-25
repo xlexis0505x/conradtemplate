@@ -98,6 +98,12 @@
   will-change: transform !important;
 }
 
+.FeaturedProductsCard img,
+.ArsenalSlice .ArsenalItem img,
+.PageHero img {
+  transition: opacity 0.2s ease-in-out;
+}
+
 .FeaturedProducts .FeaturedProductsCard:hover {
   transform: translateY(-4px) scale(1.01) !important;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75) !important;
