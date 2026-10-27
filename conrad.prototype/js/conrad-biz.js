@@ -165,40 +165,90 @@
 
         <div class="conrad-contractors-section" style="margin-top: 2.5rem;">
           <h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">
-            16 Priority International Seabed Authority (ISA) Exploration Contractors
+            Deployment Pricing & Licensing Tiers
           </h3>
-          <p style="font-size: 0.85rem; color: #8E9291; margin-bottom: 1.25rem;">
-            Strategic partner prospects evaluated by tract location, sponsor nation regulatory frameworks, and plume abatement demand.
+          <p style="font-size: 0.85rem; color: #8E9291; margin-bottom: 2rem;">
+            Modular, scalable licensing designed for early-stage trial operators through full commercial extraction fleets. All tiers include full G09 & ISA compliance data streams — no add-ons, no hidden fees.
           </p>
-          <div class="conrad-contractor-table-wrap" style="overflow-x: auto;">
-            <table class="conrad-compare-table" style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
-              <thead>
-                <tr>
-                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">ID</th>
-                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">SPONSORING STATE</th>
-                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">CONTRACTOR ENTITY</th>
-                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">ENTITY TYPE</th>
-                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">CONTRACT AREA</th>
-                  <th style="padding: 10px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">MINERAL TYPE</th>
-                  <th style="padding: 10px 14px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.15); color: #8E9291;">MATCH</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${contractors.map(function(c) {
-                  return `
-                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-                      <td style="padding: 10px 14px; font-family: monospace; color: #8E9291;">${esc(c.id)}</td>
-                      <td style="padding: 10px 14px; font-weight: 600; color: #ffffff;">${esc(c.country)}</td>
-                      <td style="padding: 10px 14px; color: rgba(255,255,255,0.9);">${esc(c.entity)}</td>
-                      <td style="padding: 10px 14px; color: #8E9291;">${esc(c.type)}</td>
-                      <td style="padding: 10px 14px; color: #8E9291;">${esc(c.area)}</td>
-                      <td style="padding: 10px 14px; color: #8E9291;">${esc(c.mineral)}</td>
-                      <td style="padding: 10px 14px; text-align: center; color: #f59e0b;">${esc(c.match)}</td>
-                    </tr>
-                  `;
-                }).join("")}
-              </tbody>
-            </table>
+
+          <div class="conrad-pricing-grid">
+
+            <!-- TIER 1: PILOT -->
+            <div class="conrad-pricing-card">
+              <div class="pricing-tier-badge">PILOT TRIAL</div>
+              <div class="pricing-price">
+                <span class="pricing-currency">USD</span>
+                <span class="pricing-amount">85K</span>
+                <span class="pricing-period">/ 30-day trial</span>
+              </div>
+              <p class="pricing-tagline">Validate our system in your environment. Fully backed by a performance guarantee.</p>
+              <div class="pricing-divider"></div>
+              <ul class="pricing-features">
+                <li><span class="pricing-check">✓</span> 1× benthic manifold skid deployment</li>
+                <li><span class="pricing-check">✓</span> Dual ADCP + optical backscatter sensor suite</li>
+                <li><span class="pricing-check">✓</span> Real-time compliance telemetry dashboard</li>
+                <li><span class="pricing-check">✓</span> G09 & ISA-aligned environmental reporting package</li>
+                <li><span class="pricing-check">✓</span> On-site technical commissioning support</li>
+                <li><span class="pricing-check">✓</span> Performance SLA: >90% turbidity reduction or refund</li>
+                <li class="pricing-excluded"><span class="pricing-cross">–</span> Fleet-wide integration</li>
+                <li class="pricing-excluded"><span class="pricing-cross">–</span> Digital twin plume modeling</li>
+              </ul>
+              <a href="#contact" class="pricing-cta pricing-cta--outline">Request Trial Deployment →</a>
+            </div>
+
+            <!-- TIER 2: OPERATOR — FEATURED -->
+            <div class="conrad-pricing-card conrad-pricing-card--featured">
+              <div class="pricing-featured-label">MOST SELECTED</div>
+              <div class="pricing-tier-badge pricing-tier-badge--featured">OPERATOR LICENSE</div>
+              <div class="pricing-price">
+                <span class="pricing-currency">USD</span>
+                <span class="pricing-amount">340K</span>
+                <span class="pricing-period">/ vessel · year</span>
+              </div>
+              <p class="pricing-tagline">Full operational deployment for active nodule collection vessels. The industry standard for ISA compliance.</p>
+              <div class="pricing-divider"></div>
+              <ul class="pricing-features">
+                <li><span class="pricing-check">✓</span> Up to 3× manifold skids per collector</li>
+                <li><span class="pricing-check">✓</span> Full ADCP + turbidity + hydrographic sensor array</li>
+                <li><span class="pricing-check">✓</span> Real-time compliance telemetry & regulatory dashboard</li>
+                <li><span class="pricing-check">✓</span> Digital twin plume dispersion modeling</li>
+                <li><span class="pricing-check">✓</span> Automated EMMP reporting (G09, ISA, EIA-ready)</li>
+                <li><span class="pricing-check">✓</span> 24/7 remote diagnostics & alert system</li>
+                <li><span class="pricing-check">✓</span> Annual calibration + sensor refresh</li>
+                <li><span class="pricing-check">✓</span> Dedicated account engineer</li>
+              </ul>
+              <a href="#contact" class="pricing-cta pricing-cta--primary">Get Operator Pricing →</a>
+            </div>
+
+            <!-- TIER 3: FLEET ENTERPRISE -->
+            <div class="conrad-pricing-card">
+              <div class="pricing-tier-badge">FLEET ENTERPRISE</div>
+              <div class="pricing-price">
+                <span class="pricing-currency"></span>
+                <span class="pricing-amount" style="font-size: 2.2rem;">Custom</span>
+                <span class="pricing-period">/ multi-vessel</span>
+              </div>
+              <p class="pricing-tagline">End-to-end environmental compliance infrastructure for full ISA concession-scale operations.</p>
+              <div class="pricing-divider"></div>
+              <ul class="pricing-features">
+                <li><span class="pricing-check">✓</span> Unlimited manifold skid deployments</li>
+                <li><span class="pricing-check">✓</span> Fleet-wide sensor fusion & unified data lake</li>
+                <li><span class="pricing-check">✓</span> Multi-zone real-time plume monitoring</li>
+                <li><span class="pricing-check">✓</span> Sovereign regulator reporting API (SBMA / ISA)</li>
+                <li><span class="pricing-check">✓</span> Full digital twin + long-range drift prediction</li>
+                <li><span class="pricing-check">✓</span> White-label environmental compliance reports</li>
+                <li><span class="pricing-check">✓</span> On-site resident engineering team</li>
+                <li><span class="pricing-check">✓</span> Priority SLA — 4-hour response guarantee</li>
+              </ul>
+              <a href="#contact" class="pricing-cta pricing-cta--outline">Contact for Fleet Proposal →</a>
+            </div>
+
+          </div>
+
+          <div class="pricing-footnote">
+            All pricing excludes vessel mobilisation costs, consumable biopolymer reagent supply (volume-tiered), and custom hardware configurations for non-standard collector architectures.
+            <strong style="color: rgba(255,255,255,0.55);">Multi-vessel volume discounts available from 3+ vessels.</strong>
+            Contact us at <a href="mailto:teamdrunkeast@gmail.com" class="contact-email" style="color: #01B1C7; text-decoration: none;">teamdrunkeast@gmail.com</a>.
           </div>
         </div>
       </div>

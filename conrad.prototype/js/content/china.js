@@ -258,7 +258,9 @@ window.Conrad.CONTENT_CHINA = {
         { name: "Mid-Atlantic Ridge", count: "3 Contracts", match: "★★★", actors: "Yuzhmorgeologiya (Russia), Ifremer (France), Poland (Polymetallic Sulfides)" },
         { name: "Western Pacific Seamounts", count: "4 Contracts", match: "★★★", actors: "JOGMEC (Japan), COMRA (China), Russia, South Korea (Cobalt-Rich Crusts)" }
       ]
-    }
+    },
+
+    contractors: []
   },
 
   // ── About Route Content Overrides ─────────────────────────

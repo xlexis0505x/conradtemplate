@@ -710,7 +710,7 @@ h1, h2, h3, h4,
 /* --- RADIANT NUCLEAR-INSPIRED 3D HARDWARE SCRUBBER (DARK MODE) --- */
 #conrad-radiant-janus-track {
   width: 100% !important;
-  height: 300vh !important;
+  height: 450vh !important;
   position: relative !important;
   background-color: #000000 !important;
   margin: 0 !important;
@@ -2085,6 +2085,221 @@ h1, h2, h3, h4,
 }
 
 
+/* === PRICING TABLE: 3-COLUMN TIER CARDS === */
+.conrad-pricing-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 1.5rem !important;
+  margin-top: 0 !important;
+  align-items: stretch !important;
+}
+
+.conrad-pricing-card {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 2.5rem 2rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.018) !important;
+  box-sizing: border-box !important;
+  transition: border-color 0.3s ease, background 0.3s ease !important;
+}
+
+.conrad-pricing-card:hover {
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.conrad-pricing-card--featured {
+  border-color: #01B1C7 !important;
+  background: rgba(1, 177, 199, 0.04) !important;
+}
+
+.conrad-pricing-card--featured:hover {
+  border-color: #01B1C7 !important;
+  background: rgba(1, 177, 199, 0.07) !important;
+}
+
+.pricing-featured-label {
+  position: absolute !important;
+  top: -1px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background: #01B1C7 !important;
+  color: #000000 !important;
+  font-family: var(--font-kicker) !important;
+  font-size: 0.62rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  padding: 4px 14px !important;
+  white-space: nowrap !important;
+}
+
+.pricing-tier-badge {
+  font-family: var(--font-kicker) !important;
+  font-size: 0.68rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.45) !important;
+  margin-bottom: 1.2rem !important;
+  margin-top: 0.6rem !important;
+}
+
+.pricing-tier-badge--featured {
+  color: #01B1C7 !important;
+}
+
+.pricing-price {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 4px !important;
+  margin-bottom: 0.85rem !important;
+}
+
+.pricing-currency {
+  font-family: var(--font-kicker) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  letter-spacing: 0.08em !important;
+  align-self: flex-start !important;
+  margin-top: 6px !important;
+}
+
+.pricing-amount {
+  font-family: var(--font-heading) !important;
+  font-size: 3rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1 !important;
+}
+
+.pricing-period {
+  font-size: 0.8rem !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+  letter-spacing: 0.02em !important;
+  margin-left: 4px !important;
+}
+
+.pricing-tagline {
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  margin: 0 0 1.25rem !important;
+  min-height: 4rem !important;
+}
+
+.pricing-divider {
+  width: 100% !important;
+  height: 1px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  margin-bottom: 1.4rem !important;
+}
+
+.pricing-features {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 0 1.75rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  flex: 1 !important;
+}
+
+.pricing-features li {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.6rem !important;
+  font-size: 0.86rem !important;
+  line-height: 1.45 !important;
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.pricing-features li.pricing-excluded {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.pricing-check {
+  color: #01B1C7 !important;
+  font-weight: 700 !important;
+  flex-shrink: 0 !important;
+  margin-top: 1px !important;
+}
+
+.pricing-cross {
+  color: rgba(255, 255, 255, 0.25) !important;
+  font-weight: 700 !important;
+  flex-shrink: 0 !important;
+  margin-top: 1px !important;
+}
+
+.pricing-cta {
+  display: inline-block !important;
+  padding: 0.85rem 1.5rem !important;
+  font-family: var(--font-kicker) !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  margin-top: auto !important;
+}
+
+.pricing-cta--primary {
+  background: #01B1C7 !important;
+  color: #000000 !important;
+  border: 1px solid #01B1C7 !important;
+}
+
+.pricing-cta--primary:hover {
+  background: #02c8e0 !important;
+  border-color: #02c8e0 !important;
+}
+
+.pricing-cta--outline {
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+.pricing-cta--outline:hover {
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  color: #ffffff !important;
+}
+
+.pricing-footnote {
+  margin-top: 1.75rem !important;
+  padding-top: 1.25rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.07) !important;
+  font-size: 0.78rem !important;
+  line-height: 1.6 !important;
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+@media (max-width: 1024px) {
+  .conrad-pricing-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .conrad-pricing-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .pricing-amount {
+    font-size: 2.4rem !important;
+  }
+}
+
+
 /* === about.css === */
 /* === CONRAD PROTOTYPE: ABOUT ROUTE STYLES & FOOTER === */
 
@@ -2092,7 +2307,7 @@ h1, h2, h3, h4,
 #conrad-walkalone-track {
   position: relative;
   width: 100%;
-  height: 420vh;
+  height: 620vh;
   background-color: #000000;
   z-index: 10;
 }
