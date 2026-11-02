@@ -144,30 +144,34 @@ def test_walk_alone_conveyor_modal(page, base_url):
 
 
 @pytest.mark.interactive
-def test_diligence_data_room_modal(page, base_url):
-    """Test clicking the Diligence trigger and closing via backdrop/ESC on /business."""
+def test_business_sections_and_footer_termination(page, base_url):
+    """Verify that /business cleanly renders sections 01-04, diligence 05 is removed, and footer terminates without gap."""
     page.goto(f"{base_url}/business", wait_until="domcontentloaded")
 
     page.wait_for_selector("#conrad-prepaint-hero", state="hidden", timeout=12000)
     page.wait_for_selector(".LoaderView", state="hidden", timeout=12000)
 
-    page.wait_for_selector("#conrad-open-diligence-btn", timeout=12000)
+    # Verify sections 01 - 04 are mounted
+    page.wait_for_selector("#conrad-biz-doctrine", timeout=12000)
+    page.wait_for_selector("#conrad-biz-economics", timeout=12000)
+    page.wait_for_selector("#conrad-biz-factory", timeout=12000)
+    page.wait_for_selector("#conrad-biz-roadmap", timeout=12000)
 
-    btn = page.locator("#conrad-open-diligence-btn")
-    btn.scroll_into_view_if_needed()
-    btn.click(force=True)
+    # Verify section 05 (diligence banner) and modal are removed
+    diligence_banner = page.locator("#conrad-biz-diligence")
+    assert diligence_banner.count() == 0 or not diligence_banner.is_visible()
 
-    modal = page.locator("#conrad-diligence-modal")
-    page.wait_for_function(
-        "() => { const m = document.getElementById('conrad-diligence-modal'); return m && m.classList.contains('open'); }",
-        timeout=5000
-    )
+    diligence_modal = page.locator("#conrad-diligence-modal")
+    assert diligence_modal.count() == 0 or not diligence_modal.is_visible()
 
-    page.keyboard.press("Escape")
-    page.wait_for_function(
-        "() => { const m = document.getElementById('conrad-diligence-modal'); return !m || !m.classList.contains('open'); }",
-        timeout=5000
-    )
+    # Verify clean gap between section 04 and footer
+    gap = page.evaluate("""() => {
+        const rm = document.getElementById("conrad-biz-roadmap");
+        const footer = document.querySelector(".Footer");
+        if (!rm || !footer) return 999;
+        return footer.offsetTop - (rm.offsetTop + rm.offsetHeight);
+    }""")
+    assert gap < 120, f"Gap between section 04 and footer is too large: {gap}px"
 
 
 @pytest.mark.interactive

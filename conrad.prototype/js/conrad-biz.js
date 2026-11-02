@@ -287,106 +287,11 @@
     </section>
     `;
 
-    var diligenceModalHTML = `
-    <section id="conrad-biz-diligence" class="conrad-biz-section diligence-banner-section">
-      <div class="conrad-biz-inner">
-        <div class="conrad-diligence-banner">
-          <div class="diligence-text-block">
-            <div class="conrad-kicker">05 // ENVIRONMENTAL DATA ROOM &amp; REFERENCES</div>
-            <h2 class="conrad-section-title">Access Technical Diligence &amp; G09 Dossier</h2>
-            <p class="conrad-section-lead">Download certified G09 EMMP compliance dossiers, Nature Communications (2025) benthic sediment benchmarks, and OECD 202/203 flocculant ecotoxicity laboratory certifications.</p>
-          </div>
-          <div class="diligence-cta-block">
-            <button id="conrad-open-diligence-btn" class="conrad-diligence-btn">
-              <span>REQUEST DATA ROOM ACCESS</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-            </button>
-            <div class="diligence-secure-badge">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <span>AUDITABLE COMPLIANCE DOSSIER</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Diligence Request Modal -->
-    <div id="conrad-diligence-modal" class="conrad-modal-overlay" aria-hidden="true">
-      <div class="conrad-modal-backdrop" id="conrad-modal-backdrop"></div>
-      <div class="conrad-modal-window conrad-modal-dialog">
-        <div class="conrad-modal-header">
-          <div>
-            <div class="modal-kicker">VERIFIED INSTITUTIONAL ACCESS</div>
-            <h3 class="modal-title">Environmental Data Room Dossier</h3>
-          </div>
-          <button id="conrad-close-modal-btn" class="conrad-modal-close modal-close-btn" aria-label="Close dialog">&times;</button>
-        </div>
-        <div class="conrad-modal-body">
-          <p class="modal-desc">Authorized concession operators, marine scientists, and regulatory observers may request the full technical dossier, including:</p>
-          <div class="modal-files-list">
-            <div class="modal-file-item">
-              <div class="file-icon">DOC</div>
-              <div class="file-info">
-                <span class="file-name">Cook Islands SBMA G09 EMMP Technical Compliance Architecture</span>
-                <span class="file-size">Environmental Management & Monitoring Plan Guide · 4.8 MB</span>
-              </div>
-            </div>
-            <div class="modal-file-item">
-              <div class="file-icon">SCI</div>
-              <div class="file-info">
-                <span class="file-name">Benthic Plume Dispersion & Redeposition Dynamics (Nature Comm. 2025)</span>
-                <span class="file-size">Empirical Seafloor Nodule Disturbance Analysis · 8.2 MB</span>
-              </div>
-            </div>
-            <div class="modal-file-item">
-              <div class="file-icon">LAB</div>
-              <div class="file-info">
-                <span class="file-name">Eco-Compatible Flocculant Ecotoxicity & Biodegradation Report</span>
-                <span class="file-size">OECD 202/203 Standard Laboratory Certification · 3.1 MB</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- APA References Section -->
-          <div class="conrad-references-block" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-            <h4 style="font-size: 0.95rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">References (APA 7th Edition)</h4>
-            <div style="max-height: 180px; overflow-y: auto; font-size: 0.78rem; line-height: 1.55; color: rgba(255,255,255,0.7); display: flex; flex-direction: column; gap: 0.45rem;">
-              ${biz.references.map(function(ref) {
-                return `<div>${esc(ref)}</div>`;
-              }).join("")}
-            </div>
-          </div>
-
-          <form id="conrad-diligence-form" class="modal-form" style="margin-top: 1.5rem;">
-            <div class="form-row">
-              <input type="text" class="modal-input" placeholder="Organization / Concession Entity *" required />
-              <input type="email" class="modal-input" placeholder="Official Institutional Email *" required />
-            </div>
-            <div class="form-row">
-              <select class="modal-input" required>
-                <option value="" disabled selected>Primary Area of Interest *</option>
-                <option value="cook-islands">Cook Islands Concession Baseline</option>
-                <option value="ccz">Clarion-Clipperton Zone (CCZ) Integration</option>
-                <option value="regulatory">Regulatory &amp; ISA Observer Inquiries</option>
-                <option value="scientific">Academic / Oceanographic Collaboration</option>
-              </select>
-            </div>
-            <button type="submit" id="diligence-submit-btn" class="modal-submit-btn">REQUEST ACCESS CREDENTIALS</button>
-            <div id="diligence-success-msg" class="modal-success-msg" style="display: none;">
-              ✓ Request submitted. Our team will deliver credentials to your institutional address within 24 hours.
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    `;
-
     return {
       doctrineHTML: doctrineHTML,
       economicsHTML: economicsHTML,
       factoryHTML: factoryHTML,
-      roadmapHTML: roadmapHTML,
-      diligenceModalHTML: diligenceModalHTML
+      roadmapHTML: roadmapHTML
     };
   }
 
@@ -539,21 +444,14 @@
       factory.parentNode.insertBefore(roadmap, factory.nextSibling);
     }
 
-    // 5. Mount or reposition Diligence Modal CTA
-    if (!ctaModal && roadmap) {
-      var w5 = document.createElement("div");
-      w5.innerHTML = htmlBlocks.diligenceModalHTML;
-      ctaModal = w5.firstElementChild;
-      var modalOverlay = w5.lastElementChild;
-      roadmap.parentNode.insertBefore(ctaModal, roadmap.nextSibling);
-      if (!document.getElementById("conrad-diligence-modal")) {
-        document.body.appendChild(modalOverlay);
-        bindModalEvents();
-      }
+    // Clean up any lingering diligence elements
+    var ctaModal = document.getElementById("conrad-biz-diligence");
+    if (ctaModal) {
+      ctaModal.remove();
       newlyMounted = true;
-    } else if (ctaModal && roadmap && ctaModal.previousElementSibling !== roadmap) {
-      roadmap.parentNode.insertBefore(ctaModal, roadmap.nextSibling);
     }
+    var modalEl = document.getElementById("conrad-diligence-modal");
+    if (modalEl) modalEl.remove();
 
     if (newlyMounted && window.Global && Global.lenis) {
       Global.lenis.resize();

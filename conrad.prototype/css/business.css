@@ -537,6 +537,27 @@
   margin: 0 0 2.5rem !important;
 }
 
+/* Final section on Business route: Clean termination without trailing gaps */
+#conrad-biz-roadmap {
+  border-bottom: none !important;
+  padding-bottom: 4rem !important;
+  margin-bottom: 0 !important;
+}
+
+.diligence-banner-section,
+#conrad-biz-diligence,
+#conrad-diligence-modal {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
 .conrad-diligence-btn {
   display: inline-flex !important;
   align-items: center !important;

@@ -97,118 +97,7 @@
           "style": "detail"
         }
       ],
-      "media": [
-        {
-          "_key": "fa592bf8236b",
-          "_type": "videoWithMeta",
-          "alt": "Dive-LD large diameter autonomous undersea vehicle operating underwater, demonstrating its modular payload flexibility and deep-sea endurance",
-          "asset": {
-            "_id": "file-df40c4fe3701c9e6febafc87125c5e9110469af8-mp4",
-            "_type": "sanity.fileAsset",
-            "mimeType": "video/mp4",
-            "duration": 10.593917,
-            "width": 1920,
-            "height": 1080,
-            "optimized": [
-              {
-                "_key": "e94d6d654a23",
-                "_type": "videoWithMeta",
-                "asset": {
-                  "_id": "file-d65f0a2f36fbb65c10a966724ae0f61c71ae19ed-mp4",
-                  "_type": "sanity.fileAsset",
-                  "mimeType": "video/mp4",
-                  "duration": 10.593917,
-                  "width": 1920,
-                  "height": 1080,
-                  "thumbnail": {
-                    "_type": "image",
-                    "asset": {
-                      "_ref": "image-b95abc74192ac5ae36f6076031bb09dc0e09d318-1920x1080-png",
-                      "_type": "reference"
-                    }
-                  }
-                }
-              },
-              {
-                "_key": "c34585a48a1d",
-                "_type": "videoWithMeta",
-                "asset": {
-                  "_id": "file-6df33bf6de2dbd3b2757b4c9e1606a075b832730-mp4",
-                  "_type": "sanity.fileAsset",
-                  "mimeType": "video/mp4",
-                  "duration": 10.593917,
-                  "width": 1600,
-                  "height": 900,
-                  "thumbnail": {
-                    "_type": "image",
-                    "asset": {
-                      "_ref": "image-b95abc74192ac5ae36f6076031bb09dc0e09d318-1920x1080-png",
-                      "_type": "reference"
-                    }
-                  }
-                }
-              },
-              {
-                "_key": "7c496cb345ac",
-                "_type": "videoWithMeta",
-                "asset": {
-                  "_id": "file-2af82e308332f44fc0542dda18f78dd8f3b83b44-mp4",
-                  "_type": "sanity.fileAsset",
-                  "mimeType": "video/mp4",
-                  "duration": 10.593917,
-                  "width": 1280,
-                  "height": 720,
-                  "thumbnail": {
-                    "_type": "image",
-                    "asset": {
-                      "_ref": "image-b95abc74192ac5ae36f6076031bb09dc0e09d318-1920x1080-png",
-                      "_type": "reference"
-                    }
-                  }
-                }
-              },
-              {
-                "_key": "9e93d071330b",
-                "_type": "videoWithMeta",
-                "asset": {
-                  "_id": "file-ed469f3d5fe8a2951e94f9410a490296e2e06375-mp4",
-                  "_type": "sanity.fileAsset",
-                  "mimeType": "video/mp4",
-                  "duration": 10.593917,
-                  "width": 854,
-                  "height": 480,
-                  "thumbnail": {
-                    "_type": "image",
-                    "asset": {
-                      "_ref": "image-b95abc74192ac5ae36f6076031bb09dc0e09d318-1920x1080-png",
-                      "_type": "reference"
-                    }
-                  }
-                }
-              }
-            ],
-            "thumbnail": {
-              "_type": "image",
-              "asset": {
-                "_id": "image-b95abc74192ac5ae36f6076031bb09dc0e09d318-1920x1080-png",
-                "_type": "sanity.imageAsset",
-                "mimeType": "image/png",
-                "metadata": {
-                  "_type": "sanity.imageMetadata",
-                  "dimensions": {
-                    "_type": "sanity.imageDimensions",
-                    "aspectRatio": 1.7777777777777777,
-                    "height": 1080,
-                    "width": 1920
-                  },
-                  "hasAlpha": false,
-                  "isOpaque": true
-                }
-              }
-            }
-          }
-        }
-      ],
+      "media": [],
       "title": "Autonomous Benthic Plume Mitigation Architecture"
     },
     {
@@ -746,7 +635,7 @@
             {
               "_key": "010946ad6603",
               "_type": "imageWithMeta",
-              "alt": "High-resolution sonar imagery of an underwater pipeline and surrounding seabed captured by Dive-LD, demonstrating its commercial uses for pipeline and cable inspection, hydrographic survey, mineral detection, and environmental monitoring",
+              "alt": "High-resolution acoustic backscatter imagery of abyssal sediment dispersion and seafloor redeposition, demonstrating real-time plume containment",
               "asset": {
                 "_id": "image-0126fc76978b2fedd63aeeacd2e3b1f55f5c617f-952x952-png",
                 "_type": "sanity.imageAsset",

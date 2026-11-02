@@ -536,19 +536,6 @@ window.generateContactHTML = function(kicker, leadText) {
   var _cachedWalkLetters = null;
   var _cachedWalkInfoItems = null;
   var _cachedWalkStepLetters = null;
-  var cachedWalkTrackHeight = 0;
-  var cachedWalkTrackTop = 0;
-  var cachedWalkViewportHeight = window.innerHeight || 800;
-
-  function measureWalkTrack() {
-    var track = _cachedWalkTrack || document.getElementById("conrad-walkalone-track");
-    if (track) {
-      cachedWalkTrackHeight = track.offsetHeight;
-      var r = track.getBoundingClientRect();
-      cachedWalkTrackTop = r.top + (window.pageYOffset || document.documentElement.scrollTop);
-    }
-    cachedWalkViewportHeight = window.innerHeight || 800;
-  }
 
   function updateWalkScroll() {
     var track = _cachedWalkTrack;
@@ -567,7 +554,6 @@ window.generateContactHTML = function(kicker, leadText) {
       _cachedWalkLetters = Array.prototype.slice.call(track.querySelectorAll(".walkalone-letter-item"));
       _cachedWalkInfoItems = Array.prototype.slice.call(track.querySelectorAll(".walkalone-info-item"));
       _cachedWalkStepLetters = Array.prototype.slice.call(track.querySelectorAll(".walkalone-step-letter"));
-      measureWalkTrack();
     }
 
     var sticky = _cachedWalkSticky;
@@ -575,16 +561,14 @@ window.generateContactHTML = function(kicker, leadText) {
     var nav = _cachedWalkNav;
     if (!track || !sticky || !strip) return;
 
-    if (!cachedWalkTrackHeight) measureWalkTrack();
-
     var WALK_DATA = getWalkData();
-    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    var rectTop = cachedWalkTrackTop - scrollY;
-    var rectBottom = rectTop + cachedWalkTrackHeight;
-    var scrollDistance = cachedWalkTrackHeight - cachedWalkViewportHeight;
+    var rect = track.getBoundingClientRect();
+    var trackHeight = track.offsetHeight;
+    var viewportHeight = window.innerHeight;
+    var scrollDistance = trackHeight - viewportHeight;
     if (scrollDistance <= 0) return;
 
-    var progress = Math.max(0, Math.min(1, -rectTop / scrollDistance));
+    var progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
     var numItems = WALK_DATA.length;
     var floatIndex = progress * (numItems - 1);
     var activeStep = Math.max(0, Math.min(numItems - 1, Math.round(floatIndex)));
@@ -592,8 +576,8 @@ window.generateContactHTML = function(kicker, leadText) {
     var stripW = 440;
     var sectionOpacity = 1;
 
-    if (rectTop > 0) {
-      var enterRatio = Math.max(0, Math.min(1, 1 - rectTop / (cachedWalkViewportHeight * 0.75)));
+    if (rect.top > 0) {
+      var enterRatio = Math.max(0, Math.min(1, 1 - rect.top / (viewportHeight * 0.75)));
       var openEase = enterRatio * enterRatio * (3 - 2 * enterRatio);
       stripW = Math.max(0, 440 * openEase);
       sectionOpacity = openEase;
@@ -673,16 +657,16 @@ window.generateContactHTML = function(kicker, leadText) {
         }
       }
 
-      var isPastOrEnd = (rectBottom <= cachedWalkViewportHeight + 60) || (progress >= 0.985);
+      var isPastOrEnd = (rect.bottom <= viewportHeight + 60) || (progress >= 0.985);
       if (isPastOrEnd || isInspectOpen) {
         if (nav) {
           nav.style.opacity = "0";
           nav.style.pointerEvents = "none";
           nav.style.transform = "translateX(-50%) translateY(14px)";
         }
-      } else if (rectTop > 0) {
+      } else if (rect.top > 0) {
         if (nav) {
-          nav.style.opacity = (Math.max(0, 1 - rectTop / 160) * sectionOpacity).toString();
+          nav.style.opacity = (Math.max(0, 1 - rect.top / 160) * sectionOpacity).toString();
           nav.style.pointerEvents = "auto";
           nav.style.transform = "translateX(-50%) translateY(0)";
         }
@@ -814,7 +798,6 @@ window.generateContactHTML = function(kicker, leadText) {
       }
 
       window.addEventListener("resize", function() {
-        measureWalkTrack();
         if (window.Global && Global.lenis) Global.lenis.resize();
         updateWalkScroll();
       }, { passive: true });

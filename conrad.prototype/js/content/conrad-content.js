@@ -217,7 +217,10 @@ window.Conrad = window.Conrad || {};
 
     updateCompanyDropdownAndContact();
 
-    // 4. Handle 404 / 400 error page background animation
+    // 4. Video suppression & deep-sea engineering placeholder mounting
+    replaceVideosWithPlaceholders();
+
+    // 5. Handle 404 / 400 error page background animation
     var fourOhFour = document.querySelector(".FourOhFourSlice");
     var canvas = document.querySelector(".Container > canvas");
     if (fourOhFour) {
@@ -353,6 +356,113 @@ window.Conrad = window.Conrad || {};
     }
   }
 
+  function createPlaceholderNode(imgSrc, altText, chipText, extraClass) {
+    var wrapper = document.createElement("div");
+    wrapper.className = "conrad-video-placeholder " + (extraClass || "");
+
+    var img = document.createElement("img");
+    img.className = "conrad-placeholder-img";
+    img.src = (typeof window.qualifyUrl === "function") ? window.qualifyUrl(imgSrc) : imgSrc;
+    img.alt = altText;
+    img.loading = "eager";
+
+    var overlay = document.createElement("div");
+    overlay.className = "conrad-placeholder-overlay";
+
+    var chip = document.createElement("div");
+    chip.className = "conrad-placeholder-chip";
+
+    var dot = document.createElement("span");
+    dot.className = "chip-dot";
+
+    var text = document.createElement("span");
+    text.className = "chip-text";
+    text.textContent = chipText;
+
+    chip.appendChild(dot);
+    chip.appendChild(text);
+    overlay.appendChild(chip);
+
+    wrapper.appendChild(img);
+    wrapper.appendChild(overlay);
+    return wrapper;
+  }
+
+  function replaceVideosWithPlaceholders() {
+    // 1. Immediately pause, suppress and remove any raw video element
+    var rawVideos = document.querySelectorAll("video");
+    rawVideos.forEach(function(v) {
+      try {
+        v.pause();
+        v.removeAttribute("src");
+        v.src = "";
+        v.load();
+      } catch (e) {}
+      v.remove();
+    });
+
+    // 2. Home Hero Video Placeholder (Solid black background + white text, no AI background, no blue chip/font)
+    var homeHero = document.querySelector(".HomeHero");
+    if (homeHero) {
+      homeHero.style.backgroundColor = "#010101";
+      var mediaWrapper = homeHero.querySelector(".mediaWrapper");
+      if (mediaWrapper) {
+        mediaWrapper.querySelectorAll(".ResponsiveVideo, video, img, .conrad-video-placeholder").forEach(function(el) { el.remove(); });
+        if (!mediaWrapper.querySelector(".conrad-home-hero-placeholder")) {
+          var heroPlaceholder = document.createElement("div");
+          heroPlaceholder.className = "conrad-home-hero-placeholder";
+          heroPlaceholder.innerHTML = '<div class="conrad-home-hero-inner"><h1 class="conrad-home-hero-title">HOME PAGE(placeholder)</h1></div>';
+          mediaWrapper.appendChild(heroPlaceholder);
+        }
+      }
+    }
+
+    // 3. Featured Announcement Slice Placeholder (Dark background, no AI background, no blue chip)
+    var announcement = document.querySelector(".FeaturedAnnouncementSlice");
+    if (announcement) {
+      var annMedia = announcement.querySelector(".mediaContainer");
+      if (annMedia) {
+        annMedia.querySelectorAll(".ResponsiveMedia, .ResponsiveVideo, video, img, .conrad-video-placeholder").forEach(function(el) { el.remove(); });
+        annMedia.style.backgroundColor = "#080b0f";
+      }
+    }
+
+    // 4. ProductHeaderSlice (on /technology or /business)
+    var prodHeaders = document.querySelectorAll(".ProductHeaderSlice");
+    prodHeaders.forEach(function(header) {
+      var bvc = header.querySelector(".backgroundVideoContainer");
+      if (bvc) {
+        bvc.querySelectorAll(".ResponsiveMedia, .ResponsiveVideo, video, img, .conrad-video-placeholder").forEach(function(el) { el.remove(); });
+        bvc.style.backgroundColor = "#010101";
+      }
+      var headerMedia = header.querySelector(".mediaContainer");
+      if (headerMedia) {
+        headerMedia.querySelectorAll(".ResponsiveMedia, .ResponsiveVideo, video, img, .conrad-video-placeholder").forEach(function(el) { el.remove(); });
+      }
+    });
+
+    // 5. ProductQualitiesSlice (tab with video on /technology)
+    var qualitySlices = document.querySelectorAll(".ProductQualitiesSlice");
+    qualitySlices.forEach(function(slice) {
+      var imageWrappers = slice.querySelectorAll(".ProductQualityContent .imageWrapper");
+      imageWrappers.forEach(function(wrap) {
+        if (wrap.querySelector("video") || wrap.dataset.videoReplaced || wrap.closest(".ProductQualityContent[data-index='2']")) {
+          if (!wrap.querySelector(".conrad-video-placeholder")) {
+            wrap.querySelectorAll(".ResponsiveMedia, .ResponsiveVideo, video").forEach(function(el) { el.remove(); });
+            wrap.dataset.videoReplaced = "true";
+            var qNode = createPlaceholderNode(
+              "/assets/images/subsea/bento-03-adcp.jpg",
+              "Acoustic Doppler Telemetry Sensor Array",
+              "ACOUSTIC DOPPLER PROFILER // TELEMETRY STREAM",
+              "quality-placeholder"
+            );
+            wrap.appendChild(qNode);
+          }
+        }
+      });
+    });
+  }
+
   function syncEdition() {
     var resolved = resolveEdition();
     if (resolved !== Conrad.edition) {
@@ -385,41 +495,9 @@ window.Conrad = window.Conrad || {};
     }
   });
 
-  function tuneLenisScroll() {
-    var l = window.Global && window.Global.lenis;
-    if (l) {
-      if (l.virtualScroll && l.virtualScroll.options) {
-        if (l.virtualScroll.options.wheelMultiplier !== 1.35) {
-          l.virtualScroll.options.wheelMultiplier = 1.35;
-        }
-        if (l.virtualScroll.options.touchMultiplier !== 1.3) {
-          l.virtualScroll.options.touchMultiplier = 1.3;
-        }
-      }
-      if (l.options) {
-        if (l.options.wheelMultiplier !== 1.35) {
-          l.options.wheelMultiplier = 1.35;
-        }
-        if (l.options.touchMultiplier !== 1.3) {
-          l.options.touchMultiplier = 1.3;
-        }
-        if (l.options.lerp !== 0.1) {
-          l.options.lerp = 0.1;
-        }
-        if (l.options.duration !== undefined) {
-          l.options.duration = undefined;
-        }
-      }
-    }
-  }
-
   window.addEventListener("conrad-locationchange", syncEdition);
   window.addEventListener("popstate", syncEdition);
-  window.addEventListener("conrad-locationchange", tuneLenisScroll);
-  window.addEventListener("popstate", tuneLenisScroll);
   setInterval(syncEdition, 100);
-  setInterval(tuneLenisScroll, 100);
-  tuneLenisScroll();
 
   if (window.Conrad && Conrad.onReady) {
     Conrad.onReady(applyBrand);

@@ -55,6 +55,27 @@ class DevHandler(SimpleHTTPRequestHandler):
         self.send_response(204)
         self.end_headers()
 
+    def do_HEAD(self):
+        clean = self.path.split("?")[0].split("#")[0].lower()
+        if clean.endswith(".mp4") or clean.endswith(".webm"):
+            self.send_response(200)
+            self.send_header("Content-Type", "video/mp4" if clean.endswith(".mp4") else "video/webm")
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+            return
+        super().do_HEAD()
+
+    def do_GET(self):
+        # Gracefully handle any legacy video requests with 200 OK empty payload (videos replaced by placeholders)
+        clean = self.path.split("?")[0].split("#")[0].lower()
+        if clean.endswith(".mp4") or clean.endswith(".webm"):
+            self.send_response(200)
+            self.send_header("Content-Type", "video/mp4" if clean.endswith(".mp4") else "video/webm")
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+            return
+        super().do_GET()
+
     def translate_path(self, path):
         translated = super().translate_path(path)
         clean = path.split("?")[0].split("#")[0].rstrip("/")

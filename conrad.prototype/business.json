@@ -78,117 +78,7 @@
           "style": "detail"
         }
       ],
-      "media": [
-        {
-          "_key": "795e62196c38",
-          "_type": "videoWithMeta",
-          "asset": {
-            "_id": "file-e2ce0f10b84da3e32741d91fef7652c37f594e6c-mp4",
-            "_type": "sanity.fileAsset",
-            "mimeType": "video/mp4",
-            "duration": 30.071708,
-            "width": 1920,
-            "height": 1080,
-            "optimized": [
-              {
-                "_key": "70c5322e003a",
-                "_type": "videoWithMeta",
-                "asset": {
-                  "_id": "file-f80ba7eca30003984c8f417a5ad7f3ae1df01278-mp4",
-                  "_type": "sanity.fileAsset",
-                  "mimeType": "video/mp4",
-                  "duration": 30.071708,
-                  "width": 1920,
-                  "height": 1080,
-                  "thumbnail": {
-                    "_type": "image",
-                    "asset": {
-                      "_ref": "image-d16558e1fa26549a59bd5b8db8abc5e7df61085c-1920x1080-png",
-                      "_type": "reference"
-                    }
-                  }
-                }
-              },
-              {
-                "_key": "d11cb5c349c6",
-                "_type": "videoWithMeta",
-                "asset": {
-                  "_id": "file-1ddabec97187fda488ade6d5197b9acd2176229a-mp4",
-                  "_type": "sanity.fileAsset",
-                  "mimeType": "video/mp4",
-                  "duration": 30.071708,
-                  "width": 1600,
-                  "height": 900,
-                  "thumbnail": {
-                    "_type": "image",
-                    "asset": {
-                      "_ref": "image-d16558e1fa26549a59bd5b8db8abc5e7df61085c-1920x1080-png",
-                      "_type": "reference"
-                    }
-                  }
-                }
-              },
-              {
-                "_key": "641e848604ce",
-                "_type": "videoWithMeta",
-                "asset": {
-                  "_id": "file-155668b8d61468d2ddcd6d83bdaf0e28e761c910-mp4",
-                  "_type": "sanity.fileAsset",
-                  "mimeType": "video/mp4",
-                  "duration": 30.071708,
-                  "width": 1280,
-                  "height": 720,
-                  "thumbnail": {
-                    "_type": "image",
-                    "asset": {
-                      "_ref": "image-d16558e1fa26549a59bd5b8db8abc5e7df61085c-1920x1080-png",
-                      "_type": "reference"
-                    }
-                  }
-                }
-              },
-              {
-                "_key": "0cabe5bf6a3b",
-                "_type": "videoWithMeta",
-                "asset": {
-                  "_id": "file-a487fe6fee98667b16dd275dd0a3c8e761a78748-mp4",
-                  "_type": "sanity.fileAsset",
-                  "mimeType": "video/mp4",
-                  "duration": 30.071708,
-                  "width": 854,
-                  "height": 480,
-                  "thumbnail": {
-                    "_type": "image",
-                    "asset": {
-                      "_ref": "image-d16558e1fa26549a59bd5b8db8abc5e7df61085c-1920x1080-png",
-                      "_type": "reference"
-                    }
-                  }
-                }
-              }
-            ],
-            "thumbnail": {
-              "_type": "image",
-              "asset": {
-                "_id": "image-d16558e1fa26549a59bd5b8db8abc5e7df61085c-1920x1080-png",
-                "_type": "sanity.imageAsset",
-                "mimeType": "image/png",
-                "metadata": {
-                  "_type": "sanity.imageMetadata",
-                  "dimensions": {
-                    "_type": "sanity.imageDimensions",
-                    "aspectRatio": 1.7777777777777777,
-                    "height": 1080,
-                    "width": 1920
-                  },
-                  "hasAlpha": false,
-                  "isOpaque": true
-                }
-              }
-            }
-          }
-        }
-      ],
+      "media": [],
       "title": "Commercial Strategy & Scale"
     },
     {
@@ -260,23 +150,6 @@
       ],
       "columnRatio": "ratio-6-6",
       "mobileSpacing": "none"
-    },
-    {
-      "_key": "c_spacer_end",
-      "_type": "spacerSlice",
-      "backgroundColor": {
-        "_createdAt": "2025-03-28T19:47:50Z",
-        "_id": "0970ba10-788c-4613-b319-39009fd75a2a",
-        "_rev": "UXH5eRH3LWIQEsoDKxb1Mv",
-        "_type": "color",
-        "_updatedAt": "2026-06-04T16:31:45Z",
-        "contrastColor": "#FFFFFF",
-        "hex": "#010101",
-        "metadata": null,
-        "name": "Black"
-      },
-      "horizontalRule": false,
-      "spacerHeight": "xl"
     }
   ],
   "slug": {

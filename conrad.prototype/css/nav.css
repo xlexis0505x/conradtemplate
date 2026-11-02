@@ -185,7 +185,7 @@ body.modal-3d-open .HeaderMobile {
   height: 100% !important;
 }
 
-/* Hide default unbranded Anduril SVG before Conrad brand lockup mounts to prevent flash */
+/* Hide default unbranded SVG before Conrad brand lockup mounts to prevent flash */
 .HeaderDesktop .home > svg:not(.conrad-brand-emblem),
 .HeaderMobile .home > svg:not(.conrad-brand-emblem),
 .left-wrapper .home > svg:not(.conrad-brand-emblem) {
@@ -244,11 +244,13 @@ body.modal-3d-open .HeaderMobile {
   padding: 0 !important;
 }
 
-/* 6. Suppress Anduril Logo and Legal Filler Links in Footer */
+/* 6. Suppress Legacy Logo and Legal Filler Links in Footer */
 .Footer .logo,
 .Footer a.logo,
 .Footer svg[aria-label*="Anduril" i],
-#sprite-anduril-logo {
+.Footer svg[aria-label*="Logo" i],
+#sprite-anduril-logo,
+#sprite-legacy-logo {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
