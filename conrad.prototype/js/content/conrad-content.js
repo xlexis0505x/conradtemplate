@@ -16,22 +16,33 @@ window.Conrad = window.Conrad || {};
       var q = params.get("edition") || params.get("region") || params.get("ver");
       if (q) {
         q = q.toLowerCase();
-        if (q === "china" || q === "cn" || q === "poseidon") return "china";
-        if (q === "global" || q === "drunkeast" || q === "en") return "global";
+        if (q === "china" || q === "cn" || q === "poseidon") {
+          try { sessionStorage.setItem("conrad_edition", "china"); } catch (e) {}
+          return "china";
+        }
+        if (q === "global" || q === "drunkeast" || q === "en") {
+          try {
+            sessionStorage.removeItem("conrad_edition");
+            localStorage.removeItem("conrad_edition");
+          } catch (e) {}
+          return "global";
+        }
       }
     } catch (e) {}
 
     // Priority B: Domain / hostname detection (for production multi-domain deployments)
     try {
       var host = (window.location.hostname || "").toLowerCase();
-      if (host.includes("poseidon") || host.includes(".cn") || host.includes("china")) {
+      if (host.includes("poseidon") || host.endsWith(".cn") || host.includes("china")) {
         return "china";
       }
     } catch (e) {}
 
     // Priority C: Injected global configuration variable
     if (window.CONRAD_EDITION) {
-      return String(window.CONRAD_EDITION).toLowerCase() === "china" ? "china" : "global";
+      var injected = String(window.CONRAD_EDITION).toLowerCase();
+      if (injected === "china" || injected === "poseidon") return "china";
+      if (injected === "global" || injected === "drunkeast") return "global";
     }
 
     // Priority D: Pathname check (e.g. /cn/ or /conradtemplate/cn/)
@@ -42,10 +53,22 @@ window.Conrad = window.Conrad || {};
       }
     } catch (e) {}
 
-    // Priority E: Session / localStorage persistence across route navigation
+    // Clean Root / Home Route:
+    // If on root ("/", "", "/index.html", "/conradtemplate", "/conradtemplate/") without an explicit China query or /cn path,
+    // ALWAYS default to Global (DRUNKEAST). Clean URLs must never be hijacked by stale storage.
+    var appPath = (typeof window.getAppPath === "function") ? window.getAppPath() : (window.location.pathname || "/");
+    if (appPath === "/" || appPath === "" || appPath === "/index.html") {
+      try {
+        sessionStorage.removeItem("conrad_edition");
+        localStorage.removeItem("conrad_edition");
+      } catch (e) {}
+      return "global";
+    }
+
+    // Priority E: Active SPA session persistence for inner sub-routes (e.g. navigating to /technology while in China edition)
     try {
-      var saved = localStorage.getItem("conrad_edition");
-      if (saved === "china" || saved === "global") return saved;
+      var sessionSaved = sessionStorage.getItem("conrad_edition");
+      if (sessionSaved === "china") return "china";
     } catch (e) {}
 
     // Priority F: Default to global
@@ -54,13 +77,16 @@ window.Conrad = window.Conrad || {};
 
   var activeEdition = resolveEdition();
 
-  // If set via URL query or pathname, persist to localStorage so route clicks in the SPA preserve active edition
+  // If set via URL query or pathname, persist to sessionStorage so route clicks in the SPA preserve active edition
   try {
     var params = new URLSearchParams(window.location.search);
     var q = params.get("edition") || params.get("region");
     var isCnPath = (window.location.pathname || "").toLowerCase().includes("/cn");
-    if (q || isCnPath) {
-      localStorage.setItem("conrad_edition", activeEdition);
+    if (q === "china" || q === "cn" || q === "poseidon" || isCnPath) {
+      sessionStorage.setItem("conrad_edition", "china");
+    } else if (q === "global" || q === "drunkeast" || q === "en") {
+      sessionStorage.removeItem("conrad_edition");
+      localStorage.removeItem("conrad_edition");
     }
   } catch (e) {}
 
@@ -141,30 +167,39 @@ window.Conrad = window.Conrad || {};
     }
 
     var rawEmblem = isCn ? "/assets/images/brand/poseidon-trident.png" : "/assets/images/brand/drunkeast-swirl.png";
-    var emblemSrc = (typeof window.qualifyUrl === "function") ? window.qualifyUrl(rawEmblem) : rawEmblem;
+    var emblemSrc = (typeof window.qualifyAssetUrl === "function") 
+      ? window.qualifyAssetUrl(rawEmblem) 
+      : ((typeof window.qualifyUrl === "function") ? window.qualifyUrl(rawEmblem) : rawEmblem);
 
     var homeLinks = document.querySelectorAll(".left-wrapper .home, .HeaderDesktop .home, .HeaderMobile .home, .top-nav .home, .nav-bg .home, a.home");
     homeLinks.forEach(function(link) {
       var lockup = link.querySelector(".conrad-brand-lockup");
       var currentBrand = link.getAttribute("data-branded");
-      if (!lockup || currentBrand !== companyName) {
+      var currentSrc = lockup ? (lockup.querySelector("img") ? lockup.querySelector("img").getAttribute("src") : "") : "";
+      if (!lockup || currentBrand !== companyName || currentSrc !== emblemSrc) {
         link.setAttribute("data-branded", companyName);
         link.setAttribute("aria-label", companyName + " Homepage");
         link.innerHTML = "";
 
         var lockupDiv = document.createElement("div");
         lockupDiv.className = "conrad-brand-lockup";
-        lockupDiv.setAttribute("style", "display:inline-flex!important;align-items:center!important;gap:8px!important;opacity:1!important;visibility:visible!important;");
+        lockupDiv.setAttribute("style", "display:inline-flex!important;align-items:center!important;gap:10px!important;opacity:1!important;visibility:visible!important;");
 
         var emblemImg = document.createElement("img");
         emblemImg.className = "conrad-brand-emblem";
         emblemImg.setAttribute("src", emblemSrc);
         emblemImg.setAttribute("alt", companyName + " Logo");
-        emblemImg.setAttribute("style", "height:24px!important;width:auto!important;max-width:32px!important;object-fit:contain!important;display:inline-block!important;opacity:1!important;visibility:visible!important;");
+        emblemImg.setAttribute("style", "height:26px!important;width:auto!important;max-width:36px!important;object-fit:contain!important;display:inline-block!important;vertical-align:middle!important;opacity:1!important;visibility:visible!important;");
+        emblemImg.onerror = function() {
+          if (!this.dataset.fallbackTried) {
+            this.dataset.fallbackTried = "true";
+            this.src = isCn ? "assets/images/brand/poseidon-trident.png" : "assets/images/brand/drunkeast-swirl.png";
+          }
+        };
 
         var brandNameSpan = document.createElement("span");
         brandNameSpan.className = "conrad-brand-name";
-        brandNameSpan.setAttribute("style", "font-size:1.15rem!important;font-weight:700!important;letter-spacing:0.04em!important;text-transform:uppercase!important;color:#ffffff!important;line-height:1!important;display:inline-block!important;opacity:1!important;visibility:visible!important;");
+        brandNameSpan.setAttribute("style", "font-size:1.15rem!important;font-weight:700!important;letter-spacing:0.04em!important;text-transform:uppercase!important;color:#ffffff!important;line-height:1!important;display:inline-block!important;vertical-align:middle!important;opacity:1!important;visibility:visible!important;");
         brandNameSpan.textContent = companyName;
 
         lockupDiv.appendChild(emblemImg);
@@ -471,7 +506,12 @@ window.Conrad = window.Conrad || {};
       Conrad.isGlobal = (resolved === "global");
       if (Conrad.content) Conrad.content.edition = resolved;
       try {
-        localStorage.setItem("conrad_edition", resolved);
+        if (resolved === "china") {
+          sessionStorage.setItem("conrad_edition", "china");
+        } else {
+          sessionStorage.removeItem("conrad_edition");
+          localStorage.removeItem("conrad_edition");
+        }
       } catch (e) {}
       applyBrand();
       cleanUiArtifacts();

@@ -56,12 +56,31 @@ window.addEventListener('load', function() {
   }
 })();
 
+// Subpath Asset URL Qualifier helper (assets are never qualified with /cn/)
+function qualifyAssetUrl(url) {
+  if (!url) return url;
+  if (/^(?:https?:|\/\/|data:|blob:)/i.test(url)) return url;
+  var p = window.location.pathname.split('?')[0].split('#')[0];
+  var isSubpath = p.startsWith('/conradtemplate');
+  var normalized = url.startsWith('/') ? url : '/' + url;
+  return isSubpath ? '/conradtemplate' + normalized : normalized;
+}
+window.qualifyAssetUrl = qualifyAssetUrl;
+
 // Subpath URL Qualifier helper
 function qualifyUrl(url) {
-  var base = window.CONRAD_BASE_PATH;
-  if (!base || base === "/" || !url) return url;
-  var cleanBase = base.replace(/\/$/, "");
+  if (!url) return url;
   if (/^(?:https?:|\/\/|mailto:|data:|blob:)/i.test(url)) return url;
+
+  // Static asset qualification: assets are never nested in /cn/
+  var isAsset = /^\/?(_external|assets|css|js|textures|draco|models|data)\//.test(url);
+  if (isAsset) {
+    return qualifyAssetUrl(url);
+  }
+
+  var base = window.CONRAD_BASE_PATH;
+  if (!base || base === "/") return url;
+  var cleanBase = base.replace(/\/$/, "");
   if (url === cleanBase || url.startsWith(cleanBase + "/") || url.startsWith(cleanBase + "?") || url.startsWith(cleanBase + "#")) {
     return url;
   }

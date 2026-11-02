@@ -77,14 +77,26 @@ class DevHandler(SimpleHTTPRequestHandler):
         super().do_GET()
 
     def translate_path(self, path):
-        translated = super().translate_path(path)
         clean = path.split("?")[0].split("#")[0].rstrip("/")
         
-        # 1. Existing local file
+        # 1. Check if stripping simulated subpaths (/conradtemplate or /cn/assets) points to a valid file
+        normalized = clean
+        if normalized.startswith("/conradtemplate"):
+            normalized = normalized[15:] or "/"
+        if normalized.startswith("/cn/assets") or normalized.startswith("/cn/_external") or normalized.startswith("/cn/css") or normalized.startswith("/cn/js"):
+            normalized = normalized[3:] or "/"
+            
+        candidate = str(DOC_ROOT / normalized.lstrip("/"))
+        if os.path.exists(candidate) and not os.path.isdir(candidate):
+            return candidate
+
+        translated = super().translate_path(path)
+        
+        # 2. Existing local file
         if os.path.exists(translated) and not os.path.isdir(translated):
             return translated
 
-        # 2. SPA Fallback: if the file/dir does not exist and has no extension, serve index.html
+        # 3. SPA Fallback: if the file/dir does not exist and has no extension, serve index.html
         if not os.path.exists(translated) and not Path(clean).suffix:
             return str(DOC_ROOT / "index.html")
 

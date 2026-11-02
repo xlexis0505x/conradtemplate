@@ -23,6 +23,34 @@ def test_edition_branding_switch(page, base_url):
 
 
 @pytest.mark.editions
+def test_clean_root_defaults_to_global_and_logo_loads(page, base_url):
+    """Verifies that clean root URLs always default to Global (DRUNKEAST) and header emblem images load."""
+    # 1. Visit China edition first
+    china_url = f"{base_url}/cn/" if "github.io" in base_url else f"{base_url}/?edition=china"
+    page.goto(china_url, wait_until="domcontentloaded")
+    page.wait_for_selector(".conrad-brand-emblem", timeout=8000)
+    
+    # Verify Poseidon emblem loaded successfully with positive natural dimensions
+    page.wait_for_function("() => { const img = document.querySelector('.conrad-brand-emblem'); return img && img.naturalWidth > 0; }", timeout=5000)
+    poseidon_nw = page.evaluate("() => document.querySelector('.conrad-brand-emblem').naturalWidth")
+    assert poseidon_nw > 0, "Poseidon logo image must load with positive natural width"
+
+    # 2. Revisit clean root - MUST default back to DRUNKEAST
+    page.goto(f"{base_url}/", wait_until="domcontentloaded")
+    page.wait_for_selector(".conrad-brand-name", timeout=8000)
+    
+    page.wait_for_function("() => window.Conrad && window.Conrad.edition === 'global'", timeout=5000)
+    edition = page.evaluate("() => window.Conrad.edition")
+    assert edition == "global", f"Clean root must default to 'global', got: {edition}"
+    
+    brand_text = page.evaluate("() => document.querySelector('.conrad-brand-name').textContent")
+    assert "DrunkEast" in brand_text, f"Expected 'DrunkEast' in brand lockup, got: {brand_text}"
+    
+    drunkeast_nw = page.evaluate("() => document.querySelector('.conrad-brand-emblem').naturalWidth")
+    assert drunkeast_nw > 0, "DrunkEast logo image must load with positive natural width"
+
+
+@pytest.mark.editions
 def test_business_financials_rendered(page, base_url):
     """Verifies that the Business route renders financial models, ledger, and analysis sections."""
     page.goto(f"{base_url}/business", wait_until="domcontentloaded")
