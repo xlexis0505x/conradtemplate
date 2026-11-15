@@ -74,6 +74,28 @@ class DevHandler(SimpleHTTPRequestHandler):
             self.send_header("Content-Length", "0")
             self.end_headers()
             return
+
+        # If this server instance is configured to default to China edition (e.g. port 8088 or --china)
+        if getattr(self.server, "edition", None) == "china":
+            is_html_route = (clean == "" or clean.endswith(".html") or not Path(clean).suffix)
+            if is_html_route:
+                index_path = DOC_ROOT / "index.html"
+                if os.path.exists(index_path):
+                    try:
+                        with open(index_path, "r", encoding="utf-8") as f:
+                            content = f.read()
+                        if 'window.CONRAD_EDITION="china"' not in content:
+                            content = content.replace("<head>", '<head><script>window.CONRAD_EDITION="china";</script>', 1)
+                        data = content.encode("utf-8")
+                        self.send_response(200)
+                        self.send_header("Content-Type", "text/html; charset=utf-8")
+                        self.send_header("Content-Length", str(len(data)))
+                        self.end_headers()
+                        self.wfile.write(data)
+                        return
+                    except Exception:
+                        pass
+
         super().do_GET()
 
     def translate_path(self, path):
@@ -162,9 +184,11 @@ class DevHandler(SimpleHTTPRequestHandler):
             return super().send_head()
 
 
-def run(port=DEFAULT_PORT):
+def run(port=DEFAULT_PORT, edition=None):
     httpd = ServerClass((HOST, port), DevHandler)
-    print(f"\n🚀 Conrad Prototype running at http://localhost:{port}/")
+    httpd.edition = edition
+    label = "POSEIDON (China Edition)" if edition == "china" else "DRUNKEAST (Global Edition)"
+    print(f"\n🚀 Conrad Prototype [{label}] running at http://localhost:{port}/")
     print(f"📁 Serving: {DOC_ROOT}")
     print("Press Ctrl+C to stop.\n")
     try:
@@ -176,5 +200,6 @@ def run(port=DEFAULT_PORT):
 
 
 if __name__ == "__main__":
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_PORT
-    run(port)
+    port = int(sys.argv[1]) if len(sys.argv) > 1 and sys.argv[1].isdigit() else DEFAULT_PORT
+    edition = "china" if ("--china" in sys.argv or port == 8088) else None
+    run(port, edition)
