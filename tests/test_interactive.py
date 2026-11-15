@@ -169,7 +169,9 @@ def test_business_sections_and_footer_termination(page, base_url):
         const rm = document.getElementById("conrad-biz-roadmap");
         const footer = document.querySelector(".Footer");
         if (!rm || !footer) return 999;
-        return footer.offsetTop - (rm.offsetTop + rm.offsetHeight);
+        const rmRect = rm.getBoundingClientRect();
+        const footerRect = footer.getBoundingClientRect();
+        return Math.abs(footerRect.top - rmRect.bottom);
     }""")
     assert gap < 120, f"Gap between section 04 and footer is too large: {gap}px"
 
@@ -228,6 +230,8 @@ def test_subsea_images_integrity_and_zero_flash(page, base_url):
     if arsenal_imgs.count() > 0:
         for i in range(arsenal_imgs.count()):
             aimg = arsenal_imgs.nth(i)
+            aimg.scroll_into_view_if_needed()
+            page.wait_for_timeout(200)
             aimg_src = aimg.get_attribute("src") or ""
             assert len(aimg_src) > 0, f"Arsenal item {i} img src must not be empty"
             is_loaded = page.evaluate("(el) => el.complete && el.naturalWidth > 0", aimg.element_handle())
@@ -249,6 +253,8 @@ def test_company_dropdown_and_edition_emails(page, base_url):
     """Verifies that the Company dropdown displays enriched mission & links, and contact emails respect edition toggles."""
     # 1. Global Edition
     page.goto(f"{base_url}/", wait_until="domcontentloaded")
+    page.wait_for_selector("#conrad-prepaint-hero", state="hidden", timeout=12000)
+    page.wait_for_selector(".LoaderView", state="hidden", timeout=12000)
     page.wait_for_selector(".company-wrapper", timeout=12000)
 
     # Click company wrapper to reveal dropdown
@@ -268,6 +274,8 @@ def test_company_dropdown_and_edition_emails(page, base_url):
 
     # 2. China / Poseidon Edition
     page.goto(f"{base_url}/?edition=china", wait_until="domcontentloaded")
+    page.wait_for_selector("#conrad-prepaint-hero", state="hidden", timeout=12000)
+    page.wait_for_selector(".LoaderView", state="hidden", timeout=12000)
     page.wait_for_selector(".company-wrapper", timeout=12000)
 
     comp_btn = page.locator(".company-wrapper")
@@ -311,5 +319,40 @@ def test_tech_page_styling_and_table_html(page, base_url):
     table_html = page.evaluate("() => document.querySelector('.conrad-compare-table')?.innerHTML || ''")
     assert "&lt;strong&gt;" not in table_html, "Comparison table should render HTML tags rather than escaped &lt;strong&gt;"
     assert "<strong>Accelerated" in table_html, "Comparison table should contain unescaped <strong> tags"
+
+
+@pytest.mark.interactive
+def test_bio_relay_3d_scrubber(page, base_url):
+    """Verifies that the 3D Bio-Relay section renders on the home page below the Janus scrubber."""
+    page.goto(f"{base_url}/", wait_until="domcontentloaded")
+    page.wait_for_selector("#conrad-prepaint-hero", state="hidden", timeout=12000)
+    page.wait_for_selector(".LoaderView", state="hidden", timeout=12000)
+
+    # 1. Verify track mounted below janus
+    page.wait_for_selector("#bio-relay-track", timeout=12000)
+    is_after_janus = page.evaluate("""() => {
+        const janus = document.getElementById("conrad-radiant-janus-track");
+        const bio = document.getElementById("bio-relay-track");
+        if (!janus || !bio) return false;
+        return !!(janus.compareDocumentPosition(bio) & Node.DOCUMENT_POSITION_FOLLOWING);
+    }""")
+    assert is_after_janus, "Bio-relay track must follow Janus track in DOM"
+
+    # 2. Verify canvas and 4 stages
+    page.wait_for_selector("#bio-relay-canvas", timeout=12000)
+    stages = page.locator("#bio-relay-track .relay-step-text")
+    assert stages.count() == 4, f"Expected 4 relay stages, found {stages.count()}"
+
+    # 3. Verify stage 1 active initially
+    active_stage = page.locator("#bio-relay-track .relay-step-text.active")
+    assert "01 // Salt-Tolerant Flocculation Growth" in active_stage.inner_text()
+
+    # 4. Verify progress cells and navigation buttons
+    cells = page.locator("#bio-relay-track .relay-cell")
+    assert cells.count() == 4, f"Expected 4 progress cells, found {cells.count()}"
+
+    next_btn = page.locator("#relay-next")
+    assert next_btn.is_visible()
+
 
 

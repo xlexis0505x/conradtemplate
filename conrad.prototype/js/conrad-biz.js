@@ -324,8 +324,8 @@
 
     var richText = document.querySelector(".TwoColumnRichText");
     var header = document.querySelector(".ProductHeaderSlice");
-    var anchor = richText || header;
-    if (!anchor) return;
+    if (!richText) return;
+    var anchor = richText;
 
     var activeEdition = (window.Conrad && Conrad.edition) || "global";
     var isChina = (activeEdition === "china");

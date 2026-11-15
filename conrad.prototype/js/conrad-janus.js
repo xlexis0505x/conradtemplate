@@ -125,7 +125,8 @@
       }
       newlyMounted = true;
     } else {
-      if (mediaLink && track.nextElementSibling !== mediaLink) {
+      var bioRelay = document.getElementById("bio-relay-track");
+      if (mediaLink && track.nextElementSibling !== mediaLink && (!bioRelay || track.nextElementSibling !== bioRelay)) {
         mediaLink.parentNode.insertBefore(track, mediaLink);
       } else if (!mediaLink && arsenal && track.previousElementSibling !== arsenal) {
         if (arsenal.nextSibling) {

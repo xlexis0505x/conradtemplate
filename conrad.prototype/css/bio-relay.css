@@ -1,0 +1,349 @@
+/* === CONRAD PROTOTYPE: BIO-RELAY CHEMISTRY ANIMATION === */
+
+/* --- Scroll Track (matches janus-track pattern) --- */
+#bio-relay-track {
+  width: 100% !important;
+  height: 480vh !important;
+  position: relative !important;
+  background-color: #000000 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+/* --- Sticky Panel (matches janus-sticky pattern) --- */
+#bio-relay-sticky {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  min-height: 650px !important;
+  overflow: hidden !important;
+  background-color: #020202 !important;
+  color: #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  box-sizing: border-box !important;
+  z-index: 20 !important;
+}
+
+/* --- Canvas (full bleed, behind overlay) --- */
+#bio-relay-canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+/* --- Inner overlay (text + controls, above canvas) --- */
+#bio-relay-sticky .relay-inner {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 3.5rem 4rem 2.5rem !important;
+  box-sizing: border-box !important;
+  pointer-events: none !important;
+  z-index: 10 !important;
+}
+
+/* --- Header Row --- */
+#bio-relay-sticky .relay-head {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  gap: 2rem !important;
+  width: 100% !important;
+  pointer-events: none !important;
+}
+
+#bio-relay-sticky .relay-title {
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.015em !important;
+  color: #ffffff !important;
+  margin: 0 0 0.5rem !important;
+  font-family: var(--font-heading) !important;
+}
+
+#bio-relay-sticky .relay-subtitle {
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  max-width: 760px !important;
+  margin: 0 !important;
+}
+
+/* --- Nav Buttons (identical to janus-btn) --- */
+#bio-relay-sticky .relay-nav {
+  display: flex !important;
+  gap: 0.5rem !important;
+  flex-shrink: 0 !important;
+  pointer-events: auto !important;
+}
+
+#bio-relay-sticky .relay-btn {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+  font-size: 1.1rem !important;
+  pointer-events: auto !important;
+}
+
+#bio-relay-sticky .relay-btn:hover:not(:disabled) {
+  background: #ffffff !important;
+  color: #01B1C7 !important;
+  border-color: #ffffff !important;
+}
+
+#bio-relay-sticky .relay-btn:disabled {
+  opacity: 0.25 !important;
+  cursor: not-allowed !important;
+}
+
+/* --- Stage Pill (top-right label) --- */
+#bio-relay-sticky .relay-stage-pill {
+  position: absolute !important;
+  top: 3.5rem !important;
+  right: 4rem !important;
+  font-family: var(--font-kicker, monospace) !important;
+  font-size: 0.68rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #01B1C7 !important;
+  opacity: 0 !important;
+  transition: opacity 0.4s ease !important;
+  pointer-events: none !important;
+  z-index: 11 !important;
+}
+
+#bio-relay-sticky .relay-stage-pill.visible {
+  opacity: 1 !important;
+}
+
+/* --- 3D Callout Pins (Radiant Scientific Precision) --- */
+#bio-relay-sticky .relay-callouts {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: 15 !important;
+}
+
+#bio-relay-sticky .relay-pin {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  pointer-events: none !important;
+  opacity: 0;
+  transition: opacity 0.25s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  z-index: 16 !important;
+  will-change: transform, opacity !important;
+}
+
+#bio-relay-sticky .relay-pin .pin-marker {
+  width: 7px !important;
+  height: 7px !important;
+  background-color: #00f0ff !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 10px #00f0ff, 0 0 20px rgba(0, 240, 255, 0.5) !important;
+  flex-shrink: 0 !important;
+}
+
+#bio-relay-sticky .relay-pin .pin-card {
+  background: rgba(8, 14, 22, 0.85) !important;
+  border: 1px solid rgba(0, 240, 255, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-radius: 4px !important;
+  padding: 6px 10px !important;
+  max-width: 240px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7) !important;
+}
+
+#bio-relay-sticky .relay-pin .pin-tag {
+  font-family: var(--font-kicker, monospace) !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  color: #00f0ff !important;
+  text-transform: uppercase !important;
+  margin-bottom: 2px !important;
+}
+
+#bio-relay-sticky .relay-pin .pin-desc {
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif) !important;
+  font-size: 0.72rem !important;
+  line-height: 1.35 !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  margin: 0 !important;
+}
+
+/* --- Captions (centered, above progress bar — identical to janus-captions) --- */
+#bio-relay-sticky .relay-captions {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 6.8rem !important;
+  transform: translateX(-50%) !important;
+  height: 70px !important;
+  width: 90% !important;
+  max-width: 820px !important;
+  margin: 0 !important;
+  pointer-events: none !important;
+}
+
+#bio-relay-sticky .relay-step-text {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  text-align: center !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+#bio-relay-sticky .relay-step-text.active {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+#bio-relay-sticky .relay-line {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+#bio-relay-sticky .relay-step-heading {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  margin-bottom: 0.25rem !important;
+  font-family: var(--font-heading, 'HelveticaNowDisplay', Helvetica, Arial, sans-serif) !important;
+  letter-spacing: -0.01em !important;
+}
+
+#bio-relay-sticky .relay-step-desc {
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  font-family: var(--font-body, 'HelveticaNowDisplay', Helvetica, Arial, sans-serif) !important;
+  max-width: 640px !important;
+  margin: 0 auto !important;
+}
+
+/* --- Progress Bar (identical to janus-progress-container) --- */
+#bio-relay-sticky .relay-progress-container {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 2.25rem !important;
+  transform: translateX(-50%) !important;
+  width: 50% !important;
+  max-width: 600px !important;
+  height: 4px !important;
+  margin: 0 !important;
+  z-index: 25 !important;
+  pointer-events: auto !important;
+}
+
+#bio-relay-sticky .relay-arrow-indicator {
+  position: absolute !important;
+  top: -16px !important;
+  left: 0 !important;
+  width: 14px !important;
+  height: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  pointer-events: none !important;
+  z-index: 26 !important;
+  margin-left: -7px !important;
+}
+
+#bio-relay-sticky .relay-arrow-indicator svg polygon {
+  fill: #01B1C7 !important;
+}
+
+#bio-relay-sticky .relay-cells {
+  display: flex !important;
+  width: 100% !important;
+  height: 100% !important;
+  align-items: center !important;
+  gap: 0 !important;
+  pointer-events: auto !important;
+}
+
+#bio-relay-sticky .relay-cell {
+  flex: 1 !important;
+  height: 2px !important;
+  background: rgba(255, 255, 255, 0.18) !important;
+  position: relative !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  transition: height 0.25s ease, background-color 0.25s ease !important;
+}
+
+#bio-relay-sticky .relay-cell::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -14px !important;
+  bottom: -14px !important;
+  left: 0 !important;
+  right: 0 !important;
+  cursor: pointer !important;
+  z-index: 27 !important;
+}
+
+#bio-relay-sticky .relay-cell.active {
+  height: 4px !important;
+  background: rgba(1, 177, 199, 0.45) !important;
+}
+
+#bio-relay-sticky .relay-cell-fill {
+  position: absolute !important;
+  inset: 0 !important;
+  background: #01B1C7 !important;
+  transform-origin: left center !important;
+  transform: scaleX(0) !important;
+}
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+  #bio-relay-sticky .relay-inner {
+    padding: 2.5rem 1.5rem 2rem !important;
+  }
+
+  #bio-relay-sticky .relay-stage-pill {
+    top: 2.5rem !important;
+    right: 1.5rem !important;
+  }
+
+  #bio-relay-sticky .relay-title {
+    font-size: clamp(1.4rem, 5vw, 1.8rem) !important;
+  }
+
+  #bio-relay-sticky .relay-captions {
+    bottom: 7.5rem !important;
+    width: 95% !important;
+  }
+
+  #bio-relay-sticky .relay-progress-container {
+    width: 80% !important;
+  }
+}
