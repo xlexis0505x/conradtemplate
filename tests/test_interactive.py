@@ -66,23 +66,15 @@ def test_janus_3d_lazy_loading(page, base_url):
 
 
 @pytest.mark.interactive
-def test_tech_3d_model_interactive(page, base_url):
-    """Verifies that the 3D model on /technology loads, dismisses the loading overlay, and mounts the 3D scene."""
+def test_tech_clean_lean_architecture(page, base_url):
+    """Verifies that /technology loads cleanly without 3D models (submarine and new slices removed per design)."""
     page.goto(f"{base_url}/technology", wait_until="domcontentloaded")
-    page.wait_for_selector(".Product3DSlice", timeout=12000)
+    page.wait_for_selector("#conrad-tech-spec-matrix", timeout=12000)
 
-    slice_el = page.locator(".Product3DSlice")
-    slice_el.scroll_into_view_if_needed()
-
-    # Wait for the loader overlay to dismiss (opacity 0 / display none)
-    page.wait_for_function(
-        "() => { const l = document.querySelector('.Product3DSlice .glOverlay'); return !l || l.style.display === 'none' || l.style.opacity === '0'; }",
-        timeout=12000
-    )
-
-    # Verify the Launch Interactive View CTA is available
-    cta = page.locator(".Product3DSlice button:has-text('Launch Interactive View'), .Product3DSlice .cta").first
-    assert cta.is_visible(), "Launch Interactive View CTA should be visible once 3D assets are ready"
+    # Verify no 3D slices are present on /technology
+    assert page.locator(".Product3DSlice").count() == 0, "Submarine 3D model should be removed on /technology"
+    assert page.locator("#conrad-manifold-slice").count() == 0, "Manifold 3D model should be removed"
+    assert page.locator("#conrad-chem-track").count() == 0, "Chem track should be removed"
 
 
 @pytest.mark.interactive
@@ -109,16 +101,18 @@ def test_spec_matrix_filters(page, base_url):
 def test_janus_3d_scrubber_buttons(page, base_url):
     """Test clicking #janus-next and #janus-prev to verify caption transitions and cell progress."""
     page.goto(f"{base_url}/", wait_until="domcontentloaded")
+    page.wait_for_selector("#conrad-prepaint-hero", state="hidden", timeout=12000)
+    page.wait_for_selector(".LoaderView", state="hidden", timeout=12000)
 
     page.wait_for_selector("#janus-next", timeout=12000)
+    canvas = page.locator("#janus-canvas")
+    canvas.wait_for(state="attached", timeout=12000)
 
     next_btn = page.locator("#janus-next")
     next_btn.scroll_into_view_if_needed()
-    next_btn.click()
+    next_btn.click(force=True)
 
     # Verify canvas dimension is greater than 0
-    canvas = page.locator("#janus-canvas")
-    canvas.wait_for(state="attached", timeout=5000)
     width = canvas.evaluate("(el) => el.clientWidth || el.width")
     assert width > 0, "Janus canvas must have non-zero dimensions after clicking next"
 
@@ -221,7 +215,8 @@ def test_subsea_images_integrity_and_zero_flash(page, base_url):
         img.wait_for(state="attached", timeout=5000)
         img_src = img.get_attribute("src") or ""
         assert len(img_src) > 0, f"Card {i} image src must not be empty"
-        # Verify image loaded successfully
+        # Wait for image to complete loading
+        page.wait_for_function("(el) => el.complete && el.naturalWidth > 0", arg=img.element_handle(), timeout=6000)
         is_loaded = page.evaluate("(el) => el.complete && el.naturalWidth > 0", img.element_handle())
         assert is_loaded, f"Card {i} image failed to load or has 0 width: {img_src}"
 
@@ -338,14 +333,14 @@ def test_bio_relay_3d_scrubber(page, base_url):
     }""")
     assert is_after_janus, "Bio-relay track must follow Janus track in DOM"
 
-    # 2. Verify canvas and 4 stages
-    page.wait_for_selector("#bio-relay-canvas", timeout=12000)
+    # 2. Verify video element and 4 stages
+    page.wait_for_selector("#bio-relay-video", timeout=12000)
     stages = page.locator("#bio-relay-track .relay-step-text")
     assert stages.count() == 4, f"Expected 4 relay stages, found {stages.count()}"
 
     # 3. Verify stage 1 active initially
     active_stage = page.locator("#bio-relay-track .relay-step-text.active")
-    assert "01 // Salt-Tolerant Flocculation Growth" in active_stage.inner_text()
+    assert "01 // Chitosan Polymer Bridging" in active_stage.inner_text()
 
     # 4. Verify progress cells and navigation buttons
     cells = page.locator("#bio-relay-track .relay-cell")

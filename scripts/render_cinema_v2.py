@@ -54,6 +54,10 @@ scene.eevee.taa_render_samples   = 32
 scene.eevee.shadow_ray_count     = 2
 scene.eevee.shadow_resolution_scale = 1.5
 
+# Motion blur — liquid smooth cinema motion
+scene.render.use_motion_blur     = True
+scene.render.motion_blur_shutter = 0.5
+
 # ─── 3. COMPOSITOR — FOG GLOW ─────────────────────────────────────────────────
 scene.use_nodes = True
 ng = bpy.data.node_groups.new("AbyssalCompositor", "CompositorNodeTree")
@@ -167,13 +171,13 @@ mat_salt_ion = make_mat("SaltIonMat",
 mat_floc = make_mat("MarineSnowFlocMat",
     color         = (0.68, 0.87, 0.97, 1.0),
     roughness     = 0.10,
-    transmission  = 0.55,
+    transmission  = 0.88,
     ior           = 1.35,
-    sss_weight    = 0.60,
+    sss_weight    = 0.30,
     sss_radius    = (0.7, 0.9, 1.1),
-    sss_scale     = 0.025,
-    emission      = (0.03, 0.14, 0.22, 1.0),
-    emission_strength = 0.8)
+    sss_scale     = 0.015,
+    emission      = (0.02, 0.08, 0.14, 1.0),
+    emission_strength = 0.4)
 
 # Bentonite — dense layered mineral silicate, NOT metallic (Fix #2)
 mat_bentonite = make_mat("BentoniteMineralMat",
@@ -284,7 +288,7 @@ kf(focus_target, 120, loc=(0.0, 0.0, -1.38))   # Stage 4: at seafloor crust
 smooth_all_keyframes(focus_target)
 
 cam_data = bpy.data.cameras.new("CinemaCamera")
-cam_data.lens             = 52
+cam_data.lens             = 42
 cam_data.dof.use_dof      = True
 cam_data.dof.focus_object = focus_target
 cam_data.dof.aperture_fstop = 4.5   # f/4.5 — shallow, background particles bokeh'd
@@ -720,21 +724,21 @@ for p in bent_protos:
     p.hide_render   = True
     p.hide_viewport = True
 
-# 14 bentonite platelets plunge into the floc during Stage 3 (frames 61–90)
+# 24 bentonite platelets plunge into the floc during Stage 3 (frames 61–90)
 bent_objs = []
 random.seed(66)
-for b in range(14):
+for b in range(24):
     bp = bent_protos[b % 3]
     b_obj = bpy.data.objects.new(f"Bentonite_{b:02d}", bp.data)
     scene.collection.objects.link(b_obj)
     b_obj.parent = master
 
-    # Random starting position high above the floc
+    # Random starting position above the floc (Z = +0.28m to +0.48m)
     phi_b   = random.uniform(0, 2 * PI)
-    r_b     = random.uniform(0.18, 0.55)
+    r_b     = random.uniform(0.12, 0.42)
     start_x = r_b * math.cos(phi_b)
     start_y = r_b * math.sin(phi_b) * 0.70
-    start_z = random.uniform(0.40, 0.90)
+    start_z = random.uniform(0.28, 0.48)
 
     final_x = random.uniform(-0.08, 0.08)
     final_y = random.uniform(-0.08, 0.08)

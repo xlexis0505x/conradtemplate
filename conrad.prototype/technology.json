@@ -217,60 +217,6 @@
       ]
     },
     {
-      "_key": "438355d964ea",
-      "_type": "product3dSlice",
-      "bottomLeftLabel": "Explore features. Activate layers. See the full system.",
-      "ctaLabel": "Launch Interactive View",
-      "fullscreenHash": {
-        "_type": "slug",
-        "current": "interactive-mode"
-      },
-      "loaderText": "Loading",
-      "loaderTopLeftLabel": "System\nInitializing",
-      "loaderTopRightLabel": "Please\nWait",
-      "productVariants": [
-        {
-          "_key": "468963efe88b",
-          "_type": "product3dVariant",
-          "accordionTitle": "Plume Mitigation Architecture:\nAutonomous Deep-Sea Sediment Abatement",
-          "content": [
-            {
-              "_key": "67416cb3135a",
-              "description": "Standardized titanium housing with 600-bar hydrostatic rating, enabling rapid integration with commercial seafloor nodule collectors and ROV tool skids.",
-              "slug": {
-                "_type": "slug",
-                "current": "modular-free-flooded-payload-interface"
-              },
-              "title": "Subsea Collector Interfacing"
-            },
-            {
-              "_key": "cfe4e0ca8f2c",
-              "description": "Standard 20-foot offshore ISO container footprint simplifies vessel-of-opportunity mobilization and dockside crane handling.",
-              "slug": {
-                "_type": "slug",
-                "current": "single-point-lift-and-tow"
-              },
-              "title": "Containerized Offshore Skid"
-            },
-            {
-              "_key": "9b9372dbed78",
-              "description": "Dual acoustic Doppler current profilers combined with optical backscatter sensors track plume boundary dynamics in real time.",
-              "slug": {
-                "_type": "slug",
-                "current": "direct-drive-electric-propulsion"
-              },
-              "title": "Closed-Loop Turbidity Sensing"
-            }
-          ],
-          "sceneName": "Product3DScene_DiveLD",
-          "variantName": ""
-        }
-      ],
-      "title": "TAKE CONTROL",
-      "topLeftLabel": "System Online",
-      "topRightLabel": "3D\nInteract"
-    },
-    {
       "_key": "294333e74401",
       "_type": "productQualitiesSlice",
       "backgroundColor": {

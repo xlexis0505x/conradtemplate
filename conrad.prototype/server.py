@@ -48,6 +48,7 @@ class DevHandler(SimpleHTTPRequestHandler):
             self.send_header("Access-Control-Allow-Origin", origin)
         self.send_header("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "*")
+        self.send_header("Accept-Ranges", "bytes")
         self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
         super().end_headers()
 
@@ -57,7 +58,8 @@ class DevHandler(SimpleHTTPRequestHandler):
 
     def do_HEAD(self):
         clean = self.path.split("?")[0].split("#")[0].lower()
-        if clean.endswith(".mp4") or clean.endswith(".webm"):
+        target_path = self.translate_path(self.path)
+        if (clean.endswith(".mp4") or clean.endswith(".webm")) and not (os.path.exists(target_path) and os.path.isfile(target_path)):
             self.send_response(200)
             self.send_header("Content-Type", "video/mp4" if clean.endswith(".mp4") else "video/webm")
             self.send_header("Content-Length", "0")
@@ -66,9 +68,10 @@ class DevHandler(SimpleHTTPRequestHandler):
         super().do_HEAD()
 
     def do_GET(self):
-        # Gracefully handle any legacy video requests with 200 OK empty payload (videos replaced by placeholders)
+        # Gracefully handle any missing legacy video requests with 200 OK empty payload (videos replaced by placeholders)
         clean = self.path.split("?")[0].split("#")[0].lower()
-        if clean.endswith(".mp4") or clean.endswith(".webm"):
+        target_path = self.translate_path(self.path)
+        if (clean.endswith(".mp4") or clean.endswith(".webm")) and not (os.path.exists(target_path) and os.path.isfile(target_path)):
             self.send_response(200)
             self.send_header("Content-Type", "video/mp4" if clean.endswith(".mp4") else "video/webm")
             self.send_header("Content-Length", "0")

@@ -159,6 +159,10 @@
     }
 
     var p3d = document.querySelector(".Product3DSlice");
+    if (p3d) {
+      p3d.remove();
+      p3d = null;
+    }
     var variations = document.querySelector(".ProductVariationsSlice");
     var header = document.querySelector(".ProductHeaderSlice");
     var qualities = document.querySelector(".ProductQualitiesSlice");

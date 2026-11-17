@@ -3250,8 +3250,8 @@ body.has-404 canvas,
   display: none !important;
 }
 
-/* --- UNIVERSAL VIDEO SUPPRESSION & DEEP-SEA PLACEHOLDER --- */
-video,
+/* --- UNIVERSAL VIDEO SUPPRESSION & DEEP-SEA PLACEHOLDER (Excluding bio-relay-video & chem-cinema-video) --- */
+video:not(#bio-relay-video):not(#chem-cinema-video):not(.relay-video),
 .ResponsiveVideo video,
 .ResponsiveVideo {
   display: none !important;

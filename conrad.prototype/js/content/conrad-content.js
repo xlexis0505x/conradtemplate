@@ -424,8 +424,8 @@ window.Conrad = window.Conrad || {};
   }
 
   function replaceVideosWithPlaceholders() {
-    // 1. Immediately pause, suppress and remove any raw video element
-    var rawVideos = document.querySelectorAll("video");
+    // 1. Immediately pause, suppress and remove any raw video element (preserving bio-relay-video & chem-cinema-video)
+    var rawVideos = document.querySelectorAll("video:not(#bio-relay-video):not(#chem-cinema-video):not(.relay-video)");
     rawVideos.forEach(function(v) {
       try {
         v.pause();

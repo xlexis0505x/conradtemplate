@@ -93,14 +93,14 @@ def test_history_back_forward(page, base_url):
     page.wait_for_selector("#conrad-tech-spec-matrix", state="attached", timeout=12000)
 
     # Allow transition to settle
-    page.wait_for_timeout(2000)
+    page.wait_for_timeout(2500)
 
     # Browser Back
     page.go_back()
     page.wait_for_selector("#conrad-radiant-janus-track", state="attached", timeout=12000)
 
     # Allow transition to settle
-    page.wait_for_timeout(2000)
+    page.wait_for_timeout(2500)
 
     # Browser Forward
     page.go_forward()
