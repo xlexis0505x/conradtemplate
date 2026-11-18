@@ -14,6 +14,7 @@ export class BioRelayScene {
   constructor(canvas) {
     this.canvas = canvas;
     this.disposed = false;
+    this.paused = false;
     this.progress = 0;
     this.smoothProgress = 0;
     this.uArr = [0, 0, 0, 0];
@@ -68,8 +69,17 @@ export class BioRelayScene {
     this.scene.add(this.simGroup);
     this.mainSpot.target = this.simGroup;
 
-    // Reusable scratch objects
+    // Reusable scratch objects (zero per-frame heap allocations)
     this.dummy = new THREE.Object3D();
+    this._tubeP = new THREE.Vector3();
+    this._tubeTmpA = new THREE.Vector3();
+    this._tubeTmpB = new THREE.Vector3();
+    this._tubeT = new THREE.Vector3();
+    this._tubePrevT = new THREE.Vector3();
+    this._tubeN = new THREE.Vector3();
+    this._tubeB = new THREE.Vector3();
+    this._tubeAxis = new THREE.Vector3();
+    this._tubeNormal = new THREE.Vector3();
 
     // Build layers
     this._buildAbyssalBackdrop();
@@ -288,6 +298,18 @@ export class BioRelayScene {
       roughness: 0.22,
     });
 
+    const tubularSegments = 36;
+    const radialSegments = 6;
+    const radius = 0.0085;
+
+    this._tubeSinTable = new Float32Array(radialSegments + 1);
+    this._tubeCosTable = new Float32Array(radialSegments + 1);
+    for (let j = 0; j <= radialSegments; j++) {
+      const v = (j / radialSegments) * Math.PI * 2;
+      this._tubeSinTable[j] = Math.sin(v);
+      this._tubeCosTable[j] = -Math.cos(v);
+    }
+
     for (let s = 0; s < 3; s++) {
       const pts = [];
       const basePts = [];
@@ -307,8 +329,11 @@ export class BioRelayScene {
         pts.push(pInit.clone());
       }
       const curve = new THREE.CatmullRomCurve3(pts);
-      const tubeGeo = new THREE.TubeGeometry(curve, 44, 0.0085, 8, false);
+      const tubeGeo = new THREE.TubeGeometry(curve, tubularSegments, radius, radialSegments, false);
+      tubeGeo.attributes.position.setUsage(THREE.DynamicDrawUsage);
+      tubeGeo.attributes.normal.setUsage(THREE.DynamicDrawUsage);
       const mesh = new THREE.Mesh(tubeGeo, strandMat);
+      mesh.frustumCulled = false;
       this.chitosanGroup.add(mesh);
 
       const amines = [];
@@ -320,9 +345,102 @@ export class BioRelayScene {
         this.allAmineNodes.push(amineObj);
       }
 
-      this.chitosanStrands.push({ mesh, basePts, corePts, pts, amines, strandIdx: s });
+      this.chitosanStrands.push({
+        mesh,
+        curve,
+        tubularSegments,
+        radialSegments,
+        radius,
+        basePts,
+        corePts,
+        pts,
+        amines,
+        strandIdx: s,
+      });
     }
     this.simGroup.add(this.chitosanGroup);
+  }
+
+  // In-place vertex & normal buffer update for chitosan polymer tubes (eliminates per-frame TubeGeometry GC churn)
+  _updateChitosanTubeInPlace(strand) {
+    const { curve, mesh, tubularSegments, radialSegments, radius } = strand;
+    const posAttr = mesh.geometry.attributes.position;
+    const normAttr = mesh.geometry.attributes.normal;
+    const sinTable = this._tubeSinTable;
+    const cosTable = this._tubeCosTable;
+
+    const P = this._tubeP;
+    const tmpA = this._tubeTmpA;
+    const tmpB = this._tubeTmpB;
+    const T = this._tubeT;
+    const prevT = this._tubePrevT;
+    const N = this._tubeN;
+    const B = this._tubeB;
+    const axis = this._tubeAxis;
+    const normal = this._tubeNormal;
+    const eps = 0.0005;
+
+    for (let i = 0; i <= tubularSegments; i++) {
+      const u = i / tubularSegments;
+      curve.getPoint(u, P);
+      curve.getPoint(Math.max(0, u - eps), tmpA);
+      curve.getPoint(Math.min(1, u + eps), tmpB);
+      T.subVectors(tmpB, tmpA);
+      if (T.lengthSq() > 1e-12) {
+        T.normalize();
+      } else {
+        T.set(0, 1, 0);
+      }
+
+      if (i === 0) {
+        const tx = Math.abs(T.x);
+        const ty = Math.abs(T.y);
+        const tz = Math.abs(T.z);
+        if (tx <= ty && tx <= tz) {
+          normal.set(1, 0, 0);
+        } else if (ty <= tx && ty <= tz) {
+          normal.set(0, 1, 0);
+        } else {
+          normal.set(0, 0, 1);
+        }
+        axis.crossVectors(T, normal).normalize();
+        N.crossVectors(T, axis).normalize();
+        B.crossVectors(T, N).normalize();
+        prevT.copy(T);
+      } else {
+        axis.crossVectors(prevT, T);
+        if (axis.lengthSq() > 1e-10) {
+          axis.normalize();
+          const cosTheta = Math.max(-1, Math.min(1, prevT.dot(T)));
+          N.applyAxisAngle(axis, Math.acos(cosTheta));
+        }
+        N.addScaledVector(T, -N.dot(T));
+        if (N.lengthSq() > 1e-12) N.normalize();
+        B.crossVectors(T, N);
+        if (B.lengthSq() > 1e-12) B.normalize();
+        prevT.copy(T);
+      }
+
+      const rowOffset = i * (radialSegments + 1);
+      for (let j = 0; j <= radialSegments; j++) {
+        const sin = sinTable[j];
+        const cos = cosTable[j];
+        let nx = cos * N.x + sin * B.x;
+        let ny = cos * N.y + sin * B.y;
+        let nz = cos * N.z + sin * B.z;
+        const invLen = 1.0 / (Math.hypot(nx, ny, nz) || 1.0);
+        nx *= invLen;
+        ny *= invLen;
+        nz *= invLen;
+
+        const vIdx = rowOffset + j;
+        normAttr.setXYZ(vIdx, nx, ny, nz);
+        posAttr.setXYZ(vIdx, P.x + radius * nx, P.y + radius * ny, P.z + radius * nz);
+      }
+    }
+
+    posAttr.needsUpdate = true;
+    normAttr.needsUpdate = true;
   }
 
   // 2B. Stage 01: Amino-to-Sediment Attachment Links (polymer bridging + surface charge neutralisation)
@@ -604,38 +722,40 @@ export class BioRelayScene {
     this.fallbackFloorMesh = new THREE.Mesh(floorGeo, this.fallbackFloorMat);
     this.seafloorGroup.add(this.fallbackFloorMesh);
 
-    const rGeo = new THREE.RingGeometry(0.46, 0.475, 64);
-    rGeo.rotateX(-Math.PI / 2);
-    this.contactRingMat = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8,
-      transparent: true,
-      opacity: 0.0,
-      depthWrite: false,
-    });
-    this.contactRing = new THREE.Mesh(rGeo, this.contactRingMat);
-    this.contactRing.position.y = 0.012;
-    this.seafloorGroup.add(this.contactRing);
-
     this.simGroup.add(this.seafloorGroup);
   }
 
-  // Load Draco-compressed Blender GLB models (seabed.glb & mineral_grains.glb)
+  // Load Draco-compressed Blender GLB models (seabed.glb, mineral_grains.glb, labels.glb)
   _loadBlenderAssets() {
     const dracoPath = window.qualifyAssetUrl ? window.qualifyAssetUrl("/draco/") : "./draco/";
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath(dracoPath);
+    this._dracoLoader = dracoLoader;
 
     const gltfLoader = new GLTFLoader();
     gltfLoader.setDRACOLoader(dracoLoader);
 
+    let pendingLoads = 3;
+    const onAssetSettled = () => {
+      pendingLoads -= 1;
+      if (pendingLoads <= 0 && this._dracoLoader === dracoLoader) {
+        dracoLoader.dispose();
+        this._dracoLoader = null;
+      }
+    };
+
     const seabedUrl = window.qualifyAssetUrl
-      ? window.qualifyAssetUrl("/models/seabed.glb?v=20261117c")
-      : "./models/seabed.glb?v=20261117c";
+      ? window.qualifyAssetUrl("/models/seabed.glb?v=20261118")
+      : "./models/seabed.glb?v=20261118";
 
     gltfLoader.load(
       seabedUrl,
       (gltf) => {
-        if (this.disposed) return;
+        if (this.disposed) {
+          this._disposeObject3D(gltf.scene);
+          onAssetSettled();
+          return;
+        }
         this.blenderSeabed = gltf.scene;
         this.seabedMaterials = [];
         this.blenderSeabed.traverse((child) => {
@@ -651,23 +771,30 @@ export class BioRelayScene {
           this.fallbackFloorMesh.geometry.dispose();
           this.fallbackFloorMat.dispose();
           this.fallbackFloorMesh = null;
+          this.fallbackFloorMat = null;
         }
         this.seafloorGroup.add(this.blenderSeabed);
+        onAssetSettled();
       },
       undefined,
       (err) => {
         console.warn("[bio-relay] seabed.glb fallback active:", err);
+        onAssetSettled();
       }
     );
 
     const grainsUrl = window.qualifyAssetUrl
-      ? window.qualifyAssetUrl("/models/mineral_grains.glb?v=20261117b")
-      : "./models/mineral_grains.glb?v=20261117b";
+      ? window.qualifyAssetUrl("/models/mineral_grains.glb?v=20261118")
+      : "./models/mineral_grains.glb?v=20261118";
 
     gltfLoader.load(
       grainsUrl,
       (gltf) => {
-        if (this.disposed) return;
+        if (this.disposed) {
+          this._disposeObject3D(gltf.scene);
+          onAssetSettled();
+          return;
+        }
         let clayGeo = null;
         gltf.scene.traverse((child) => {
           if (child.isMesh && child.name.indexOf("Clay_Platelet") !== -1) {
@@ -678,20 +805,27 @@ export class BioRelayScene {
           this.clayMesh.geometry.dispose();
           this.clayMesh.geometry = clayGeo;
         }
+        // Dispose unused materials/geometries from the loaded glTF container while preserving clayGeo
+        const keepGeos = new Set(clayGeo ? [clayGeo] : []);
+        this._disposeObject3D(gltf.scene, keepGeos);
+        onAssetSettled();
       },
       undefined,
-      () => {}
+      () => {
+        onAssetSettled();
+      }
     );
 
     const labelsUrl = window.qualifyAssetUrl
-      ? window.qualifyAssetUrl("/models/labels.glb?v=20261117c")
-      : "./models/labels.glb?v=20261117c";
+      ? window.qualifyAssetUrl("/models/labels.glb?v=20261118")
+      : "./models/labels.glb?v=20261118";
 
     gltfLoader.load(
       labelsUrl,
       (gltf) => {
         if (this.disposed) {
-          dracoLoader.dispose();
+          this._disposeObject3D(gltf.scene);
+          onAssetSettled();
           return;
         }
         const labelSpecs = [
@@ -800,7 +934,11 @@ export class BioRelayScene {
           });
           if (!foundMesh) continue;
 
-          const mat = foundMesh.material.clone();
+          const origMat = foundMesh.material;
+          const mat = origMat.clone();
+          if (origMat && typeof origMat.dispose === "function") {
+            origMat.dispose();
+          }
           mat.transparent = true;
           mat.opacity = 0.0;
           mat.depthWrite = false;
@@ -902,7 +1040,9 @@ export class BioRelayScene {
             spec,
             mesh: foundMesh,
             mat,
+            bgMesh,
             bgMat,
+            barMesh,
             barMat,
             line,
             lineMat,
@@ -910,11 +1050,13 @@ export class BioRelayScene {
             dotMat,
           });
         }
-        dracoLoader.dispose();
+        // Dispose any leftover unused meshes/materials still in gltf.scene
+        this._disposeObject3D(gltf.scene);
+        onAssetSettled();
       },
       undefined,
       () => {
-        dracoLoader.dispose();
+        onAssetSettled();
       }
     );
   }
@@ -936,8 +1078,26 @@ export class BioRelayScene {
     this.camera.updateProjectionMatrix();
   }
 
-  _animate() {
+  setPaused(paused) {
     if (this.disposed) return;
+    const next = !!paused;
+    if (this.paused === next) return;
+    this.paused = next;
+    if (this.paused) {
+      if (this.rafId) {
+        cancelAnimationFrame(this.rafId);
+        this.rafId = null;
+      }
+    } else if (!this.rafId) {
+      this.rafId = requestAnimationFrame(this._animate);
+    }
+  }
+
+  _animate() {
+    if (this.disposed || this.paused) {
+      this.rafId = null;
+      return;
+    }
     const elapsed = this.clock.getElapsedTime();
 
     this.smoothProgress += (this.progress - this.smoothProgress) * 0.085;
@@ -1019,7 +1179,7 @@ export class BioRelayScene {
     }
     this.clayMesh.instanceMatrix.needsUpdate = true;
 
-    // 2. Update Chitosan Polymer Strands & Amino Binding Sites
+    // 2. Update Chitosan Polymer Strands & Amino Binding Sites (in-place buffer update, zero GC churn)
     for (const strand of this.chitosanStrands) {
       for (let i = 0; i < strand.pts.length; i++) {
         const p0 = strand.basePts[i];
@@ -1032,14 +1192,12 @@ export class BioRelayScene {
           (this._lerp(p0.z, p1.z, s1) - wave) * depositSpreadXZ
         );
       }
-      const updatedCurve = new THREE.CatmullRomCurve3(strand.pts);
-      strand.mesh.geometry.dispose();
-      strand.mesh.geometry = new THREE.TubeGeometry(updatedCurve, 36, 0.0085, 6, false);
+      this._updateChitosanTubeInPlace(strand);
 
       for (const a of strand.amines) {
-        const pt = updatedCurve.getPointAt(a.u);
-        a.mesh.position.copy(pt);
-        a.worldPos.copy(pt);
+        strand.curve.getPoint(a.u, this._tubeP);
+        a.mesh.position.copy(this._tubeP);
+        a.worldPos.copy(this._tubeP);
         const pulse = 1.0 + 0.10 * Math.sin(elapsed * 2.0 + a.u * 4.0);
         a.mesh.scale.setScalar(pulse * this._lerp(1.0, 0.75, s4));
       }
@@ -1205,7 +1363,7 @@ export class BioRelayScene {
     }
     this.dropMesh.instanceMatrix.needsUpdate = true;
 
-    // 5. Update Sculpted Abyssal Seabed & Bathymetric Contact Ring (Stage 04)
+    // 5. Update Sculpted Abyssal Seabed (Stage 04)
     const seabedVis = this._smoothstep(0.64, 0.84, p);
     if (this.seabedMaterials && this.seabedMaterials.length > 0) {
       for (let m = 0; m < this.seabedMaterials.length; m++) {
@@ -1214,10 +1372,6 @@ export class BioRelayScene {
     }
     if (this.fallbackFloorMat) {
       this.fallbackFloorMat.opacity = seabedVis * 0.95;
-    }
-    if (this.contactRingMat && this.contactRing) {
-      this.contactRing.visible = false;
-      this.contactRingMat.opacity = 0.0;
     }
 
     if (this.mainSpot) {
@@ -1284,9 +1438,96 @@ export class BioRelayScene {
     this.rafId = requestAnimationFrame(this._animate);
   }
 
+  _disposeMaterial(mat, disposedMats, disposedTexs) {
+    if (!mat || disposedMats.has(mat)) return;
+    disposedMats.add(mat);
+    for (const key in mat) {
+      const val = mat[key];
+      if (val && val.isTexture && !disposedTexs.has(val)) {
+        disposedTexs.add(val);
+        val.dispose();
+      }
+    }
+    if (typeof mat.dispose === "function") {
+      mat.dispose();
+    }
+  }
+
+  _disposeObject3D(root, skipGeos = null, disposedGeos = new Set(), disposedMats = new Set(), disposedTexs = new Set()) {
+    if (!root) return;
+    root.traverse((obj) => {
+      if (obj.geometry && (!skipGeos || !skipGeos.has(obj.geometry)) && !disposedGeos.has(obj.geometry)) {
+        disposedGeos.add(obj.geometry);
+        obj.geometry.dispose();
+      }
+      if (obj.material) {
+        if (Array.isArray(obj.material)) {
+          for (let i = 0; i < obj.material.length; i++) {
+            this._disposeMaterial(obj.material[i], disposedMats, disposedTexs);
+          }
+        } else {
+          this._disposeMaterial(obj.material, disposedMats, disposedTexs);
+        }
+      }
+      if (obj.isInstancedMesh && typeof obj.dispose === "function") {
+        obj.dispose();
+      }
+    });
+  }
+
   dispose() {
+    if (this.disposed) return;
     this.disposed = true;
-    if (this.rafId) cancelAnimationFrame(this.rafId);
-    this.renderer.dispose();
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
+
+    if (this._dracoLoader) {
+      this._dracoLoader.dispose();
+      this._dracoLoader = null;
+    }
+
+    const disposedGeos = new Set();
+    const disposedMats = new Set();
+    const disposedTexs = new Set();
+
+    // Explicitly dispose callout plaques (text, backdrop, accent bar), leader lines, and anchor dots
+    if (this.calloutItems && this.calloutItems.length > 0) {
+      for (let i = 0; i < this.calloutItems.length; i++) {
+        const item = this.calloutItems[i];
+        if (item.mesh) {
+          this._disposeObject3D(item.mesh, null, disposedGeos, disposedMats, disposedTexs);
+          this.scene.remove(item.mesh);
+        }
+        if (item.line) {
+          this._disposeObject3D(item.line, null, disposedGeos, disposedMats, disposedTexs);
+          this.scene.remove(item.line);
+        }
+        if (item.dot) {
+          this._disposeObject3D(item.dot, null, disposedGeos, disposedMats, disposedTexs);
+          this.scene.remove(item.dot);
+        }
+      }
+      this.calloutItems.length = 0;
+    }
+
+    // Dispose all remaining scene geometries, materials, textures, and instanced meshes
+    this._disposeObject3D(this.scene, null, disposedGeos, disposedMats, disposedTexs);
+    this.scene.clear();
+
+    this.chitosanStrands = [];
+    this.allAmineNodes = [];
+    this.seabedMaterials = [];
+    this.blenderSeabed = null;
+    this.fallbackFloorMesh = null;
+    this.fallbackFloorMat = null;
+
+    if (this.renderer) {
+      if (this.renderer.renderLists) {
+        this.renderer.renderLists.dispose();
+      }
+      this.renderer.dispose();
+    }
   }
 }

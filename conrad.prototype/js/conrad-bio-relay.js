@@ -16,7 +16,6 @@
   var NUM_STAGES   = 4;
   var TRACK_ID     = 'bio-relay-track';
   var STICKY_ID    = 'bio-relay-sticky';
-  var VIDEO_ID     = 'bio-relay-video';
   var CANVAS_ID    = 'bio-relay-canvas';
 
   /* Stage descriptions — English across both Global and China editions */
@@ -59,12 +58,10 @@
   function buildTrackHTML() {
     var stageData = getActiveStageData();
     var mainTitle = getMainTitle();
-    var videoSrc = (window.location.pathname.indexOf('/cn') !== -1 ? '../assets/bio-relay-cinema.mp4?v=20261117a' : '/assets/bio-relay-cinema.mp4?v=20261117a');
 
     return [
       '<div id="' + TRACK_ID + '">',
       '  <section id="' + STICKY_ID + '">',
-      '    <video id="' + VIDEO_ID + '" class="relay-video" src="' + videoSrc + '" muted playsinline preload="auto"></video>',
       '    <canvas id="' + CANVAS_ID + '" class="relay-canvas"></canvas>',
       '',
       '    <!-- Left Text Pillar (Pure Editorial Monochrome White Typography) -->',
@@ -112,13 +109,16 @@
   }
 
   /* ─── State ──────────────────────────────────────────────────── */
-  var currentStep     = 0;
-  var lastStep        = -1;
-  var eventsBound     = false;
-  var domCache        = {};
-  var captionTimeline = null;
-  var bioRelayScene   = null;
-  var sceneLoading    = false;
+  var currentStep        = 0;
+  var lastStep           = -1;
+  var eventsBound        = false;
+  var globalEventsBound  = false;
+  var domCache           = {};
+  var captionTimeline    = null;
+  var bioRelayScene      = null;
+  var sceneLoading       = false;
+  var visibilityObserver = null;
+  var trackVisible       = false;
 
   /* ─── Route Guard & Helpers ──────────────────────────────────── */
   function isHomeRoute() {
@@ -172,6 +172,11 @@
     var track  = document.getElementById(TRACK_ID);
 
     if (!onHome) {
+      if (visibilityObserver) {
+        visibilityObserver.disconnect();
+        visibilityObserver = null;
+      }
+      trackVisible = false;
       if (bioRelayScene) {
         try { bioRelayScene.dispose(); } catch (e) {}
         bioRelayScene = null;
@@ -223,18 +228,49 @@
     }
 
     var canvas = document.getElementById(CANVAS_ID);
-    if (canvas && !bioRelayScene && !sceneLoading) {
+    var initBioRelayScene = function () {
+      if (!canvas || bioRelayScene || sceneLoading || !isHomeRoute() || !document.contains(canvas)) return;
       sceneLoading = true;
-      var engineUrl = (window.qualifyAssetUrl ? window.qualifyAssetUrl('/bio-relay-engine.js?v=20261117n') : './bio-relay-engine.js?v=20261117n');
+      var engineUrl = (window.qualifyAssetUrl ? window.qualifyAssetUrl('/bio-relay-engine.js?v=20261118') : './bio-relay-engine.js?v=20261118');
       import(engineUrl).then(function (mod) {
+        if (!isHomeRoute() || !document.contains(canvas)) {
+          sceneLoading = false;
+          return;
+        }
         bioRelayScene = new mod.BioRelayScene(canvas);
         bioRelayScene.setSize(window.innerWidth, window.innerHeight);
+        if (!trackVisible) {
+          bioRelayScene.setPaused(true);
+        }
         sceneLoading = false;
         updateScroll();
       }).catch(function (err) {
         sceneLoading = false;
         console.error('[bio-relay 3D scene init error]', err);
       });
+    };
+
+    if (canvas && !visibilityObserver) {
+      if ('IntersectionObserver' in window) {
+        visibilityObserver = new IntersectionObserver(function (entries) {
+          var entry = entries[0];
+          if (!entry) return;
+          trackVisible = entry.isIntersecting;
+          if (trackVisible) {
+            if (!bioRelayScene && !sceneLoading) {
+              initBioRelayScene();
+            } else if (bioRelayScene && typeof bioRelayScene.setPaused === 'function') {
+              bioRelayScene.setPaused(false);
+            }
+          } else if (bioRelayScene && typeof bioRelayScene.setPaused === 'function') {
+            bioRelayScene.setPaused(true);
+          }
+        }, { rootMargin: '400px 0px' });
+        visibilityObserver.observe(track);
+      } else {
+        trackVisible = true;
+        initBioRelayScene();
+      }
     }
 
     bindEvents();
@@ -266,24 +302,28 @@
       });
     });
 
-    /* LENIS SCROLL BINDING */
-    if (window.Global && Global.lenis) {
-      Global.lenis.on('scroll', updateScroll);
-    } else {
-      window.addEventListener('scroll', updateScroll, { passive: true });
-    }
+    if (!globalEventsBound) {
+      globalEventsBound = true;
 
-    /* Window resize: recalculate arrow targetX & WebGL viewport */
-    window.addEventListener('resize', function () {
-      domCache.progressContainer = null;
-      if (bioRelayScene) {
-        bioRelayScene.setSize(window.innerWidth, window.innerHeight);
+      /* LENIS SCROLL BINDING */
+      if (window.Global && Global.lenis) {
+        Global.lenis.on('scroll', updateScroll);
+      } else {
+        window.addEventListener('scroll', updateScroll, { passive: true });
       }
-      updateArrow(currentStep, true);
-    }, { passive: true });
 
-    window.addEventListener('conrad-locationchange', ensureBioRelaySection);
-    window.addEventListener('popstate', ensureBioRelaySection);
+      /* Window resize: recalculate arrow targetX & WebGL viewport */
+      window.addEventListener('resize', function () {
+        domCache.progressContainer = null;
+        if (bioRelayScene) {
+          bioRelayScene.setSize(window.innerWidth, window.innerHeight);
+        }
+        updateArrow(currentStep, true);
+      }, { passive: true });
+
+      window.addEventListener('conrad-locationchange', ensureBioRelaySection);
+      window.addEventListener('popstate', ensureBioRelaySection);
+    }
   }
 
   function updateScroll() {

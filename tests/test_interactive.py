@@ -333,8 +333,20 @@ def test_bio_relay_3d_scrubber(page, base_url):
     }""")
     assert is_after_janus, "Bio-relay track must follow Janus track in DOM"
 
-    # 2. Verify video element and 4 stages
-    page.wait_for_selector("#bio-relay-video", timeout=12000)
+    # 2. Verify WebGL canvas element (no dead <video>) and 4 stages
+    page.wait_for_selector("#bio-relay-canvas", timeout=12000)
+    assert page.locator("#bio-relay-video").count() == 0, "Dead #bio-relay-video element must be removed"
+    page.evaluate("() => { const t = document.getElementById('bio-relay-track'); if (t) t.scrollIntoView({ block: 'start' }); }")
+    page.wait_for_timeout(1200)
+    canvas = page.locator("#bio-relay-canvas")
+    width = canvas.evaluate("(el) => el.clientWidth || el.width")
+    height = canvas.evaluate("(el) => el.clientHeight || el.height")
+    assert width > 0 and height > 0, f"Bio-relay canvas must have non-zero dimensions, got {width}x{height}"
+    failed_bio_assets = [
+        msg["text"] for msg in page.console_messages
+        if "[bio-relay" in msg["text"] and ("error" in msg["text"].lower() or "fallback" in msg["text"].lower())
+    ]
+    assert len(failed_bio_assets) == 0, f"Bio-relay 3D engine logged errors: {failed_bio_assets}"
     stages = page.locator("#bio-relay-track .relay-step-text")
     assert stages.count() == 4, f"Expected 4 relay stages, found {stages.count()}"
 
