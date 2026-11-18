@@ -90,7 +90,7 @@
               "_key": "39a7abf7f47b",
               "_type": "span",
               "marks": [],
-              "text": "The autonomous benthic plume mitigation architecture integrates active bio-flocculant dispersion, 6,000m hydrostatic pressure vessels, closed-loop ADCP acoustic telemetry, and real-time sediment settling verification. Engineered for full compliance with ISA Draft Exploitation Regulations."
+              "text": "Our crawler-released ternary bio-flocculant combines chitosan ([X mg/L]), plant-based starch ([Y mg/L]), and bentonite ([Z%]) to accelerate fine sediment settling in 35 ppt seawater and support ISA and Cook Islands SBMA G09 environmental plans."
             }
           ],
           "markDefs": [],
@@ -257,8 +257,8 @@
         {
           "_key": "q1",
           "_type": "productQuality",
-          "title": "Active Bio-Polymer Dispersion",
-          "description": "Precision automated micro-injection of food-grade modified starch coagulant accelerates microscopic silt aggregation and rapid gravitational settling within 20 meters of the seafloor.",
+          "title": "Ternary Bio-Flocculant Recipe",
+          "description": "Chitosan ([X mg/L]), gelatinised plant-based starch ([Y mg/L]), and fine bentonite clay ([Z%] dry sediment mass) bind fine seabed particles into dense, fast-settling flocs in 35 ppt seawater.",
           "media": [
             {
               "_key": "484e5c176b41",
@@ -286,8 +286,8 @@
         {
           "_key": "q2",
           "_type": "productQuality",
-          "title": "6,000m Hydrostatic Endurance",
-          "description": "Titanium Grade 5 and ceramic pressure vessels withstand 600 atmospheres of abyssal hydrostatic pressure for continuous multi-week continuous operations.",
+          "title": "Direct Crawler Release",
+          "description": "Formulated as a drop-in bio-based chemical treatment released directly by seabed mining crawlers into disturbed sediment discharge without bespoke vessel reconstruction.",
           "media": [
             {
               "_key": "46c3d6d07270",
@@ -315,8 +315,8 @@
         {
           "_key": "q3",
           "_type": "productQuality",
-          "title": "Closed-Loop Telemetry",
-          "description": "Four-beam acoustic Doppler current profilers coupled with high-frequency optical backscatter probes monitor plume density gradients and autonomously throttle chemical dosing.",
+          "title": "Controlled Ratio & Salinity Sweep",
+          "description": "Benchmarked at 1.0 g dry sediment/L across 0–3 mg/L chitosan, 0–120 mg/L starch, 0–20% bentonite, and 0–35 ppt salinity with 3–4 replicates per condition.",
           "media": [
             {
               "_key": "5a12c8737b48",
@@ -433,8 +433,8 @@
         {
           "_key": "q4",
           "_type": "productQuality",
-          "title": "Intermodal ISO Container Skid",
-          "description": "Mobilized directly within standard 20-foot DNV 2.7-1 certified offshore containers for plug-and-play crane deployment aboard commercial mining and survey vessels.",
+          "title": "G09 & ISA EMMP Evidence",
+          "description": "Reduces residual turbidity by [A%] and suspended solids by [B%], raising settling speed from [D] to [E] mm/s to support Cook Islands SBMA G09 and ISA environmental plans.",
           "media": [
             {
               "_key": "8fa53877e264",

@@ -17,98 +17,98 @@ window.Conrad.CONTENT_CHINA = {
   home: {
     heroKicker: "MARINE ENVIRONMENTAL ENGINEERING // 2026",
     heroTitle: "Inspired by the Sea. Driven by Innovation.",
-    heroLead: "Developing next-generation subsea sediment flocculation and closed-loop turbidity control systems to harmonize marine mineral extraction with ecological sustainability.",
+    heroLead: "Combining chitosan, plant-based starch, and bentonite into a clean bio-based flocculant released directly by mining crawlers to settle disturbed sediment faster — because net zero should not come at the expense of our oceans.",
     
     // Stats Bar
     stats: [
       {
+        value: "+10% / yr",
+        label: "CRITICAL MINERAL DEMAND",
+        sub: "Annual global demand growth for energy-key minerals (IEA Outlook 2026)"
+      },
+      {
+        value: "-37%",
+        label: "SEABED FAUNA LOSS",
+        sub: "Animal abundance reduction inside unmitigated mining tracks (Nature E&E, 2025)"
+      },
+      {
         value: "254,654 km²",
-        label: "TARGET EXPLORATION EEZ",
-        sub: "Cook Islands exploration baseline across CIC Limited, Moana Minerals, and CSR"
+        label: "COOK ISLANDS EEZ BASELINE",
+        sub: "Initial validation footprint across CIC Limited, Moana Minerals & CSR"
       },
       {
-        value: "22 Contracts",
-        label: "PIPELINE OPPORTUNITY",
-        sub: "19 ISA nodule exploration contracts + 3 national commercial licences"
-      },
-      {
-        value: ">90%",
-        label: "TURBIDITY SUPPRESSION",
-        sub: "Accelerated benthic redeposition factor vs untreated slurry discharge"
-      },
-      {
-        value: "0 Toxic Residuals",
-        label: "MARINE ECO-SAFETY",
-        sub: "100% biodegradable natural biopolymer chemistry compliant with OECD 202/203"
+        value: "3-Part Formula",
+        label: "TERNARY BIO-FLOCCULANT",
+        sub: "Chitosan ([X mg/L]), plant starch ([Y mg/L]) & bentonite ([Z%]) in 35 ppt seawater"
       }
     ],
 
     // 7 Core Bento Cards
     bentoCards: [
       {
-        title: "01 // Eco-Flocculation Chemistry",
-        subtitle: "High-Efficiency Bio-Compatible Aggregate Binding",
-        desc: "Proprietary non-toxic natural biopolymer designed to agglomerate sub-micron abyssal sediment particles into heavy macro-flocs, increasing settling velocity by over an order of magnitude.",
+        title: "01 // Chitosan Primary Bridging",
+        subtitle: "Bio-Derived Amino Charge Neutralisation ([X mg/L])",
+        desc: "Chitosan (tested across 0–3 mg/L in 35 ppt seawater) binds fine negatively charged abyssal sediment particles through amino-group interactions, initiating rapid primary flocculation without synthetic toxicity.",
         image: "/assets/images/subsea/bento-01-flocculation.jpg"
       },
       {
-        title: "02 // Subsea Active Dispenser Manifold",
-        subtitle: "6,000-Meter Depth-Rated Injection Architecture",
-        desc: "Autonomous benthic manifold skid mounted directly to mining collector discharge chutes, delivering closed-loop micro-dosed chemical dispersion under 600 bar hydrostatic pressure.",
+        title: "02 // Plant-Starch Reinforcement",
+        subtitle: "Gelatinised Polymer Chain Bridging ([Y mg/L])",
+        desc: "Gelatinised plant-based starch (tested across 0–120 mg/L) adsorbs onto chitosan-bound flocs to chain particles together, increasing floc integrity and preventing break-up under turbulent bottom currents.",
         image: "/assets/images/subsea/bento-02-manifold.jpg"
       },
       {
-        title: "03 // Acoustic & Turbidity Sensing",
-        subtitle: "Real-Time Sensor Fusion & Edge Hydrodynamic Processing",
-        desc: "Integrated dual 600 kHz Acoustic Doppler Current Profilers (ADCP) and 850nm optical backscatter sensors providing closed-loop environmental feedback to modulate dosing.",
+        title: "03 // Bentonite Deposit Compaction",
+        subtitle: "Layered Mineral Lamellae Ballasting ([Z%] Mass)",
+        desc: "Natural fine-grained bentonite clay (tested at 0–20% of dry sediment mass; 0–200 mg/L at 1.0 g/L sediment) packs closely into the floc matrix, raising settling velocity from [D] to [E] mm/s and resisting resuspension.",
         image: "/assets/images/subsea/bento-03-adcp.jpg"
       },
       {
-        title: "04 // Plume Dispersion Digital Twin",
-        subtitle: "Predictive Numerical Modeling & Ocean Current Calibration",
-        desc: "Real-time spatial plume migration simulation calibrated against abyssal benthic currents, predicting settling footprints and preventing transboundary particle drift.",
+        title: "04 // Crawler-Mounted Release",
+        subtitle: "Direct Chemical Dosing Into Disturbed Sediment",
+        desc: "Engineered as a drop-in bio-flocculant treatment released directly by existing seabed mining crawlers into the discharge plume, eliminating bespoke vessel reconstructions while treating sediment at the source.",
         image: "/assets/images/subsea/bento-04-digital-twin.jpg"
       },
       {
-        title: "05 // G09 & ISA Regulatory Compliance",
-        subtitle: "Automated Environmental Management & Monitoring Telemetry",
-        desc: "Real-time compliance data stream designed to satisfy Cook Islands SBMA G09 standards and International Seabed Authority (ISA) benthic discharge monitoring regulations.",
+        title: "05 // G09 & ISA Compliance Proof",
+        subtitle: "Auditable Turbidity, Settling & Resuspension Metrics",
+        desc: "Generates measured suspended solids ([B%] reduction), turbidity ([A%] reduction), and settling data aligned with Cook Islands SBMA G09 guidelines and International Seabed Authority (ISA) EIS/EMMP requirements.",
         image: "/assets/images/subsea/bento-05-telemetry.jpg"
       },
       {
-        title: "06 // Modular Offshore Skid",
-        subtitle: "Containerized Research Vessel & Mining Barge Integration",
-        desc: "Standardized subsea modular footprint compatible with commercial nodule collector trials and environmental survey vessels without requiring bespoke deck reconstructions.",
+        title: "06 // High-Salinity Seawater Kinetics",
+        subtitle: "Calibrated Across 0–35 ppt Abyssal Salinity",
+        desc: "Conventional land-based synthetic flocculants degrade in saline water. Our three-material recipe is specifically formulated and benchmarked at 35 ppt full-strength seawater across 0, 10, 20, and 35 ppt salinity sweeps.",
         image: "/assets/images/subsea/bento-06-offshore-skid.jpg"
       },
       {
-        title: "07 // 600-Bar Pressure Vessel & Valving",
-        subtitle: "Titanium Subsea Valving & Zero-Failure Solenoid Actuation",
-        desc: "Deep-ocean pressure-balanced electromagnetic valves eliminating mechanical pinch points, delivering uninterrupted operation under abyssal temperature and salinity extremes.",
+        title: "07 // Marine Ecological Compatibility",
+        subtitle: "Bio-Based Alternative to Toxic Synthetic Polymers",
+        desc: "Uses biologically sourced chitosan and plant starch alongside natural bentonite to curb suspended plumes that clog filter feeders and bury benthic habitats, cutting treatment cost to [$M/m³] ([O%] savings).",
         image: "/assets/images/subsea/bento-07-pressure-vessel.jpg"
       }
     ],
 
     scrubber: {
       kicker: "02 // PLUME MITIGATION DISSECTION",
-      title: "Active Benthic Sediment Neutralization Cycle",
-      lead: "Scroll through real-time internal fluid dynamics, in-situ chemical binding, and accelerated abyssal sedimentation.",
+      title: "Crawler-Released Bio-Flocculation Cycle",
+      lead: "Scroll through disturbed seabed sediment capture, ternary bio-flocculant release, and compacted benthic redeposition.",
       steps: [
         {
-          heading: "01 // Benthic Extraction & Disturbance Zone",
-          desc: "Collector track and nodule pick-up generate high-density sediment slurry at the seafloor interface."
+          heading: "01 // Benthic Extraction & Sediment Disturbance",
+          desc: "Mining crawlers stir up fine abyssal clay at the seafloor, creating sediment plumes that can travel hundreds of kilometres and reduce seabed animal abundance by 37%."
         },
         {
-          heading: "02 // In-Chute Flocculant Dosing & Turbulence Mixing",
-          desc: "Electromagnetic injection nozzles micro-dose eco-compatible biopolymer directly into the discharge flow."
+          heading: "02 // Crawler-Released Ternary Bio-Flocculant",
+          desc: "The crawler releases our bio-based formulation—chitosan ([X mg/L]), gelatinised plant starch ([Y mg/L]), and bentonite ([Z%])—directly into the turbulent discharge flow."
         },
         {
-          heading: "03 // Rapid Macro-Floc Agglomeration",
-          desc: "Polymer bridging forces sub-micron clay and silt into dense macro-flocs, accelerating settling velocity by over 20x."
+          heading: "03 // Macro-Floc Agglomeration & Compaction",
+          desc: "Chitosan bridges fine particles, starch reinforces floc chains against shear, and bentonite packs the matrix to increase settling speed from [D] to [E] mm/s ([F%] increase)."
         },
         {
-          heading: "04 // Localized Redeposition & Verified Telemetry",
-          desc: "Sediment drops within designated mining corridors, eliminating midwater plumes and generating auditable sensor proof."
+          heading: "04 // Rapid Seabed Redeposition & Compliance",
+          desc: "Residual turbidity drops by [A%] and suspended solids by [B%], cutting settling time from [G] to [H] min and generating auditable EMMP metrics for ISA and SBMA G09."
         }
       ]
     }
@@ -138,12 +138,12 @@ window.Conrad.CONTENT_CHINA = {
         },
         {
           stage: "INITIAL SAM // COOK ISLANDS BEACHHEAD",
-          cost: "US$600k – US$1.8M",
+          cost: "US$450k – US$1.5M",
           sub: "3 LICENSED EXPLORATION HOLDERS",
           meta: [
             { label: "Market Base", value: "CIC Ltd, Moana Minerals, CSR Ltd" },
             { label: "Monitored Area", value: "254,654 km² Exploration Licences" },
-            { label: "Scope", value: "Monitoring, modeling & baseline trials" }
+            { label: "Scope", value: "Monitoring & modeling ($150k–$500k/operator)" }
           ]
         },
         {
@@ -152,18 +152,18 @@ window.Conrad.CONTENT_CHINA = {
           sub: "OVER 3 YEARS ACROSS ALL 3 CONCESSIONS",
           meta: [
             { label: "Average Concession", value: "$500k – $1.5M per operator" },
-            { label: "Services", value: "Hardware lease + chemical supply" },
-            { label: "Driver", value: "Environment Regulations 2023" }
+            { label: "Services", value: "Monitoring, modeling, bio-flocculation trials" },
+            { label: "Driver", value: "Environment Regulations 2023 & G09" }
           ]
         },
         {
-          stage: "GLOBAL INDUSTRY TAM // 2026 – 2034",
-          cost: "US$6.18B → US$65.56B",
-          sub: "34.3% CAGR DRIVEN BY CLEAN ENERGY TRANSITION",
+          stage: "ADJACENT CHINA & GLOBAL SCALE // DREDGING & SEABED",
+          cost: "US$14B – US$16B",
+          sub: "MARINE DREDGING REMEDIATION + $6.18B→$65.56B SEABED MINING",
           meta: [
-            { label: "Key Critical Metals", value: "Nickel, Cobalt, Copper, Manganese" },
-            { label: "Contract Base", value: "22 ISA & national nodule contracts" },
-            { label: "Primary Mandate", value: "ISA Draft Exploitation Regulations" }
+            { label: "China Infrastructure", value: "CCCC/CHEC (800M–1B m³/yr) & CNOOC" },
+            { label: "Accessible Sediment Market", value: "~$3.5B (350–500M tons/yr @ $7–$10/ton)" },
+            { label: "Global Seabed Pipeline", value: "22 ISA & national nodule contracts (34.3% CAGR)" }
           ]
         }
       ]
@@ -256,7 +256,8 @@ window.Conrad.CONTENT_CHINA = {
         { name: "Western Pacific Basin", count: "1 Contract", match: "★★★★★", actors: "Beijing Pioneer Hi-Tech Development Corporation (China)" },
         { name: "Indian Ocean Ridges", count: "5 Contracts", match: "★★★", actors: "COMRA (China), Republic of Korea, Germany (BGR), India (Polymetallic Sulfides)" },
         { name: "Mid-Atlantic Ridge", count: "3 Contracts", match: "★★★", actors: "Yuzhmorgeologiya (Russia), Ifremer (France), Poland (Polymetallic Sulfides)" },
-        { name: "Western Pacific Seamounts", count: "4 Contracts", match: "★★★", actors: "JOGMEC (Japan), COMRA (China), Russia, South Korea (Cobalt-Rich Crusts)" }
+        { name: "Western Pacific Seamounts", count: "4 Contracts", match: "★★★", actors: "JOGMEC (Japan), COMRA (China), Russia, South Korea (Cobalt-Rich Crusts)" },
+        { name: "China Marine Dredging & Coastal Remediation", count: "~$3.5B Accessible", match: "★★★★★", actors: "CCCC / CHEC (800M–1B m³/yr dredged material), CNOOC, Coastal Shoreline Restoration ($14B–$16B global market; $7–$10/ton)" }
       ]
     },
 
@@ -335,6 +336,7 @@ window.Conrad.CONTENT_CHINA = {
     // Mission & Vision
     mission: "The deep sea is one of the least understood environments on Earth, yet it faces growing pressures from human activities. POSEIDON seeks to bridge the gap between technological innovation and environmental responsibility. Through scientific research, engineering, and experimentation, we aim to develop practical approaches to deep-sea challenges while recognising the complexity and uncertainty of marine ecosystems. Our goal is not simply to advance what technology can do, but to explore how it can be used more responsibly.",
     vision: "We envision a future in which the exploration of the deep ocean and the protection of its ecosystems can progress together. By combining curiosity with scientific rigour and innovation with sustainability, POSEIDON aspires to contribute to a future where technological advancement does not come at the expense of the natural world. The ocean holds the unknown. We work towards a better way to understand and protect it.",
+    teamStory: "POSEIDON was sparked by conversations between Wanjing and her parents, both maritime shipping and commercial logistics professionals with over 20 years of expertise. This curiosity led her to a documentary exploring the growing demand for seabed minerals in the clean energy transition, revealing a deeper dilemma: balancing resource extraction, ISA governance, and fragile marine biodiversity. Founded on UN Sustainable Development Goal 9 (Industry, Innovation and Infrastructure) and Goal 14 (Life Below Water), we assembled five teammates to make deep-sea resource extraction more environmentally responsible through bioflocculation technology.",
 
     // Contact Directory
     contact: {

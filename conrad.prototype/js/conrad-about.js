@@ -16,6 +16,22 @@ window.generateContactHTML = function(kicker, leadText) {
   var mission = aboutData.mission || "";
   var vision = aboutData.vision || "";
   var storyParas = aboutData.storyParagraphs || [];
+  var teamStory = aboutData.teamStory || "";
+  var teamMembers = aboutData.teamMembers || [];
+
+  var teamBlockHTML = "";
+  if (teamStory || teamMembers.length) {
+    var membersText = teamMembers.map(function(m) {
+      return "<strong style=\"color:#ffffff;\">" + m.name + " (" + m.role + ")</strong> — " + m.focus;
+    }).join(" &nbsp;&middot;&nbsp; ");
+    teamBlockHTML = `
+      <div style="margin-top: 1.25rem; padding: 1.5rem 2rem; background: rgba(255,255,255,0.03); border-left: 2px solid #01B1C7;">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">Our Team &amp; Origin (UN SDG 9 &amp; 14)</h3>
+        ${teamStory ? `<p style="font-size: 0.95rem; line-height: 1.6; color: rgba(255,255,255,0.75); margin: 0 0 0.85rem 0;">${teamStory}</p>` : ""}
+        ${membersText ? `<p style="font-size: 0.92rem; line-height: 1.7; color: rgba(255,255,255,0.75); margin: 0;">${membersText}</p>` : ""}
+      </div>
+    `;
+  }
 
   var storyHTML = "";
   if (storyParas.length) {
@@ -26,6 +42,7 @@ window.generateContactHTML = function(kicker, leadText) {
         ${storyParas.map(function(p) { return `<p class="conrad-contact-lead" style="margin-bottom: 1.25rem; max-width: 900px;">${p}</p>`; }).join("")}
         ${mission ? `<div style="margin-top: 2rem; padding: 1.5rem 2rem; background: rgba(255,255,255,0.03); border-left: 2px solid #ffffff;"><h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">Our Mission</h3><p style="font-size: 0.95rem; line-height: 1.6; color: rgba(255,255,255,0.7); margin: 0;">${mission}</p></div>` : ""}
         ${vision ? `<div style="margin-top: 1.25rem; padding: 1.5rem 2rem; background: rgba(255,255,255,0.03); border-left: 2px solid rgba(255,255,255,0.4);"><h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">Our Vision</h3><p style="font-size: 0.95rem; line-height: 1.6; color: rgba(255,255,255,0.7); margin: 0;">${vision}</p></div>` : ""}
+        ${teamBlockHTML}
       </div>
     `;
   } else if (mission) {
@@ -34,6 +51,7 @@ window.generateContactHTML = function(kicker, leadText) {
         <div class="conrad-contact-kicker">01 // OUR MISSION</div>
         <h2 class="conrad-contact-title" style="margin-bottom: 1.5rem;">Responsible Ocean Innovation</h2>
         <p class="conrad-contact-lead" style="margin-bottom: 1.25rem; max-width: 900px;">${mission}</p>
+        ${teamBlockHTML}
       </div>
     `;
   }
@@ -93,18 +111,6 @@ window.generateContactHTML = function(kicker, leadText) {
             <span class="conrad-socials-label">NETWORK</span>
             <div class="conrad-socials-links">
               <a href="mailto:${email}" class="conrad-social-link">EMAIL DIRECT &nearr;</a>
-            </div>
-          </div>
-          <div class="conrad-facilities-group">
-            <span class="conrad-socials-label">OPERATIONAL HUBS</span>
-            <div class="conrad-facilities-list">
-              <span>RAROTONGA (COOK ISLANDS)</span>
-              <span class="dot">&middot;</span>
-              <span>BEIJING</span>
-              <span class="dot">&middot;</span>
-              <span>SINGAPORE</span>
-              <span class="dot">&middot;</span>
-              <span>HONOLULU</span>
             </div>
           </div>
         </div>

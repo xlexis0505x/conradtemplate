@@ -31,7 +31,7 @@
     {
       "_key": "c4a9e6e10228",
       "_type": "featuredAnnouncementSlice",
-      "description": "In-Situ Benthic Sediment Control & Turbidity Abatement",
+      "description": "Crawler-Released Chitosan, Plant Starch & Bentonite Bio-Flocculation",
       "hideSlice": false,
       "mediaType": "none",
       "page": [
@@ -51,7 +51,7 @@
         {
           "_key": "e5a34e8b3fbf",
           "_type": "featuredProduct",
-          "description": "Bio-Compatible Aggregate Binding for Subsea Sediment",
+          "description": "Bio-Derived Amino Charge Neutralisation ([X mg/L])",
           "image": {
             "_type": "imageWithMeta",
             "asset": {
@@ -74,12 +74,12 @@
           "layout": "",
           "mediaType": "image",
           "page": [],
-          "title": "01 // ACTIVE FLOCCULATION"
+          "title": "01 // CHITOSAN PRIMARY BRIDGING"
         },
         {
           "_key": "360b2b2d9ea4",
           "_type": "featuredProduct",
-          "description": "6,000-Meter Depth-Rated Active Injection Architecture",
+          "description": "Gelatinised Polymer Chain Bridging ([Y mg/L])",
           "image": {
             "_type": "imageWithMeta",
             "alt": "test",
@@ -103,12 +103,12 @@
           "layout": "",
           "mediaType": "image",
           "page": [],
-          "title": "02 // SUBSEA MANIFOLD"
+          "title": "02 // PLANT-STARCH REINFORCEMENT"
         },
         {
           "_key": "0a5ecc59f60a",
           "_type": "featuredProduct",
-          "description": "Dual 600 kHz Doppler Profilers & Edge Turbidity Fusion",
+          "description": "Layered Mineral Lamellae Ballasting ([Z%] Mass)",
           "image": {
             "_type": "imageWithMeta",
             "asset": {
@@ -131,12 +131,12 @@
           "layout": "",
           "mediaType": "image",
           "page": [],
-          "title": "03 // ADCP ACOUSTIC SENSING"
+          "title": "03 // BENTONITE DEPOSIT COMPACTION"
         },
         {
           "_key": "35fe2e286a1b",
           "_type": "featuredProduct",
-          "description": "Predictive Hydrodynamic Current & Drift Numerical Modeling",
+          "description": "Direct Chemical Dosing Into Disturbed Sediment",
           "image": {
             "_type": "imageWithMeta",
             "asset": {
@@ -172,12 +172,12 @@
           },
           "layout": "tall",
           "page": [],
-          "title": "04 // PLUME DIGITAL TWIN"
+          "title": "04 // CRAWLER-MOUNTED RELEASE"
         },
         {
           "_key": "d63e20ce1a60",
           "_type": "featuredProduct",
-          "description": "Automated Environmental Management & Monitoring Telemetry",
+          "description": "Auditable Turbidity, Settling & Resuspension Metrics",
           "image": {
             "_type": "imageWithMeta",
             "asset": {
@@ -200,12 +200,12 @@
           "layout": "wide",
           "mediaType": "image",
           "page": [],
-          "title": "05 // G09 EMMP TELEMETRY"
+          "title": "05 // G09 & ISA COMPLIANCE PROOF"
         },
         {
           "_key": "85b57dc5c580",
           "_type": "featuredProduct",
-          "description": "Containerized Research Vessel & Mining Barge Interfacing",
+          "description": "Calibrated Across 0–35 ppt Abyssal Salinity",
           "image": {
             "_type": "imageWithMeta",
             "asset": {
@@ -228,12 +228,12 @@
           "layout": "",
           "mediaType": "image",
           "page": [],
-          "title": "06 // OFFSHORE MODULAR SKID"
+          "title": "06 // HIGH-SALINITY SEAWATER KINETICS"
         },
         {
           "_key": "49c191ad0528",
           "_type": "featuredProduct",
-          "description": "Titanium Subsea Valving & Zero-Failure Solenoid Actuation",
+          "description": "Bio-Based Alternative to Toxic Synthetic Polymers",
           "image": {
             "_type": "imageWithMeta",
             "asset": {
@@ -270,7 +270,7 @@
           "layout": "",
           "mediaType": "image",
           "page": [],
-          "title": "07 // 600-BAR PRESSURE VESSEL"
+          "title": "07 // MARINE ECOLOGICAL COMPATIBILITY"
         }
       ]
     },
@@ -326,12 +326,12 @@
           },
           "page": {
             "_type": "internalLink",
-            "text": "10x",
+            "text": "+10%/yr",
             "reference": {
-              "title": "10x"
+              "title": "+10%/yr"
             }
           },
-          "subtitle": "Throughput Multiplier\nAutonomous performance exceeding legacy systems by an order of magnitude."
+          "subtitle": "Critical Mineral Demand\nGlobal energy-key mineral demand growing 10% annually (IEA Outlook 2026)."
         },
         {
           "_key": "item-75pct",
@@ -357,12 +357,12 @@
           },
           "page": {
             "_type": "internalLink",
-            "text": "-75%",
+            "text": "-37%",
             "reference": {
-              "title": "-75%"
+              "title": "-37%"
             }
           },
-          "subtitle": "Unit Lifecycle Cost\nRadical reduction in capital expenditure and recurring operational cost."
+          "subtitle": "Seabed Fauna Loss\nAnimal abundance drop inside unmitigated deep-sea mining tracks (Nature E&E, 2025)."
         },
         {
           "_key": "item-12wks",
@@ -388,12 +388,12 @@
           },
           "page": {
             "_type": "internalLink",
-            "text": "<12 Wks",
+            "text": "22 Contracts",
             "reference": {
-              "title": "<12 Wks"
+              "title": "22 Contracts"
             }
           },
-          "subtitle": "Build to Deployment\nCompressing multi-year procurement into weeks with software-defined tooling."
+          "subtitle": "Addressable Pipeline\n19 ISA polymetallic nodule contracts plus 3 Cook Islands exploration licences."
         },
         {
           "_key": "item-100pct",
@@ -419,12 +419,12 @@
           },
           "page": {
             "_type": "internalLink",
-            "text": "100%",
+            "text": "3 Agents",
             "reference": {
-              "title": "100%"
+              "title": "3 Agents"
             }
           },
-          "subtitle": "Rig Validation\nClosed-loop hardware telemetry verified under operational stress."
+          "subtitle": "Ternary Bio-Formula\nChitosan ([X mg/L]), plant starch ([Y mg/L]), and bentonite ([Z%]) in 35 ppt seawater."
         }
       ],
       "backgroundColor": {

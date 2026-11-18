@@ -23,26 +23,26 @@
     {
       num:     '01',
       heading: 'Chitosan Polymer Bridging & Charge Neutralisation',
-      desc:    'Chitosan attaches to fine sediment particles through interactions between its amino groups and particle surfaces, helping neutralise negative surface charges. Its polymer chains connect multiple particles into larger flocs, with effectiveness depending on pH, salinity, and dosage.',
-      tags:    ['Fine Sediment Plume', 'Chitosan Polymer Bridging']
+      desc:    'Released directly from the mining crawler into disturbed sediment, chitosan ([X mg/L]; 0–3 mg/L test range) binds fine particles via amino-group charge neutralisation and bridges suspended silt into larger flocs in 35 ppt seawater.',
+      tags:    ['Chitosan [X mg/L]', 'Fine Sediment Bridging']
     },
     {
       num:     '02',
       heading: 'Gelatinised Starch Floc Reinforcement',
-      desc:    'Gelatinised plant-based starch may help connect sediment particles and reinforce the flocs through adsorption and polymer bridging. Its effect on floc strength and resistance to breakage under flow is evaluated experimentally.',
-      tags:    ['Gelatinised Plant Starch', 'Proposed Bridging Mechanism']
+      desc:    'Gelatinised plant-based starch ([Y mg/L]; 0–120 mg/L test range) adsorbs onto chitosan-bound flocs, chaining particles together to increase floc integrity and resistance to break-up under turbulent bottom flow.',
+      tags:    ['Plant Starch [Y mg/L]', 'Floc Shear Reinforcement']
     },
     {
       num:     '03',
       heading: 'Bentonite Fine-Clay Incorporation',
-      desc:    'Bentonite adds fine layered clay particles to the floc structure. Incorporating these mineral lamellae may alter the floc’s density, internal structure, and settling behaviour, with effects on sediment settling and deposit formation measured experimentally.',
-      tags:    ['Fine Bentonite Clay', 'Experimental Settling Metrics']
+      desc:    'Natural bentonite clay ([Z%] of dry sediment mass; 0–20% test range) integrates fine mineral lamellae into the floc matrix, expelling trapped pore water and increasing settling velocity from [D] to [E] mm/s ([F%] increase).',
+      tags:    ['Bentonite [Z%] Mass', 'Settling [D] → [E] mm/s']
     },
     {
       num:     '04',
       heading: 'Seabed Settling & Deposit Stability',
-      desc:    'After settling onto the seafloor, the combined formulation may produce a more stable sediment deposit. Its resistance to erosion and resuspension under different controlled water-current conditions is tested experimentally.',
-      tags:    ['Benthic Sediment Deposit', 'Controlled Flow Testing']
+      desc:    'Dense ternary flocs reduce residual turbidity by [A%] and suspended solids by [B%], cutting settling time from [G] to [H] min and leaving a compacted seabed deposit resistant to current-driven resuspension.',
+      tags:    ['[A%] Lower Turbidity', 'Compacted Seabed Deposit']
     }
   ];
 

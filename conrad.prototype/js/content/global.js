@@ -14,75 +14,75 @@ window.Conrad.CONTENT_GLOBAL = {
   // ── Home Route Content ────────────────────────────────────
   home: {
     heroKicker: "ENVIRONMENTAL OCEAN ENGINEERING // 2026",
-    heroTitle: "Restoring the Abyss: Autonomous Deep-Sea Plume Mitigation",
-    heroLead: "Engineered in-situ chemical flocculation and real-time turbidity telemetry designed to mitigate deep-sea sediment dispersion and unlock international environmental approvals.",
+    heroTitle: "Restoring the Abyss: Bio-Based Deep-Sea Plume Mitigation",
+    heroLead: "Combining chitosan, plant-based starch, and bentonite into a clean bio-based flocculant released directly by mining crawlers to settle disturbed sediment faster — because net zero should not come at the expense of our oceans.",
     
     // Stats Bar (Directly below video)
     stats: [
       {
+        value: "+10% / yr",
+        label: "CRITICAL MINERAL DEMAND",
+        sub: "Annual global demand growth for energy-key minerals (IEA Outlook 2026)"
+      },
+      {
+        value: "-37%",
+        label: "SEABED FAUNA LOSS",
+        sub: "Animal abundance reduction inside unmitigated mining tracks (Nature E&E, 2025)"
+      },
+      {
         value: "254,654 km²",
-        label: "TARGET EXPLORATION EEZ",
-        sub: "Cook Islands exploration license baseline across CIC, Moana & CSR"
+        label: "COOK ISLANDS EEZ BASELINE",
+        sub: "Initial validation footprint across CIC Limited, Moana Minerals & CSR"
       },
       {
-        value: "22 Contracts",
-        label: "PIPELINE OPPORTUNITY",
-        sub: "19 ISA nodule exploration contracts + 3 national commercial licences"
-      },
-      {
-        value: ">90%",
-        label: "TURBIDITY SUPPRESSION",
-        sub: "Accelerated benthic redeposition factor vs. untreated slurry discharge"
-      },
-      {
-        value: "0 Toxic Residuals",
-        label: "MARINE ECO-SAFETY",
-        sub: "100% biodegradable biopolymer chemistry compliant with OECD 202/203"
+        value: "3-Part Formula",
+        label: "TERNARY BIO-FLOCCULANT",
+        sub: "Chitosan ([X mg/L]), plant starch ([Y mg/L]) & bentonite ([Z%]) in 35 ppt seawater"
       }
     ],
 
     // 7 Core Subsystem Bento Cards
     bentoCards: [
       {
-        title: "01 // Eco-Flocculation Chemistry",
-        subtitle: "High-Efficiency Bio-Compatible Aggregate Binding",
-        desc: "Proprietary non-toxic natural biopolymer designed to agglomerate sub-micron abyssal sediment particles into heavy macro-flocs, increasing settling velocity by over an order of magnitude.",
+        title: "01 // Chitosan Primary Bridging",
+        subtitle: "Bio-Derived Amino Charge Neutralisation ([X mg/L])",
+        desc: "Chitosan (tested across 0–3 mg/L in 35 ppt seawater) binds fine negatively charged abyssal sediment particles through amino-group interactions, initiating rapid primary flocculation without synthetic toxicity.",
         image: "/assets/images/subsea/bento-01-flocculation.jpg"
       },
       {
-        title: "02 // Subsea Active Dispenser Manifold",
-        subtitle: "6,000-Meter Depth-Rated Injection Architecture",
-        desc: "Autonomous benthic manifold skid mounted directly to mining collector discharge chutes, delivering closed-loop micro-dosed chemical dispersion under 600 bar hydrostatic pressure.",
+        title: "02 // Plant-Starch Reinforcement",
+        subtitle: "Gelatinised Polymer Chain Bridging ([Y mg/L])",
+        desc: "Gelatinised plant-based starch (tested across 0–120 mg/L) adsorbs onto chitosan-bound flocs to chain particles together, increasing floc integrity and preventing break-up under turbulent bottom currents.",
         image: "/assets/images/subsea/bento-02-manifold.jpg"
       },
       {
-        title: "03 // Acoustic & Turbidity Sensing",
-        subtitle: "Real-Time Sensor Fusion & Edge Hydrodynamic Processing",
-        desc: "Integrated dual 600 kHz Acoustic Doppler Current Profilers (ADCP) and 850nm optical backscatter sensors providing closed-loop environmental feedback to modulate dosing.",
+        title: "03 // Bentonite Deposit Compaction",
+        subtitle: "Layered Mineral Lamellae Ballasting ([Z%] Mass)",
+        desc: "Natural fine-grained bentonite clay (tested at 0–20% of dry sediment mass; 0–200 mg/L at 1.0 g/L sediment) packs closely into the floc matrix, raising settling velocity from [D] to [E] mm/s and resisting resuspension.",
         image: "/assets/images/subsea/bento-03-adcp.jpg"
       },
       {
-        title: "04 // Plume Dispersion Digital Twin",
-        subtitle: "Predictive Numerical Modeling & Ocean Current Calibration",
-        desc: "Real-time spatial plume migration simulation calibrated against abyssal benthic currents, predicting settling footprints and preventing transboundary particle drift.",
+        title: "04 // Crawler-Mounted Release",
+        subtitle: "Direct Chemical Dosing Into Disturbed Sediment",
+        desc: "Engineered as a drop-in bio-flocculant treatment released directly by existing seabed mining crawlers into the discharge plume, eliminating bespoke vessel reconstructions while treating sediment at the source.",
         image: "/assets/images/subsea/bento-04-digital-twin.jpg"
       },
       {
-        title: "05 // G09 & ISA Regulatory Compliance",
-        subtitle: "Automated Environmental Management & Monitoring Telemetry",
-        desc: "Real-time compliance data stream designed to satisfy Cook Islands SBMA G09 standards and International Seabed Authority (ISA) benthic discharge monitoring regulations.",
+        title: "05 // G09 & ISA Compliance Proof",
+        subtitle: "Auditable Turbidity, Settling & Resuspension Metrics",
+        desc: "Generates measured suspended solids ([B%] reduction), turbidity ([A%] reduction), and settling data aligned with Cook Islands SBMA G09 guidelines and International Seabed Authority (ISA) EIS/EMMP requirements.",
         image: "/assets/images/subsea/bento-05-telemetry.jpg"
       },
       {
-        title: "06 // Modular Offshore Skid",
-        subtitle: "Containerized Research Vessel & Mining Barge Integration",
-        desc: "Standardized subsea modular footprint compatible with commercial nodule collector trials and environmental survey vessels without requiring bespoke deck reconstructions.",
+        title: "06 // High-Salinity Seawater Kinetics",
+        subtitle: "Calibrated Across 0–35 ppt Abyssal Salinity",
+        desc: "Conventional land-based synthetic flocculants degrade in saline water. Our three-material recipe is specifically formulated and benchmarked at 35 ppt full-strength seawater across 0, 10, 20, and 35 ppt salinity sweeps.",
         image: "/assets/images/subsea/bento-06-offshore-skid.jpg"
       },
       {
-        title: "07 // 600-Bar Pressure Vessel & Valving",
-        subtitle: "Titanium Subsea Valving & Zero-Failure Solenoid Actuation",
-        desc: "Deep-ocean pressure-balanced electromagnetic valves eliminating mechanical pinch points, delivering uninterrupted operation under abyssal temperature and salinity extremes.",
+        title: "07 // Marine Ecological Compatibility",
+        subtitle: "Bio-Based Alternative to Toxic Synthetic Polymers",
+        desc: "Uses biologically sourced chitosan and plant starch alongside natural bentonite to curb suspended plumes that clog filter feeders and bury benthic habitats, cutting treatment cost to [$M/m³] ([O%] savings).",
         image: "/assets/images/subsea/bento-07-pressure-vessel.jpg"
       }
     ],
@@ -90,24 +90,24 @@ window.Conrad.CONTENT_GLOBAL = {
     // Interactive Scrubber Steps
     scrubber: {
       kicker: "02 // PLUME MITIGATION DISSECTION",
-      title: "Active Benthic Sediment Neutralization Cycle",
-      lead: "Scroll through real-time internal fluid dynamics, in-situ chemical binding, and accelerated abyssal sedimentation.",
+      title: "Crawler-Released Bio-Flocculation Cycle",
+      lead: "Scroll through disturbed seabed sediment capture, ternary bio-flocculant release, and compacted benthic redeposition.",
       steps: [
         {
-          heading: "01 // Benthic Extraction & Disturbance Zone",
-          desc: "Collector track and nodule pick-up generate high-density sediment slurry at the seafloor interface."
+          heading: "01 // Benthic Extraction & Sediment Disturbance",
+          desc: "Mining crawlers stir up fine abyssal clay at the seafloor, creating sediment plumes that can travel hundreds of kilometres and reduce seabed animal abundance by 37%."
         },
         {
-          heading: "02 // In-Chute Flocculant Dosing & Turbulence Mixing",
-          desc: "Electromagnetic injection nozzles micro-dose eco-compatible biopolymer directly into the discharge flow."
+          heading: "02 // Crawler-Released Ternary Bio-Flocculant",
+          desc: "The crawler releases our bio-based formulation—chitosan ([X mg/L]), gelatinised plant starch ([Y mg/L]), and bentonite ([Z%])—directly into the turbulent discharge flow."
         },
         {
-          heading: "03 // Rapid Macro-Floc Agglomeration",
-          desc: "Polymer bridging forces sub-micron clay and silt into dense macro-flocs, accelerating settling velocity by over 20x."
+          heading: "03 // Macro-Floc Agglomeration & Compaction",
+          desc: "Chitosan bridges fine particles, starch reinforces floc chains against shear, and bentonite packs the matrix to increase settling speed from [D] to [E] mm/s ([F%] increase)."
         },
         {
-          heading: "04 // Localized Redeposition & Verified Telemetry",
-          desc: "Sediment drops within designated mining corridors, eliminating midwater plumes and generating auditable sensor proof."
+          heading: "04 // Rapid Seabed Redeposition & Compliance",
+          desc: "Residual turbidity drops by [A%] and suspended solids by [B%], cutting settling time from [G] to [H] min and generating auditable EMMP metrics for ISA and SBMA G09."
         }
       ]
     }
@@ -115,121 +115,121 @@ window.Conrad.CONTENT_GLOBAL = {
 
   // ── Tech Route Content ────────────────────────────────────
   tech: {
-    kicker: "02 // INDUSTRIAL SPECIFICATIONS",
-    title: "Subsea Technical Envelope & Tolerances",
-    lead: "High-density physical metrics, 600-bar hydrostatic pressure ratings, and acoustic telemetry built to marine engineering standards with commercial agile deployment.",
+    kicker: "02 // FORMULATION & EXPERIMENTAL SPECIFICATIONS",
+    title: "Ternary Bio-Flocculant Matrix & Crawler-Release Parameters",
+    lead: "A three-material bio-based chemical treatment—chitosan, plant-based starch, and bentonite clay—formulated for 35 ppt seawater and direct release from deep-sea mining crawlers.",
     tabs: [
       { filter: "all", label: "ALL" },
-      { filter: "chassis", label: "CHASSIS & SLED" },
-      { filter: "dosing", label: "DISPENSER MANIFOLD" },
-      { filter: "sensing", label: "ACOUSTIC SENSORS" },
-      { filter: "materials", label: "MATERIALS & PRESSURE" },
-      { filter: "interfaces", label: "SUBSEA INTERFACES" }
+      { filter: "chassis", label: "FORMULATION" },
+      { filter: "dosing", label: "DOSAGE & MIXING" },
+      { filter: "sensing", label: "SETTLING & TURBIDITY" },
+      { filter: "materials", label: "SALINITY & SAFETY" },
+      { filter: "interfaces", label: "CRAWLER RELEASE" }
     ],
     schematics: [
       {
         schematic: "all",
         image: "/assets/images/subsea/benthic-collector.jpg",
-        badge: "SYSTEM SCHEMATIC // OVERVIEW",
-        title: "Autonomous Subsea Plume Mitigation Platform",
-        tag: "6,000M DEPTH RATED // SBMA G09 COMPLIANT"
+        badge: "FORMULATION OVERVIEW // TERNARY RECIPE",
+        title: "Crawler-Released Ternary Bio-Flocculant Formulation",
+        tag: "CHITOSAN · PLANT STARCH · BENTONITE // 35 PPT SEAWATER"
       },
       {
         schematic: "chassis",
-        image: "/assets/images/subsea/bento-06-offshore-skid.jpg",
-        badge: "STRUCTURAL SCHEMATIC // CHASSIS",
-        title: "TITANIUM BENTHIC MONOCOQUE FRAME",
-        tag: "600-BAR HYDROSTATIC RATING"
+        image: "/assets/images/subsea/bento-01-flocculation.jpg",
+        badge: "THREE-MATERIAL RECIPE // CHEMISTRY",
+        title: "CHITOSAN, PLANT STARCH & BENTONITE MATRIX",
+        tag: "1.0 G DRY SEDIMENT/L // 3–4 REPLICATES"
       },
       {
         schematic: "dosing",
         image: "/assets/images/subsea/bento-02-manifold.jpg",
-        badge: "DISPENSER SCHEMATIC // FLUIDICS",
-        title: "ACTIVE CLOSED-LOOP INJECTION MANIFOLD",
-        tag: "MICRO-DOSED BIO-POLYMER"
+        badge: "DOSAGE MATRIX // OPTIMISATION",
+        title: "CONTROLLED RATIO DOSING & RAPID DISPERSION",
+        tag: "[X MG/L] CHITOSAN · [Y MG/L] STARCH · [Z%] BENTONITE"
       },
       {
         schematic: "sensing",
         image: "/assets/images/subsea/bento-03-adcp.jpg",
-        badge: "SENSOR SCHEMATIC // TELEMETRY",
-        title: "DUAL 600 KHZ ADCP & OPTICAL TURBIDITY ARRAY",
-        tag: "REAL-TIME HYDRODYNAMIC PROCESSING"
+        badge: "PERFORMANCE METRICS // SETTLING",
+        title: "TURBIDITY, SUSPENDED SOLIDS & SETTLING VELOCITY",
+        tag: "[A%] TURBIDITY DROP // [D] → [E] MM/S"
       },
       {
         schematic: "materials",
         image: "/assets/images/subsea/bento-07-pressure-vessel.jpg",
-        badge: "MATERIALS SCHEMATIC // CORROSION PROOF",
-        title: "GRADE 5 TITANIUM ENCLOSURES & RESIN MATRIX",
-        tag: "PRESSURE-BALANCED OIL-FILLED (PBOF)"
+        badge: "MARINE COMPATIBILITY // SALINITY",
+        title: "BIO-DERIVED INGREDIENTS & 0–35 PPT SALINITY SWEEP",
+        tag: "NATURAL ALTERNATIVE TO SYNTHETIC FLOCCULANTS"
       },
       {
         schematic: "interfaces",
         image: "/assets/images/subsea/bento-05-telemetry.jpg",
-        badge: "PAYLOAD SCHEMATIC // UMBILICAL",
-        title: "ISO 13628-8 SUBSEA UMBILICAL INTERFACE",
-        tag: "HOT-SWAPPABLE 10 GBPS LINK"
+        badge: "DEPLOYMENT // CRAWLER INTEGRATION",
+        title: "DIRECT MINING CRAWLER RELEASE & EMMP COMPLIANCE",
+        tag: "SBMA G09 & ISA EIS/EMMP ALIGNED"
       }
     ],
     specs: [
-      { category: "chassis", param: "OPERATIONAL DEPTH", val: "6,000 m / 19,685 ft", meta: "[ 600 BAR HYDROSTATIC ]" },
-      { category: "chassis", param: "FRAME DIMENSIONS", val: "3.80 m × 2.40 m × 1.85 m", meta: "[ MODULAR BENTHIC SLED ]" },
-      { category: "chassis", param: "DRY WEIGHT", val: "1,850 kg / 4,078 lbs", meta: "[ CRANE DEPLOYABLE ]" },
-      { category: "chassis", param: "IN-WATER WEIGHT", val: "Neutrally Buoyant", meta: "[ SYNTACTIC FOAM BALANCED ]" },
-      { category: "chassis", param: "MAX PAYLOAD RATING", val: "2,500 kg / 5,510 lbs", meta: "[ COLLECTOR INTERFACE ]" },
-      { category: "dosing", param: "SLURRY FLOW CAPACITY", val: "12,000 m³/h Throughput", meta: "[ CONTINUOUS PROCESSING ]" },
-      { category: "dosing", param: "FLOCCULANT DOSING RANGE", val: "0.5 – 5.0 ppm Active Dosing", meta: "[ CLOSED-LOOP ADAPTIVE ]" },
-      { category: "dosing", param: "SETTLING VELOCITY MULTIPLIER", val: ">20x Acceleration", meta: "[ RAPID BENTHIC DROP ]" },
-      { category: "dosing", param: "INJECTION VALVE RATING", val: "600 Bar Pressure-Balanced", meta: "[ ZERO-LEAK SOLENOIDS ]" },
-      { category: "sensing", param: "ACOUSTIC CURRENT PROFILER", val: "Dual 600 kHz Teledyne ADCP", meta: "[ 3D WATER COLUMN VECTORS ]" },
-      { category: "sensing", param: "OPTICAL BACKSCATTER", val: "Dual 850 nm Nephelometric OBS", meta: "[ 0 – 4,000 NTU RANGE ]" },
-      { category: "sensing", param: "SEDIMENT REDEPOSITION FACTOR", val: ">90% within 15 Minutes", meta: "[ NATURE COMM. 2025 BENCHMARK ]" },
-      { category: "sensing", param: "TELEMETRY UPLINK", val: "Acoustic & Subsea Optical Fiber", meta: "[ AUDITABLE G09 LOG ]" },
-      { category: "materials", param: "PRIMARY METALLURGY", val: "Titanium Grade 5 (Ti-6Al-4V)", meta: "[ DEEP-ABYSS CORROSION IMMUNE ]" },
-      { category: "materials", param: "BUOYANCY COMPOSITE", val: "6,000m Rated Syntactic Glass Foam", meta: "[ ZERO WATER ABSORPTION ]" },
-      { category: "materials", param: "CHEMICAL BIO-COMPATIBILITY", val: "100% Non-Toxic Natural Biopolymer", meta: "[ OECD 202/203 COMPLIANT ]" },
-      { category: "interfaces", param: "POWER & DATA UMBILICAL", val: "48V DC Bus / 10 Gbps Ethernet Fiber", meta: "[ ISO 13628-8 COMPLIANT ]" },
-      { category: "interfaces", param: "MOBILIZATION FOOTPRINT", val: "Standard 20-Foot ISO Container Skid", meta: "[ NO SHIP RECONSTRUCTION ]" },
-      { category: "interfaces", param: "DECK INTEGRATION", val: "Compatible with Commercial Vessels", meta: "[ 24-HOUR RAPID MOBILIZATION ]" }
+      { category: "chassis", param: "PRIMARY FLOCCULANT (STAGE 1)", val: "Chitosan Biopolymer", meta: "[ AMINO CHARGE NEUTRALISATION ]" },
+      { category: "chassis", param: "FLOC REINFORCER (STAGE 2)", val: "Gelatinised Plant-Based Starch", meta: "[ POLYMER CHAIN BRIDGING ]" },
+      { category: "chassis", param: "DEPOSIT COMPACTOR (STAGE 3–4)", val: "Fine Natural Bentonite Clay", meta: "[ MINERAL LAMELLAE PACKING ]" },
+      { category: "chassis", param: "REFERENCE SEDIMENT LOAD", val: "1.0 g Dry Sediment / L", meta: "[ 3–4 REPLICATES PER CONDITION ]" },
+      { category: "chassis", param: "DEEP-SEA SALINITY BASELINE", val: "35 ppt Artificial Seawater", meta: "[ FULL-STRENGTH SEAWATER ]" },
+      { category: "dosing", param: "CHITOSAN DOSAGE (OPTIMAL / SWEEP)", val: "[X mg/L] (0, 0.5, 2, 3 mg/L)", meta: "[ STAGE 1 FLOCCULATION ]" },
+      { category: "dosing", param: "PLANT STARCH DOSAGE (OPTIMAL / SWEEP)", val: "[Y mg/L] (0, 30, 60, 120 mg/L)", meta: "[ STAGE 2 REINFORCEMENT ]" },
+      { category: "dosing", param: "BENTONITE DOSAGE (OPTIMAL / SWEEP)", val: "[Z%] Dry Mass (0, 5, 10, 20%)", meta: "[ 0–200 MG/L AT 1.0 G/L ]" },
+      { category: "dosing", param: "DISPERSION MIXING SCHEDULE", val: "Rapid Mix [rpm] for 1–2 min", meta: "[ CRAWLER WAKE DISPERSION ]" },
+      { category: "sensing", param: "TURBIDITY REDUCTION", val: "[A%] vs. Untreated Control", meta: "[ WATER CLARITY GAIN ]" },
+      { category: "sensing", param: "SUSPENDED SOLIDS REDUCTION", val: "[B%] ([C kg] per [Q m³])", meta: "[ REDUCED PLUME LOAD ]" },
+      { category: "sensing", param: "SETTLING VELOCITY", val: "[D] → [E] mm/s ([F%] Increase)", meta: "[ STOKES SETTLING SHIFT ]" },
+      { category: "sensing", param: "SETTLING TIME REDUCTION", val: "[G] → [H] min ([I%] Reduction)", meta: "[ RAPID BENTHIC DROP ]" },
+      { category: "materials", param: "SALINITY SENSITIVITY SWEEP", val: "0, 10, 20, 35 ppt Tested", meta: "[ TREATED VS. UNTREATED ]" },
+      { category: "materials", param: "INGREDIENT SOURCING", val: "Bio-Derived Chitosan & Starch + Clay", meta: "[ NON-SYNTHETIC ALTERNATIVE ]" },
+      { category: "materials", param: "DEPOSIT RESUSPENSION STABILITY", val: "Compacted Settled Bed Under Flow", meta: "[ BENTONITE PACKING EFFECT ]" },
+      { category: "interfaces", param: "RELEASE MECHANISM", val: "Direct Release via Mining Crawler", meta: "[ IN-PLUME SOURCE TREATMENT ]" },
+      { category: "interfaces", param: "ESTIMATED TREATMENT COST", val: "[$M / m³] ([O%] vs. [$N / m³])", meta: "[ [$R] ANNUAL SAVINGS AT [Q m³] ]" },
+      { category: "interfaces", param: "REGULATORY DATA OUTPUT", val: "Turbidity, Settling & Resuspension", meta: "[ ISA EIS/EMMP & SBMA G09 ]" }
     ],
     comparison: {
       kicker: "03 // STRATEGIC ADVANTAGE",
-      title: "In-Situ Active Mitigation vs. Legacy Unmitigated Operations",
-      lead: "A direct operational and environmental comparison of active chemical sediment flocculation against unmitigated mining discharge and passive post-hoc monitoring.",
+      title: "Ternary Bio-Flocculant vs. Conventional & Passive Approaches",
+      lead: "Comparing our crawler-released chitosan, starch, and bentonite treatment against passive plume monitoring and toxic land-based synthetic flocculants.",
       headers: {
         metric: "PERFORMANCE DIMENSION",
-        conrad: "DRUNKEAST SYSTEM",
-        legacy: "LEGACY UNMITIGATED / PASSIVE"
+        conrad: "DRUNKEAST BIO-FLOCCULANT",
+        legacy: "SYNTHETIC FLOCCULANTS / PASSIVE MONITORING"
       },
       rows: [
         {
           metric: "Sediment Settling Velocity",
-          conrad: "<strong>Accelerated >20x</strong> <span class=\"tag\">&lt;15 MIN SETTLING</span>",
-          legacy: "3–6 Months (Uncontrolled 100+ km midwater drift)"
+          conrad: "<strong>Accelerated [F%]</strong> <span class=\"tag\">[D] → [E] MM/S</span>",
+          legacy: "Slow natural settling; plumes travel hundreds of km in currents"
         },
         {
-          metric: "Environmental Permitting",
-          conrad: "<strong>Pre-Clearance Proof</strong> <span class=\"tag\">G09 &amp; ISA EMMP</span>",
-          legacy: "Moratorium Risk / Suspended Exploitation Licences"
+          metric: "Turbidity & Suspended Solids",
+          conrad: "<strong>[A%] Turbidity / [B%] Solids</strong> <span class=\"tag\">[G] → [H] MIN</span>",
+          legacy: "Passive models track plumes without physically removing sediment"
         },
         {
-          metric: "Real-Time Feedback Control",
-          conrad: "<strong>Autonomous Closed-Loop</strong> <span class=\"tag\">ADCP &amp; OBS TELEMETRY</span>",
-          legacy: "Delayed Post-Hoc Retrieval (Zero active mitigation)"
+          metric: "Seawater Salinity Performance",
+          conrad: "<strong>35 ppt Seawater Formulated</strong> <span class=\"tag\">0–35 PPT TESTED</span>",
+          legacy: "Conventional land flocculants lose effectiveness in high-salinity seawater"
         },
         {
           metric: "Marine Ecological Safety",
-          conrad: "<strong>100% Biodegradable</strong> <span class=\"tag\">OECD 202/203 NON-TOXIC</span>",
-          legacy: "Heavy Metal Re-suspension & Toxic Chemical Additives"
+          conrad: "<strong>Bio-Derived + Natural Clay</strong> <span class=\"tag\">CHITOSAN · STARCH · BENTONITE</span>",
+          legacy: "Industrial synthetic flocculants are toxic to marine life (-37% fauna in tracks)"
         },
         {
-          metric: "Deployment Logistics",
-          conrad: "<strong>20-Foot ISO Container Skid</strong> <span class=\"tag\">EXPEDITIONARY</span>",
-          legacy: "Bespoke Multi-Million Offshore Vessel Retrofits"
+          metric: "Deployment Integration",
+          conrad: "<strong>Direct Crawler Release</strong> <span class=\"tag\">DROP-IN CHEMICAL</span>",
+          legacy: "Bespoke hardware retrofits or passive buoys with zero active mitigation"
         },
         {
-          metric: "Commercial Cost Profile",
-          conrad: "<strong>$100k–$300k Pilot Contract</strong> <span class=\"tag\">LIGHT ASSET LEASE</span>",
-          legacy: "Tens of Millions in Stranded Vessel Downtime & Fines"
+          metric: "Treatment Cost Profile",
+          conrad: "<strong>[$M / m³] Est. Cost</strong> <span class=\"tag\">[O%] SAVINGS</span>",
+          legacy: "[$N / m³] conventional methods + regulatory delay & permitting risk"
         }
       ]
     }
@@ -309,9 +309,9 @@ window.Conrad.CONTENT_GLOBAL = {
           letter: "E",
           name: "ECONOMIC & CLIENT DYNAMICS",
           points: [
-            "Highly concentrated initial client base (3 licensed operators: CIC, Moana Minerals, CSR); high customer engagement priority.",
-            "Offshore support vessels and deep-sea robotics represent extreme capex; light-asset leasing and pilot service contracts reduce adoption hurdles.",
-            "Early revenue secured through scientific trial grants and pre-mining environmental data verification."
+            "Highly concentrated initial client base (3 licensed operators: CIC, Moana Minerals, CSR); engineers & environmental teams use the product while mining operators/contractors finance purchases, and regulators set requirements.",
+            "Estimated treatment cost of [$M / m³] delivers [O%] savings vs. conventional methods ([$N / m³]), saving [$R] annually at [Q m³] treated volume.",
+            "Drop-in bio-flocculant supply and pilot monitoring contracts lower adoption hurdles compared with bespoke offshore vessel hardware retrofits."
           ]
         },
         {
@@ -327,9 +327,9 @@ window.Conrad.CONTENT_GLOBAL = {
           letter: "T",
           name: "TECHNOLOGICAL RELIABILITY",
           points: [
-            "6,000m abyssal conditions (600 bar hydrostatic pressure, 2°C temperature, zero ambient light) demand flawless hardware endurance.",
-            "Sediment dispersion depends on abyssal bottom currents, particle size, and flocculation kinetics—requiring in-situ calibration.",
-            "Dual architecture: 'Predictive Modeling' guides monitoring points while 'In-Situ Dosing' actively accelerates sedimentation."
+            "Conventional land flocculants fail in 35 ppt seawater; our chitosan ([X mg/L]), plant starch ([Y mg/L]), and bentonite ([Z%]) recipe is specifically formulated for saline abyssal plumes.",
+            "Sediment dispersion depends on bottom currents, particle size, and flocculation kinetics—benchmarked across 0, 10, 20, and 35 ppt salinity.",
+            "Released directly from existing mining crawlers into disturbed discharge, pairing active bio-flocculation with turbidity & settling verification."
           ]
         },
         {
@@ -466,8 +466,16 @@ window.Conrad.CONTENT_GLOBAL = {
       }
     ],
 
-    // Mission Statement
+    // Mission Statement & Founding Team
     mission: "We believe that innovation should go hand in hand with environmental responsibility. Our mission is to explore practical, science-based approaches to deep-sea challenges, combining technological development with a commitment to sustainability. By questioning existing approaches, testing new ideas, and learning from the natural world, we strive to contribute to a future in which ocean exploration and environmental protection can advance together.",
+    teamStory: "DrunkEast was sparked by conversations between Wanjing and her parents, both maritime shipping and commercial logistics professionals with over 20 years of expertise. This curiosity led her to a documentary exploring the growing demand for seabed minerals in the clean energy transition, revealing a deeper dilemma: balancing resource extraction, ISA governance, and fragile marine biodiversity. Founded on UN Sustainable Development Goal 9 (Industry, Innovation and Infrastructure) and Goal 14 (Life Below Water), we assembled five teammates to make deep-sea resource extraction more environmentally responsible through bioflocculation technology.",
+    teamMembers: [
+      { name: "Wanjing", role: "CEO", focus: "Strategy and communication" },
+      { name: "William", role: "CTO", focus: "Bioengineering research and flocculation development" },
+      { name: "Clara", role: "CESO", focus: "Marine biodiversity and ecological compatibility" },
+      { name: "Alice", role: "CPO", focus: "Product design, 3D modelling and material testing" },
+      { name: "Elaine", role: "CMO / CRO", focus: "Market research and commercial strategy" }
+    ],
 
     // Contact Directory
     contact: {

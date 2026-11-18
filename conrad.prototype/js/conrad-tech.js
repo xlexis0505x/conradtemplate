@@ -45,10 +45,10 @@
     var data = getTechData();
     var brand = (window.Conrad && Conrad.content && Conrad.content.get("brandName")) || "DRUNKEAST";
     var comp = data.comparison || {};
-    var compHeaders = comp.headers || {
-      metric: "PERFORMANCE DIMENSION",
-      conrad: brand + " SYSTEM",
-      legacy: "LEGACY UNMITIGATED / PASSIVE"
+    var compHeaders = {
+      metric: (comp.headers && comp.headers.metric) || "PERFORMANCE DIMENSION",
+      conrad: brand + " BIO-FLOCCULANT",
+      legacy: (comp.headers && comp.headers.legacy) || "SYNTHETIC FLOCCULANTS / PASSIVE MONITORING"
     };
     var compRows = comp.rows || [];
 

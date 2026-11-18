@@ -12,8 +12,8 @@
         <div class="janus-head">
           <div>
             <div class="conrad-kicker">02 // HYDRODYNAMIC DISSECTION</div>
-            <h2 class="janus-title">Active Sediment Neutralization Cycle</h2>
-            <p class="janus-subtitle">Scroll through real-time internal fluid dynamics, in-situ chemical binding, and accelerated abyssal sedimentation.</p>
+            <h2 class="janus-title">Crawler-Released Bio-Flocculation Cycle</h2>
+            <p class="janus-subtitle">Scroll through seabed sediment disturbance, crawler chemical release, ternary flocculation, and compacted abyssal redeposition.</p>
           </div>
           <div class="janus-nav">
             <button id="janus-prev" class="janus-btn" aria-label="Previous">&lt;</button>
@@ -24,23 +24,23 @@
         <div class="janus-captions">
           <div class="janus-step-text active" data-step="0">
             <div class="janus-step-heading janus-line">01 // Benthic Extraction &amp; Disturbance:</div>
-            <div class="janus-step-desc janus-line">Collector crawler track pick-up creates high-density suspended sediment slurry at the abyssal seafloor interface.</div>
+            <div class="janus-step-desc janus-line">Mining crawlers stir up fine abyssal sediment into plumes that can drift hundreds of kilometres and cut seabed animal abundance by 37% within tracks.</div>
           </div>
           <div class="janus-step-text" data-step="1">
-            <div class="janus-step-heading janus-line">02 // In-Chute Flocculant Dosing:</div>
-            <div class="janus-step-desc janus-line">Titanium electromagnetic nozzles micro-dose eco-compatible biopolymer directly into the turbulent discharge flow under 600 bar hydrostatic pressure.</div>
+            <div class="janus-step-heading janus-line">02 // Crawler-Released Bio-Flocculant Dosing:</div>
+            <div class="janus-step-desc janus-line">The crawler releases our three-material bio-based treatment—chitosan ([X mg/L]), plant starch ([Y mg/L]), and bentonite ([Z%])—directly into disturbed sediment flow.</div>
           </div>
           <div class="janus-step-text" data-step="2">
-            <div class="janus-step-heading janus-line">03 // Rapid Macro-Floc Agglomeration:</div>
-            <div class="janus-step-desc janus-line">Polymer bridging binds sub-micron clay and silt into dense macro-flocs, increasing settling velocity by over 20x.</div>
+            <div class="janus-step-heading janus-line">03 // Ternary Macro-Floc Agglomeration:</div>
+            <div class="janus-step-desc janus-line">Chitosan binds fine particles, plant starch chains flocs together against flow shear, and bentonite compacts the matrix—raising settling speed from [D] to [E] mm/s ([F%] increase).</div>
           </div>
           <div class="janus-step-text" data-step="3">
-            <div class="janus-step-heading janus-line">04 // Confined Localized Redeposition:</div>
-            <div class="janus-step-desc janus-line">Sediments drop rapidly within designated extraction swaths, preventing transboundary migration into upper photic layers.</div>
+            <div class="janus-step-heading janus-line">04 // Compacted Localized Redeposition:</div>
+            <div class="janus-step-desc janus-line">Residual turbidity drops by [A%] and suspended solids by [B%], cutting settling time from [G] to [H] min and leaving a stable deposit resistant to resuspension.</div>
           </div>
           <div class="janus-step-text" data-step="4">
-            <div class="janus-step-heading janus-line">05 // Certified Telemetry &amp; G09 Proof:</div>
-            <div class="janus-step-desc janus-line">Integrated ADCP and optical backscatter sensors log verified compliance proof directly for Cook Islands SBMA and ISA observers.</div>
+            <div class="janus-step-heading janus-line">05 // Auditable G09 &amp; ISA EMMP Data:</div>
+            <div class="janus-step-desc janus-line">Measured turbidity, settling velocity, and resuspension resistance provide operators with concrete evidence for Cook Islands SBMA G09 and ISA environmental plans.</div>
           </div>
         </div>
 

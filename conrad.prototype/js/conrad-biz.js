@@ -41,6 +41,8 @@
     var pipelineRegions = (biz.pipeline && biz.pipeline.regions) || [];
     var contractors = biz.contractors || [];
 
+    var email = (window.Conrad && Conrad.content && Conrad.content.get("about.contact.email")) || (isChina ? "teamposeidon@gmail.com" : "teamdrunkeast@gmail.com");
+
     var doctrineHTML = `
     <section id="conrad-biz-doctrine" class="conrad-biz-section">
       <div class="conrad-biz-inner">
@@ -55,19 +57,19 @@
             <div class="doctrine-badge">THE UNMITIGATED PLUME DILEMMA</div>
             <h3 class="doctrine-title">Uncontrolled Sediment Dispersion</h3>
             <ul class="doctrine-list">
-              <li><strong>Existential Permitting Barrier:</strong> Commercial exploitation licences cannot be granted under ISA or Cook Islands regulations without demonstrated, verifiable plume containment.</li>
-              <li><strong>Transboundary Drift Liability:</strong> Sub-micron clay plumes drift 50–100+ km in the oceanic water column, causing severe ecological damage and catastrophic reputational risk.</li>
-              <li><strong>Post-Hoc Monitoring Deadlock:</strong> Passive sensor buoys merely observe damage without preventing it, risking sudden shut-down orders and stranded multimillion-dollar mining capex.</li>
+              <li><strong>Fragile Benthic Impact:</strong> Mining crawlers disturb fine abyssal sediment that can spread hundreds of kilometres, clogging filter feeders and driving a 37% drop in seabed animal abundance within tracks (Nature E&amp;E, 2025).</li>
+              <li><strong>Ineffective Current Options:</strong> Passive predictive models track plumes without physically removing sediment, while conventional industrial synthetic flocculants are toxic to marine life and fail in 35 ppt seawater.</li>
+              <li><strong>Regulatory Bottleneck:</strong> ISA environmental rules and Cook Islands SBMA G09 guidelines require structured EIS and EMMP proof before commercial exploitation can proceed.</li>
             </ul>
           </div>
 
           <div class="conrad-doctrine-card solution-card">
-            <div class="doctrine-badge">THE ${esc(brand)} PERMITTING MODEL</div>
-            <h3 class="doctrine-title">In-Situ Chemical Flocculation</h3>
+            <div class="doctrine-badge">THE ${esc(brand)} BIO-FLOCCULANT MODEL</div>
+            <h3 class="doctrine-title">Crawler-Released Ternary Bio-Flocculation</h3>
             <ul class="doctrine-list">
-              <li><strong>Unlocking the License to Operate:</strong> We de-risk environmental approval by providing concession holders with certified, auditable sedimentation control data.</li>
-              <li><strong>Accelerated Benthic Deposition:</strong> Non-toxic biodegradable biopolymer binds micro-particles into dense flocs, confining redeposition strictly to primary mining swaths.</li>
-              <li><strong>Automated G09 &amp; ISA Telemetry:</strong> In-situ ADCP and optical backscatter sensors stream real-time compliance proof directly to maritime authorities and stakeholders.</li>
+              <li><strong>Clean Three-Material Formulation:</strong> Chitosan ([X mg/L]), plant-based starch ([Y mg/L]), and bentonite ([Z%]) bind fine suspended particles directly upon crawler release, reducing turbidity by [A%] and raising settling speed by [F%].</li>
+              <li><strong>Cost-Effective Viability:</strong> Estimated treatment cost of [$M / m³] delivers [O%] savings compared with conventional methods ([$N / m³]), saving [$R] per year at [Q m³] treated volume.</li>
+              <li><strong>Clear Industry Ecosystem:</strong> Mining engineers and environmental teams use our treatment, licensed operators and marine contractors finance purchases, and regulators (SBMA, NES, ISA) set environmental compliance standards.</li>
             </ul>
             <div class="doctrine-img-wrap">
               <img src="${(typeof window.qualifyUrl === 'function') ? window.qualifyUrl('/assets/images/subsea/benthic-collector.jpg') : '/assets/images/subsea/benthic-collector.jpg'}" alt="Deep-Sea Sediment Mitigation Operation" />
@@ -165,90 +167,90 @@
 
         <div class="conrad-contractors-section" style="margin-top: 2.5rem;">
           <h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">
-            Deployment Pricing & Licensing Tiers
+            Phased Go-To-Market &amp; Engagement Tiers
           </h3>
           <p style="font-size: 0.85rem; color: #8E9291; margin-bottom: 2rem;">
-            Modular, scalable licensing designed for early-stage trial operators through full commercial extraction fleets. All tiers include full G09 & ISA compliance data streams — no add-ons, no hidden fees.
+            Illustrative engagement structure aligned with our Cook Islands beachhead SOM ($100k–$300k) and 3-year contract expenditure assumptions ($200k–$600k/operator), scaling from monitoring pilots to commercial bio-flocculant supply.
           </p>
 
           <div class="conrad-pricing-grid">
 
             <!-- TIER 1: PILOT -->
             <div class="conrad-pricing-card">
-              <div class="pricing-tier-badge">PILOT TRIAL</div>
+              <div class="pricing-tier-badge">PHASE 1 // PILOT TRIAL</div>
               <div class="pricing-price">
                 <span class="pricing-currency">USD</span>
-                <span class="pricing-amount">85K</span>
-                <span class="pricing-period">/ 30-day trial</span>
+                <span class="pricing-amount">100K–300K</span>
+                <span class="pricing-period">/ pilot contract</span>
               </div>
-              <p class="pricing-tagline">Validate our system in your environment. Fully backed by a performance guarantee.</p>
+              <p class="pricing-tagline">Initial Cook Islands beachhead pilot covering baseline sediment testing, plume modeling, and G09 data support.</p>
               <div class="pricing-divider"></div>
               <ul class="pricing-features">
-                <li><span class="pricing-check">✓</span> 1× benthic manifold skid deployment</li>
-                <li><span class="pricing-check">✓</span> Dual ADCP + optical backscatter sensor suite</li>
-                <li><span class="pricing-check">✓</span> Real-time compliance telemetry dashboard</li>
-                <li><span class="pricing-check">✓</span> G09 & ISA-aligned environmental reporting package</li>
-                <li><span class="pricing-check">✓</span> On-site technical commissioning support</li>
-                <li><span class="pricing-check">✓</span> Performance SLA: >90% turbidity reduction or refund</li>
-                <li class="pricing-excluded"><span class="pricing-cross">–</span> Fleet-wide integration</li>
-                <li class="pricing-excluded"><span class="pricing-cross">–</span> Digital twin plume modeling</li>
+                <li><span class="pricing-check">✓</span> Site-specific sediment &amp; 35 ppt seawater calibration</li>
+                <li><span class="pricing-check">✓</span> Chitosan ([X mg/L]), starch ([Y mg/L]) &amp; bentonite ([Z%]) ratio tuning</li>
+                <li><span class="pricing-check">✓</span> Turbidity ([A%]), solids ([B%]) &amp; settling ([D]→[E] mm/s) report</li>
+                <li><span class="pricing-check">✓</span> SBMA G09 &amp; ISA EMMP compliance documentation support</li>
+                <li><span class="pricing-check">✓</span> Plume dispersion modeling &amp; monitoring baseline</li>
+                <li><span class="pricing-check">✓</span> Technical onboarding for environmental &amp; engineering teams</li>
+                <li class="pricing-excluded"><span class="pricing-cross">–</span> Multi-vessel commercial reagent supply</li>
+                <li class="pricing-excluded"><span class="pricing-cross">–</span> Multi-concession fleet rollout</li>
               </ul>
-              <a href="#contact" class="pricing-cta pricing-cta--outline">Request Trial Deployment →</a>
+              <a href="mailto:${esc(email)}?subject=Pilot%20Trial%20Inquiry" class="pricing-cta pricing-cta--outline">Request Pilot Scope →</a>
             </div>
 
             <!-- TIER 2: OPERATOR — FEATURED -->
             <div class="conrad-pricing-card conrad-pricing-card--featured">
-              <div class="pricing-featured-label">MOST SELECTED</div>
-              <div class="pricing-tier-badge pricing-tier-badge--featured">OPERATOR LICENSE</div>
+              <div class="pricing-featured-label">CORE CONCESSION TIER</div>
+              <div class="pricing-tier-badge pricing-tier-badge--featured">PHASE 2 // OPERATOR PROGRAM</div>
               <div class="pricing-price">
                 <span class="pricing-currency">USD</span>
-                <span class="pricing-amount">340K</span>
-                <span class="pricing-period">/ vessel · year</span>
+                <span class="pricing-amount">200K–600K</span>
+                <span class="pricing-period">/ 3-yr project</span>
               </div>
-              <p class="pricing-tagline">Full operational deployment for active nodule collection vessels. The industry standard for ISA compliance.</p>
+              <p class="pricing-tagline">Full sea-trial integration for licensed nodule exploration operators preparing collector trials and EIA/EMMP filings.</p>
               <div class="pricing-divider"></div>
               <ul class="pricing-features">
-                <li><span class="pricing-check">✓</span> Up to 3× manifold skids per collector</li>
-                <li><span class="pricing-check">✓</span> Full ADCP + turbidity + hydrographic sensor array</li>
-                <li><span class="pricing-check">✓</span> Real-time compliance telemetry & regulatory dashboard</li>
-                <li><span class="pricing-check">✓</span> Digital twin plume dispersion modeling</li>
-                <li><span class="pricing-check">✓</span> Automated EMMP reporting (G09, ISA, EIA-ready)</li>
-                <li><span class="pricing-check">✓</span> 24/7 remote diagnostics & alert system</li>
-                <li><span class="pricing-check">✓</span> Annual calibration + sensor refresh</li>
-                <li><span class="pricing-check">✓</span> Dedicated account engineer</li>
+                <li><span class="pricing-check">✓</span> Crawler-released bio-flocculant supply at [$M / m³] est. cost</li>
+                <li><span class="pricing-check">✓</span> [O%] unit cost savings vs. conventional methods ([$N / m³])</li>
+                <li><span class="pricing-check">✓</span> Collector discharge mixing &amp; dosage calibration</li>
+                <li><span class="pricing-check">✓</span> Continuous turbidity, settling &amp; resuspension verification</li>
+                <li><span class="pricing-check">✓</span> Auditable SBMA G09 &amp; ISA EIS/EMMP reporting package</li>
+                <li><span class="pricing-check">✓</span> Integration partnership with collector equipment providers</li>
+                <li><span class="pricing-check">✓</span> Salinity-calibrated QA across 0–35 ppt test sweeps</li>
+                <li><span class="pricing-check">✓</span> Dedicated bioengineering &amp; environmental liaison</li>
               </ul>
-              <a href="#contact" class="pricing-cta pricing-cta--primary">Get Operator Pricing →</a>
+              <a href="mailto:${esc(email)}?subject=Operator%20Program%20Inquiry" class="pricing-cta pricing-cta--primary">Request Operator Program →</a>
             </div>
 
             <!-- TIER 3: FLEET ENTERPRISE -->
             <div class="conrad-pricing-card">
-              <div class="pricing-tier-badge">FLEET ENTERPRISE</div>
+              <div class="pricing-tier-badge">PHASE 3 // FLEET SCALE</div>
               <div class="pricing-price">
                 <span class="pricing-currency"></span>
                 <span class="pricing-amount" style="font-size: 2.2rem;">Custom</span>
-                <span class="pricing-period">/ multi-vessel</span>
+                <span class="pricing-period">/ multi-concession</span>
               </div>
-              <p class="pricing-tagline">End-to-end environmental compliance infrastructure for full ISA concession-scale operations.</p>
+              <p class="pricing-tagline">${isChina ? "Commercial-scale bio-flocculant supply across ISA seabed fleets and China marine dredging/remediation operators (CCCC/CNOOC)." : "Commercial-scale bio-flocculant supply and ongoing EMMP verification across multi-vessel ISA and sovereign concessions."}</p>
               <div class="pricing-divider"></div>
               <ul class="pricing-features">
-                <li><span class="pricing-check">✓</span> Unlimited manifold skid deployments</li>
-                <li><span class="pricing-check">✓</span> Fleet-wide sensor fusion & unified data lake</li>
-                <li><span class="pricing-check">✓</span> Multi-zone real-time plume monitoring</li>
-                <li><span class="pricing-check">✓</span> Sovereign regulator reporting API (SBMA / ISA)</li>
-                <li><span class="pricing-check">✓</span> Full digital twin + long-range drift prediction</li>
-                <li><span class="pricing-check">✓</span> White-label environmental compliance reports</li>
-                <li><span class="pricing-check">✓</span> On-site resident engineering team</li>
-                <li><span class="pricing-check">✓</span> Priority SLA — 4-hour response guarantee</li>
+                <li><span class="pricing-check">✓</span> Volume-tiered chitosan, plant starch &amp; bentonite supply</li>
+                <li><span class="pricing-check">✓</span> [$R] estimated annual savings at [Q m³] treated volume</li>
+                <li><span class="pricing-check">✓</span> Multi-concession crawler dosing standardization</li>
+                <li><span class="pricing-check">✓</span> Regulator-ready reporting alignment (SBMA / NES / ISA)</li>
+                <li><span class="pricing-check">✓</span> ${isChina ? "Adjacent dredging &amp; coastal restoration deployment ($7–$10/ton)" : "Cross-concession benthic deposit stability verification"}</li>
+                <li><span class="pricing-check">✓</span> Long-term biological recovery &amp; resuspension tracking</li>
+                <li><span class="pricing-check">✓</span> Bio-derived supply chain QA &amp; batch certification</li>
+                <li><span class="pricing-check">✓</span> Annual operational review &amp; dosage optimization</li>
               </ul>
-              <a href="#contact" class="pricing-cta pricing-cta--outline">Contact for Fleet Proposal →</a>
+              <a href="mailto:${esc(email)}?subject=Fleet%20Scale%20Proposal" class="pricing-cta pricing-cta--outline">Contact for Fleet Proposal →</a>
             </div>
 
           </div>
 
           <div class="pricing-footnote">
-            All pricing excludes vessel mobilisation costs, consumable biopolymer reagent supply (volume-tiered), and custom hardware configurations for non-standard collector architectures.
-            <strong style="color: rgba(255,255,255,0.55);">Multi-vessel volume discounts available from 3+ vessels.</strong>
-            Contact us at <a href="mailto:teamdrunkeast@gmail.com" class="contact-email" style="color: #01B1C7; text-decoration: none;">teamdrunkeast@gmail.com</a>.
+            All project expenditure figures represent illustrative 3-year planning scenarios pending operator tender validation; SBMA G09 provides EMMP guidance rather than a mandatory equipment purchase order.
+            <strong style="color: rgba(255,255,255,0.55);">Estimated treatment cost: [$M / m³] ([O%] savings vs. conventional methods).</strong>
+            Contact us at <a href="mailto:${esc(email)}" class="contact-email" style="color: #01B1C7; text-decoration: none;">${esc(email)}</a>.
           </div>
         </div>
       </div>
