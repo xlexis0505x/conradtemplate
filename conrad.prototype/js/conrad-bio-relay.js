@@ -231,7 +231,7 @@
     var initBioRelayScene = function () {
       if (!canvas || bioRelayScene || sceneLoading || !isHomeRoute() || !document.contains(canvas)) return;
       sceneLoading = true;
-      var engineUrl = (window.qualifyAssetUrl ? window.qualifyAssetUrl('/bio-relay-engine.js?v=20261118') : './bio-relay-engine.js?v=20261118');
+      var engineUrl = (window.qualifyAssetUrl ? window.qualifyAssetUrl('/bio-relay-engine.js?v=20261118b') : './bio-relay-engine.js?v=20261118b');
       import(engineUrl).then(function (mod) {
         if (!isHomeRoute() || !document.contains(canvas)) {
           sceneLoading = false;

@@ -284,10 +284,8 @@ export class BioRelayScene {
       emissiveIntensity: 0.30,
       roughness: 0.24,
       metalness: 0.02,
-      transmission: 0.35,
-      thickness: 0.24,
-      ior: 1.34,
-      clearcoat: 0.55,
+      clearcoat: 0.60,
+      clearcoatRoughness: 0.16,
     });
 
     const amineGeo = new THREE.SphereGeometry(0.018, 14, 14);
@@ -299,7 +297,7 @@ export class BioRelayScene {
     });
 
     const tubularSegments = 36;
-    const radialSegments = 6;
+    const radialSegments = 8;
     const radius = 0.0085;
 
     this._tubeSinTable = new Float32Array(radialSegments + 1);
@@ -356,12 +354,16 @@ export class BioRelayScene {
         pts,
         amines,
         strandIdx: s,
+        hasStartFrame: false,
+        prevStartT: new THREE.Vector3(),
+        startN: new THREE.Vector3(),
       });
     }
     this.simGroup.add(this.chitosanGroup);
   }
 
-  // In-place vertex & normal buffer update for chitosan polymer tubes (eliminates per-frame TubeGeometry GC churn)
+  // In-place vertex & normal buffer update for chitosan polymer tubes (eliminates per-frame TubeGeometry GC churn
+  // and keeps the start frame temporally continuous via parallel transport so strands never flash/snap)
   _updateChitosanTubeInPlace(strand) {
     const { curve, mesh, tubularSegments, radialSegments, radius } = strand;
     const posAttr = mesh.geometry.attributes.position;
@@ -393,18 +395,36 @@ export class BioRelayScene {
       }
 
       if (i === 0) {
-        const tx = Math.abs(T.x);
-        const ty = Math.abs(T.y);
-        const tz = Math.abs(T.z);
-        if (tx <= ty && tx <= tz) {
-          normal.set(1, 0, 0);
-        } else if (ty <= tx && ty <= tz) {
-          normal.set(0, 1, 0);
+        if (!strand.hasStartFrame) {
+          const tx = Math.abs(T.x);
+          const ty = Math.abs(T.y);
+          const tz = Math.abs(T.z);
+          if (tx <= ty && tx <= tz) {
+            normal.set(1, 0, 0);
+          } else if (ty <= tx && ty <= tz) {
+            normal.set(0, 1, 0);
+          } else {
+            normal.set(0, 0, 1);
+          }
+          axis.crossVectors(T, normal).normalize();
+          N.crossVectors(T, axis).normalize();
+          strand.prevStartT.copy(T);
+          strand.startN.copy(N);
+          strand.hasStartFrame = true;
         } else {
-          normal.set(0, 0, 1);
+          // Parallel-transport the starting normal across frames to eliminate axis-flip flashing
+          N.copy(strand.startN);
+          axis.crossVectors(strand.prevStartT, T);
+          if (axis.lengthSq() > 1e-10) {
+            axis.normalize();
+            const cosTheta = Math.max(-1, Math.min(1, strand.prevStartT.dot(T)));
+            N.applyAxisAngle(axis, Math.acos(cosTheta));
+          }
+          N.addScaledVector(T, -N.dot(T));
+          if (N.lengthSq() > 1e-12) N.normalize();
+          strand.prevStartT.copy(T);
+          strand.startN.copy(N);
         }
-        axis.crossVectors(T, normal).normalize();
-        N.crossVectors(T, axis).normalize();
         B.crossVectors(T, N).normalize();
         prevT.copy(T);
       } else {
@@ -590,6 +610,7 @@ export class BioRelayScene {
     });
 
     this.flocMesh = new THREE.Mesh(geo, this.flocMat);
+    this.flocMesh.renderOrder = 10;
     this.simGroup.add(this.flocMesh);
   }
 
