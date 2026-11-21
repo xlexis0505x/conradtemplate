@@ -32,37 +32,12 @@ def test_bento_card_modal_open_and_close(page, base_url):
 
 
 @pytest.mark.interactive
-def test_janus_3d_lazy_loading(page, base_url):
-    """Verifies that the 3D Radiant Janus scene canvas initializes and loads assets when scrolled into view."""
+def test_radiant_janus_removed_from_home(page, base_url):
+    """Verifies that the Radiant Janus 3D animation is removed from the home page."""
     page.goto(f"{base_url}/", wait_until="domcontentloaded")
     page.wait_for_selector("#Stage", timeout=10000)
-
-    # Locate the 3D scrubber section
-    track = page.locator("#conrad-radiant-janus-track")
-    if track.count() == 0:
-        # Give custom script a moment to inject track into DOM
-        track.wait_for(state="attached", timeout=6000)
-
-    assert track.count() > 0, "The 3D Radiant Janus track section must be present in DOM"
-
-    # Scroll the 3D track into view to trigger IntersectionObserver lazy-loading
-    track.scroll_into_view_if_needed()
-    page.wait_for_timeout(2000)
-
-    # Verify canvas element is created and attached
-    canvas = page.locator("#janus-canvas")
-    canvas.wait_for(state="attached", timeout=8000)
-
-    width = canvas.evaluate("(el) => el.clientWidth || el.width")
-    height = canvas.evaluate("(el) => el.clientHeight || el.height")
-    assert width > 0 and height > 0, f"Janus canvas must have non-zero dimensions, got {width}x{height}"
-
-    # Verify that the 3D model assets actually loaded (not caught in error fallback)
-    failed_janus_assets = [
-        msg["text"] for msg in page.console_messages
-        if "[janus]" in msg["text"] and "failed to load" in msg["text"]
-    ]
-    assert len(failed_janus_assets) == 0, f"Janus 3D engine failed to load assets: {failed_janus_assets}"
+    page.wait_for_timeout(1000)
+    assert page.locator("#conrad-radiant-janus-track").count() == 0, "Radiant Janus track should not be present on home page"
 
 
 @pytest.mark.interactive
@@ -98,23 +73,23 @@ def test_spec_matrix_filters(page, base_url):
 
 
 @pytest.mark.interactive
-def test_janus_3d_scrubber_buttons(page, base_url):
-    """Test clicking #janus-next and #janus-prev to verify caption transitions and cell progress."""
+def test_bio_relay_scrubber_buttons(page, base_url):
+    """Test clicking #relay-next to verify bio-relay step progression."""
     page.goto(f"{base_url}/", wait_until="domcontentloaded")
     page.wait_for_selector("#conrad-prepaint-hero", state="hidden", timeout=12000)
     page.wait_for_selector(".LoaderView", state="hidden", timeout=12000)
 
-    page.wait_for_selector("#janus-next", timeout=12000)
-    canvas = page.locator("#janus-canvas")
+    page.wait_for_selector("#relay-next", timeout=12000)
+    canvas = page.locator("#bio-relay-canvas")
     canvas.wait_for(state="attached", timeout=12000)
 
-    next_btn = page.locator("#janus-next")
+    next_btn = page.locator("#relay-next")
     next_btn.scroll_into_view_if_needed()
     next_btn.click(force=True)
 
     # Verify canvas dimension is greater than 0
     width = canvas.evaluate("(el) => el.clientWidth || el.width")
-    assert width > 0, "Janus canvas must have non-zero dimensions after clicking next"
+    assert width > 0, "Bio-relay canvas must have non-zero dimensions after clicking next"
 
 
 @pytest.mark.interactive
@@ -318,20 +293,14 @@ def test_tech_page_styling_and_table_html(page, base_url):
 
 @pytest.mark.interactive
 def test_bio_relay_3d_scrubber(page, base_url):
-    """Verifies that the 3D Bio-Relay section renders on the home page below the Janus scrubber."""
+    """Verifies that the 3D Bio-Relay section renders on the home page and Radiant Janus is removed."""
     page.goto(f"{base_url}/", wait_until="domcontentloaded")
     page.wait_for_selector("#conrad-prepaint-hero", state="hidden", timeout=12000)
     page.wait_for_selector(".LoaderView", state="hidden", timeout=12000)
 
-    # 1. Verify track mounted below janus
+    # 1. Verify track mounted on home page and Radiant Janus removed
     page.wait_for_selector("#bio-relay-track", timeout=12000)
-    is_after_janus = page.evaluate("""() => {
-        const janus = document.getElementById("conrad-radiant-janus-track");
-        const bio = document.getElementById("bio-relay-track");
-        if (!janus || !bio) return false;
-        return !!(janus.compareDocumentPosition(bio) & Node.DOCUMENT_POSITION_FOLLOWING);
-    }""")
-    assert is_after_janus, "Bio-relay track must follow Janus track in DOM"
+    assert page.locator("#conrad-radiant-janus-track").count() == 0, "Radiant Janus track must be removed from home page"
 
     # 2. Verify WebGL canvas element (no dead <video>) and 4 stages
     page.wait_for_selector("#bio-relay-canvas", timeout=12000)

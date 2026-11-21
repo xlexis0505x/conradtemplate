@@ -189,14 +189,10 @@
       return;
     }
 
-    if (!isNodeValid(domCache.janusTrack)) {
-      domCache.janusTrack = document.getElementById('conrad-radiant-janus-track');
-    }
-    var janusTrack = domCache.janusTrack;
     var mediaLink  = document.querySelector('.MediaLinkSlice');
     var arsenal    = document.querySelector('.ArsenalSlice');
 
-    if (!janusTrack && !mediaLink && !arsenal) return;
+    if (!mediaLink && !arsenal) return;
 
     var newlyMounted = false;
     if (!track) {
@@ -207,24 +203,14 @@
       w.innerHTML = buildTrackHTML();
       track = w.firstElementChild;
 
-      if (janusTrack && janusTrack.nextSibling) {
-        janusTrack.parentNode.insertBefore(track, janusTrack.nextSibling);
-      } else if (janusTrack) {
-        janusTrack.parentNode.appendChild(track);
-      } else if (mediaLink) {
+      if (mediaLink) {
         mediaLink.parentNode.insertBefore(track, mediaLink);
       } else if (arsenal && arsenal.nextSibling) {
         arsenal.parentNode.insertBefore(track, arsenal.nextSibling);
+      } else if (arsenal) {
+        arsenal.parentNode.appendChild(track);
       }
       newlyMounted = true;
-    } else {
-      if (janusTrack && track.previousElementSibling !== janusTrack) {
-        if (janusTrack.nextSibling) {
-          janusTrack.parentNode.insertBefore(track, janusTrack.nextSibling);
-        } else {
-          janusTrack.parentNode.appendChild(track);
-        }
-      }
     }
 
     var canvas = document.getElementById(CANVAS_ID);
@@ -455,6 +441,11 @@
   }
 
   /* ─── Polling Initializer & Lifecycle ─────────────────────────── */
+  window.ensureBioRelaySection = ensureBioRelaySection;
+  if (window.Conrad) {
+    window.Conrad.ensureBioRelaySection = ensureBioRelaySection;
+  }
+
   setInterval(ensureBioRelaySection, 250);
 
   if (window.Conrad && Conrad.onReady) {

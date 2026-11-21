@@ -336,8 +336,7 @@ function qualifyUrl(url) {
 <script defer src="js/conrad-shared.js"></script>
 <script defer src="js/conrad-router.js"></script>
 <script defer src="js/conrad-home.js"></script>
-<script defer type="module" src="js/conrad-janus.js"></script>
-<script defer src="js/conrad-bio-relay.js?v=20261118c"></script>
+<script defer src="js/conrad-bio-relay.js?v=20261121a"></script>
 <script defer src="js/conrad-tech.js"></script>
 <script defer src="js/conrad-biz.js"></script>
 <script defer src="js/conrad-about.js"></script>
@@ -374,7 +373,7 @@ function qualifyUrl(url) {
   var checkTimer = setInterval(function() {
     var stage = document.getElementById('Stage');
     var hasStageContent = stage && stage.children.length > 0;
-    if (document.querySelector('.home-hero') || document.querySelector('#conrad-radiant-janus-sticky') || hasStageContent) {
+    if (document.querySelector('.home-hero') || document.querySelector('#bio-relay-sticky') || hasStageContent) {
       clearInterval(checkTimer);
       setTimeout(dismissPrepaint, 150);
     }

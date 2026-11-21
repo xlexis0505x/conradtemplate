@@ -34,15 +34,15 @@
       var isBiz = (p === "/business" || p.startsWith("/business/"));
       var isAbout = (p === "/about" || p.startsWith("/about/"));
 
-      // 1. Home Route Sync (Radiant Nuclear 3D reactor)
-      var homeTrack = (cachedHomeTrack && cachedHomeTrack.isConnected) ? cachedHomeTrack : (cachedHomeTrack = document.getElementById("conrad-radiant-janus-track"));
-      var ensureHome = (window.Conrad && window.Conrad.ensureHomeJanus) || window.ensureHomeJanus;
+      // 1. Home Route Sync (Bio-Relay 3D Scrubber)
+      var bioTrack = (cachedHomeTrack && cachedHomeTrack.isConnected) ? cachedHomeTrack : (cachedHomeTrack = document.getElementById("bio-relay-track"));
+      var ensureBio = (window.Conrad && window.Conrad.ensureBioRelaySection) || window.ensureBioRelaySection;
       if (isHome) {
-        if (!homeTrack && typeof ensureHome === "function") {
-          ensureHome();
+        if (!bioTrack && typeof ensureBio === "function") {
+          ensureBio();
         }
-      } else if (homeTrack && typeof ensureHome === "function") {
-        ensureHome();
+      } else if (bioTrack && typeof ensureBio === "function") {
+        ensureBio();
       }
 
       // 2. Technology Route Sync (3D Submarine, Spec Matrix & Comparison)

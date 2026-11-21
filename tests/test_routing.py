@@ -44,7 +44,7 @@ def test_global_routes_navigation(page, base_url):
     home_link.wait_for(state="attached", timeout=12000)
     home_link.click(force=True)
 
-    page.wait_for_selector("#conrad-radiant-janus-track", state="attached", timeout=12000)
+    page.wait_for_selector("#bio-relay-track", state="attached", timeout=12000)
 
 
 @pytest.mark.routing
@@ -97,7 +97,7 @@ def test_history_back_forward(page, base_url):
 
     # Browser Back
     page.go_back()
-    page.wait_for_selector("#conrad-radiant-janus-track", state="attached", timeout=12000)
+    page.wait_for_selector("#bio-relay-track", state="attached", timeout=12000)
 
     # Allow transition to settle
     page.wait_for_timeout(2500)
