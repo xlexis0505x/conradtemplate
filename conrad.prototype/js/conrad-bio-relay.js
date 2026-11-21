@@ -129,8 +129,8 @@
       return window.getAppPath() === '/';
     }
     var p = window.location.pathname.replace(/\/$/, '') || '/';
-    if (p.startsWith('/cn')) p = p.substring(3).replace(/\/$/, '') || '/';
     if (p.startsWith('/conradtemplate')) p = p.substring(15).replace(/\/$/, '') || '/';
+    if (p.startsWith('/cn')) p = p.substring(3).replace(/\/$/, '') || '/';
     return p === '/' || p === '/index.html' || p === '';
   }
 
