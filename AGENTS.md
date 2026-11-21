@@ -66,3 +66,30 @@ Before submitting any Pull Request or committing changes:
   - `test(...)`: Adding or updating test suites
   - `chore(...)`: Maintenance, dependency, or configuration updates
 - Keep PRs focused to a single logical change. Provide a clear summary of what was changed and the test output.
+
+---
+
+## 6. 3D WebGL & Animation Standards (Smoothness & Performance)
+
+When creating or modifying 3D WebGL engines, procedural geometries, or canvas scrubbers:
+
+1. **In-Place Buffer Updates (Zero GC Churn):**
+   - Never instantiate new `BufferGeometry`, `TubeGeometry`, or material instances inside animation loops (`requestAnimationFrame`) or scroll handlers.
+   - Pre-allocate vertex, normal, and UV typed arrays at initialization. Mutate existing Float32Array buffers in-place and set `attributes.position.needsUpdate = true`.
+
+2. **Temporal Frame Continuity & Parallel Transport:**
+   - For procedural curves and dynamic extrusions, never compute initial Frenet frames using static axis thresholds across frames.
+   - Implement **parallel transport** across ticks by caching `prevStartT` and `startN`, rotating the normal by the angular delta between tangents, and projecting orthogonally to maintain temporal continuity without rotational snaps or flips.
+
+3. **High-Framerate PBR Shader Optimization:**
+   - Avoid expensive real-time physical transmission, thickness, or refraction shaders (`transmission`, `ior`, `thickness`) on high-vertex dynamic geometry.
+   - Emulate organic coatings using lightweight `clearcoat` (0.5–0.7) and `clearcoatRoughness` (0.1–0.2) to sustain locked 120 FPS rendering across devices.
+
+4. **Transparent Mesh Depth Ordering:**
+   - Explicitly assign `renderOrder` (e.g., `flocMesh.renderOrder = 10`) on layered transparent objects to prevent depth-sorting conflicts and alpha flickering.
+
+5. **Decoupled Scroll & Continuous RAF Damping:**
+   - Decouple scroll event handlers from rendering calculations. Store normalized target progress and smoothly interpolate (`lerp`, `smoothStep`, exponential decay damping) within the continuous RAF cycle.
+
+6. **Single Unified Engine Instance:**
+   - Ensure only one active WebGL canvas/scrubber runtime operates per page. Do not mount concurrent redundant 3D scenes.
